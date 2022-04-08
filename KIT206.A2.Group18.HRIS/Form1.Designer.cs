@@ -1,7 +1,7 @@
 ﻿
 namespace KIT206.A2.Group18.HRIS
 {
-    partial class Form1
+    partial class HRIS
     {
         /// <summary>
         /// Required designer variable.
@@ -21,28 +21,16 @@ namespace KIT206.A2.Group18.HRIS
             base.Dispose(disposing);
         }
 
-        #region Windows Form Designer generated code
-
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
-        /// </summary>
-        private void InitializeComponent()
-        {
-            this.SuspendLayout();
-            // 
-            // Form1
-            // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1363, 747);
-            this.Name = "Form1";
-            this.Text = "Form1";
-            this.ResumeLayout(false);
-
-        }
-
-        #endregion
+        private System.Windows.Forms.Panel titleHolder;
+        private System.Windows.Forms.Label systemTitle;
+        private System.Windows.Forms.Panel container;
+        private System.Windows.Forms.TableLayoutPanel menuHolder;
+        private System.Windows.Forms.Button unitListButton;
+        private System.Windows.Forms.Button classListButton;
+        private System.Windows.Forms.Button consultationListButton;
+        private System.Windows.Forms.Button staffListButton;
+        private System.Windows.Forms.Panel listHolder;
+        private System.Windows.Forms.Panel panel1;
     }
 }
 
