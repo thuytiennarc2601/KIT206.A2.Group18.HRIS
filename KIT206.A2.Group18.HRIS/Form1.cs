@@ -22,17 +22,20 @@ namespace KIT206.A2.Group18.HRIS
             this.titleHolder = new System.Windows.Forms.Panel();
             this.systemTitle = new System.Windows.Forms.Label();
             this.container = new System.Windows.Forms.Panel();
+            this.listViewHolder = new System.Windows.Forms.Panel();
+            this.listHolder = new System.Windows.Forms.FlowLayoutPanel();
+            this.searchFieldHolder = new System.Windows.Forms.Panel();
+            this.addButton = new System.Windows.Forms.Button();
             this.menuHolder = new System.Windows.Forms.TableLayoutPanel();
             this.unitListButton = new System.Windows.Forms.Button();
             this.classListButton = new System.Windows.Forms.Button();
             this.consultationListButton = new System.Windows.Forms.Button();
             this.staffListButton = new System.Windows.Forms.Button();
-            this.listHolder = new System.Windows.Forms.Panel();
-            this.panel1 = new System.Windows.Forms.Panel();
             this.titleHolder.SuspendLayout();
             this.container.SuspendLayout();
+            this.listViewHolder.SuspendLayout();
+            this.searchFieldHolder.SuspendLayout();
             this.menuHolder.SuspendLayout();
-            this.listHolder.SuspendLayout();
             this.SuspendLayout();
             // 
             // titleHolder
@@ -53,21 +56,62 @@ namespace KIT206.A2.Group18.HRIS
             this.systemTitle.ForeColor = System.Drawing.Color.BurlyWood;
             this.systemTitle.Location = new System.Drawing.Point(149, 13);
             this.systemTitle.Name = "systemTitle";
-            this.systemTitle.Size = new System.Drawing.Size(1272, 97);
+            this.systemTitle.Size = new System.Drawing.Size(1013, 78);
             this.systemTitle.TabIndex = 0;
             this.systemTitle.Text = "Human Resource Information System";
             this.systemTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // container
             // 
-            this.container.Controls.Add(this.listHolder);
+            this.container.Controls.Add(this.listViewHolder);
             this.container.Controls.Add(this.menuHolder);
             this.container.Cursor = System.Windows.Forms.Cursors.Default;
-            this.container.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.container.Dock = System.Windows.Forms.DockStyle.Top;
             this.container.Location = new System.Drawing.Point(0, 113);
             this.container.Name = "container";
             this.container.Size = new System.Drawing.Size(1289, 669);
             this.container.TabIndex = 1;
+            // 
+            // listViewHolder
+            // 
+            this.listViewHolder.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.listViewHolder.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.listViewHolder.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.listViewHolder.Controls.Add(this.listHolder);
+            this.listViewHolder.Controls.Add(this.searchFieldHolder);
+            this.listViewHolder.Location = new System.Drawing.Point(152, 163);
+            this.listViewHolder.Name = "listViewHolder";
+            this.listViewHolder.Size = new System.Drawing.Size(998, 496);
+            this.listViewHolder.TabIndex = 1;
+            // 
+            // listHolder
+            // 
+            this.listHolder.BackColor = System.Drawing.Color.White;
+            this.listHolder.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.listHolder.Location = new System.Drawing.Point(23, 59);
+            this.listHolder.Name = "listHolder";
+            this.listHolder.Size = new System.Drawing.Size(954, 418);
+            this.listHolder.TabIndex = 1;
+            // 
+            // searchFieldHolder
+            // 
+            this.searchFieldHolder.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.searchFieldHolder.Controls.Add(this.addButton);
+            this.searchFieldHolder.Location = new System.Drawing.Point(0, 0);
+            this.searchFieldHolder.Name = "searchFieldHolder";
+            this.searchFieldHolder.Size = new System.Drawing.Size(996, 53);
+            this.searchFieldHolder.TabIndex = 0;
+            // 
+            // addButton
+            // 
+            this.addButton.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.addButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.addButton.Image = global::KIT206.A2.Group18.HRIS.Properties.Resources.icons8_add_30;
+            this.addButton.Location = new System.Drawing.Point(943, 11);
+            this.addButton.Name = "addButton";
+            this.addButton.Size = new System.Drawing.Size(34, 34);
+            this.addButton.TabIndex = 0;
+            this.addButton.UseVisualStyleBackColor = true;
             // 
             // menuHolder
             // 
@@ -92,6 +136,7 @@ namespace KIT206.A2.Group18.HRIS
             // unitListButton
             // 
             this.unitListButton.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.unitListButton.BackColor = System.Drawing.Color.Transparent;
             this.unitListButton.BackgroundImage = global::KIT206.A2.Group18.HRIS.Properties.Resources.unit1;
             this.unitListButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.unitListButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -99,7 +144,7 @@ namespace KIT206.A2.Group18.HRIS
             this.unitListButton.Name = "unitListButton";
             this.unitListButton.Size = new System.Drawing.Size(243, 151);
             this.unitListButton.TabIndex = 1;
-            this.unitListButton.UseVisualStyleBackColor = true;
+            this.unitListButton.UseVisualStyleBackColor = false;
             // 
             // classListButton
             // 
@@ -136,25 +181,7 @@ namespace KIT206.A2.Group18.HRIS
             this.staffListButton.Size = new System.Drawing.Size(243, 151);
             this.staffListButton.TabIndex = 4;
             this.staffListButton.UseVisualStyleBackColor = true;
-            // 
-            // listHolder
-            // 
-            this.listHolder.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.listHolder.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.listHolder.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.listHolder.Controls.Add(this.panel1);
-            this.listHolder.Location = new System.Drawing.Point(152, 163);
-            this.listHolder.Name = "listHolder";
-            this.listHolder.Size = new System.Drawing.Size(998, 496);
-            this.listHolder.TabIndex = 1;
-            // 
-            // panel1
-            // 
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(996, 74);
-            this.panel1.TabIndex = 0;
+            this.staffListButton.Click += new System.EventHandler(this.staffListButton_Click);
             // 
             // HRIS
             // 
@@ -167,20 +194,37 @@ namespace KIT206.A2.Group18.HRIS
             this.titleHolder.ResumeLayout(false);
             this.titleHolder.PerformLayout();
             this.container.ResumeLayout(false);
+            this.listViewHolder.ResumeLayout(false);
+            this.searchFieldHolder.ResumeLayout(false);
             this.menuHolder.ResumeLayout(false);
-            this.listHolder.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
-        private void label1_Click(object sender, EventArgs e)
+        //view staff list when choosing STAFF button
+        private void staffListButton_Click(object sender, EventArgs e)
         {
+            populateStaffList();
+        } 
 
-        }
-
-        private void searchBar_TextChanged(object sender, EventArgs e)
+        //generates a list on staff list view
+        private void populateStaffList()
         {
+            List<Staff> staffList = Staff.LoadAllStaffList();
+            int element_num = staffList.Count;
 
+            staffListItem[] listView = new staffListItem[element_num];
+
+            for (int i = 0; i < staffList.Count; i++)
+            {
+                listView[i] = new staffListItem();
+                listView[i].Title = (staffList[i].title).ToString() + ".";
+                listView[i].StaffName = staffList[i].Name;
+                listView[i].Email = staffList[i].Email;
+                listView[i].Campus = staffList[i].campus.ToString();
+
+                listHolder.Controls.Add(listView[i]);
+            }
         }
     }
 }

@@ -29,8 +29,10 @@ namespace KIT206.A2.Group18.HRIS
         private System.Windows.Forms.Button classListButton;
         private System.Windows.Forms.Button consultationListButton;
         private System.Windows.Forms.Button staffListButton;
-        private System.Windows.Forms.Panel listHolder;
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel listViewHolder;
+        private System.Windows.Forms.Panel searchFieldHolder;
+        private System.Windows.Forms.Button addButton;
+        private System.Windows.Forms.FlowLayoutPanel listHolder;
     }
 }
 

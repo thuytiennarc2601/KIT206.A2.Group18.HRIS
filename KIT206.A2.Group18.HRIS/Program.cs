@@ -18,7 +18,7 @@ namespace KIT206.A2.Group18.HRIS
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new HRIS());
-            Console.WriteLine("Hello everyone!");
+            //Console.WriteLine("Hello everyone!");
         }
     }
 }
