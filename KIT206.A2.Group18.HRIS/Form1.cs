@@ -23,14 +23,14 @@ namespace KIT206.A2.Group18.HRIS
             this.systemTitle = new System.Windows.Forms.Label();
             this.container = new System.Windows.Forms.Panel();
             this.listViewHolder = new System.Windows.Forms.Panel();
+            this.listHolder = new System.Windows.Forms.FlowLayoutPanel();
             this.searchFieldHolder = new System.Windows.Forms.Panel();
+            this.addButton = new System.Windows.Forms.Button();
             this.menuHolder = new System.Windows.Forms.TableLayoutPanel();
-            this.button1 = new System.Windows.Forms.Button();
             this.unitListButton = new System.Windows.Forms.Button();
             this.classListButton = new System.Windows.Forms.Button();
             this.consultationListButton = new System.Windows.Forms.Button();
             this.staffListButton = new System.Windows.Forms.Button();
-            this.listHolder = new System.Windows.Forms.FlowLayoutPanel();
             this.titleHolder.SuspendLayout();
             this.container.SuspendLayout();
             this.listViewHolder.SuspendLayout();
@@ -84,14 +84,34 @@ namespace KIT206.A2.Group18.HRIS
             this.listViewHolder.Size = new System.Drawing.Size(998, 496);
             this.listViewHolder.TabIndex = 1;
             // 
+            // listHolder
+            // 
+            this.listHolder.BackColor = System.Drawing.Color.White;
+            this.listHolder.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.listHolder.Location = new System.Drawing.Point(23, 59);
+            this.listHolder.Name = "listHolder";
+            this.listHolder.Size = new System.Drawing.Size(954, 418);
+            this.listHolder.TabIndex = 1;
+            // 
             // searchFieldHolder
             // 
             this.searchFieldHolder.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.searchFieldHolder.Controls.Add(this.button1);
+            this.searchFieldHolder.Controls.Add(this.addButton);
             this.searchFieldHolder.Location = new System.Drawing.Point(0, 0);
             this.searchFieldHolder.Name = "searchFieldHolder";
             this.searchFieldHolder.Size = new System.Drawing.Size(996, 53);
             this.searchFieldHolder.TabIndex = 0;
+            // 
+            // addButton
+            // 
+            this.addButton.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.addButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.addButton.Image = global::KIT206.A2.Group18.HRIS.Properties.Resources.icons8_add_30;
+            this.addButton.Location = new System.Drawing.Point(943, 11);
+            this.addButton.Name = "addButton";
+            this.addButton.Size = new System.Drawing.Size(34, 34);
+            this.addButton.TabIndex = 0;
+            this.addButton.UseVisualStyleBackColor = true;
             // 
             // menuHolder
             // 
@@ -112,17 +132,6 @@ namespace KIT206.A2.Group18.HRIS
             this.menuHolder.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.menuHolder.Size = new System.Drawing.Size(998, 157);
             this.menuHolder.TabIndex = 0;
-            // 
-            // button1
-            // 
-            this.button1.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.button1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button1.Image = global::KIT206.A2.Group18.HRIS.Properties.Resources.icons8_add_30;
-            this.button1.Location = new System.Drawing.Point(943, 11);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(34, 34);
-            this.button1.TabIndex = 0;
-            this.button1.UseVisualStyleBackColor = true;
             // 
             // unitListButton
             // 
@@ -172,15 +181,7 @@ namespace KIT206.A2.Group18.HRIS
             this.staffListButton.Size = new System.Drawing.Size(243, 151);
             this.staffListButton.TabIndex = 4;
             this.staffListButton.UseVisualStyleBackColor = true;
-            // 
-            // listHolder
-            // 
-            this.listHolder.BackColor = System.Drawing.Color.White;
-            this.listHolder.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.listHolder.Location = new System.Drawing.Point(23, 59);
-            this.listHolder.Name = "listHolder";
-            this.listHolder.Size = new System.Drawing.Size(954, 418);
-            this.listHolder.TabIndex = 1;
+            this.staffListButton.Click += new System.EventHandler(this.staffListButton_Click);
             // 
             // HRIS
             // 
@@ -200,14 +201,30 @@ namespace KIT206.A2.Group18.HRIS
 
         }
 
-        private void label1_Click(object sender, EventArgs e)
+        //view staff list when choosing STAFF button
+        private void staffListButton_Click(object sender, EventArgs e)
         {
+            populateStaffList();
+        } 
 
-        }
-
-        private void searchBar_TextChanged(object sender, EventArgs e)
+        //generates a list on staff list view
+        private void populateStaffList()
         {
+            List<Staff> staffList = Staff.LoadAllStaffList();
+            int element_num = staffList.Count;
 
+            staffListItem[] listView = new staffListItem[element_num];
+
+            for (int i = 0; i < staffList.Count; i++)
+            {
+                listView[i] = new staffListItem();
+                listView[i].Title = (staffList[i].title).ToString() + ".";
+                listView[i].StaffName = staffList[i].Name;
+                listView[i].Email = staffList[i].Email;
+                listView[i].Campus = staffList[i].campus.ToString();
+
+                listHolder.Controls.Add(listView[i]);
+            }
         }
     }
 }

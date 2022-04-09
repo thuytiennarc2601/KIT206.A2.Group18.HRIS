@@ -29,7 +29,6 @@ namespace KIT206.A2.Group18.HRIS
         /// </summary>
         private void InitializeComponent()
         {
-            this.staffImage = new System.Windows.Forms.PictureBox();
             this.staffName = new System.Windows.Forms.Label();
             this.staffTitle = new System.Windows.Forms.Label();
             this.staffEmail = new System.Windows.Forms.Label();
@@ -39,19 +38,10 @@ namespace KIT206.A2.Group18.HRIS
             this.staffID = new System.Windows.Forms.Label();
             this.removeStaff = new System.Windows.Forms.Button();
             this.selectBar = new System.Windows.Forms.Panel();
-            ((System.ComponentModel.ISupportInitialize)(this.staffImage)).BeginInit();
+            this.staffImage = new System.Windows.Forms.PictureBox();
             this.imageHolder.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.staffImage)).BeginInit();
             this.SuspendLayout();
-            // 
-            // staffImage
-            // 
-            this.staffImage.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.staffImage.Location = new System.Drawing.Point(16, 11);
-            this.staffImage.Name = "staffImage";
-            this.staffImage.Size = new System.Drawing.Size(90, 90);
-            this.staffImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.staffImage.TabIndex = 0;
-            this.staffImage.TabStop = false;
             // 
             // staffName
             // 
@@ -59,11 +49,13 @@ namespace KIT206.A2.Group18.HRIS
             this.staffName.AutoEllipsis = true;
             this.staffName.AutoSize = true;
             this.staffName.Font = new System.Drawing.Font("Calibri", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.staffName.Location = new System.Drawing.Point(253, 22);
+            this.staffName.Location = new System.Drawing.Point(241, 22);
             this.staffName.Name = "staffName";
             this.staffName.Size = new System.Drawing.Size(139, 33);
             this.staffName.TabIndex = 1;
             this.staffName.Text = "Staff Name";
+            this.staffName.MouseEnter += new System.EventHandler(this.staffListItem_MouseEnter);
+            this.staffName.MouseLeave += new System.EventHandler(this.staffListItem_MouseLeave);
             // 
             // staffTitle
             // 
@@ -71,11 +63,13 @@ namespace KIT206.A2.Group18.HRIS
             this.staffTitle.AutoEllipsis = true;
             this.staffTitle.AutoSize = true;
             this.staffTitle.Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.staffTitle.Location = new System.Drawing.Point(190, 25);
+            this.staffTitle.Location = new System.Drawing.Point(189, 25);
             this.staffTitle.Name = "staffTitle";
             this.staffTitle.Size = new System.Drawing.Size(57, 29);
             this.staffTitle.TabIndex = 3;
             this.staffTitle.Text = "Prof.";
+            this.staffTitle.MouseEnter += new System.EventHandler(this.staffListItem_MouseEnter);
+            this.staffTitle.MouseLeave += new System.EventHandler(this.staffListItem_MouseLeave);
             // 
             // staffEmail
             // 
@@ -88,6 +82,8 @@ namespace KIT206.A2.Group18.HRIS
             this.staffEmail.Size = new System.Drawing.Size(133, 23);
             this.staffEmail.TabIndex = 4;
             this.staffEmail.Text = "abc@gmail.com";
+            this.staffEmail.MouseEnter += new System.EventHandler(this.staffListItem_MouseEnter);
+            this.staffEmail.MouseLeave += new System.EventHandler(this.staffListItem_MouseLeave);
             // 
             // imageHolder
             // 
@@ -99,6 +95,8 @@ namespace KIT206.A2.Group18.HRIS
             this.imageHolder.Name = "imageHolder";
             this.imageHolder.Size = new System.Drawing.Size(124, 114);
             this.imageHolder.TabIndex = 5;
+            this.imageHolder.MouseEnter += new System.EventHandler(this.staffListItem_MouseEnter);
+            this.imageHolder.MouseLeave += new System.EventHandler(this.staffListItem_MouseLeave);
             // 
             // staffCampus
             // 
@@ -110,6 +108,8 @@ namespace KIT206.A2.Group18.HRIS
             this.staffCampus.Size = new System.Drawing.Size(153, 23);
             this.staffCampus.TabIndex = 6;
             this.staffCampus.Text = "Sandy Bay campus";
+            this.staffCampus.MouseEnter += new System.EventHandler(this.staffListItem_MouseEnter);
+            this.staffCampus.MouseLeave += new System.EventHandler(this.staffListItem_MouseLeave);
             // 
             // staffEdit
             // 
@@ -119,12 +119,14 @@ namespace KIT206.A2.Group18.HRIS
             this.staffEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.staffEdit.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.staffEdit.ForeColor = System.Drawing.Color.White;
-            this.staffEdit.Location = new System.Drawing.Point(801, 100);
+            this.staffEdit.Location = new System.Drawing.Point(800, 100);
             this.staffEdit.Name = "staffEdit";
             this.staffEdit.Size = new System.Drawing.Size(70, 23);
             this.staffEdit.TabIndex = 7;
             this.staffEdit.Text = "Edit";
             this.staffEdit.UseVisualStyleBackColor = false;
+            this.staffEdit.MouseEnter += new System.EventHandler(this.staffListItem_MouseEnter);
+            this.staffEdit.MouseLeave += new System.EventHandler(this.staffListItem_MouseLeave);
             // 
             // staffID
             // 
@@ -136,6 +138,8 @@ namespace KIT206.A2.Group18.HRIS
             this.staffID.Size = new System.Drawing.Size(85, 23);
             this.staffID.TabIndex = 8;
             this.staffID.Text = "ID: xxxxxx";
+            this.staffID.MouseEnter += new System.EventHandler(this.staffListItem_MouseEnter);
+            this.staffID.MouseLeave += new System.EventHandler(this.staffListItem_MouseLeave);
             // 
             // removeStaff
             // 
@@ -143,21 +147,37 @@ namespace KIT206.A2.Group18.HRIS
             this.removeStaff.Cursor = System.Windows.Forms.Cursors.Hand;
             this.removeStaff.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.removeStaff.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.removeStaff.Location = new System.Drawing.Point(877, 100);
+            this.removeStaff.Location = new System.Drawing.Point(876, 100);
             this.removeStaff.Name = "removeStaff";
             this.removeStaff.Size = new System.Drawing.Size(70, 23);
             this.removeStaff.TabIndex = 9;
             this.removeStaff.Text = "Remove";
             this.removeStaff.UseVisualStyleBackColor = true;
+            this.removeStaff.MouseEnter += new System.EventHandler(this.staffListItem_MouseEnter);
+            this.removeStaff.MouseLeave += new System.EventHandler(this.staffListItem_MouseLeave);
             // 
             // selectBar
             // 
             this.selectBar.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.selectBar.BackColor = System.Drawing.Color.DarkSlateGray;
+            this.selectBar.BackColor = System.Drawing.Color.White;
             this.selectBar.Location = new System.Drawing.Point(0, 0);
             this.selectBar.Name = "selectBar";
             this.selectBar.Size = new System.Drawing.Size(10, 140);
             this.selectBar.TabIndex = 10;
+            this.selectBar.MouseEnter += new System.EventHandler(this.staffListItem_MouseEnter);
+            this.selectBar.MouseLeave += new System.EventHandler(this.staffListItem_MouseLeave);
+            // 
+            // staffImage
+            // 
+            this.staffImage.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.staffImage.Location = new System.Drawing.Point(16, 11);
+            this.staffImage.Name = "staffImage";
+            this.staffImage.Size = new System.Drawing.Size(90, 90);
+            this.staffImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.staffImage.TabIndex = 0;
+            this.staffImage.TabStop = false;
+            this.staffImage.MouseEnter += new System.EventHandler(this.staffListItem_MouseEnter);
+            this.staffImage.MouseLeave += new System.EventHandler(this.staffListItem_MouseLeave);
             // 
             // staffListItem
             // 
@@ -173,12 +193,14 @@ namespace KIT206.A2.Group18.HRIS
             this.Controls.Add(this.staffEmail);
             this.Controls.Add(this.staffTitle);
             this.Controls.Add(this.staffName);
-            this.MaximumSize = new System.Drawing.Size(954, 150);
-            this.MinimumSize = new System.Drawing.Size(954, 140);
+            this.MaximumSize = new System.Drawing.Size(950, 140);
+            this.MinimumSize = new System.Drawing.Size(950, 140);
             this.Name = "staffListItem";
             this.Size = new System.Drawing.Size(954, 140);
-            ((System.ComponentModel.ISupportInitialize)(this.staffImage)).EndInit();
+            this.MouseEnter += new System.EventHandler(this.staffListItem_MouseEnter);
+            this.MouseLeave += new System.EventHandler(this.staffListItem_MouseLeave);
             this.imageHolder.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.staffImage)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
