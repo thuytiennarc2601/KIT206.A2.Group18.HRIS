@@ -37,7 +37,7 @@ namespace KIT206.A2.Group18.HRIS
             this.emptyMessage.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.emptyMessage.AutoSize = true;
             this.emptyMessage.Font = new System.Drawing.Font("Calibri", 21.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.emptyMessage.Location = new System.Drawing.Point(231, 47);
+            this.emptyMessage.Location = new System.Drawing.Point(214, 37);
             this.emptyMessage.Name = "emptyMessage";
             this.emptyMessage.Size = new System.Drawing.Size(495, 36);
             this.emptyMessage.TabIndex = 0;
@@ -49,10 +49,10 @@ namespace KIT206.A2.Group18.HRIS
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.emptyMessage);
             this.ForeColor = System.Drawing.SystemColors.ButtonShadow;
-            this.MaximumSize = new System.Drawing.Size(954, 140);
-            this.MinimumSize = new System.Drawing.Size(954, 140);
+            this.MaximumSize = new System.Drawing.Size(920, 120);
+            this.MinimumSize = new System.Drawing.Size(920, 120);
             this.Name = "emptyList";
-            this.Size = new System.Drawing.Size(954, 140);
+            this.Size = new System.Drawing.Size(920, 120);
             this.ResumeLayout(false);
             this.PerformLayout();
 

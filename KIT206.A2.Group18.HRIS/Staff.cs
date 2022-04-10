@@ -7,9 +7,10 @@ using MySql.Data.MySqlClient;
 
 namespace KIT206.A2.Group18.HRIS
 {
-    public enum Title { Prof, Dr, Mr, Mrs, Ms, Miss, Unk }
 
     public enum Campus { Hobart, Launceston, NonLocated }
+
+    public enum Category { admin, technical, casual, academic, unknown }
 
     class Staff
     {
@@ -19,20 +20,21 @@ namespace KIT206.A2.Group18.HRIS
 
         public string Name { get; set; }
 
-        public Title title { get; set; }
+        public string Title { get; set; }
 
         public Campus campus { get; set; }
 
-        public int Phone { get; set; }
+        public string Phone { get; set; }
 
         public string Room { get; set; }
 
         public string Email { get; set; }
 
-        public string Category { get; set; }
+        public Category category { get; set; }
 
         public string Photo { get; set; }
 
+        //retrieves all STAFF from staff database
         public static List<Staff> LoadAllStaffList()
         {
             List<Staff> staffList = new List<Staff>();
@@ -43,7 +45,7 @@ namespace KIT206.A2.Group18.HRIS
             {
                 conn.Open();
 
-                MySqlCommand cmd = new MySqlCommand("select id, given_name, family_name, title, campus, email from staff", conn);
+                MySqlCommand cmd = new MySqlCommand("select id, given_name, family_name, title, campus, email, phone, room, photo, category from staff", conn);
 
                 rdr = cmd.ExecuteReader();
 
@@ -51,18 +53,20 @@ namespace KIT206.A2.Group18.HRIS
                 {
                     Staff result = new Staff();
 
-                    result.ID = rdr.GetInt32(0);
-                    result.Name = rdr.GetString(1) + " " + rdr.GetString(2);
+                    result.ID = rdr.GetInt32(0); //get id
+                    result.Name = rdr.GetString(1) + " " + rdr.GetString(2); //get name
 
+                    //get Title
                     if (rdr.GetString(3) == "")
                     {
-                        result.title = Title.Unk;
+                        result.Title = "Unk";
                     }
                     else
                     {
-                        result.title = (Title)Enum.Parse(typeof(Title), rdr.GetString(3));
+                        result.Title = rdr.GetString(3);
                     }
 
+                    //get Campus
                     if (rdr.GetString(4) == "")
                     {
                         result.campus = Campus.NonLocated;
@@ -72,7 +76,55 @@ namespace KIT206.A2.Group18.HRIS
                         result.campus = (Campus)Enum.Parse(typeof(Campus), rdr.GetString(4));
                     }
 
-                    result.Email = rdr.GetString(5);
+                    //get Email
+                    if (rdr.GetString(5) == "")
+                    {
+                        result.Email = "No email added";
+                    }
+                    else
+                    {
+                        result.Email = rdr.GetString(5);
+                    }
+
+                    //get Phone
+                    if( rdr.GetString(6) == "")
+                    {
+                        result.Phone = "No number added";
+                    }
+                    else
+                    {
+                        result.Phone = rdr.GetString(6);
+                    }
+
+                    //get ROOM
+                    if (rdr.GetString(7) == "")
+                    {
+                        result.Room = "No room assigned";
+                    }
+                    else
+                    {
+                        result.Room = rdr.GetString(7);
+                    }
+
+                    //get PHOTO
+                    //if (rdr.GetString(8) == "")
+                    //{
+                        //result.Photo = "No number added";
+                    //}
+                    //else
+                    //{
+                        //result.Photo = rdr.GetString(8);
+                    //}
+
+                    //get CATEGORY
+                    if (rdr.GetString(9) == "")
+                    {
+                        result.category = Category.unknown;
+                    }
+                    else
+                    {
+                        result.category = (Category)Enum.Parse(typeof(Category), rdr.GetString(9));
+                    }
 
                     staffList.Add(result);
                 }

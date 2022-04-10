@@ -7,6 +7,7 @@ using MySql.Data.MySqlClient;
 
 namespace KIT206.A2.Group18.HRIS
 {
+    //for getting connection from database
     class GetSqlConnection
     {
         private static MySqlConnection conn;

@@ -25,6 +25,14 @@ namespace KIT206.A2.Group18.HRIS
         private string _email;
         private string _id;
         private Image _icon;
+        private int _itemID;
+
+        [Category("Staff Properties")]
+        public int ItemID
+        {
+            get {return _itemID; }
+            set {_itemID = value; }
+        }
 
         [Category("Staff Properties")]
         public string Title
@@ -71,12 +79,21 @@ namespace KIT206.A2.Group18.HRIS
 
         private void staffListItem_MouseEnter(object sender, EventArgs e)
         {
-            selectBar.BackColor = Color.DarkSeaGreen;
+            selectBar.BackColor = Color.SteelBlue;
         }
 
         private void staffListItem_MouseLeave(object sender, EventArgs e)
         {
             selectBar.BackColor = Color.White;
+        }
+
+        //open staff details
+        //pass the list's index
+        private void staffListItem_DoubleClick(object sender, EventArgs e)
+        {
+            staffDetailView staffDetail = new staffDetailView();
+            staffDetail.ItemID = this.ItemID;
+            staffDetail.ShowDialog();
         }
     }
 }

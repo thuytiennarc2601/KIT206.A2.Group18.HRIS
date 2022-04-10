@@ -63,6 +63,16 @@ namespace KIT206.A2.Group18.HRIS.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap _0cc4f09cdee89166635771b853a50326 {
+            get {
+                object obj = ResourceManager.GetObject("0cc4f09cdee89166635771b853a50326", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap _34 {
             get {
                 object obj = ResourceManager.GetObject("34", resourceCulture);
@@ -73,9 +83,29 @@ namespace KIT206.A2.Group18.HRIS.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap _669176 {
+            get {
+                object obj = ResourceManager.GetObject("669176", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap _class {
             get {
                 object obj = ResourceManager.GetObject("class", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap CAT_HAIR_TIE_1000 {
+            get {
+                object obj = ResourceManager.GetObject("CAT-HAIR-TIE_1000", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -106,6 +136,16 @@ namespace KIT206.A2.Group18.HRIS.Properties {
         internal static System.Drawing.Bitmap icons8_administrator_male_90 {
             get {
                 object obj = ResourceManager.GetObject("icons8-administrator-male-90", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_administrator_male_901 {
+            get {
+                object obj = ResourceManager.GetObject("icons8-administrator-male-901", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

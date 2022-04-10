@@ -40,21 +40,21 @@ namespace KIT206.A2.Group18.HRIS
             // 
             // titleHolder
             // 
-            this.titleHolder.BackColor = System.Drawing.Color.White;
+            this.titleHolder.AutoSize = true;
+            this.titleHolder.BackColor = System.Drawing.Color.SeaShell;
             this.titleHolder.Controls.Add(this.systemTitle);
             this.titleHolder.Dock = System.Windows.Forms.DockStyle.Top;
             this.titleHolder.Location = new System.Drawing.Point(0, 0);
             this.titleHolder.Name = "titleHolder";
-            this.titleHolder.Size = new System.Drawing.Size(1289, 113);
+            this.titleHolder.Size = new System.Drawing.Size(1289, 83);
             this.titleHolder.TabIndex = 0;
             // 
             // systemTitle
             // 
             this.systemTitle.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.systemTitle.AutoSize = true;
             this.systemTitle.Font = new System.Drawing.Font("Calibri", 48F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.systemTitle.ForeColor = System.Drawing.Color.BurlyWood;
-            this.systemTitle.Location = new System.Drawing.Point(149, 13);
+            this.systemTitle.Location = new System.Drawing.Point(149, 5);
             this.systemTitle.Name = "systemTitle";
             this.systemTitle.Size = new System.Drawing.Size(1013, 78);
             this.systemTitle.TabIndex = 0;
@@ -63,34 +63,36 @@ namespace KIT206.A2.Group18.HRIS
             // 
             // container
             // 
+            this.container.BackColor = System.Drawing.Color.SeaShell;
             this.container.Controls.Add(this.listViewHolder);
             this.container.Controls.Add(this.menuHolder);
             this.container.Cursor = System.Windows.Forms.Cursors.Default;
             this.container.Dock = System.Windows.Forms.DockStyle.Top;
-            this.container.Location = new System.Drawing.Point(0, 113);
+            this.container.Location = new System.Drawing.Point(0, 83);
             this.container.Name = "container";
-            this.container.Size = new System.Drawing.Size(1289, 669);
+            this.container.Size = new System.Drawing.Size(1289, 750);
             this.container.TabIndex = 1;
             // 
             // listViewHolder
             // 
             this.listViewHolder.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.listViewHolder.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.listViewHolder.BackColor = System.Drawing.Color.Tan;
             this.listViewHolder.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.listViewHolder.Controls.Add(this.listHolder);
             this.listViewHolder.Controls.Add(this.searchFieldHolder);
-            this.listViewHolder.Location = new System.Drawing.Point(152, 163);
+            this.listViewHolder.Location = new System.Drawing.Point(151, 169);
             this.listViewHolder.Name = "listViewHolder";
-            this.listViewHolder.Size = new System.Drawing.Size(998, 496);
+            this.listViewHolder.Size = new System.Drawing.Size(998, 578);
             this.listViewHolder.TabIndex = 1;
             // 
             // listHolder
             // 
+            this.listHolder.AutoScroll = true;
             this.listHolder.BackColor = System.Drawing.Color.White;
             this.listHolder.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.listHolder.Location = new System.Drawing.Point(23, 59);
+            this.listHolder.Location = new System.Drawing.Point(23, 70);
             this.listHolder.Name = "listHolder";
-            this.listHolder.Size = new System.Drawing.Size(954, 418);
+            this.listHolder.Size = new System.Drawing.Size(954, 491);
             this.listHolder.TabIndex = 1;
             // 
             // searchFieldHolder
@@ -107,7 +109,7 @@ namespace KIT206.A2.Group18.HRIS
             this.addButton.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.addButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.addButton.Image = global::KIT206.A2.Group18.HRIS.Properties.Resources.icons8_add_30;
-            this.addButton.Location = new System.Drawing.Point(943, 11);
+            this.addButton.Location = new System.Drawing.Point(943, 19);
             this.addButton.Name = "addButton";
             this.addButton.Size = new System.Drawing.Size(34, 34);
             this.addButton.TabIndex = 0;
@@ -126,7 +128,7 @@ namespace KIT206.A2.Group18.HRIS
             this.menuHolder.Controls.Add(this.classListButton, 2, 0);
             this.menuHolder.Controls.Add(this.consultationListButton, 3, 0);
             this.menuHolder.Controls.Add(this.staffListButton, 0, 0);
-            this.menuHolder.Location = new System.Drawing.Point(152, 0);
+            this.menuHolder.Location = new System.Drawing.Point(151, 6);
             this.menuHolder.Name = "menuHolder";
             this.menuHolder.RowCount = 1;
             this.menuHolder.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
@@ -145,6 +147,7 @@ namespace KIT206.A2.Group18.HRIS
             this.unitListButton.Size = new System.Drawing.Size(243, 151);
             this.unitListButton.TabIndex = 1;
             this.unitListButton.UseVisualStyleBackColor = false;
+            this.unitListButton.Click += new System.EventHandler(this.unitListButton_Click);
             // 
             // classListButton
             // 
@@ -161,6 +164,7 @@ namespace KIT206.A2.Group18.HRIS
             // consultationListButton
             // 
             this.consultationListButton.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.consultationListButton.AutoSize = true;
             this.consultationListButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.consultationListButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.consultationListButton.Image = global::KIT206.A2.Group18.HRIS.Properties.Resources.consultation;
@@ -186,22 +190,23 @@ namespace KIT206.A2.Group18.HRIS
             // HRIS
             // 
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1289, 782);
+            this.ClientSize = new System.Drawing.Size(1289, 845);
             this.Controls.Add(this.container);
             this.Controls.Add(this.titleHolder);
             this.Name = "HRIS";
             this.Text = "Human Resource Information System";
             this.titleHolder.ResumeLayout(false);
-            this.titleHolder.PerformLayout();
             this.container.ResumeLayout(false);
             this.listViewHolder.ResumeLayout(false);
             this.searchFieldHolder.ResumeLayout(false);
             this.menuHolder.ResumeLayout(false);
+            this.menuHolder.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
-        //view staff list when choosing STAFF button
+        //view staff list when clicking STAFF button
         private void staffListButton_Click(object sender, EventArgs e)
         {
             populateStaffList();
@@ -215,16 +220,33 @@ namespace KIT206.A2.Group18.HRIS
 
             staffListItem[] listView = new staffListItem[element_num];
 
+            if (listHolder.Controls.Count > 0)
+            {
+                listHolder.Controls.Clear();
+            }
+
             for (int i = 0; i < staffList.Count; i++)
             {
                 listView[i] = new staffListItem();
-                listView[i].Title = (staffList[i].title).ToString() + ".";
+                listView[i].Title = staffList[i].Title+ ".";
+                listView[i].ID = (staffList[i].ID).ToString();
                 listView[i].StaffName = staffList[i].Name;
                 listView[i].Email = staffList[i].Email;
                 listView[i].Campus = staffList[i].campus.ToString();
+                listView[i].ItemID = i;
 
                 listHolder.Controls.Add(listView[i]);
             }
+        }
+
+        private void unitListButton_Click(object sender, EventArgs e)
+        {
+            if (listHolder.Controls.Count > 0)
+            {
+                listHolder.Controls.Clear();
+            }
+            emptyList empty = new emptyList();
+            listHolder.Controls.Add(empty);
         }
     }
 }
