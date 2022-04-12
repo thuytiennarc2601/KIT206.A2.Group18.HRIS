@@ -95,5 +95,14 @@ namespace KIT206.A2.Group18.HRIS
             staffDetail.ItemID = this.ItemID;
             staffDetail.ShowDialog();
         }
+
+        //open edit staff info
+        //pass the list's index
+        private void editStaff_Click(object sender, EventArgs e)
+        {
+            addStaffInfo addStaff = new addStaffInfo();
+            addStaff.ItemID = this.ItemID;
+            addStaff.ShowDialog();
+        }
     }
 }

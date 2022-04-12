@@ -4,11 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
+using System.IO;
 
 namespace KIT206.A2.Group18.HRIS
 {
 
-    public enum Campus { Hobart, Launceston, NonLocated }
+    public enum Campus { Hobart, Launceston, Notlocated }
 
     public enum Category { admin, technical, casual, academic, unknown }
 
@@ -18,7 +19,9 @@ namespace KIT206.A2.Group18.HRIS
 
         public int ID { get; set; }
 
-        public string Name { get; set; }
+        public string GivenName { get; set; }
+
+        public string FamilyName { get; set; }
 
         public string Title { get; set; }
 
@@ -32,7 +35,7 @@ namespace KIT206.A2.Group18.HRIS
 
         public Category category { get; set; }
 
-        public string Photo { get; set; }
+        public byte[] Photo { get; set; }
 
         //retrieves all STAFF from staff database
         public static List<Staff> LoadAllStaffList()
@@ -54,7 +57,10 @@ namespace KIT206.A2.Group18.HRIS
                     Staff result = new Staff();
 
                     result.ID = rdr.GetInt32(0); //get id
-                    result.Name = rdr.GetString(1) + " " + rdr.GetString(2); //get name
+
+                    //get name
+                    result.GivenName = rdr.GetString(1); 
+                    result.FamilyName = rdr.GetString(2); 
 
                     //get Title
                     if (rdr.GetString(3) == "")
@@ -69,7 +75,7 @@ namespace KIT206.A2.Group18.HRIS
                     //get Campus
                     if (rdr.GetString(4) == "")
                     {
-                        result.campus = Campus.NonLocated;
+                        result.campus = Campus.Notlocated;
                     }
                     else
                     {
@@ -107,14 +113,10 @@ namespace KIT206.A2.Group18.HRIS
                     }
 
                     //get PHOTO
-                    //if (rdr.GetString(8) == "")
-                    //{
-                        //result.Photo = "No number added";
-                    //}
-                    //else
-                    //{
-                        //result.Photo = rdr.GetString(8);
-                    //}
+                    if (!Convert.IsDBNull(rdr[8]))
+                    {
+                        result.Photo = (byte[])rdr[8];
+                    }
 
                     //get CATEGORY
                     if (rdr.GetString(9) == "")
