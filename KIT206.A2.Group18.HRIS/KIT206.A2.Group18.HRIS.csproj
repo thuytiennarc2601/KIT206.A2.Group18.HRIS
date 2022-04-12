@@ -127,6 +127,12 @@
     <Compile Include="staffListItem.Designer.cs">
       <DependentUpon>staffListItem.cs</DependentUpon>
     </Compile>
+    <Compile Include="unitListItem.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="unitListItem.Designer.cs">
+      <DependentUpon>unitListItem.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="addStaffInfo.resx">
       <DependentUpon>addStaffInfo.cs</DependentUpon>
     </EmbeddedResource>
@@ -152,7 +158,11 @@
     <EmbeddedResource Include="staffListItem.resx">
       <DependentUpon>staffListItem.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="unitListItem.resx">
+      <DependentUpon>unitListItem.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="packages.config" />
+    <None Include="Properties\DataSources\Staff.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -213,6 +223,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\0cc4f09cdee89166635771b853a50326.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\avatar.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

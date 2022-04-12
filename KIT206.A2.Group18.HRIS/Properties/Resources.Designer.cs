@@ -103,6 +103,16 @@ namespace KIT206.A2.Group18.HRIS.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap avatar {
+            get {
+                object obj = ResourceManager.GetObject("avatar", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap CAT_HAIR_TIE_1000 {
             get {
                 object obj = ResourceManager.GetObject("CAT-HAIR-TIE_1000", resourceCulture);

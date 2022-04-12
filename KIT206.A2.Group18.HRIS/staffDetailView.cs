@@ -35,12 +35,23 @@ namespace KIT206.A2.Group18.HRIS
         {
             List<Staff> staffList = Staff.LoadAllStaffList();
             int id = this.ItemID;
-            staffNameDetail.Text = staffList[id].Title + ". " + staffList[id].Name;
+            this.Text = staffList[id].Title + ". " + staffList[id].GivenName + " " + staffList[id].FamilyName;
+            staffNameDetail.Text = staffList[id].Title + ". " + staffList[id].GivenName + " " + staffList[id].FamilyName;
             staffIDDetail.Text = "ID: " + (staffList[id].ID).ToString();
             staffCategoryDetail.Text = ((staffList[id].category).ToString() + " staff").ToUpper();
             staffPhoneDetail.Text = "Contact: " + staffList[id].Phone;
             staffEmailDetail.Text = "Email address: " + staffList[id].Email;
             staffCampusdetail.Text = "Location: " + staffList[id].Room + " | " + staffList[id].campus + " campus";
+
+            if(staffList[id].Photo == null)
+            {
+                staffAvatar.Image = Properties.Resources.avatar;
+            }
+            else
+            {
+                ImageConverter converter = new System.Drawing.ImageConverter();
+                staffAvatar.Image = converter.ConvertFrom(staffList[id].Photo) as Image;
+            }
         }
     }
 }
