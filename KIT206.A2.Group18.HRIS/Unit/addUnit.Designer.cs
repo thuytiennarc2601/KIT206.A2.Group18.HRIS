@@ -30,9 +30,9 @@ namespace KIT206.A2.Group18.HRIS
         private void InitializeComponent()
         {
             this.container = new System.Windows.Forms.Panel();
+            this.addUnitButton = new System.Windows.Forms.Button();
             this.note = new System.Windows.Forms.Label();
             this.coordinatorTB = new System.Windows.Forms.TextBox();
-            this.addUnitButton = new System.Windows.Forms.Button();
             this.coorOptions = new System.Windows.Forms.FlowLayoutPanel();
             this.unitCodeTB = new System.Windows.Forms.TextBox();
             this.unitNameTB = new System.Windows.Forms.TextBox();
@@ -45,10 +45,10 @@ namespace KIT206.A2.Group18.HRIS
             // container
             // 
             this.container.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.container.BackColor = System.Drawing.Color.SeaShell;
+            this.container.BackColor = System.Drawing.Color.White;
+            this.container.Controls.Add(this.addUnitButton);
             this.container.Controls.Add(this.note);
             this.container.Controls.Add(this.coordinatorTB);
-            this.container.Controls.Add(this.addUnitButton);
             this.container.Controls.Add(this.coorOptions);
             this.container.Controls.Add(this.unitCodeTB);
             this.container.Controls.Add(this.unitNameTB);
@@ -59,6 +59,22 @@ namespace KIT206.A2.Group18.HRIS
             this.container.Name = "container";
             this.container.Size = new System.Drawing.Size(558, 329);
             this.container.TabIndex = 0;
+            // 
+            // addUnitButton
+            // 
+            this.addUnitButton.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.addUnitButton.BackColor = System.Drawing.Color.PaleVioletRed;
+            this.addUnitButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.addUnitButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.addUnitButton.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.addUnitButton.ForeColor = System.Drawing.Color.White;
+            this.addUnitButton.Location = new System.Drawing.Point(21, 268);
+            this.addUnitButton.Name = "addUnitButton";
+            this.addUnitButton.Size = new System.Drawing.Size(95, 44);
+            this.addUnitButton.TabIndex = 6;
+            this.addUnitButton.Text = "ADD";
+            this.addUnitButton.UseVisualStyleBackColor = false;
+            this.addUnitButton.Click += new System.EventHandler(this.addUnitButton_Click);
             // 
             // note
             // 
@@ -80,6 +96,7 @@ namespace KIT206.A2.Group18.HRIS
             "Lisa Bella",
             "123456 - Anabella",
             "Ian 0123456"});
+            this.coordinatorTB.BackColor = System.Drawing.Color.White;
             this.coordinatorTB.Font = new System.Drawing.Font("Calibri", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.coordinatorTB.ForeColor = System.Drawing.Color.Gray;
             this.coordinatorTB.Location = new System.Drawing.Point(249, 116);
@@ -89,27 +106,11 @@ namespace KIT206.A2.Group18.HRIS
             this.coordinatorTB.TabIndex = 7;
             this.coordinatorTB.TextChanged += new System.EventHandler(this.coordinatorTB_TextChanged);
             // 
-            // addUnitButton
-            // 
-            this.addUnitButton.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.addUnitButton.BackColor = System.Drawing.Color.SteelBlue;
-            this.addUnitButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.addUnitButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.addUnitButton.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.addUnitButton.ForeColor = System.Drawing.Color.White;
-            this.addUnitButton.Location = new System.Drawing.Point(9, 276);
-            this.addUnitButton.Name = "addUnitButton";
-            this.addUnitButton.Size = new System.Drawing.Size(113, 35);
-            this.addUnitButton.TabIndex = 6;
-            this.addUnitButton.Text = "ADD";
-            this.addUnitButton.UseVisualStyleBackColor = false;
-            this.addUnitButton.Click += new System.EventHandler(this.addUnitButton_Click);
-            // 
             // coorOptions
             // 
             this.coorOptions.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.coorOptions.AutoScroll = true;
-            this.coorOptions.BackColor = System.Drawing.Color.SeaShell;
+            this.coorOptions.BackColor = System.Drawing.Color.White;
             this.coorOptions.Location = new System.Drawing.Point(249, 150);
             this.coorOptions.MinimumSize = new System.Drawing.Size(266, 105);
             this.coorOptions.Name = "coorOptions";
@@ -120,6 +121,7 @@ namespace KIT206.A2.Group18.HRIS
             // unitCodeTB
             // 
             this.unitCodeTB.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.unitCodeTB.BackColor = System.Drawing.Color.White;
             this.unitCodeTB.Font = new System.Drawing.Font("Calibri", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.unitCodeTB.ForeColor = System.Drawing.Color.Gray;
             this.unitCodeTB.Location = new System.Drawing.Point(176, 66);
@@ -131,6 +133,7 @@ namespace KIT206.A2.Group18.HRIS
             // unitNameTB
             // 
             this.unitNameTB.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.unitNameTB.BackColor = System.Drawing.Color.White;
             this.unitNameTB.Font = new System.Drawing.Font("Calibri", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.unitNameTB.ForeColor = System.Drawing.Color.Gray;
             this.unitNameTB.Location = new System.Drawing.Point(176, 20);
@@ -155,7 +158,7 @@ namespace KIT206.A2.Group18.HRIS
             this.unitCodeLB.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.unitCodeLB.AutoSize = true;
             this.unitCodeLB.Font = new System.Drawing.Font("Calibri", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.unitCodeLB.Location = new System.Drawing.Point(3, 65);
+            this.unitCodeLB.Location = new System.Drawing.Point(3, 67);
             this.unitCodeLB.Name = "unitCodeLB";
             this.unitCodeLB.Size = new System.Drawing.Size(133, 35);
             this.unitCodeLB.TabIndex = 1;
@@ -176,7 +179,7 @@ namespace KIT206.A2.Group18.HRIS
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.Tan;
+            this.BackColor = System.Drawing.Color.LightGray;
             this.ClientSize = new System.Drawing.Size(582, 353);
             this.Controls.Add(this.container);
             this.MaximumSize = new System.Drawing.Size(600, 400);

@@ -71,7 +71,7 @@ namespace KIT206.A2.Group18.HRIS
 
         private void staffListItem_MouseEnter(object sender, EventArgs e)
         {
-            selectBar.BackColor = Color.SteelBlue;
+            selectBar.BackColor = Color.DarkSeaGreen;
         }
 
         private void staffListItem_MouseLeave(object sender, EventArgs e)

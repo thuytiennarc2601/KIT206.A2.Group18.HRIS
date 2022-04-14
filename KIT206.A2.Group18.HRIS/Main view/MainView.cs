@@ -45,34 +45,35 @@ namespace KIT206.A2.Group18.HRIS
             // titleHolder
             // 
             this.titleHolder.AutoSize = true;
-            this.titleHolder.BackColor = System.Drawing.Color.SeaShell;
+            this.titleHolder.BackColor = System.Drawing.Color.White;
             this.titleHolder.Controls.Add(this.systemTitle);
             this.titleHolder.Dock = System.Windows.Forms.DockStyle.Top;
             this.titleHolder.Location = new System.Drawing.Point(0, 0);
             this.titleHolder.Name = "titleHolder";
-            this.titleHolder.Size = new System.Drawing.Size(1289, 83);
+            this.titleHolder.Size = new System.Drawing.Size(1289, 85);
             this.titleHolder.TabIndex = 0;
             // 
             // systemTitle
             // 
             this.systemTitle.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.systemTitle.BackColor = System.Drawing.Color.White;
             this.systemTitle.Font = new System.Drawing.Font("Calibri", 48F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.systemTitle.ForeColor = System.Drawing.Color.BurlyWood;
-            this.systemTitle.Location = new System.Drawing.Point(149, 5);
+            this.systemTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.systemTitle.Location = new System.Drawing.Point(149, -4);
             this.systemTitle.Name = "systemTitle";
-            this.systemTitle.Size = new System.Drawing.Size(1013, 78);
+            this.systemTitle.Size = new System.Drawing.Size(1013, 89);
             this.systemTitle.TabIndex = 0;
             this.systemTitle.Text = "Human Resource Information System";
             this.systemTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // container
             // 
-            this.container.BackColor = System.Drawing.Color.SeaShell;
+            this.container.BackColor = System.Drawing.Color.White;
             this.container.Controls.Add(this.listViewHolder);
             this.container.Controls.Add(this.menuHolder);
             this.container.Cursor = System.Windows.Forms.Cursors.Default;
             this.container.Dock = System.Windows.Forms.DockStyle.Top;
-            this.container.Location = new System.Drawing.Point(0, 83);
+            this.container.Location = new System.Drawing.Point(0, 85);
             this.container.Name = "container";
             this.container.Size = new System.Drawing.Size(1289, 771);
             this.container.TabIndex = 1;
@@ -80,7 +81,7 @@ namespace KIT206.A2.Group18.HRIS
             // listViewHolder
             // 
             this.listViewHolder.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.listViewHolder.BackColor = System.Drawing.Color.Tan;
+            this.listViewHolder.BackColor = System.Drawing.Color.Silver;
             this.listViewHolder.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.listViewHolder.Controls.Add(this.listHolder);
             this.listViewHolder.Controls.Add(this.searchFieldHolder);
@@ -95,63 +96,76 @@ namespace KIT206.A2.Group18.HRIS
             this.listHolder.AutoScroll = true;
             this.listHolder.BackColor = System.Drawing.Color.White;
             this.listHolder.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.listHolder.Location = new System.Drawing.Point(23, 70);
+            this.listHolder.Location = new System.Drawing.Point(23, 69);
             this.listHolder.Name = "listHolder";
-            this.listHolder.Size = new System.Drawing.Size(954, 491);
+            this.listHolder.Size = new System.Drawing.Size(954, 492);
             this.listHolder.TabIndex = 1;
             // 
             // searchFieldHolder
             // 
             this.searchFieldHolder.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.searchFieldHolder.BackColor = System.Drawing.Color.Silver;
             this.searchFieldHolder.Controls.Add(this.addConBtn);
             this.searchFieldHolder.Controls.Add(this.addClassBtn);
             this.searchFieldHolder.Controls.Add(this.addUnitbtn);
             this.searchFieldHolder.Controls.Add(this.searchBar);
             this.searchFieldHolder.Location = new System.Drawing.Point(0, 0);
             this.searchFieldHolder.Name = "searchFieldHolder";
-            this.searchFieldHolder.Size = new System.Drawing.Size(996, 64);
+            this.searchFieldHolder.Size = new System.Drawing.Size(996, 69);
             this.searchFieldHolder.TabIndex = 0;
             // 
             // addConBtn
             // 
             this.addConBtn.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.addConBtn.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.addConBtn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.addConBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.addConBtn.Font = new System.Drawing.Font("Calibri", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.addConBtn.Location = new System.Drawing.Point(823, 19);
+            this.addConBtn.Location = new System.Drawing.Point(823, 21);
             this.addConBtn.Name = "addConBtn";
             this.addConBtn.Size = new System.Drawing.Size(154, 37);
             this.addConBtn.TabIndex = 4;
             this.addConBtn.Text = "Add consultation";
-            this.addConBtn.UseVisualStyleBackColor = true;
+            this.addConBtn.UseVisualStyleBackColor = false;
             // 
             // addClassBtn
             // 
             this.addClassBtn.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.addClassBtn.BackColor = System.Drawing.Color.Gray;
+            this.addClassBtn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.addClassBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.addClassBtn.Font = new System.Drawing.Font("Calibri", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.addClassBtn.Location = new System.Drawing.Point(707, 19);
+            this.addClassBtn.ForeColor = System.Drawing.Color.White;
+            this.addClassBtn.Location = new System.Drawing.Point(707, 21);
             this.addClassBtn.Name = "addClassBtn";
             this.addClassBtn.Size = new System.Drawing.Size(110, 37);
             this.addClassBtn.TabIndex = 3;
             this.addClassBtn.Text = "Add class";
-            this.addClassBtn.UseVisualStyleBackColor = true;
+            this.addClassBtn.UseVisualStyleBackColor = false;
             // 
             // addUnitbtn
             // 
             this.addUnitbtn.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.addUnitbtn.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.addUnitbtn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.addUnitbtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.addUnitbtn.Font = new System.Drawing.Font("Calibri", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.addUnitbtn.Location = new System.Drawing.Point(591, 19);
+            this.addUnitbtn.Location = new System.Drawing.Point(591, 21);
             this.addUnitbtn.Name = "addUnitbtn";
             this.addUnitbtn.Size = new System.Drawing.Size(110, 37);
             this.addUnitbtn.TabIndex = 2;
             this.addUnitbtn.Text = "Add unit";
-            this.addUnitbtn.UseVisualStyleBackColor = true;
+            this.addUnitbtn.UseVisualStyleBackColor = false;
             this.addUnitbtn.Click += new System.EventHandler(this.addUnitbtn_Click);
             // 
             // searchBar
             // 
             this.searchBar.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.searchBar.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.searchBar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.searchBar.Font = new System.Drawing.Font("Calibri", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.searchBar.ForeColor = System.Drawing.Color.Gray;
-            this.searchBar.Location = new System.Drawing.Point(23, 18);
+            this.searchBar.Location = new System.Drawing.Point(23, 20);
             this.searchBar.Margin = new System.Windows.Forms.Padding(10);
             this.searchBar.MaxLength = 50;
             this.searchBar.Name = "searchBar";
@@ -186,6 +200,7 @@ namespace KIT206.A2.Group18.HRIS
             this.unitListButton.BackgroundImage = global::KIT206.A2.Group18.HRIS.Properties.Resources.unit1;
             this.unitListButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.unitListButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.unitListButton.Image = global::KIT206.A2.Group18.HRIS.Properties.Resources.unit2;
             this.unitListButton.Location = new System.Drawing.Point(252, 3);
             this.unitListButton.Name = "unitListButton";
             this.unitListButton.Size = new System.Drawing.Size(243, 151);
@@ -198,7 +213,7 @@ namespace KIT206.A2.Group18.HRIS
             this.classListButton.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.classListButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.classListButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.classListButton.Image = global::KIT206.A2.Group18.HRIS.Properties.Resources._class;
+            this.classListButton.Image = global::KIT206.A2.Group18.HRIS.Properties.Resources.class1;
             this.classListButton.Location = new System.Drawing.Point(501, 3);
             this.classListButton.Name = "classListButton";
             this.classListButton.Size = new System.Drawing.Size(243, 151);
@@ -211,7 +226,7 @@ namespace KIT206.A2.Group18.HRIS
             this.consultationListButton.AutoSize = true;
             this.consultationListButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.consultationListButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.consultationListButton.Image = global::KIT206.A2.Group18.HRIS.Properties.Resources.consultation;
+            this.consultationListButton.Image = global::KIT206.A2.Group18.HRIS.Properties.Resources.consultation_1;
             this.consultationListButton.Location = new System.Drawing.Point(750, 3);
             this.consultationListButton.Name = "consultationListButton";
             this.consultationListButton.Size = new System.Drawing.Size(245, 151);
@@ -223,7 +238,7 @@ namespace KIT206.A2.Group18.HRIS
             this.staffListButton.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.staffListButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.staffListButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.staffListButton.Image = global::KIT206.A2.Group18.HRIS.Properties.Resources.staff2;
+            this.staffListButton.Image = global::KIT206.A2.Group18.HRIS.Properties.Resources.staff3;
             this.staffListButton.Location = new System.Drawing.Point(3, 3);
             this.staffListButton.Name = "staffListButton";
             this.staffListButton.Size = new System.Drawing.Size(243, 151);
@@ -266,7 +281,7 @@ namespace KIT206.A2.Group18.HRIS
         {
             populateStaffList();
             chooseUnit = false;
-            chooseStaff = true;
+            chooseStaff = true; //when the staff button is clicked
             chooseClass = false;
             chooseConsultation = false;
         }
@@ -279,17 +294,19 @@ namespace KIT206.A2.Group18.HRIS
             int element_num = staffList.Count;
             staffListItem[] listView = new staffListItem[element_num];
 
+            //clear all items from the last choice before displaying the new ones
             if (listHolder.Controls.Count > 0)
             {
                 listHolder.Controls.Clear();
             }
 
+            //if the staff list is empty
             if (staffList.Count <= 0)
             {
                 emptyList empty = new emptyList();
                 listHolder.Controls.Add(empty);
             }
-            else
+            else //if not
             {
                 for (int i = 0; i < staffList.Count; i++)
                 {
@@ -298,7 +315,6 @@ namespace KIT206.A2.Group18.HRIS
                     listView[i].StaffName = staffList[i].Title + ". " + staffList[i].GivenName + " " + staffList[i].FamilyName;
                     listView[i].Email = staffList[i].Email;
                     listView[i].Campus = staffList[i].campus.ToString() + " campus";
-
                     listView[i].ItemID = i;
 
                     if (staffList[i].Photo == null || staffList[i].Photo.Length == 0)
@@ -320,7 +336,7 @@ namespace KIT206.A2.Group18.HRIS
         private void unitListButton_Click(object sender, EventArgs e)
         {
             populateUnitList();
-            chooseUnit = true;
+            chooseUnit = true; //when the unit button is clicked
             chooseStaff = false;
             chooseClass = false;
             chooseConsultation = false;
@@ -334,17 +350,19 @@ namespace KIT206.A2.Group18.HRIS
             int count = unitList.Count;
             unitListItem[] unitView = new unitListItem[count];
 
+            //clear all last items
             if (listHolder.Controls.Count > 0)
             {
                 listHolder.Controls.Clear();
             }
 
+            //if the unit list is empty
             if (unitList.Count <= 0)
             {
                 emptyList empty = new emptyList();
                 listHolder.Controls.Add(empty);
             }
-            else
+            else //if not
             {
                 for (int i = 0; i < unitList.Count; i++)
                 {
@@ -373,7 +391,7 @@ namespace KIT206.A2.Group18.HRIS
 
         private void addUnitbtn_Click(object sender, EventArgs e)
         {
-            chooseUnit = true;
+            chooseUnit = true; //changes to tab Unit when clicking 'Add unit' button
             chooseStaff = false;
             chooseClass = false;
             chooseConsultation = false;
@@ -381,6 +399,8 @@ namespace KIT206.A2.Group18.HRIS
             addNewUnit.ShowDialog();
         }
 
+        #region Load tabs when activated
+        //load a specific list after an action based on the chosen tab
         private void HRIS_Activated(object sender, EventArgs e)
         {
             if (chooseStaff)
@@ -393,5 +413,6 @@ namespace KIT206.A2.Group18.HRIS
                 populateUnitList();
             }
         }
+        #endregion
     }
 }

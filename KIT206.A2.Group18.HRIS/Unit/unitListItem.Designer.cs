@@ -41,6 +41,7 @@ namespace KIT206.A2.Group18.HRIS
             // selectBar
             // 
             this.selectBar.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.selectBar.BackColor = System.Drawing.Color.White;
             this.selectBar.Location = new System.Drawing.Point(0, 0);
             this.selectBar.Name = "selectBar";
             this.selectBar.Size = new System.Drawing.Size(13, 130);
@@ -52,11 +53,11 @@ namespace KIT206.A2.Group18.HRIS
             // 
             this.unitName.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.unitName.AutoSize = true;
-            this.unitName.Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.unitName.ForeColor = System.Drawing.Color.Tan;
+            this.unitName.Font = new System.Drawing.Font("Georgia", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.unitName.ForeColor = System.Drawing.Color.PaleVioletRed;
             this.unitName.Location = new System.Drawing.Point(91, 15);
             this.unitName.Name = "unitName";
-            this.unitName.Size = new System.Drawing.Size(273, 37);
+            this.unitName.Size = new System.Drawing.Size(334, 35);
             this.unitName.TabIndex = 1;
             this.unitName.Text = "Game Fundamentals";
             this.unitName.MouseEnter += new System.EventHandler(this.unitListItem_MouseEnter);
@@ -66,11 +67,11 @@ namespace KIT206.A2.Group18.HRIS
             // 
             this.unitCode.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.unitCode.AutoSize = true;
-            this.unitCode.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.unitCode.Font = new System.Drawing.Font("Calibri", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.unitCode.ForeColor = System.Drawing.Color.Gray;
             this.unitCode.Location = new System.Drawing.Point(94, 52);
             this.unitCode.Name = "unitCode";
-            this.unitCode.Size = new System.Drawing.Size(65, 24);
+            this.unitCode.Size = new System.Drawing.Size(79, 29);
             this.unitCode.TabIndex = 2;
             this.unitCode.Text = "KIT109";
             this.unitCode.MouseEnter += new System.EventHandler(this.unitListItem_MouseEnter);
@@ -80,11 +81,11 @@ namespace KIT206.A2.Group18.HRIS
             // 
             this.coordinatorName.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.coordinatorName.AutoSize = true;
-            this.coordinatorName.Font = new System.Drawing.Font("Calibri", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.coordinatorName.Font = new System.Drawing.Font("Century Gothic", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.coordinatorName.ForeColor = System.Drawing.Color.Black;
-            this.coordinatorName.Location = new System.Drawing.Point(276, 78);
+            this.coordinatorName.Location = new System.Drawing.Point(276, 82);
             this.coordinatorName.Name = "coordinatorName";
-            this.coordinatorName.Size = new System.Drawing.Size(203, 35);
+            this.coordinatorName.Size = new System.Drawing.Size(206, 28);
             this.coordinatorName.TabIndex = 3;
             this.coordinatorName.Text = "Dr. Lindsay Wells";
             this.coordinatorName.MouseEnter += new System.EventHandler(this.unitListItem_MouseEnter);
@@ -106,16 +107,16 @@ namespace KIT206.A2.Group18.HRIS
             // 
             // editCor
             // 
-            this.editCor.BackColor = System.Drawing.Color.SteelBlue;
+            this.editCor.BackColor = System.Drawing.Color.LightPink;
             this.editCor.Cursor = System.Windows.Forms.Cursors.Hand;
             this.editCor.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.editCor.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.editCor.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.editCor.ForeColor = System.Drawing.Color.White;
-            this.editCor.Location = new System.Drawing.Point(991, 21);
+            this.editCor.Location = new System.Drawing.Point(1101, 76);
             this.editCor.Name = "editCor";
-            this.editCor.Size = new System.Drawing.Size(192, 33);
+            this.editCor.Size = new System.Drawing.Size(97, 42);
             this.editCor.TabIndex = 5;
-            this.editCor.Text = "Edit Coordinator";
+            this.editCor.Text = "EDIT";
             this.editCor.UseVisualStyleBackColor = false;
             this.editCor.Click += new System.EventHandler(this.editCor_Click);
             this.editCor.MouseEnter += new System.EventHandler(this.unitListItem_MouseEnter);
@@ -134,6 +135,7 @@ namespace KIT206.A2.Group18.HRIS
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.White;
             this.Controls.Add(this.Seperator);
             this.Controls.Add(this.editCor);
             this.Controls.Add(this.coordinatorUnit);

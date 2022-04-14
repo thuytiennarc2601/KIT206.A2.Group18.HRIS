@@ -123,9 +123,39 @@ namespace KIT206.A2.Group18.HRIS.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap class1 {
+            get {
+                object obj = ResourceManager.GetObject("class1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap consultation {
             get {
                 object obj = ResourceManager.GetObject("consultation", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap consultation_1 {
+            get {
+                object obj = ResourceManager.GetObject("consultation 1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap consultation1 {
+            get {
+                object obj = ResourceManager.GetObject("consultation1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -214,6 +244,16 @@ namespace KIT206.A2.Group18.HRIS.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap staff3 {
+            get {
+                object obj = ResourceManager.GetObject("staff3", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap unit {
             get {
                 object obj = ResourceManager.GetObject("unit", resourceCulture);
@@ -227,6 +267,16 @@ namespace KIT206.A2.Group18.HRIS.Properties {
         internal static System.Drawing.Bitmap unit1 {
             get {
                 object obj = ResourceManager.GetObject("unit1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap unit2 {
+            get {
+                object obj = ResourceManager.GetObject("unit2", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

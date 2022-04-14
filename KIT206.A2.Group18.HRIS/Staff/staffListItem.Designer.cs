@@ -45,12 +45,12 @@ namespace KIT206.A2.Group18.HRIS
             this.staffName.AutoEllipsis = true;
             this.staffName.AutoSize = true;
             this.staffName.BackColor = System.Drawing.Color.White;
-            this.staffName.Font = new System.Drawing.Font("Calibri", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.staffName.ForeColor = System.Drawing.Color.Peru;
-            this.staffName.Location = new System.Drawing.Point(237, 14);
+            this.staffName.Font = new System.Drawing.Font("Georgia", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.staffName.ForeColor = System.Drawing.Color.OliveDrab;
+            this.staffName.Location = new System.Drawing.Point(233, 14);
             this.staffName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.staffName.Name = "staffName";
-            this.staffName.Size = new System.Drawing.Size(169, 40);
+            this.staffName.Size = new System.Drawing.Size(186, 35);
             this.staffName.TabIndex = 1;
             this.staffName.Text = "Staff Name";
             this.staffName.DoubleClick += new System.EventHandler(this.staffListItem_DoubleClick);
@@ -96,7 +96,7 @@ namespace KIT206.A2.Group18.HRIS
             this.staffID.AutoSize = true;
             this.staffID.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.staffID.ForeColor = System.Drawing.Color.Gray;
-            this.staffID.Location = new System.Drawing.Point(235, 54);
+            this.staffID.Location = new System.Drawing.Point(235, 53);
             this.staffID.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.staffID.Name = "staffID";
             this.staffID.Size = new System.Drawing.Size(105, 29);
@@ -109,17 +109,18 @@ namespace KIT206.A2.Group18.HRIS
             // editStaff
             // 
             this.editStaff.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.editStaff.BackColor = System.Drawing.Color.SteelBlue;
+            this.editStaff.BackColor = System.Drawing.Color.DarkSeaGreen;
+            this.editStaff.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.editStaff.Cursor = System.Windows.Forms.Cursors.Hand;
             this.editStaff.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.editStaff.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.editStaff.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.editStaff.ForeColor = System.Drawing.Color.White;
-            this.editStaff.Location = new System.Drawing.Point(1093, 98);
+            this.editStaff.Location = new System.Drawing.Point(1112, 98);
             this.editStaff.Margin = new System.Windows.Forms.Padding(4);
             this.editStaff.Name = "editStaff";
-            this.editStaff.Size = new System.Drawing.Size(93, 42);
+            this.editStaff.Size = new System.Drawing.Size(97, 42);
             this.editStaff.TabIndex = 9;
-            this.editStaff.Text = "Edit";
+            this.editStaff.Text = "EDIT";
             this.editStaff.UseVisualStyleBackColor = false;
             this.editStaff.Click += new System.EventHandler(this.editStaff_Click);
             this.editStaff.MouseEnter += new System.EventHandler(this.staffListItem_MouseEnter);

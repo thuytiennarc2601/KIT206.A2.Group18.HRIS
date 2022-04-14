@@ -61,7 +61,7 @@ namespace KIT206.A2.Group18.HRIS
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.SeaShell;
+            this.BackColor = System.Drawing.Color.White;
             this.Controls.Add(this.coorIDName);
             this.Controls.Add(this.selectBar);
             this.Name = "coordinatorListItem";
