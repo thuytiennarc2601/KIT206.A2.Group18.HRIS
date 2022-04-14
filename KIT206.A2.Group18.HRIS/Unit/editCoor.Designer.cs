@@ -43,7 +43,7 @@ namespace KIT206.A2.Group18.HRIS
             // container
             // 
             this.container.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.container.BackColor = System.Drawing.Color.SeaShell;
+            this.container.BackColor = System.Drawing.Color.White;
             this.container.Controls.Add(this.updateButton);
             this.container.Controls.Add(this.options);
             this.container.Controls.Add(this.editNameTB);
@@ -59,14 +59,14 @@ namespace KIT206.A2.Group18.HRIS
             // updateButton
             // 
             this.updateButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.updateButton.BackColor = System.Drawing.Color.SteelBlue;
+            this.updateButton.BackColor = System.Drawing.Color.PaleVioletRed;
             this.updateButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.updateButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.updateButton.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.updateButton.ForeColor = System.Drawing.Color.White;
-            this.updateButton.Location = new System.Drawing.Point(549, 278);
+            this.updateButton.Location = new System.Drawing.Point(549, 270);
             this.updateButton.Name = "updateButton";
-            this.updateButton.Size = new System.Drawing.Size(110, 36);
+            this.updateButton.Size = new System.Drawing.Size(110, 44);
             this.updateButton.TabIndex = 6;
             this.updateButton.Text = "UPDATE";
             this.updateButton.UseVisualStyleBackColor = false;
@@ -76,8 +76,8 @@ namespace KIT206.A2.Group18.HRIS
             // 
             this.options.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.options.AutoScroll = true;
-            this.options.BackColor = System.Drawing.Color.SeaShell;
-            this.options.Location = new System.Drawing.Point(9, 117);
+            this.options.BackColor = System.Drawing.Color.White;
+            this.options.Location = new System.Drawing.Point(9, 129);
             this.options.Name = "options";
             this.options.Size = new System.Drawing.Size(451, 197);
             this.options.TabIndex = 5;
@@ -90,7 +90,7 @@ namespace KIT206.A2.Group18.HRIS
             this.editNameTB.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.editNameTB.Font = new System.Drawing.Font("Calibri", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.editNameTB.ForeColor = System.Drawing.Color.Gray;
-            this.editNameTB.Location = new System.Drawing.Point(9, 75);
+            this.editNameTB.Location = new System.Drawing.Point(8, 87);
             this.editNameTB.Name = "editNameTB";
             this.editNameTB.Size = new System.Drawing.Size(451, 36);
             this.editNameTB.TabIndex = 4;
@@ -102,7 +102,7 @@ namespace KIT206.A2.Group18.HRIS
             this.note.AutoSize = true;
             this.note.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.note.ForeColor = System.Drawing.Color.Gray;
-            this.note.Location = new System.Drawing.Point(184, 54);
+            this.note.Location = new System.Drawing.Point(231, 61);
             this.note.Name = "note";
             this.note.Size = new System.Drawing.Size(228, 18);
             this.note.TabIndex = 3;
@@ -112,10 +112,10 @@ namespace KIT206.A2.Group18.HRIS
             // 
             this.unitCoor.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.unitCoor.AutoSize = true;
-            this.unitCoor.Font = new System.Drawing.Font("Calibri", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.unitCoor.Location = new System.Drawing.Point(4, 46);
+            this.unitCoor.Font = new System.Drawing.Font("Century Gothic", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.unitCoor.Location = new System.Drawing.Point(4, 54);
             this.unitCoor.Name = "unitCoor";
-            this.unitCoor.Size = new System.Drawing.Size(183, 29);
+            this.unitCoor.Size = new System.Drawing.Size(211, 30);
             this.unitCoor.TabIndex = 2;
             this.unitCoor.Text = "Unit coordinator:";
             // 
@@ -132,10 +132,11 @@ namespace KIT206.A2.Group18.HRIS
             // 
             this.unitInfo.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.unitInfo.AutoSize = true;
-            this.unitInfo.Font = new System.Drawing.Font("Calibri", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.unitInfo.Location = new System.Drawing.Point(3, 3);
+            this.unitInfo.Font = new System.Drawing.Font("Century Gothic", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.unitInfo.ForeColor = System.Drawing.Color.PaleVioletRed;
+            this.unitInfo.Location = new System.Drawing.Point(3, 7);
             this.unitInfo.Name = "unitInfo";
-            this.unitInfo.Size = new System.Drawing.Size(390, 35);
+            this.unitInfo.Size = new System.Drawing.Size(373, 28);
             this.unitInfo.TabIndex = 0;
             this.unitInfo.Text = "KIT109 | GAME FUNDAMENTALS";
             // 
@@ -143,7 +144,7 @@ namespace KIT206.A2.Group18.HRIS
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.Tan;
+            this.BackColor = System.Drawing.Color.LightGray;
             this.ClientSize = new System.Drawing.Size(750, 353);
             this.Controls.Add(this.container);
             this.MaximumSize = new System.Drawing.Size(768, 400);

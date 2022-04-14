@@ -48,7 +48,7 @@ namespace KIT206.A2.Group18.HRIS
             // detailHolder
             // 
             this.detailHolder.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.detailHolder.BackColor = System.Drawing.Color.SeaShell;
+            this.detailHolder.BackColor = System.Drawing.Color.White;
             this.detailHolder.Controls.Add(this.consultationHolder);
             this.detailHolder.Controls.Add(this.consultationLabels);
             this.detailHolder.Controls.Add(this.unitLabel);
@@ -61,9 +61,9 @@ namespace KIT206.A2.Group18.HRIS
             this.detailHolder.Controls.Add(this.staffNameDetail);
             this.detailHolder.Controls.Add(this.staffAvatar);
             this.detailHolder.ForeColor = System.Drawing.Color.Black;
-            this.detailHolder.Location = new System.Drawing.Point(25, 25);
+            this.detailHolder.Location = new System.Drawing.Point(25, 12);
             this.detailHolder.Name = "detailHolder";
-            this.detailHolder.Size = new System.Drawing.Size(681, 463);
+            this.detailHolder.Size = new System.Drawing.Size(681, 479);
             this.detailHolder.TabIndex = 0;
             // 
             // consultationHolder
@@ -71,19 +71,21 @@ namespace KIT206.A2.Group18.HRIS
             this.consultationHolder.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.consultationHolder.AutoScroll = true;
             this.consultationHolder.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.consultationHolder.Location = new System.Drawing.Point(16, 346);
+            this.consultationHolder.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.consultationHolder.Location = new System.Drawing.Point(16, 368);
             this.consultationHolder.Name = "consultationHolder";
-            this.consultationHolder.Size = new System.Drawing.Size(650, 104);
+            this.consultationHolder.Size = new System.Drawing.Size(650, 97);
             this.consultationHolder.TabIndex = 8;
             // 
             // consultationLabels
             // 
             this.consultationLabels.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.consultationLabels.AutoSize = true;
-            this.consultationLabels.Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.consultationLabels.Location = new System.Drawing.Point(9, 306);
+            this.consultationLabels.Font = new System.Drawing.Font("Calibri", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.consultationLabels.ForeColor = System.Drawing.Color.OliveDrab;
+            this.consultationLabels.Location = new System.Drawing.Point(11, 328);
             this.consultationLabels.Name = "consultationLabels";
-            this.consultationLabels.Size = new System.Drawing.Size(220, 37);
+            this.consultationLabels.Size = new System.Drawing.Size(249, 41);
             this.consultationLabels.TabIndex = 9;
             this.consultationLabels.Text = "CONSULTATIONS";
             // 
@@ -92,10 +94,11 @@ namespace KIT206.A2.Group18.HRIS
             this.unitLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.unitLabel.AutoSize = true;
             this.unitLabel.BackColor = System.Drawing.Color.Transparent;
-            this.unitLabel.Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.unitLabel.Location = new System.Drawing.Point(11, 167);
+            this.unitLabel.Font = new System.Drawing.Font("Calibri", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.unitLabel.ForeColor = System.Drawing.Color.OliveDrab;
+            this.unitLabel.Location = new System.Drawing.Point(9, 175);
             this.unitLabel.Name = "unitLabel";
-            this.unitLabel.Size = new System.Drawing.Size(92, 37);
+            this.unitLabel.Size = new System.Drawing.Size(104, 41);
             this.unitLabel.TabIndex = 8;
             this.unitLabel.Text = "UNITS";
             // 
@@ -104,17 +107,19 @@ namespace KIT206.A2.Group18.HRIS
             this.unitHolder.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.unitHolder.AutoScroll = true;
             this.unitHolder.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.unitHolder.Location = new System.Drawing.Point(16, 199);
+            this.unitHolder.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.unitHolder.Location = new System.Drawing.Point(16, 215);
             this.unitHolder.Name = "unitHolder";
-            this.unitHolder.Size = new System.Drawing.Size(650, 104);
+            this.unitHolder.Size = new System.Drawing.Size(650, 110);
             this.unitHolder.TabIndex = 7;
+            this.unitHolder.WrapContents = false;
             // 
             // staffCategoryDetail
             // 
             this.staffCategoryDetail.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.staffCategoryDetail.AutoSize = true;
             this.staffCategoryDetail.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.staffCategoryDetail.Location = new System.Drawing.Point(174, 73);
+            this.staffCategoryDetail.Location = new System.Drawing.Point(174, 79);
             this.staffCategoryDetail.Name = "staffCategoryDetail";
             this.staffCategoryDetail.Size = new System.Drawing.Size(183, 29);
             this.staffCategoryDetail.TabIndex = 6;
@@ -125,7 +130,7 @@ namespace KIT206.A2.Group18.HRIS
             this.staffCampusdetail.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.staffCampusdetail.AutoSize = true;
             this.staffCampusdetail.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.staffCampusdetail.Location = new System.Drawing.Point(174, 141);
+            this.staffCampusdetail.Location = new System.Drawing.Point(174, 149);
             this.staffCampusdetail.Name = "staffCampusdetail";
             this.staffCampusdetail.Size = new System.Drawing.Size(283, 29);
             this.staffCampusdetail.TabIndex = 5;
@@ -136,7 +141,7 @@ namespace KIT206.A2.Group18.HRIS
             this.staffPhoneDetail.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.staffPhoneDetail.AutoSize = true;
             this.staffPhoneDetail.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.staffPhoneDetail.Location = new System.Drawing.Point(174, 96);
+            this.staffPhoneDetail.Location = new System.Drawing.Point(174, 104);
             this.staffPhoneDetail.Name = "staffPhoneDetail";
             this.staffPhoneDetail.Size = new System.Drawing.Size(203, 29);
             this.staffPhoneDetail.TabIndex = 4;
@@ -147,7 +152,7 @@ namespace KIT206.A2.Group18.HRIS
             this.staffEmailDetail.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.staffEmailDetail.AutoSize = true;
             this.staffEmailDetail.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.staffEmailDetail.Location = new System.Drawing.Point(174, 118);
+            this.staffEmailDetail.Location = new System.Drawing.Point(174, 126);
             this.staffEmailDetail.Name = "staffEmailDetail";
             this.staffEmailDetail.Size = new System.Drawing.Size(240, 29);
             this.staffEmailDetail.TabIndex = 3;
@@ -167,11 +172,11 @@ namespace KIT206.A2.Group18.HRIS
             // 
             this.staffNameDetail.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.staffNameDetail.AutoSize = true;
-            this.staffNameDetail.Font = new System.Drawing.Font("Calibri", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.staffNameDetail.ForeColor = System.Drawing.Color.Black;
-            this.staffNameDetail.Location = new System.Drawing.Point(172, 14);
+            this.staffNameDetail.Font = new System.Drawing.Font("Georgia", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.staffNameDetail.ForeColor = System.Drawing.Color.OliveDrab;
+            this.staffNameDetail.Location = new System.Drawing.Point(172, 22);
             this.staffNameDetail.Name = "staffNameDetail";
-            this.staffNameDetail.Size = new System.Drawing.Size(275, 45);
+            this.staffNameDetail.Size = new System.Drawing.Size(275, 35);
             this.staffNameDetail.TabIndex = 1;
             this.staffNameDetail.Text = "Title. Staff Name";
             // 
@@ -179,7 +184,7 @@ namespace KIT206.A2.Group18.HRIS
             // 
             this.staffAvatar.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.staffAvatar.Image = global::KIT206.A2.Group18.HRIS.Properties.Resources.CAT_HAIR_TIE_1000;
-            this.staffAvatar.Location = new System.Drawing.Point(16, 14);
+            this.staffAvatar.Location = new System.Drawing.Point(16, 22);
             this.staffAvatar.Name = "staffAvatar";
             this.staffAvatar.Size = new System.Drawing.Size(150, 150);
             this.staffAvatar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -190,7 +195,7 @@ namespace KIT206.A2.Group18.HRIS
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.AutoSize = true;
-            this.BackColor = System.Drawing.Color.Tan;
+            this.BackColor = System.Drawing.Color.LightGray;
             this.ClientSize = new System.Drawing.Size(732, 503);
             this.Controls.Add(this.detailHolder);
             this.MaximumSize = new System.Drawing.Size(750, 550);

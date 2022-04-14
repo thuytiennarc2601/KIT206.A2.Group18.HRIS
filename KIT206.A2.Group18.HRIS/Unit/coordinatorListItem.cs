@@ -40,13 +40,13 @@ namespace KIT206.A2.Group18.HRIS
         {
             if (coorIDName.Text != "No result found")
             {
-                selectBar.BackColor = Color.SteelBlue;
+                selectBar.BackColor = Color.PaleVioletRed;
             }
         }
 
         private void coordinatorListItem_MouseLeave(object sender, EventArgs e)
         {
-            selectBar.BackColor = Color.SeaShell;
+            selectBar.BackColor = Color.White;
         }
     }
 }

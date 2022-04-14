@@ -61,38 +61,12 @@ namespace KIT206.A2.Group18.HRIS
         #region Retrieve staff details
         private List<Staff> getCoordinatorDetail(string searchText)
         {
-            MySqlDataReader rdr = null;
-            conn = GetSqlConnection.GetConnection();
-            List<Staff> staffList = new List<Staff>();
-
-            try
-            {
-                conn.Open();
-                MySqlCommand cmd = new MySqlCommand("select id, given_name, family_name from staff where id like '" + searchText + "%' or given_name like '" + searchText + "%' or family_name like '" + searchText + "%'", conn);
-                rdr = cmd.ExecuteReader();
-                while (rdr.Read())
-                {
-                    Staff staff = new Staff();
-                    staff.ID = rdr.GetInt32(0);
-                    staff.GivenName = rdr.GetString(1);
-                    staff.FamilyName = rdr.GetString(2);
-
-                    staffList.Add(staff);
-                }
-            }
-
-            finally
-            {
-                if (rdr != null)
-                {
-                    rdr.Close();
-                }
-                if (conn != null)
-                {
-                    conn.Close();
-                }
-            }
-            return staffList;
+            List<Staff> staffList = Staff.LoadAllStaffList();
+            var searchResult = from Staff s in staffList
+                               where (s.GivenName).ToLower().Contains(searchText.ToLower()) ||
+                               (s.FamilyName).ToLower().Contains(searchText.ToLower()) || (s.ID).ToString().Contains(searchText)
+                               select s;
+            return new List<Staff>(searchResult);
         }
         #endregion
 

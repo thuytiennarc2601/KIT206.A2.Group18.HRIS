@@ -26,41 +26,19 @@ namespace KIT206.A2.Group18.HRIS
         private bool Validation(int coorID, string code, string title)
         {
             bool valid = true;
-            int checkStaff = 0;
-            string checkUnitCode = "";
-            MySqlDataReader rdr = null;
-            conn = GetSqlConnection.GetConnection();
+            List<Unit> unitList = Unit.LoadAllUnit();
+            List<Staff> staffList = Staff.LoadAllStaffList();
 
-            try
-            {
-                conn.Open();
-                MySqlCommand staffCmd = new MySqlCommand("select id from staff where id='" + coorID + "'", conn);
-                rdr = staffCmd.ExecuteReader();
-                while(rdr.Read())
-                {
-                    checkStaff = rdr.GetInt32(0);
-                }
-                rdr.Close();
+            var checkUnit = from Unit u in unitList
+                                where code == u.UnitCode || title == u.UnitName || code == u.UnitName || title == u.UnitCode
+                                select u;
 
-                MySqlCommand unitCmd = new MySqlCommand("select code from unit where code='" + code + "' or title='" + title + "'", conn);
-                rdr = unitCmd.ExecuteReader();
-                while(rdr.Read())
-                {
-                    checkUnitCode = rdr.GetString(0);
-                }
-            }
+            var checkStaff = from Staff s in staffList
+                                 where coorID == s.ID
+                                 select s;
 
-            finally
-            {
-                if(rdr != null)
-                {
-                    rdr.Close();
-                }
-                if(conn != null)
-                {
-                    conn.Close();
-                }
-            }
+            List<Unit> resultUnit = new List<Unit>(checkUnit);
+            List<Staff> resultStaff = new List<Staff>(checkStaff);
 
             if(unitCodeTB.Text == "")
             {
@@ -74,7 +52,7 @@ namespace KIT206.A2.Group18.HRIS
                 valid = false;
             }
 
-            else if (checkUnitCode != "")
+            else if (resultUnit.Count > 0)
             {
                 MessageBox.Show("Unit code or name already exist");
                 valid = false;
@@ -86,7 +64,7 @@ namespace KIT206.A2.Group18.HRIS
                 valid = false;
             }
 
-            else if (checkStaff == 0)
+            else if (resultStaff.Count == 0)
             {
                 MessageBox.Show("The staff does not exist");
                 valid = false;
@@ -165,38 +143,12 @@ namespace KIT206.A2.Group18.HRIS
         #region Retrieve staff details
         private List<Staff> getCoordinatorDetail(string searchText)
         {
-            MySqlDataReader rdr = null;
-            conn = GetSqlConnection.GetConnection();
-            List<Staff> staffList = new List<Staff>();
-
-            try
-            {
-                conn.Open();
-                MySqlCommand cmd = new MySqlCommand("select id, given_name, family_name from staff where id like '" + searchText + "%' or given_name like '" + searchText + "%' or family_name like '" + searchText + "%'", conn);
-                rdr = cmd.ExecuteReader();
-                while (rdr.Read())
-                {
-                    Staff staff = new Staff();
-                    staff.ID = rdr.GetInt32(0);
-                    staff.GivenName = rdr.GetString(1);
-                    staff.FamilyName = rdr.GetString(2);
-
-                    staffList.Add(staff);
-                }
-            }
-
-            finally
-            {
-                if (rdr != null)
-                {
-                    rdr.Close();
-                }
-                if (conn != null)
-                {
-                    conn.Close();
-                }
-            }
-            return staffList;
+            List<Staff> staffList = Staff.LoadAllStaffList();
+            var searchResult = from Staff s in staffList
+                               where (s.GivenName).ToLower().Contains(searchText.ToLower()) || 
+                               (s.FamilyName).ToLower().Contains(searchText.ToLower()) || (s.ID).ToString().Contains(searchText)
+                               select s;
+            return new List<Staff>(searchResult);
         }
         #endregion
 

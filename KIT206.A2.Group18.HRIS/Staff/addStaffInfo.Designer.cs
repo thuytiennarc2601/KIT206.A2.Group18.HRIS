@@ -61,7 +61,7 @@ namespace KIT206.A2.Group18.HRIS
             // container
             // 
             this.container.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.container.BackColor = System.Drawing.Color.SeaShell;
+            this.container.BackColor = System.Drawing.Color.White;
             this.container.Controls.Add(this.separator);
             this.container.Controls.Add(this.titleTB);
             this.container.Controls.Add(this.saveStaffButton);
@@ -90,7 +90,7 @@ namespace KIT206.A2.Group18.HRIS
             // 
             // separator
             // 
-            this.separator.BackColor = System.Drawing.Color.Tan;
+            this.separator.BackColor = System.Drawing.Color.LightGray;
             this.separator.Location = new System.Drawing.Point(521, 26);
             this.separator.Name = "separator";
             this.separator.Size = new System.Drawing.Size(10, 404);
@@ -99,8 +99,9 @@ namespace KIT206.A2.Group18.HRIS
             // titleTB
             // 
             this.titleTB.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.titleTB.BackColor = System.Drawing.Color.White;
             this.titleTB.Font = new System.Drawing.Font("Calibri", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.titleTB.Location = new System.Drawing.Point(155, 26);
+            this.titleTB.Location = new System.Drawing.Point(165, 26);
             this.titleTB.MaxLength = 10;
             this.titleTB.Name = "titleTB";
             this.titleTB.Size = new System.Drawing.Size(146, 36);
@@ -109,7 +110,7 @@ namespace KIT206.A2.Group18.HRIS
             // saveStaffButton
             // 
             this.saveStaffButton.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.saveStaffButton.BackColor = System.Drawing.Color.SteelBlue;
+            this.saveStaffButton.BackColor = System.Drawing.Color.DarkSeaGreen;
             this.saveStaffButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.saveStaffButton.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.saveStaffButton.ForeColor = System.Drawing.Color.White;
@@ -127,7 +128,7 @@ namespace KIT206.A2.Group18.HRIS
             this.imageButton.BackColor = System.Drawing.Color.White;
             this.imageButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.imageButton.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.imageButton.ForeColor = System.Drawing.Color.Tan;
+            this.imageButton.ForeColor = System.Drawing.Color.DarkSeaGreen;
             this.imageButton.Location = new System.Drawing.Point(572, 212);
             this.imageButton.Name = "imageButton";
             this.imageButton.Size = new System.Drawing.Size(180, 34);
@@ -139,10 +140,11 @@ namespace KIT206.A2.Group18.HRIS
             // campusList
             // 
             this.campusList.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.campusList.BackColor = System.Drawing.Color.White;
             this.campusList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.campusList.Font = new System.Drawing.Font("Calibri", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.campusList.FormattingEnabled = true;
-            this.campusList.Location = new System.Drawing.Point(155, 393);
+            this.campusList.Location = new System.Drawing.Point(165, 394);
             this.campusList.MaxDropDownItems = 15;
             this.campusList.Name = "campusList";
             this.campusList.Size = new System.Drawing.Size(321, 36);
@@ -152,8 +154,9 @@ namespace KIT206.A2.Group18.HRIS
             // roomTB
             // 
             this.roomTB.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.roomTB.BackColor = System.Drawing.Color.White;
             this.roomTB.Font = new System.Drawing.Font("Calibri", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.roomTB.Location = new System.Drawing.Point(155, 339);
+            this.roomTB.Location = new System.Drawing.Point(165, 338);
             this.roomTB.MaxLength = 20;
             this.roomTB.Name = "roomTB";
             this.roomTB.Size = new System.Drawing.Size(321, 36);
@@ -162,8 +165,9 @@ namespace KIT206.A2.Group18.HRIS
             // emailTB
             // 
             this.emailTB.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.emailTB.BackColor = System.Drawing.Color.White;
             this.emailTB.Font = new System.Drawing.Font("Calibri", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.emailTB.Location = new System.Drawing.Point(155, 285);
+            this.emailTB.Location = new System.Drawing.Point(165, 285);
             this.emailTB.MaxLength = 50;
             this.emailTB.Name = "emailTB";
             this.emailTB.Size = new System.Drawing.Size(321, 36);
@@ -172,8 +176,9 @@ namespace KIT206.A2.Group18.HRIS
             // contactTB
             // 
             this.contactTB.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.contactTB.BackColor = System.Drawing.Color.White;
             this.contactTB.Font = new System.Drawing.Font("Calibri", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.contactTB.Location = new System.Drawing.Point(155, 232);
+            this.contactTB.Location = new System.Drawing.Point(165, 232);
             this.contactTB.MaxLength = 15;
             this.contactTB.Name = "contactTB";
             this.contactTB.Size = new System.Drawing.Size(321, 36);
@@ -183,10 +188,10 @@ namespace KIT206.A2.Group18.HRIS
             // 
             this.campusLB.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.campusLB.AutoSize = true;
-            this.campusLB.Font = new System.Drawing.Font("Calibri", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.campusLB.Font = new System.Drawing.Font("Constantia", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.campusLB.Location = new System.Drawing.Point(3, 392);
             this.campusLB.Name = "campusLB";
-            this.campusLB.Size = new System.Drawing.Size(114, 35);
+            this.campusLB.Size = new System.Drawing.Size(120, 35);
             this.campusLB.TabIndex = 12;
             this.campusLB.Text = "Campus:";
             // 
@@ -194,10 +199,10 @@ namespace KIT206.A2.Group18.HRIS
             // 
             this.roomLB.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.roomLB.AutoSize = true;
-            this.roomLB.Font = new System.Drawing.Font("Calibri", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.roomLB.Font = new System.Drawing.Font("Constantia", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.roomLB.Location = new System.Drawing.Point(3, 338);
             this.roomLB.Name = "roomLB";
-            this.roomLB.Size = new System.Drawing.Size(89, 35);
+            this.roomLB.Size = new System.Drawing.Size(94, 35);
             this.roomLB.TabIndex = 11;
             this.roomLB.Text = "Room:";
             // 
@@ -205,10 +210,10 @@ namespace KIT206.A2.Group18.HRIS
             // 
             this.emailLB.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.emailLB.AutoSize = true;
-            this.emailLB.Font = new System.Drawing.Font("Calibri", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.emailLB.Font = new System.Drawing.Font("Constantia", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.emailLB.Location = new System.Drawing.Point(3, 284);
             this.emailLB.Name = "emailLB";
-            this.emailLB.Size = new System.Drawing.Size(84, 35);
+            this.emailLB.Size = new System.Drawing.Size(91, 35);
             this.emailLB.TabIndex = 10;
             this.emailLB.Text = "Email:";
             // 
@@ -216,18 +221,19 @@ namespace KIT206.A2.Group18.HRIS
             // 
             this.ContactLB.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.ContactLB.AutoSize = true;
-            this.ContactLB.Font = new System.Drawing.Font("Calibri", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ContactLB.Font = new System.Drawing.Font("Constantia", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ContactLB.Location = new System.Drawing.Point(3, 231);
             this.ContactLB.Name = "ContactLB";
-            this.ContactLB.Size = new System.Drawing.Size(111, 35);
+            this.ContactLB.Size = new System.Drawing.Size(117, 35);
             this.ContactLB.TabIndex = 9;
             this.ContactLB.Text = "Contact:";
             // 
             // FNameTB
             // 
             this.FNameTB.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.FNameTB.BackColor = System.Drawing.Color.White;
             this.FNameTB.Font = new System.Drawing.Font("Calibri", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.FNameTB.Location = new System.Drawing.Point(155, 181);
+            this.FNameTB.Location = new System.Drawing.Point(165, 181);
             this.FNameTB.MaxLength = 20;
             this.FNameTB.Name = "FNameTB";
             this.FNameTB.Size = new System.Drawing.Size(321, 36);
@@ -237,18 +243,19 @@ namespace KIT206.A2.Group18.HRIS
             // 
             this.FNameLB.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.FNameLB.AutoSize = true;
-            this.FNameLB.Font = new System.Drawing.Font("Calibri", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FNameLB.Font = new System.Drawing.Font("Constantia", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FNameLB.Location = new System.Drawing.Point(3, 180);
             this.FNameLB.Name = "FNameLB";
-            this.FNameLB.Size = new System.Drawing.Size(138, 35);
+            this.FNameLB.Size = new System.Drawing.Size(145, 35);
             this.FNameLB.TabIndex = 7;
             this.FNameLB.Text = "Last name:";
             // 
             // GNameTB
             // 
             this.GNameTB.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.GNameTB.BackColor = System.Drawing.Color.White;
             this.GNameTB.Font = new System.Drawing.Font("Calibri", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.GNameTB.Location = new System.Drawing.Point(155, 129);
+            this.GNameTB.Location = new System.Drawing.Point(165, 127);
             this.GNameTB.MaxLength = 20;
             this.GNameTB.Name = "GNameTB";
             this.GNameTB.Size = new System.Drawing.Size(321, 36);
@@ -258,21 +265,22 @@ namespace KIT206.A2.Group18.HRIS
             // 
             this.GNameLb.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.GNameLb.AutoSize = true;
-            this.GNameLb.Font = new System.Drawing.Font("Calibri", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.GNameLb.Font = new System.Drawing.Font("Constantia", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.GNameLb.Location = new System.Drawing.Point(3, 128);
             this.GNameLb.Name = "GNameLb";
-            this.GNameLb.Size = new System.Drawing.Size(142, 35);
+            this.GNameLb.Size = new System.Drawing.Size(149, 35);
             this.GNameLb.TabIndex = 5;
             this.GNameLb.Text = "First name:";
             // 
             // cateList
             // 
             this.cateList.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.cateList.BackColor = System.Drawing.Color.White;
             this.cateList.DisplayMember = "0";
             this.cateList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cateList.Font = new System.Drawing.Font("Calibri", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cateList.FormattingEnabled = true;
-            this.cateList.Location = new System.Drawing.Point(155, 77);
+            this.cateList.Location = new System.Drawing.Point(165, 77);
             this.cateList.MaxDropDownItems = 15;
             this.cateList.Name = "cateList";
             this.cateList.Size = new System.Drawing.Size(321, 36);
@@ -284,10 +292,10 @@ namespace KIT206.A2.Group18.HRIS
             // 
             this.cateLb.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.cateLb.AutoSize = true;
-            this.cateLb.Font = new System.Drawing.Font("Calibri", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cateLb.Font = new System.Drawing.Font("Constantia", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cateLb.Location = new System.Drawing.Point(3, 76);
             this.cateLb.Name = "cateLb";
-            this.cateLb.Size = new System.Drawing.Size(125, 35);
+            this.cateLb.Size = new System.Drawing.Size(128, 35);
             this.cateLb.TabIndex = 3;
             this.cateLb.Text = "Category:";
             // 
@@ -295,10 +303,10 @@ namespace KIT206.A2.Group18.HRIS
             // 
             this.titleLb.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.titleLb.AutoSize = true;
-            this.titleLb.Font = new System.Drawing.Font("Calibri", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.titleLb.Font = new System.Drawing.Font("Constantia", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.titleLb.Location = new System.Drawing.Point(3, 25);
             this.titleLb.Name = "titleLb";
-            this.titleLb.Size = new System.Drawing.Size(72, 35);
+            this.titleLb.Size = new System.Drawing.Size(78, 35);
             this.titleLb.TabIndex = 1;
             this.titleLb.Text = "Title:";
             // 
@@ -328,7 +336,7 @@ namespace KIT206.A2.Group18.HRIS
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.Tan;
+            this.BackColor = System.Drawing.Color.LightGray;
             this.ClientSize = new System.Drawing.Size(832, 503);
             this.Controls.Add(this.container);
             this.Margin = new System.Windows.Forms.Padding(4);

@@ -18,6 +18,7 @@ namespace KIT206.A2.Group18.HRIS
         }
 
         private int _itemID;
+        private int staffID;
 
         #region Properties
 
@@ -35,6 +36,7 @@ namespace KIT206.A2.Group18.HRIS
         {
             List<Staff> staffList = Staff.LoadAllStaffList();
             int id = this.ItemID;
+            this.staffID = staffList[id].ID;
             this.Text = staffList[id].Title + ". " + staffList[id].GivenName + " " + staffList[id].FamilyName;
             staffNameDetail.Text = staffList[id].Title + ". " + staffList[id].GivenName + " " + staffList[id].FamilyName;
             staffIDDetail.Text = "ID: " + (staffList[id].ID).ToString();
@@ -52,6 +54,34 @@ namespace KIT206.A2.Group18.HRIS
                 ImageConverter converter = new System.Drawing.ImageConverter();
                 staffAvatar.Image = converter.ConvertFrom(staffList[id].Photo) as Image;
             }
+            getUnit(staffID);
         }
+
+        #region Get Unit
+        //Get the units that the staff member teachs
+        private void getUnit(int staffID)
+        {
+            List<Unit> unitList = Unit.LoadAllUnit();
+
+            var getUnitList = from Unit u in unitList
+                              where staffID == u.Coordinator
+                              select u;
+
+            List<Unit> result = new List<Unit>(getUnitList);
+            Label[] unitLabels = new Label[result.Count];
+
+            for(int i = 0; i < result.Count; i++)
+            {
+                unitLabels[i] = new Label();
+                unitLabels[i].Name = "unitLabel";
+                unitLabels[i].ForeColor = Color.Gray;
+                unitLabels[i].AutoSize = true;
+                unitLabels[i].Font = new Font("Calibri", 16);
+                unitLabels[i].Text = result[i].UnitCode.ToUpper() + " | " + result[i].UnitName;
+
+                unitHolder.Controls.Add(unitLabels[i]);
+            }
+        }
+        #endregion
     }
 }
