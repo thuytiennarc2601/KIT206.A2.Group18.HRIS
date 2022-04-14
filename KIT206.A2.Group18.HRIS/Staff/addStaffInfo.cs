@@ -21,13 +21,13 @@ namespace KIT206.A2.Group18.HRIS
             InitializeComponent();
         }
 
+        #region Properties
         private int _itemID;
         private int _staffID;
         private string _category;
         private string _campus;
         private byte[] _imageByteArray;
-
-        #region Properties
+        
         [Category("Extra properties")]
         public int ItemID
         {
@@ -36,6 +36,7 @@ namespace KIT206.A2.Group18.HRIS
         }
         #endregion
 
+        #region Generate category options
         //if a staff mem's category is yet added, display a list of categories, else show the staff's category
         private void categoryOptions(List<Staff> staffList, Staff staff)
         {
@@ -57,7 +58,9 @@ namespace KIT206.A2.Group18.HRIS
                 cateList.SelectedIndex = 0;
             }
         }
+        #endregion
 
+        #region Generate campus options
         //if a staff mem's campus is yet added, display a list of title, else show the staff's title
         private void campusOptions(List<Staff> staffList, Staff staff)
         {
@@ -79,7 +82,9 @@ namespace KIT206.A2.Group18.HRIS
                 campusList.SelectedIndex = 0;
             }
         }
+        #endregion
 
+        #region Display staff info
         //if a staff mem's is already added, unable the corresponding fields
         private void displayStaffInfo(List<Staff> staffList, Staff staff)
         {
@@ -110,7 +115,7 @@ namespace KIT206.A2.Group18.HRIS
                 roomTB.Enabled = false;
             }
 
-            if(staff.Photo == null)
+            if(staff.Photo == null || staff.Photo.Length == 0)
             {
                 staffAvatar.Image = Properties.Resources.avatar;
             }
@@ -120,21 +125,18 @@ namespace KIT206.A2.Group18.HRIS
                 staffAvatar.Image = converter.ConvertFrom(staff.Photo) as Image;
             }
         }
+        #endregion
 
+        #region Validation
         //for checking any invalid data
         private bool validation()
         {
             bool valid = true;
-
-            if (titleTB.TextLength > 4)
-            {
-                MessageBox.Show("Title should just contain less than 4 characters");
-                valid = false;
-            }
-
             return valid;
         }
+        #endregion
 
+        #region Load all data when loading form
         //Load all data when starting loading the form
         private void addStaffInfo_Load(object sender, EventArgs e)
         {
@@ -147,6 +149,7 @@ namespace KIT206.A2.Group18.HRIS
             campusOptions(staffList, staff);
             displayStaffInfo(staffList, staff);
         }
+        #endregion
 
         private void cateList_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -158,6 +161,7 @@ namespace KIT206.A2.Group18.HRIS
             _campus = (campusList.SelectedItem).ToString();
         }
 
+        #region Load photo from desktop file
         //load staff photo from file and convert that photo to a byte array
         private void imageButton_Click(object sender, EventArgs e)
         {
@@ -168,20 +172,22 @@ namespace KIT206.A2.Group18.HRIS
                 _imageByteArray = (byte[])(new ImageConverter().ConvertTo(Image.FromFile(filePath), typeof(Byte[])));
             }
         }
+        #endregion
 
+        #region Update staff details to database
         //save all modified data when clicking SAVE button
         private void saveStaffButton_Click(object sender, EventArgs e)
         {
             MySqlDataReader rdr = null;
             conn = GetSqlConnection.GetConnection();
             bool valid = validation();
-
-            try
+            if (valid)
             {
-                conn.Open();
-                if (valid)
+                try
                 {
-                    if (titleTB.Text != "Unk") //edit title
+                    conn.Open();
+
+                    if (titleTB.Text != "Unknown") //edit title
                     {
                         MySqlCommand cmdTitle = new MySqlCommand("update staff set title ='" + titleTB.Text + "' where id = '" + this._staffID + "'", conn);
                         rdr = cmdTitle.ExecuteReader();
@@ -237,24 +243,22 @@ namespace KIT206.A2.Group18.HRIS
                         while (rdr.Read()) { }
                         rdr.Close();
                     }
-                    MessageBox.Show("Update successfully!");
                 }
-            }
-            finally
-            {
-                if (rdr != null)
+                finally
                 {
-                    rdr.Close();
+                    if (rdr != null)
+                    {
+                        rdr.Close();
+                    }
+                    if (conn != null)
+                    {
+                        conn.Close();
+                    }
                 }
-                if (conn != null)
-                {
-                    conn.Close();
-                }
+                MessageBox.Show("Information updated");
+                this.Close();
             }
-
-            
         }
-
-        
+        #endregion
     }
 }

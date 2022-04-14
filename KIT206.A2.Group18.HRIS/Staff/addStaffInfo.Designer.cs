@@ -31,6 +31,7 @@ namespace KIT206.A2.Group18.HRIS
         {
             this.components = new System.ComponentModel.Container();
             this.container = new System.Windows.Forms.Panel();
+            this.separator = new System.Windows.Forms.Panel();
             this.titleTB = new System.Windows.Forms.TextBox();
             this.saveStaffButton = new System.Windows.Forms.Button();
             this.imageButton = new System.Windows.Forms.Button();
@@ -51,7 +52,6 @@ namespace KIT206.A2.Group18.HRIS
             this.titleLb = new System.Windows.Forms.Label();
             this.staffAvatar = new System.Windows.Forms.PictureBox();
             this.openImage = new System.Windows.Forms.OpenFileDialog();
-            this.separator = new System.Windows.Forms.Panel();
             this.staffBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.container.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.staffAvatar)).BeginInit();
@@ -88,12 +88,20 @@ namespace KIT206.A2.Group18.HRIS
             this.container.Size = new System.Drawing.Size(784, 454);
             this.container.TabIndex = 0;
             // 
+            // separator
+            // 
+            this.separator.BackColor = System.Drawing.Color.Tan;
+            this.separator.Location = new System.Drawing.Point(521, 26);
+            this.separator.Name = "separator";
+            this.separator.Size = new System.Drawing.Size(10, 404);
+            this.separator.TabIndex = 21;
+            // 
             // titleTB
             // 
             this.titleTB.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.titleTB.Font = new System.Drawing.Font("Calibri", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.titleTB.Location = new System.Drawing.Point(155, 26);
-            this.titleTB.MaxLength = 4;
+            this.titleTB.MaxLength = 10;
             this.titleTB.Name = "titleTB";
             this.titleTB.Size = new System.Drawing.Size(146, 36);
             this.titleTB.TabIndex = 19;
@@ -311,14 +319,6 @@ namespace KIT206.A2.Group18.HRIS
             // openImage
             // 
             this.openImage.FileName = "openFileDialog1";
-            // 
-            // separator
-            // 
-            this.separator.BackColor = System.Drawing.Color.Tan;
-            this.separator.Location = new System.Drawing.Point(521, 26);
-            this.separator.Name = "separator";
-            this.separator.Size = new System.Drawing.Size(10, 404);
-            this.separator.TabIndex = 21;
             // 
             // staffBindingSource
             // 

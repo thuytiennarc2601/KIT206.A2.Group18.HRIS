@@ -43,7 +43,7 @@ namespace KIT206.A2.Group18.HRIS
             staffEmailDetail.Text = "Email address: " + staffList[id].Email;
             staffCampusdetail.Text = "Location: " + staffList[id].Room + " | " + staffList[id].campus + " campus";
 
-            if(staffList[id].Photo == null)
+            if(staffList[id].Photo == null || staffList[id].Photo.Length == 0)
             {
                 staffAvatar.Image = Properties.Resources.avatar;
             }

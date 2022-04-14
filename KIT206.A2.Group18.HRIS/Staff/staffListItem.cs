@@ -19,7 +19,6 @@ namespace KIT206.A2.Group18.HRIS
 
         #region Properties
         //defines all elements existing in a staff list item
-        private string _title;
         private string _name;
         private string _campus;
         private string _email;
@@ -32,13 +31,6 @@ namespace KIT206.A2.Group18.HRIS
         {
             get {return _itemID; }
             set {_itemID = value; }
-        }
-
-        [Category("Staff Properties")]
-        public string Title
-        {
-            get { return _title; }
-            set { _title = value; staffTitle.Text = value; }
         }
 
         [Category("Staff Properties")]

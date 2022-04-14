@@ -93,53 +93,81 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="addStaffInfo.cs">
+    <Compile Include="editCoor.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="addStaffInfo.Designer.cs">
+    <Compile Include="editCoor.Designer.cs">
+      <DependentUpon>editCoor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Staff\addStaffInfo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Staff\addStaffInfo.Designer.cs">
       <DependentUpon>addStaffInfo.cs</DependentUpon>
     </Compile>
-    <Compile Include="GetSqlConnection.cs" />
-    <Compile Include="emptyList.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="emptyList.Designer.cs">
-      <DependentUpon>emptyList.cs</DependentUpon>
-    </Compile>
-    <Compile Include="MainView.cs">
+    <Compile Include="Unit\addUnit.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MainView.Designer.cs">
+    <Compile Include="Unit\addUnit.Designer.cs">
+      <DependentUpon>addUnit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Unit\coordinatorListItem.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Unit\coordinatorListItem.Designer.cs">
+      <DependentUpon>coordinatorListItem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Main view\GetSqlConnection.cs" />
+    <Compile Include="Main view\emptyList.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Main view\emptyList.Designer.cs">
+      <DependentUpon>emptyList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Main view\MainView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Main view\MainView.Designer.cs">
       <DependentUpon>MainView.cs</DependentUpon>
     </Compile>
-    <Compile Include="Program.cs" />
+    <Compile Include="Main view\Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Staff.cs" />
-    <Compile Include="staffDetailView.cs">
+    <Compile Include="Staff\Staff.cs" />
+    <Compile Include="Staff\staffDetailView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="staffDetailView.Designer.cs">
+    <Compile Include="Staff\staffDetailView.Designer.cs">
       <DependentUpon>staffDetailView.cs</DependentUpon>
     </Compile>
-    <Compile Include="staffListItem.cs">
+    <Compile Include="Staff\staffListItem.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="staffListItem.Designer.cs">
+    <Compile Include="Staff\staffListItem.Designer.cs">
       <DependentUpon>staffListItem.cs</DependentUpon>
     </Compile>
-    <Compile Include="unitListItem.cs">
+    <Compile Include="Unit\Unit.cs" />
+    <Compile Include="Unit\unitListItem.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="unitListItem.Designer.cs">
+    <Compile Include="Unit\unitListItem.Designer.cs">
       <DependentUpon>unitListItem.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="addStaffInfo.resx">
+    <EmbeddedResource Include="editCoor.resx">
+      <DependentUpon>editCoor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Staff\addStaffInfo.resx">
       <DependentUpon>addStaffInfo.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="emptyList.resx">
+    <EmbeddedResource Include="Unit\addUnit.resx">
+      <DependentUpon>addUnit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Unit\coordinatorListItem.resx">
+      <DependentUpon>coordinatorListItem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Main view\emptyList.resx">
       <DependentUpon>emptyList.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MainView.resx">
+    <EmbeddedResource Include="Main view\MainView.resx">
       <DependentUpon>MainView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -152,13 +180,13 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="staffDetailView.resx">
+    <EmbeddedResource Include="Staff\staffDetailView.resx">
       <DependentUpon>staffDetailView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="staffListItem.resx">
+    <EmbeddedResource Include="Staff\staffListItem.resx">
       <DependentUpon>staffListItem.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="unitListItem.resx">
+    <EmbeddedResource Include="Unit\unitListItem.resx">
       <DependentUpon>unitListItem.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
