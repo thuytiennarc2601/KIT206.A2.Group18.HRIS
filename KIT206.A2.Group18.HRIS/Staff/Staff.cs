@@ -37,6 +37,7 @@ namespace KIT206.A2.Group18.HRIS
 
         public byte[] Photo { get; set; }
 
+        #region Get all staff from database
         //retrieves all STAFF from staff database
         public static List<Staff> LoadAllStaffList()
         {
@@ -63,9 +64,9 @@ namespace KIT206.A2.Group18.HRIS
                     result.FamilyName = rdr.GetString(2); 
 
                     //get Title
-                    if (rdr.GetString(3) == "")
+                    if (Convert.IsDBNull(rdr[3]) || rdr.GetString(3) == "")
                     {
-                        result.Title = "Unk";
+                        result.Title = "Unknown";
                     }
                     else
                     {
@@ -73,7 +74,7 @@ namespace KIT206.A2.Group18.HRIS
                     }
 
                     //get Campus
-                    if (rdr.GetString(4) == "")
+                    if (rdr.GetString(4) == "" || Convert.IsDBNull(rdr[4]))
                     {
                         result.campus = Campus.Notlocated;
                     }
@@ -83,7 +84,7 @@ namespace KIT206.A2.Group18.HRIS
                     }
 
                     //get Email
-                    if (rdr.GetString(5) == "")
+                    if (rdr.GetString(5) == "" || Convert.IsDBNull(rdr[5]))
                     {
                         result.Email = "No email added";
                     }
@@ -93,7 +94,7 @@ namespace KIT206.A2.Group18.HRIS
                     }
 
                     //get Phone
-                    if( rdr.GetString(6) == "")
+                    if( rdr.GetString(6) == "" || Convert.IsDBNull(rdr[6]))
                     {
                         result.Phone = "No number added";
                     }
@@ -103,7 +104,7 @@ namespace KIT206.A2.Group18.HRIS
                     }
 
                     //get ROOM
-                    if (rdr.GetString(7) == "")
+                    if (rdr.GetString(7) == "" || Convert.IsDBNull(rdr[7]))
                     {
                         result.Room = "No room assigned";
                     }
@@ -119,7 +120,7 @@ namespace KIT206.A2.Group18.HRIS
                     }
 
                     //get CATEGORY
-                    if (rdr.GetString(9) == "")
+                    if (rdr.GetString(9) == "" || Convert.IsDBNull(rdr[9]))
                     {
                         result.category = Category.unknown;
                     }
@@ -146,5 +147,6 @@ namespace KIT206.A2.Group18.HRIS
 
             return staffList;
         }
+        #endregion
     }
 }

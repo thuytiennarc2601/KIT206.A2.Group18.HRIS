@@ -17,6 +17,7 @@ namespace KIT206.A2.Group18.HRIS
             InitializeComponent();
         }
 
+        #region InitializeComponent
         private void InitializeComponent()
         {
             this.titleHolder = new System.Windows.Forms.Panel();
@@ -25,15 +26,15 @@ namespace KIT206.A2.Group18.HRIS
             this.listViewHolder = new System.Windows.Forms.Panel();
             this.listHolder = new System.Windows.Forms.FlowLayoutPanel();
             this.searchFieldHolder = new System.Windows.Forms.Panel();
-            this.menuHolder = new System.Windows.Forms.TableLayoutPanel();
+            this.addConBtn = new System.Windows.Forms.Button();
+            this.addClassBtn = new System.Windows.Forms.Button();
+            this.addUnitbtn = new System.Windows.Forms.Button();
             this.searchBar = new System.Windows.Forms.TextBox();
+            this.menuHolder = new System.Windows.Forms.TableLayoutPanel();
             this.unitListButton = new System.Windows.Forms.Button();
             this.classListButton = new System.Windows.Forms.Button();
             this.consultationListButton = new System.Windows.Forms.Button();
             this.staffListButton = new System.Windows.Forms.Button();
-            this.addUnitbtn = new System.Windows.Forms.Button();
-            this.addClassBtn = new System.Windows.Forms.Button();
-            this.addConBtn = new System.Windows.Forms.Button();
             this.titleHolder.SuspendLayout();
             this.container.SuspendLayout();
             this.listViewHolder.SuspendLayout();
@@ -73,7 +74,7 @@ namespace KIT206.A2.Group18.HRIS
             this.container.Dock = System.Windows.Forms.DockStyle.Top;
             this.container.Location = new System.Drawing.Point(0, 83);
             this.container.Name = "container";
-            this.container.Size = new System.Drawing.Size(1289, 750);
+            this.container.Size = new System.Drawing.Size(1289, 771);
             this.container.TabIndex = 1;
             // 
             // listViewHolder
@@ -90,6 +91,7 @@ namespace KIT206.A2.Group18.HRIS
             // 
             // listHolder
             // 
+            this.listHolder.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.listHolder.AutoScroll = true;
             this.listHolder.BackColor = System.Drawing.Color.White;
             this.listHolder.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
@@ -107,8 +109,55 @@ namespace KIT206.A2.Group18.HRIS
             this.searchFieldHolder.Controls.Add(this.searchBar);
             this.searchFieldHolder.Location = new System.Drawing.Point(0, 0);
             this.searchFieldHolder.Name = "searchFieldHolder";
-            this.searchFieldHolder.Size = new System.Drawing.Size(996, 71);
+            this.searchFieldHolder.Size = new System.Drawing.Size(996, 64);
             this.searchFieldHolder.TabIndex = 0;
+            // 
+            // addConBtn
+            // 
+            this.addConBtn.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.addConBtn.Font = new System.Drawing.Font("Calibri", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.addConBtn.Location = new System.Drawing.Point(823, 19);
+            this.addConBtn.Name = "addConBtn";
+            this.addConBtn.Size = new System.Drawing.Size(154, 37);
+            this.addConBtn.TabIndex = 4;
+            this.addConBtn.Text = "Add consultation";
+            this.addConBtn.UseVisualStyleBackColor = true;
+            // 
+            // addClassBtn
+            // 
+            this.addClassBtn.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.addClassBtn.Font = new System.Drawing.Font("Calibri", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.addClassBtn.Location = new System.Drawing.Point(707, 19);
+            this.addClassBtn.Name = "addClassBtn";
+            this.addClassBtn.Size = new System.Drawing.Size(110, 37);
+            this.addClassBtn.TabIndex = 3;
+            this.addClassBtn.Text = "Add class";
+            this.addClassBtn.UseVisualStyleBackColor = true;
+            // 
+            // addUnitbtn
+            // 
+            this.addUnitbtn.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.addUnitbtn.Font = new System.Drawing.Font("Calibri", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.addUnitbtn.Location = new System.Drawing.Point(591, 19);
+            this.addUnitbtn.Name = "addUnitbtn";
+            this.addUnitbtn.Size = new System.Drawing.Size(110, 37);
+            this.addUnitbtn.TabIndex = 2;
+            this.addUnitbtn.Text = "Add unit";
+            this.addUnitbtn.UseVisualStyleBackColor = true;
+            this.addUnitbtn.Click += new System.EventHandler(this.addUnitbtn_Click);
+            // 
+            // searchBar
+            // 
+            this.searchBar.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.searchBar.Font = new System.Drawing.Font("Calibri", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.searchBar.ForeColor = System.Drawing.Color.Gray;
+            this.searchBar.Location = new System.Drawing.Point(23, 18);
+            this.searchBar.Margin = new System.Windows.Forms.Padding(10);
+            this.searchBar.MaxLength = 50;
+            this.searchBar.Name = "searchBar";
+            this.searchBar.Size = new System.Drawing.Size(367, 36);
+            this.searchBar.TabIndex = 1;
+            this.searchBar.TextChanged += new System.EventHandler(this.searchBar_TextChanged);
             // 
             // menuHolder
             // 
@@ -129,18 +178,6 @@ namespace KIT206.A2.Group18.HRIS
             this.menuHolder.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.menuHolder.Size = new System.Drawing.Size(998, 157);
             this.menuHolder.TabIndex = 0;
-            // 
-            // searchBar
-            // 
-            this.searchBar.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.searchBar.Font = new System.Drawing.Font("Calibri", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.searchBar.ForeColor = System.Drawing.Color.Gray;
-            this.searchBar.Location = new System.Drawing.Point(23, 21);
-            this.searchBar.Margin = new System.Windows.Forms.Padding(10);
-            this.searchBar.MaxLength = 50;
-            this.searchBar.Name = "searchBar";
-            this.searchBar.Size = new System.Drawing.Size(367, 36);
-            this.searchBar.TabIndex = 1;
             // 
             // unitListButton
             // 
@@ -194,39 +231,6 @@ namespace KIT206.A2.Group18.HRIS
             this.staffListButton.UseVisualStyleBackColor = true;
             this.staffListButton.Click += new System.EventHandler(this.staffListButton_Click);
             // 
-            // addUnitbtn
-            // 
-            this.addUnitbtn.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.addUnitbtn.Font = new System.Drawing.Font("Calibri", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.addUnitbtn.Location = new System.Drawing.Point(591, 15);
-            this.addUnitbtn.Name = "addUnitbtn";
-            this.addUnitbtn.Size = new System.Drawing.Size(110, 37);
-            this.addUnitbtn.TabIndex = 2;
-            this.addUnitbtn.Text = "Add unit";
-            this.addUnitbtn.UseVisualStyleBackColor = true;
-            // 
-            // addClassBtn
-            // 
-            this.addClassBtn.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.addClassBtn.Font = new System.Drawing.Font("Calibri", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.addClassBtn.Location = new System.Drawing.Point(707, 15);
-            this.addClassBtn.Name = "addClassBtn";
-            this.addClassBtn.Size = new System.Drawing.Size(110, 37);
-            this.addClassBtn.TabIndex = 3;
-            this.addClassBtn.Text = "Add class";
-            this.addClassBtn.UseVisualStyleBackColor = true;
-            // 
-            // addConBtn
-            // 
-            this.addConBtn.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.addConBtn.Font = new System.Drawing.Font("Calibri", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.addConBtn.Location = new System.Drawing.Point(823, 14);
-            this.addConBtn.Name = "addConBtn";
-            this.addConBtn.Size = new System.Drawing.Size(154, 37);
-            this.addConBtn.TabIndex = 4;
-            this.addConBtn.Text = "Add consultation";
-            this.addConBtn.UseVisualStyleBackColor = true;
-            // 
             // HRIS
             // 
             this.BackColor = System.Drawing.Color.White;
@@ -235,6 +239,7 @@ namespace KIT206.A2.Group18.HRIS
             this.Controls.Add(this.titleHolder);
             this.Name = "HRIS";
             this.Text = "Human Resource Information System";
+            this.Activated += new System.EventHandler(this.HRIS_Activated);
             this.Load += new System.EventHandler(this.HRIS_Load);
             this.titleHolder.ResumeLayout(false);
             this.container.ResumeLayout(false);
@@ -247,21 +252,31 @@ namespace KIT206.A2.Group18.HRIS
             this.PerformLayout();
 
         }
+        #endregion
 
-
+        #region option controls
+        private bool chooseStaff = false;
+        private bool chooseUnit = false;
+        private bool chooseClass = false;
+        private bool chooseConsultation = false;
+        #endregion
 
         //view staff list when clicking STAFF button
         private void staffListButton_Click(object sender, EventArgs e)
         {
             populateStaffList();
-        } 
+            chooseUnit = false;
+            chooseStaff = true;
+            chooseClass = false;
+            chooseConsultation = false;
+        }
 
+        #region Generate a staff list
         //generates a list on staff list view
         private void populateStaffList()
         {
             List<Staff> staffList = Staff.LoadAllStaffList();
             int element_num = staffList.Count;
-
             staffListItem[] listView = new staffListItem[element_num];
 
             if (listHolder.Controls.Count > 0)
@@ -269,44 +284,114 @@ namespace KIT206.A2.Group18.HRIS
                 listHolder.Controls.Clear();
             }
 
-            for (int i = 0; i < staffList.Count; i++)
+            if (staffList.Count <= 0)
             {
-                listView[i] = new staffListItem();
-                listView[i].Title = staffList[i].Title+ ".";
-                listView[i].ID = "ID: " + (staffList[i].ID).ToString();
-                listView[i].StaffName = staffList[i].GivenName + " " + staffList[i].FamilyName;
-                listView[i].Email = staffList[i].Email;
-                listView[i].Campus = staffList[i].campus.ToString() + " campus";
-
-                listView[i].ItemID = i;
-
-                if (staffList[i].Photo == null)
+                emptyList empty = new emptyList();
+                listHolder.Controls.Add(empty);
+            }
+            else
+            {
+                for (int i = 0; i < staffList.Count; i++)
                 {
-                    listView[i].Icon = Properties.Resources.avatar;
-                }
-                else
-                {
-                    ImageConverter converter = new System.Drawing.ImageConverter();
-                    listView[i].Icon = converter.ConvertFrom(staffList[i].Photo) as Image;
-                }
+                    listView[i] = new staffListItem();
+                    listView[i].ID = "ID: " + (staffList[i].ID).ToString();
+                    listView[i].StaffName = staffList[i].Title + ". " + staffList[i].GivenName + " " + staffList[i].FamilyName;
+                    listView[i].Email = staffList[i].Email;
+                    listView[i].Campus = staffList[i].campus.ToString() + " campus";
 
-                listHolder.Controls.Add(listView[i]);
+                    listView[i].ItemID = i;
+
+                    if (staffList[i].Photo == null || staffList[i].Photo.Length == 0)
+                    {
+                        listView[i].Icon = Properties.Resources.avatar;
+                    }
+                    else
+                    {
+                        ImageConverter converter = new System.Drawing.ImageConverter();
+                        listView[i].Icon = converter.ConvertFrom(staffList[i].Photo) as Image;
+                    }
+
+                    listHolder.Controls.Add(listView[i]);
+                }
             }
         }
+        #endregion
 
         private void unitListButton_Click(object sender, EventArgs e)
         {
+            populateUnitList();
+            chooseUnit = true;
+            chooseStaff = false;
+            chooseClass = false;
+            chooseConsultation = false;
+        }
+
+        #region Generate a unit list
+        //generate unit list retrieved from database
+        private void populateUnitList()
+        {
+            List<Unit> unitList = Unit.LoadAllUnit();
+            int count = unitList.Count;
+            unitListItem[] unitView = new unitListItem[count];
+
             if (listHolder.Controls.Count > 0)
             {
                 listHolder.Controls.Clear();
             }
-            emptyList empty = new emptyList();
-            listHolder.Controls.Add(empty);
+
+            if (unitList.Count <= 0)
+            {
+                emptyList empty = new emptyList();
+                listHolder.Controls.Add(empty);
+            }
+            else
+            {
+                for (int i = 0; i < unitList.Count; i++)
+                {
+                    unitView[i] = new unitListItem();
+                    unitView[i].UnitCode = (unitList[i].UnitCode).ToUpper();
+                    unitView[i].UnitName = unitList[i].UnitName;
+                    unitView[i].CoordinatorName = Unit.getCoordinatorName(unitList[i].Coordinator);
+                    unitView[i].ItemID = i;
+
+                    listHolder.Controls.Add(unitView[i]);
+                }
+            }
         }
+        #endregion
 
         private void HRIS_Load(object sender, EventArgs e)
         {
+            chooseStaff = true;
             populateStaffList();
+        }
+
+        private void searchBar_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void addUnitbtn_Click(object sender, EventArgs e)
+        {
+            chooseUnit = true;
+            chooseStaff = false;
+            chooseClass = false;
+            chooseConsultation = false;
+            addUnit addNewUnit = new addUnit();
+            addNewUnit.ShowDialog();
+        }
+
+        private void HRIS_Activated(object sender, EventArgs e)
+        {
+            if (chooseStaff)
+            {
+                populateStaffList();
+            }
+
+            else if(chooseUnit)
+            {
+                populateUnitList();
+            }
         }
     }
 }
