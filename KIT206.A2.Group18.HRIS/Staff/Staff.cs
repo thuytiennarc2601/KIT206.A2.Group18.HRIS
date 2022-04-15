@@ -148,5 +148,111 @@ namespace KIT206.A2.Group18.HRIS
             return staffList;
         }
         #endregion
+
+        #region Get Staff Name
+        //Get name of staff based on their ID
+        public static string GetStaffName(int staffID)
+        {
+            string name = "";
+            MySqlDataReader rdr = null;
+            conn = GetSqlConnection.GetConnection();
+
+            try
+            {
+                conn.Open();
+                MySqlCommand cmd = new MySqlCommand("select given_name, family_name, title from staff where id='" + staffID + "'", conn);
+
+                rdr = cmd.ExecuteReader();
+                while (rdr.Read())
+                {
+                    string givenName = rdr.GetString(0);
+                    string familyName = rdr.GetString(1);
+
+                    string title = "";
+                    if (Convert.IsDBNull(rdr[2]) || rdr.GetString(2) == "")
+                    {
+                        title = "Unknown";
+                    }
+                    else
+                    {
+                        title = rdr.GetString(2);
+                    }
+
+                    name = title + ". " + givenName + " " + familyName;
+                }
+            }
+            finally
+            {
+                if (rdr != null)
+                {
+                    rdr.Close();
+                }
+                if (conn != null)
+                {
+                    conn.Close();
+                }
+            }
+            return name;
+        }
+        #endregion
+
+        #region Get Staff Location
+        //Get room and campus of a staff member
+        public static string GetStaffLocation(int staffID)
+        {
+            string staffLocation = "";
+
+            MySqlDataReader rdr = null;
+            conn = GetSqlConnection.GetConnection();
+
+            try
+            {
+                conn.Open();
+                MySqlCommand cmd = new MySqlCommand("select campus, room from staff where id=@id", conn);
+                cmd.Parameters.AddWithValue("@id", staffID);
+
+                rdr = cmd.ExecuteReader();
+                while(rdr.Read())
+                {
+                    string room = "";
+                    string campus = "";
+
+                    //get Campus
+                    if (rdr.GetString(0) == "" || Convert.IsDBNull(rdr[0]))
+                    {
+                        campus = Campus.Notlocated.ToString();
+                    }
+                    else
+                    {
+                        campus = rdr.GetString(0);
+                    }
+
+                    //get ROOM
+                    if (rdr.GetString(1) == "" || Convert.IsDBNull(rdr[1]))
+                    {
+                        room = "No room assigned";
+                    }
+                    else
+                    {
+                        room = rdr.GetString(1);
+                    }
+                    staffLocation = "Room: " + room + " | " + campus + " campus";
+                }
+            }
+            finally
+            {
+                if(rdr!=null)
+                {
+                    rdr.Close();
+                }
+                if(conn!=null)
+                {
+                    conn.Close();
+                }
+            }
+
+            return staffLocation;
+        }
+        #endregion
     }
 }

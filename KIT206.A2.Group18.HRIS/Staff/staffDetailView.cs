@@ -31,6 +31,7 @@ namespace KIT206.A2.Group18.HRIS
 
         #endregion
 
+        #region Display detail
         //Load staff details based on its index in the list
         private void staffDetailView_Load(object sender, EventArgs e)
         {
@@ -55,7 +56,9 @@ namespace KIT206.A2.Group18.HRIS
                 staffAvatar.Image = converter.ConvertFrom(staffList[id].Photo) as Image;
             }
             getUnit(staffID);
+            getConsultation(staffID);
         }
+        #endregion
 
         #region Get Unit
         //Get the units that the staff member teachs
@@ -64,7 +67,7 @@ namespace KIT206.A2.Group18.HRIS
             List<Unit> unitList = Unit.LoadAllUnit();
 
             var getUnitList = from Unit u in unitList
-                              where staffID == u.Coordinator
+                              where staffID == u.Coordinator.ID
                               select u;
 
             List<Unit> result = new List<Unit>(getUnitList);
@@ -80,6 +83,31 @@ namespace KIT206.A2.Group18.HRIS
                 unitLabels[i].Text = result[i].UnitCode.ToUpper() + " | " + result[i].UnitName;
 
                 unitHolder.Controls.Add(unitLabels[i]);
+            }
+        }
+        #endregion
+
+        #region Get Consultation
+        //Get the consultations of the staff member
+        private void getConsultation(int staffID)
+        {
+            List<Consultation> conList = Consultation.GetAllConsultation();
+            var getConList = from Consultation c in conList
+                             where staffID == c.staff.ID
+                             select c;
+            List<Consultation> result = new List<Consultation>(getConList);
+            Label[] conLabels = new Label[result.Count];
+
+            for(int i = 0; i<result.Count; i++)
+            {
+                conLabels[i] = new Label();
+                conLabels[i].Name = "conLabel";
+                conLabels[i].ForeColor = Color.Gray;
+                conLabels[i].AutoSize = true;
+                conLabels[i].Font = new Font("Calibri", 16);
+                conLabels[i].Text = result[i].day.ToString() + " | " + result[i].StartTime.ToString() + " - " + result[i].EndTime.ToString();
+
+                consultationHolder.Controls.Add(conLabels[i]);
             }
         }
         #endregion

@@ -9,13 +9,13 @@ namespace KIT206.A2.Group18.HRIS
 {
     class Unit
     {
-        private static MySqlConnection conn;
-
         public string UnitCode { get; set; }
 
         public string UnitName { get; set; }
 
-        public int Coordinator { get; set; }
+        public Staff Coordinator { get; set; }
+
+        private static MySqlConnection conn;
 
         #region Load all units
         //Load all units from database
@@ -33,10 +33,11 @@ namespace KIT206.A2.Group18.HRIS
                 while(rdr.Read())
                 {
                     Unit unit = new Unit();
+                    unit.Coordinator = new Staff();
                     
                     unit.UnitCode = rdr.GetString(0);
                     unit.UnitName = rdr.GetString(1);
-                    unit.Coordinator = rdr.GetInt32(2);
+                    unit.Coordinator.ID = rdr.GetInt32(2);
 
                     unitList.Add(unit);
                 }
@@ -58,50 +59,51 @@ namespace KIT206.A2.Group18.HRIS
         }
         #endregion
 
-        #region Get coordinator name
-        //get the unit coordinator details from database
-        public static string getCoordinatorName (int staffID)
+        #region Load a unit list with staff details (title, name)
+        public static List<Unit> LoadFullUnitList()
         {
-            string name = "";
+            List<Unit> unitList = Unit.LoadAllUnit();
             MySqlDataReader rdr = null;
             conn = GetSqlConnection.GetConnection();
 
-            try
+            for(int i = 0; i<unitList.Count; i++)
             {
-                conn.Open();
-                MySqlCommand cmd = new MySqlCommand("select given_name, family_name, title from staff where id='" + staffID + "'", conn);
-
-                rdr = cmd.ExecuteReader();
-                while(rdr.Read())
+                try
                 {
-                    string givenName = rdr.GetString(0);
-                    string familyName = rdr.GetString(1);
+                    conn.Open();
+                    MySqlCommand cmd = new MySqlCommand("select title, given_name, family_name from staff where id=@id", conn);
+                    cmd.Parameters.AddWithValue("@id", unitList[i].Coordinator.ID);
+                    rdr = cmd.ExecuteReader();
 
-                    string title = "";
-                    if (rdr.GetString(2) == "")
+                    while(rdr.Read())
                     {
-                        title = "Unknown";
-                    }
-                    else
-                    {
-                        title = rdr.GetString(2);
-                    }
+                        unitList[i].Coordinator.GivenName = rdr.GetString(1);
+                        unitList[i].Coordinator.FamilyName = rdr.GetString(2);
 
-                    name = title + ". " + givenName + " " + familyName;
+                        if(Convert.IsDBNull(rdr[0]) || rdr.GetString(0) == "")
+                        {
+                            unitList[i].Coordinator.Title = "Unknown";
+                        }
+                        else
+                        {
+                            unitList[i].Coordinator.Title = rdr.GetString(0);
+                        }
+                    }
+                }
+                finally
+                {
+                    if(rdr!=null)
+                    {
+                        rdr.Close();
+                    }
+                    if(conn!=null)
+                    {
+                        conn.Close();
+                    }
                 }
             }
-            finally
-            {
-                if(rdr != null)
-                {
-                    rdr.Close();
-                }
-                if(conn != null)
-                {
-                    conn.Close();
-                }
-            }
-            return name;
+
+            return unitList;
         }
         #endregion
     }

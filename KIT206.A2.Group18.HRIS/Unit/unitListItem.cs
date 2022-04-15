@@ -70,5 +70,12 @@ namespace KIT206.A2.Group18.HRIS
             editCoordinator.UnitCode = this.UnitCode;
             editCoordinator.ShowDialog();
         }
+
+        private void unitListItem_DoubleClick(object sender, EventArgs e)
+        {
+            unitDetailsView unitView = new unitDetailsView();
+            unitView.ItemID = this.ItemID;
+            unitView.ShowDialog();
+        }
     }
 }

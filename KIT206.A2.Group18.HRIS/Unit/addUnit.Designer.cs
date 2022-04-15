@@ -146,10 +146,10 @@ namespace KIT206.A2.Group18.HRIS
             // 
             this.CoorLB.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.CoorLB.AutoSize = true;
-            this.CoorLB.Font = new System.Drawing.Font("Calibri", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CoorLB.Font = new System.Drawing.Font("Century Gothic", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CoorLB.Location = new System.Drawing.Point(3, 115);
             this.CoorLB.Name = "CoorLB";
-            this.CoorLB.Size = new System.Drawing.Size(212, 35);
+            this.CoorLB.Size = new System.Drawing.Size(241, 34);
             this.CoorLB.TabIndex = 2;
             this.CoorLB.Text = "Unit coordinator:";
             // 
@@ -157,10 +157,10 @@ namespace KIT206.A2.Group18.HRIS
             // 
             this.unitCodeLB.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.unitCodeLB.AutoSize = true;
-            this.unitCodeLB.Font = new System.Drawing.Font("Calibri", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.unitCodeLB.Font = new System.Drawing.Font("Century Gothic", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.unitCodeLB.Location = new System.Drawing.Point(3, 67);
             this.unitCodeLB.Name = "unitCodeLB";
-            this.unitCodeLB.Size = new System.Drawing.Size(133, 35);
+            this.unitCodeLB.Size = new System.Drawing.Size(154, 34);
             this.unitCodeLB.TabIndex = 1;
             this.unitCodeLB.Text = "Unit code:";
             // 
@@ -168,10 +168,10 @@ namespace KIT206.A2.Group18.HRIS
             // 
             this.unitNameLB.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.unitNameLB.AutoSize = true;
-            this.unitNameLB.Font = new System.Drawing.Font("Calibri", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.unitNameLB.Font = new System.Drawing.Font("Century Gothic", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.unitNameLB.Location = new System.Drawing.Point(3, 19);
             this.unitNameLB.Name = "unitNameLB";
-            this.unitNameLB.Size = new System.Drawing.Size(141, 35);
+            this.unitNameLB.Size = new System.Drawing.Size(161, 34);
             this.unitNameLB.TabIndex = 0;
             this.unitNameLB.Text = "Unit name:";
             // 

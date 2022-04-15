@@ -37,22 +37,26 @@ namespace KIT206.A2.Group18.HRIS
             this.emptyMessage.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.emptyMessage.AutoSize = true;
             this.emptyMessage.Font = new System.Drawing.Font("Calibri", 21.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.emptyMessage.Location = new System.Drawing.Point(214, 37);
+            this.emptyMessage.Location = new System.Drawing.Point(480, 41);
+            this.emptyMessage.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.emptyMessage.Name = "emptyMessage";
-            this.emptyMessage.Size = new System.Drawing.Size(495, 36);
+            this.emptyMessage.Size = new System.Drawing.Size(273, 45);
             this.emptyMessage.TabIndex = 0;
-            this.emptyMessage.Text = "The list is empty. Please add a new item.";
+            this.emptyMessage.Text = "The list is empty. ";
+            this.emptyMessage.Click += new System.EventHandler(this.emptyMessage_Click);
             // 
             // emptyList
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.White;
             this.Controls.Add(this.emptyMessage);
             this.ForeColor = System.Drawing.SystemColors.ButtonShadow;
-            this.MaximumSize = new System.Drawing.Size(920, 120);
-            this.MinimumSize = new System.Drawing.Size(920, 120);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.MaximumSize = new System.Drawing.Size(1227, 148);
+            this.MinimumSize = new System.Drawing.Size(1227, 148);
             this.Name = "emptyList";
-            this.Size = new System.Drawing.Size(920, 120);
+            this.Size = new System.Drawing.Size(1227, 148);
             this.ResumeLayout(false);
             this.PerformLayout();
 
