@@ -36,6 +36,8 @@ namespace KIT206.A2.Group18.HRIS
         private System.Windows.Forms.Button addClassBtn;
         private System.Windows.Forms.Button addUnitbtn;
         private System.Windows.Forms.Button addConBtn;
+        private System.Windows.Forms.Button searchButton;
+        private System.Windows.Forms.Panel searchBarHolder;
     }
 }
 

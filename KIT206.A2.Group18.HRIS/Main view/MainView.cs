@@ -31,10 +31,12 @@ namespace KIT206.A2.Group18.HRIS
             this.addUnitbtn = new System.Windows.Forms.Button();
             this.searchBar = new System.Windows.Forms.TextBox();
             this.menuHolder = new System.Windows.Forms.TableLayoutPanel();
+            this.searchButton = new System.Windows.Forms.Button();
             this.unitListButton = new System.Windows.Forms.Button();
             this.classListButton = new System.Windows.Forms.Button();
             this.consultationListButton = new System.Windows.Forms.Button();
             this.staffListButton = new System.Windows.Forms.Button();
+            this.searchBarHolder = new System.Windows.Forms.Panel();
             this.titleHolder.SuspendLayout();
             this.container.SuspendLayout();
             this.listViewHolder.SuspendLayout();
@@ -105,6 +107,8 @@ namespace KIT206.A2.Group18.HRIS
             // 
             this.searchFieldHolder.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.searchFieldHolder.BackColor = System.Drawing.Color.Silver;
+            this.searchFieldHolder.Controls.Add(this.searchBarHolder);
+            this.searchFieldHolder.Controls.Add(this.searchButton);
             this.searchFieldHolder.Controls.Add(this.addConBtn);
             this.searchFieldHolder.Controls.Add(this.addClassBtn);
             this.searchFieldHolder.Controls.Add(this.addUnitbtn);
@@ -121,7 +125,7 @@ namespace KIT206.A2.Group18.HRIS
             this.addConBtn.Cursor = System.Windows.Forms.Cursors.Hand;
             this.addConBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.addConBtn.Font = new System.Drawing.Font("Calibri", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.addConBtn.Location = new System.Drawing.Point(823, 21);
+            this.addConBtn.Location = new System.Drawing.Point(823, 19);
             this.addConBtn.Name = "addConBtn";
             this.addConBtn.Size = new System.Drawing.Size(154, 37);
             this.addConBtn.TabIndex = 4;
@@ -136,7 +140,7 @@ namespace KIT206.A2.Group18.HRIS
             this.addClassBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.addClassBtn.Font = new System.Drawing.Font("Calibri", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.addClassBtn.ForeColor = System.Drawing.Color.White;
-            this.addClassBtn.Location = new System.Drawing.Point(707, 21);
+            this.addClassBtn.Location = new System.Drawing.Point(707, 19);
             this.addClassBtn.Name = "addClassBtn";
             this.addClassBtn.Size = new System.Drawing.Size(110, 37);
             this.addClassBtn.TabIndex = 3;
@@ -150,7 +154,7 @@ namespace KIT206.A2.Group18.HRIS
             this.addUnitbtn.Cursor = System.Windows.Forms.Cursors.Hand;
             this.addUnitbtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.addUnitbtn.Font = new System.Drawing.Font("Calibri", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.addUnitbtn.Location = new System.Drawing.Point(591, 21);
+            this.addUnitbtn.Location = new System.Drawing.Point(591, 19);
             this.addUnitbtn.Name = "addUnitbtn";
             this.addUnitbtn.Size = new System.Drawing.Size(110, 37);
             this.addUnitbtn.TabIndex = 2;
@@ -161,17 +165,18 @@ namespace KIT206.A2.Group18.HRIS
             // searchBar
             // 
             this.searchBar.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.searchBar.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.searchBar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.searchBar.Font = new System.Drawing.Font("Calibri", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.searchBar.ForeColor = System.Drawing.Color.Gray;
-            this.searchBar.Location = new System.Drawing.Point(23, 20);
+            this.searchBar.BackColor = System.Drawing.Color.Silver;
+            this.searchBar.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.searchBar.Font = new System.Drawing.Font("Century Gothic", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.searchBar.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.searchBar.Location = new System.Drawing.Point(30, 25);
             this.searchBar.Margin = new System.Windows.Forms.Padding(10);
             this.searchBar.MaxLength = 50;
             this.searchBar.Name = "searchBar";
-            this.searchBar.Size = new System.Drawing.Size(367, 36);
+            this.searchBar.Size = new System.Drawing.Size(367, 29);
             this.searchBar.TabIndex = 1;
-            this.searchBar.TextChanged += new System.EventHandler(this.searchBar_TextChanged);
+            this.searchBar.Text = "What are you looking for?";
+            this.searchBar.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.searchBar_KeyPress);
             // 
             // menuHolder
             // 
@@ -192,6 +197,21 @@ namespace KIT206.A2.Group18.HRIS
             this.menuHolder.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.menuHolder.Size = new System.Drawing.Size(998, 157);
             this.menuHolder.TabIndex = 0;
+            // 
+            // searchButton
+            // 
+            this.searchButton.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.searchButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.searchButton.BackColor = System.Drawing.Color.White;
+            this.searchButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.searchButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.searchButton.Image = global::KIT206.A2.Group18.HRIS.Properties.Resources.icons8_search_30;
+            this.searchButton.Location = new System.Drawing.Point(396, 20);
+            this.searchButton.Name = "searchButton";
+            this.searchButton.Size = new System.Drawing.Size(34, 36);
+            this.searchButton.TabIndex = 5;
+            this.searchButton.UseVisualStyleBackColor = false;
+            this.searchButton.Click += new System.EventHandler(this.searchButton_Click);
             // 
             // unitListButton
             // 
@@ -219,6 +239,7 @@ namespace KIT206.A2.Group18.HRIS
             this.classListButton.Size = new System.Drawing.Size(243, 151);
             this.classListButton.TabIndex = 3;
             this.classListButton.UseVisualStyleBackColor = true;
+            this.classListButton.Click += new System.EventHandler(this.classListButton_Click);
             // 
             // consultationListButton
             // 
@@ -232,6 +253,7 @@ namespace KIT206.A2.Group18.HRIS
             this.consultationListButton.Size = new System.Drawing.Size(245, 151);
             this.consultationListButton.TabIndex = 4;
             this.consultationListButton.UseVisualStyleBackColor = true;
+            this.consultationListButton.Click += new System.EventHandler(this.consultationListButton_Click);
             // 
             // staffListButton
             // 
@@ -245,6 +267,15 @@ namespace KIT206.A2.Group18.HRIS
             this.staffListButton.TabIndex = 1;
             this.staffListButton.UseVisualStyleBackColor = true;
             this.staffListButton.Click += new System.EventHandler(this.staffListButton_Click);
+            // 
+            // searchBarHolder
+            // 
+            this.searchBarHolder.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.searchBarHolder.BackColor = System.Drawing.Color.Black;
+            this.searchBarHolder.Location = new System.Drawing.Point(23, 53);
+            this.searchBarHolder.Name = "searchBarHolder";
+            this.searchBarHolder.Size = new System.Drawing.Size(367, 3);
+            this.searchBarHolder.TabIndex = 6;
             // 
             // HRIS
             // 
@@ -276,21 +307,69 @@ namespace KIT206.A2.Group18.HRIS
         private bool chooseConsultation = false;
         #endregion
 
+        #region Click on a button
         //view staff list when clicking STAFF button
         private void staffListButton_Click(object sender, EventArgs e)
         {
-            populateStaffList();
+            List<Staff> staffList = Staff.LoadAllStaffList();
+            populateStaffList(staffList);
             chooseUnit = false;
             chooseStaff = true; //when the staff button is clicked
             chooseClass = false;
             chooseConsultation = false;
         }
 
+        //view consultation list when click on CONSULTATION button
+        private void consultationListButton_Click(object sender, EventArgs e)
+        {
+
+            List<Consultation> conList = Consultation.GetAllConsultation();
+            populateConsultationList(conList);
+            chooseUnit = false;
+            chooseStaff = false;
+            chooseClass = false;
+            chooseConsultation = true; //when the consultation button is clicked
+        }
+
+        //view unit list when click on CLASS button
+        private void unitListButton_Click(object sender, EventArgs e)
+        {
+            List<Unit> unitList = Unit.LoadAllUnit();
+            populateUnitList(unitList);
+            chooseUnit = true; //when the unit button is clicked
+            chooseStaff = false;
+            chooseClass = false;
+            chooseConsultation = false;
+        }
+
+        //view class list when click on CLASS button
+        private void classListButton_Click(object sender, EventArgs e)
+        {
+            List<Class> classList = Class.getClassWithUnitDetails();
+            populateClassList(classList);
+            chooseUnit = false;
+            chooseStaff = false;
+            chooseClass = true; //when the class button is clicked
+            chooseConsultation = false;
+        }
+
+        //display 'ADD A UNIT' view when click on 'ADD UNIT' button
+        private void addUnitbtn_Click(object sender, EventArgs e)
+        {
+            chooseUnit = true; //changes to tab Unit when clicking 'Add unit' button
+            chooseStaff = false;
+            chooseClass = false;
+            chooseConsultation = false;
+            addUnit addNewUnit = new addUnit();
+            addNewUnit.ShowDialog();
+        }
+        #endregion
+
         #region Generate a staff list
         //generates a list on staff list view
-        private void populateStaffList()
+        private void populateStaffList(List<Staff> staffList)
         {
-            List<Staff> staffList = Staff.LoadAllStaffList();
+            
             int element_num = staffList.Count;
             staffListItem[] listView = new staffListItem[element_num];
 
@@ -333,20 +412,10 @@ namespace KIT206.A2.Group18.HRIS
         }
         #endregion
 
-        private void unitListButton_Click(object sender, EventArgs e)
-        {
-            populateUnitList();
-            chooseUnit = true; //when the unit button is clicked
-            chooseStaff = false;
-            chooseClass = false;
-            chooseConsultation = false;
-        }
-
         #region Generate a unit list
         //generate unit list retrieved from database
-        private void populateUnitList()
+        private void populateUnitList(List<Unit> unitList)
         {
-            List<Unit> unitList = Unit.LoadAllUnit();
             int count = unitList.Count;
             unitListItem[] unitView = new unitListItem[count];
 
@@ -369,7 +438,7 @@ namespace KIT206.A2.Group18.HRIS
                     unitView[i] = new unitListItem();
                     unitView[i].UnitCode = (unitList[i].UnitCode).ToUpper();
                     unitView[i].UnitName = unitList[i].UnitName;
-                    unitView[i].CoordinatorName = Unit.getCoordinatorName(unitList[i].Coordinator);
+                    unitView[i].CoordinatorName = Staff.GetStaffName(unitList[i].Coordinator.ID);
                     unitView[i].ItemID = i;
 
                     listHolder.Controls.Add(unitView[i]);
@@ -378,25 +447,79 @@ namespace KIT206.A2.Group18.HRIS
         }
         #endregion
 
+        #region Generate class list
+        //Display all classes on main view
+        private void populateClassList(List<Class> classList)
+        {
+            classListItem[] classView = new classListItem[classList.Count];
+
+            if(listHolder.Controls.Count > 0)
+            {
+                listHolder.Controls.Clear();
+            }
+
+            if(classList.Count <= 0)
+            {
+                emptyList empty = new emptyList();
+                listHolder.Controls.Add(empty);
+            }
+            else
+            {
+                for (int i = 0; i < classList.Count; i++)
+                {
+                    classView[i] = new classListItem();
+                    classView[i].ItemID = i;
+                    classView[i].UnitInfo = (classList[i].unit.UnitCode).ToUpper() + " | " + classList[i].unit.UnitName;
+                    classView[i].StaffName = Staff.GetStaffName(classList[i].staff.ID);
+                    classView[i].DayAndTime = classList[i].day.ToString() + " | " + classList[i].StartTime.ToString() + " - " + classList[i].EndTime.ToString();
+                    classView[i].TypeRoomCampus = classList[i].type.ToString() + " | Room: " + classList[i].Room + " | " + classList[i].campus.ToString() + " campus";
+
+                    listHolder.Controls.Add(classView[i]);
+                }
+            }
+        }
+        #endregion
+
+        #region Generate Consultation List
+        private void populateConsultationList(List<Consultation> conList)
+        {
+            consultationListItem[] conView = new consultationListItem[conList.Count]; 
+
+            if(listHolder.Controls.Count > 0)
+            {
+                listHolder.Controls.Clear();
+            }
+
+            if(conList.Count <= 0)
+            {
+                emptyList empty = new emptyList();
+                listHolder.Controls.Add(empty);
+            }
+            else
+            {
+
+
+                for (int i = 0; i<conList.Count; i++)
+                {
+                    conView[i] = new consultationListItem();
+                    conView[i].ItemID = i;
+                    conView[i].StaffName = Staff.GetStaffName(conList[i].staff.ID);
+                    conView[i].StaffID = "ID: " + conList[i].staff.ID;
+                    conView[i].DayTimeCon = conList[i].day.ToString() + " | " + conList[i].StartTime.ToString() + " - " + conList[i].EndTime.ToString();
+                    conView[i].ConLocation = Staff.GetStaffLocation(conList[i].staff.ID);
+
+                    listHolder.Controls.Add(conView[i]);
+                }
+            }
+        }
+        #endregion
+
         private void HRIS_Load(object sender, EventArgs e)
         {
             chooseStaff = true;
-            populateStaffList();
-        }
 
-        private void searchBar_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void addUnitbtn_Click(object sender, EventArgs e)
-        {
-            chooseUnit = true; //changes to tab Unit when clicking 'Add unit' button
-            chooseStaff = false;
-            chooseClass = false;
-            chooseConsultation = false;
-            addUnit addNewUnit = new addUnit();
-            addNewUnit.ShowDialog();
+            List<Staff> staffList = Staff.LoadAllStaffList();
+            populateStaffList(staffList);
         }
 
         #region Load tabs when activated
@@ -405,14 +528,163 @@ namespace KIT206.A2.Group18.HRIS
         {
             if (chooseStaff)
             {
-                populateStaffList();
+                List<Staff> staffList = Staff.LoadAllStaffList();
+                populateStaffList(staffList);
             }
 
             else if(chooseUnit)
             {
-                populateUnitList();
+                List<Unit> unitList = Unit.LoadAllUnit();
+                populateUnitList(unitList);
+            }
+
+            else if(chooseClass)
+            {
+                List<Class> classList = Class.getClassWithUnitDetails();
+                populateClassList(classList);
+            }
+
+            else if(chooseConsultation)
+            {
+                List<Consultation> conList = Consultation.GetAllConsultation();
+                populateConsultationList(conList);
+            }
+        }
+
+
+        #endregion
+
+        #region Return A List Of Result
+        //return a staff list based on search text
+        private void returnStaffListOnSearch(string searchText)
+        {
+            List<Staff> staffList = Staff.LoadAllStaffList();
+            var result = from Staff s in staffList
+                         where s.GivenName.ToLower().Contains(searchText) || s.FamilyName.ToLower().Contains(searchText)
+                                || (s.ID).ToString().Contains(searchText) || s.Email.ToLower().Contains(searchText)
+                                || s.Title.ToLower().Contains(searchText) || (s.campus).ToString().ToLower().Contains(searchText)
+                         select s;
+
+            List<Staff> resultList = new List<Staff>(result);
+            populateStaffList(resultList);
+        }
+
+        //return a unit list based on search text
+        private void returnUnitListOnSearch(string searchText)
+        {
+            List<Unit> unitList = Unit.LoadFullUnitList();
+            var result = from Unit u in unitList
+                         where (u.UnitCode).ToLower().Contains(searchText) || (u.UnitName).ToLower().Contains(searchText)
+                               || (u.Coordinator.ID).ToString().Contains(searchText) || (u.Coordinator.GivenName).ToLower().Contains(searchText)
+                               || (u.Coordinator.FamilyName).ToLower().Contains(searchText) || (u.Coordinator.Title).ToLower().Contains(searchText)
+                         select u;
+
+            List<Unit> resultList = new List<Unit>(result);
+            populateUnitList(resultList);
+        }
+
+        //return a class list based on search text
+        private void returnClassListOnSearch(string searchText)
+        {
+            List<Class> classList = Class.LoadFullClassList();
+            var result = from Class c in classList
+                         where (c.unit.UnitCode).ToLower().Contains(searchText) || (c.unit.UnitName).ToLower().Contains(searchText)
+                               || (c.type).ToString().ToLower().Contains(searchText) || (c.staff.GivenName).ToLower().Contains(searchText)
+                               || (c.staff.FamilyName).ToLower().Contains(searchText) || (c.staff.Title).ToLower().Contains(searchText)
+                               || c.StartTime.ToString().Contains(searchText) || c.EndTime.ToString().Contains(searchText) ||
+                               (c.day).ToString().ToLower().Contains(searchText) || (c.staff.campus).ToString().ToLower().Contains(searchText)
+                         select c;
+
+            List<Class> resultList = new List<Class>(result);
+            populateClassList(resultList);
+        }
+
+        //return a Consultation list based on search text
+        private void returnConsultationListOnSearch(string searchText)
+        {
+            List<Consultation> conList = Consultation.LoadFullConsultationList();
+            var result = from Consultation c in conList
+                         where (c.staff.GivenName).ToLower().Contains(searchText) || (c.staff.FamilyName).ToLower().Contains(searchText)
+                                || (c.staff.ID).ToString().Contains(searchText) || (c.StartTime).ToString().Contains(searchText) ||
+                                (c.EndTime).ToString().Contains(searchText) || (c.day).ToString().ToLower().Contains(searchText)
+                         select c;
+
+            List<Consultation> resultList = new List<Consultation>(result);
+            populateConsultationList(resultList);
+        }
+        #endregion
+
+        #region Search for an entity
+        //search for specific data based on tab chosen
+        private void Search()
+        {
+            string searchText = searchBar.Text.ToLower();
+            if (chooseStaff)
+            {
+                if (searchText == "")
+                {
+                    List<Staff> staffList = Staff.LoadAllStaffList();
+                    populateStaffList(staffList);
+                    searchBar.Text = "What are you looking for?";
+                }
+                else
+                {
+                    returnStaffListOnSearch(searchText);
+                }
+            }
+            else if (chooseUnit)
+            {
+                if (searchText == "")
+                {
+                    List<Unit> unitList = Unit.LoadAllUnit();
+                    populateUnitList(unitList);
+                    searchBar.Text = "What are you looking for?";
+                }
+                else
+                {
+                    returnUnitListOnSearch(searchText);
+                }
+            }
+            else if (chooseClass)
+            {
+                if (searchText == "")
+                {
+                    List<Class> classList = Class.LoadAllClasses();
+                    populateClassList(classList);
+                    searchBar.Text = "What are you looking for?";
+                }
+                else
+                {
+                    returnClassListOnSearch(searchText);
+                }
+            }
+            else if (chooseConsultation)
+            {
+                if (searchText == "")
+                {
+                    List<Consultation> conList = Consultation.GetAllConsultation();
+                    populateConsultationList(conList);
+                    searchBar.Text = "What are you looking for?";
+                }
+                else
+                {
+                    returnConsultationListOnSearch(searchText);
+                }
             }
         }
         #endregion
+
+        private void searchBar_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if(Convert.ToInt32(e.KeyChar) == 13)
+            {
+                Search();
+            }
+        }
+
+        private void searchButton_Click(object sender, EventArgs e)
+        {
+            Search();
+        }
     }
 }

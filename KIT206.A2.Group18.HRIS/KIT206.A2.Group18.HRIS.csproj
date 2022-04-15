@@ -93,6 +93,32 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Unit\classDetails.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Unit\classDetails.Designer.cs">
+      <DependentUpon>classDetails.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Class\Class.cs" />
+    <Compile Include="Class\classListItem.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Class\classListItem.Designer.cs">
+      <DependentUpon>classListItem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Consultation\Consultation.cs" />
+    <Compile Include="Consultation\consultationListItem.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Consultation\consultationListItem.Designer.cs">
+      <DependentUpon>consultationListItem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Unit\unitDetailsView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Unit\unitDetailsView.Designer.cs">
+      <DependentUpon>unitDetailsView.cs</DependentUpon>
+    </Compile>
     <Compile Include="Unit\editCoor.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -152,6 +178,18 @@
     <Compile Include="Unit\unitListItem.Designer.cs">
       <DependentUpon>unitListItem.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Unit\classDetails.resx">
+      <DependentUpon>classDetails.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Class\classListItem.resx">
+      <DependentUpon>classListItem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Consultation\consultationListItem.resx">
+      <DependentUpon>consultationListItem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Unit\unitDetailsView.resx">
+      <DependentUpon>unitDetailsView.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Unit\editCoor.resx">
       <DependentUpon>editCoor.cs</DependentUpon>
     </EmbeddedResource>
@@ -269,6 +307,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\consultation 1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-search-30.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

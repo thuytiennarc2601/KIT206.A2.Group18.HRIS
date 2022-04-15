@@ -47,11 +47,11 @@ namespace KIT206.A2.Group18.HRIS
             List<Unit> unitList = Unit.LoadAllUnit();
 
             Unit unit = unitList[this.ItemID];
-            coordinatorInfo = Unit.getCoordinatorName(unit.Coordinator);
-            iniCoorID = unit.Coordinator;
+            coordinatorInfo = Staff.GetStaffName(unit.Coordinator.ID);
+            iniCoorID = unit.Coordinator.ID;
             coorID = iniCoorID;
             unitInfo.Text = unit.UnitCode.ToString() + " | " + unit.UnitName;
-            editNameTB.Text = unit.Coordinator.ToString() + " | " + coordinatorInfo;
+            editNameTB.Text = unit.Coordinator.ID.ToString() + " | " + coordinatorInfo;
             this.Text = "Edit " + unitInfo.Text + " Coordinator";
         }
 

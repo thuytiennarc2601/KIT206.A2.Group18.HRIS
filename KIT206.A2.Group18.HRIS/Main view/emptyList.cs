@@ -16,5 +16,10 @@ namespace KIT206.A2.Group18.HRIS
         {
             InitializeComponent();
         }
+
+        private void emptyMessage_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

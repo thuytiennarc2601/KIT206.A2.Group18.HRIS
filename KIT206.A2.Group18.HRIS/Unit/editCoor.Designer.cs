@@ -168,7 +168,6 @@ namespace KIT206.A2.Group18.HRIS
         private System.Windows.Forms.Label unitInfo;
         private System.Windows.Forms.Button updateButton;
         private System.Windows.Forms.FlowLayoutPanel options;
-        private System.Windows.Forms.TextBox coorName;
         private System.Windows.Forms.TextBox editNameTB;
     }
 }

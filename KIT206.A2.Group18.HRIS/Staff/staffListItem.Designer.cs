@@ -115,7 +115,7 @@ namespace KIT206.A2.Group18.HRIS
             this.editStaff.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.editStaff.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.editStaff.ForeColor = System.Drawing.Color.White;
-            this.editStaff.Location = new System.Drawing.Point(1112, 98);
+            this.editStaff.Location = new System.Drawing.Point(1112, 88);
             this.editStaff.Margin = new System.Windows.Forms.Padding(4);
             this.editStaff.Name = "editStaff";
             this.editStaff.Size = new System.Drawing.Size(97, 42);
@@ -172,6 +172,7 @@ namespace KIT206.A2.Group18.HRIS
             this.MaximumSize = new System.Drawing.Size(1227, 148);
             this.MinimumSize = new System.Drawing.Size(1227, 148);
             this.Name = "staffListItem";
+            this.Padding = new System.Windows.Forms.Padding(0, 10, 0, 10);
             this.Size = new System.Drawing.Size(1227, 148);
             this.DoubleClick += new System.EventHandler(this.staffListItem_DoubleClick);
             this.MouseEnter += new System.EventHandler(this.staffListItem_MouseEnter);

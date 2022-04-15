@@ -46,6 +46,7 @@ namespace KIT206.A2.Group18.HRIS
             this.selectBar.Name = "selectBar";
             this.selectBar.Size = new System.Drawing.Size(13, 130);
             this.selectBar.TabIndex = 0;
+            this.selectBar.Click += new System.EventHandler(this.unitListItem_DoubleClick);
             this.selectBar.MouseEnter += new System.EventHandler(this.unitListItem_MouseEnter);
             this.selectBar.MouseLeave += new System.EventHandler(this.unitListItem_MouseLeave);
             // 
@@ -60,6 +61,7 @@ namespace KIT206.A2.Group18.HRIS
             this.unitName.Size = new System.Drawing.Size(334, 35);
             this.unitName.TabIndex = 1;
             this.unitName.Text = "Game Fundamentals";
+            this.unitName.Click += new System.EventHandler(this.unitListItem_DoubleClick);
             this.unitName.MouseEnter += new System.EventHandler(this.unitListItem_MouseEnter);
             this.unitName.MouseLeave += new System.EventHandler(this.unitListItem_MouseLeave);
             // 
@@ -74,6 +76,7 @@ namespace KIT206.A2.Group18.HRIS
             this.unitCode.Size = new System.Drawing.Size(79, 29);
             this.unitCode.TabIndex = 2;
             this.unitCode.Text = "KIT109";
+            this.unitCode.Click += new System.EventHandler(this.unitListItem_DoubleClick);
             this.unitCode.MouseEnter += new System.EventHandler(this.unitListItem_MouseEnter);
             this.unitCode.MouseLeave += new System.EventHandler(this.unitListItem_MouseLeave);
             // 
@@ -83,11 +86,12 @@ namespace KIT206.A2.Group18.HRIS
             this.coordinatorName.AutoSize = true;
             this.coordinatorName.Font = new System.Drawing.Font("Century Gothic", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.coordinatorName.ForeColor = System.Drawing.Color.Black;
-            this.coordinatorName.Location = new System.Drawing.Point(276, 82);
+            this.coordinatorName.Location = new System.Drawing.Point(287, 82);
             this.coordinatorName.Name = "coordinatorName";
             this.coordinatorName.Size = new System.Drawing.Size(206, 28);
             this.coordinatorName.TabIndex = 3;
             this.coordinatorName.Text = "Dr. Lindsay Wells";
+            this.coordinatorName.Click += new System.EventHandler(this.unitListItem_DoubleClick);
             this.coordinatorName.MouseEnter += new System.EventHandler(this.unitListItem_MouseEnter);
             this.coordinatorName.MouseLeave += new System.EventHandler(this.unitListItem_MouseLeave);
             // 
@@ -102,6 +106,7 @@ namespace KIT206.A2.Group18.HRIS
             this.coordinatorUnit.Size = new System.Drawing.Size(177, 29);
             this.coordinatorUnit.TabIndex = 4;
             this.coordinatorUnit.Text = "Unit coordinator:";
+            this.coordinatorUnit.Click += new System.EventHandler(this.unitListItem_DoubleClick);
             this.coordinatorUnit.MouseEnter += new System.EventHandler(this.unitListItem_MouseEnter);
             this.coordinatorUnit.MouseLeave += new System.EventHandler(this.unitListItem_MouseLeave);
             // 
@@ -125,7 +130,7 @@ namespace KIT206.A2.Group18.HRIS
             // Seperator
             // 
             this.Seperator.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.Seperator.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.Seperator.BackColor = System.Drawing.Color.LightGray;
             this.Seperator.Location = new System.Drawing.Point(48, 126);
             this.Seperator.Name = "Seperator";
             this.Seperator.Size = new System.Drawing.Size(1171, 10);
@@ -145,6 +150,7 @@ namespace KIT206.A2.Group18.HRIS
             this.Controls.Add(this.selectBar);
             this.Name = "unitListItem";
             this.Size = new System.Drawing.Size(1220, 130);
+            this.DoubleClick += new System.EventHandler(this.unitListItem_DoubleClick);
             this.MouseEnter += new System.EventHandler(this.unitListItem_MouseEnter);
             this.MouseLeave += new System.EventHandler(this.unitListItem_MouseLeave);
             this.ResumeLayout(false);
