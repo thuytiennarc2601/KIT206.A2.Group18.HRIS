@@ -80,7 +80,7 @@ namespace KIT206.A2.Group18.HRIS
         }
 
         //open staff details
-        //pass the list's index
+        //pass the list's index into 'staffDetailView'
         private void staffListItem_DoubleClick(object sender, EventArgs e)
         {
             staffDetailView staffDetail = new staffDetailView();
@@ -89,7 +89,7 @@ namespace KIT206.A2.Group18.HRIS
         }
 
         //open edit staff info
-        //pass the list's index
+        //pass the list's index into 'addStaffInfo'
         private void editStaff_Click(object sender, EventArgs e)
         {
             addStaffInfo addStaff = new addStaffInfo();

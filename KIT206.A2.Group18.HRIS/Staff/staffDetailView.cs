@@ -17,10 +17,9 @@ namespace KIT206.A2.Group18.HRIS
             InitializeComponent();
         }
 
+        #region Properties
         private int _itemID;
         private int staffID;
-
-        #region Properties
 
         [Category("Ëxtra properties")]
         public int ItemID
@@ -32,11 +31,11 @@ namespace KIT206.A2.Group18.HRIS
         #endregion
 
         #region Display detail
-        //Load staff details based on its index in the list
+        //Load staff details based on its index in the staff list
         private void staffDetailView_Load(object sender, EventArgs e)
         {
             List<Staff> staffList = Staff.LoadAllStaffList();
-            int id = this.ItemID;
+            int id = this.ItemID; //the index in the staff list
             this.staffID = staffList[id].ID;
             this.Text = staffList[id].Title + ". " + staffList[id].GivenName + " " + staffList[id].FamilyName;
             staffNameDetail.Text = staffList[id].Title + ". " + staffList[id].GivenName + " " + staffList[id].FamilyName;
@@ -68,11 +67,12 @@ namespace KIT206.A2.Group18.HRIS
 
             var getUnitList = from Unit u in unitList
                               where staffID == u.Coordinator.ID
-                              select u;
+                              select u; //LINQ
 
             List<Unit> result = new List<Unit>(getUnitList);
-            Label[] unitLabels = new Label[result.Count];
 
+            //display units
+            Label[] unitLabels = new Label[result.Count];
             for(int i = 0; i < result.Count; i++)
             {
                 unitLabels[i] = new Label();
@@ -96,8 +96,9 @@ namespace KIT206.A2.Group18.HRIS
                              where staffID == c.staff.ID
                              select c;
             List<Consultation> result = new List<Consultation>(getConList);
-            Label[] conLabels = new Label[result.Count];
 
+            //display consultation
+            Label[] conLabels = new Label[result.Count];
             for(int i = 0; i<result.Count; i++)
             {
                 conLabels[i] = new Label();

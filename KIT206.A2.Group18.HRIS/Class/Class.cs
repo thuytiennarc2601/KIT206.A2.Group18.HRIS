@@ -13,6 +13,7 @@ namespace KIT206.A2.Group18.HRIS
 
     class Class
     {
+        #region Class Properties
         public Unit unit { get; set; }
 
         public Staff staff { get; set; }
@@ -28,11 +29,12 @@ namespace KIT206.A2.Group18.HRIS
         public Type type { get; set; }
 
         public string Room { get; set; }
+        #endregion
 
         private static MySqlConnection conn;
 
-        #region Get All Classes
-        //Retrieve all classes from database
+        #region Get All Classes at level 0
+        //Retrieve all classes from database without staff or unit details
         public static List<Class> LoadAllClasses()
         {
             List<Class> classList = new List<Class>();
@@ -96,98 +98,45 @@ namespace KIT206.A2.Group18.HRIS
         }
         #endregion
 
-        #region Get a Class list with full unit details (code, title, staffID
+        #region Get a Class list at level 1
+        //get class list plus unit details 
         public static List<Class> getClassWithUnitDetails ()
         {
             List<Class> classList = Class.LoadAllClasses();
-
-            MySqlDataReader rdr = null;
-            conn = GetSqlConnection.GetConnection();
-
-            for(int i = 0; i<classList.Count; i++)
+            List<Unit> unitList = Unit.LoadAllUnit();
+            for (int i = 0; i < classList.Count; i++)
             {
-                try
-                {
-                    conn.Open();
-                    MySqlCommand cmd = new MySqlCommand("select title from unit where code=@code", conn);
-                    cmd.Parameters.AddWithValue("@code", classList[i].unit.UnitCode);
-                    rdr = cmd.ExecuteReader();
-                    {
-                        while(rdr.Read())
-                        {
-                            classList[i].unit.UnitName = rdr.GetString(0);
-                        }
-                    }
-                }
-                finally
-                {
-                    if(rdr != null)
-                    {
-                        rdr.Close();
-                    }
-                    if(conn != null)
-                    {
-                        conn.Close();
-                    }
-                }
+                var result = from Unit u in unitList
+                             where u.UnitCode == classList[i].unit.UnitCode
+                             select u;
+                List<Unit> resultList = new List<Unit>(result);
+
+                classList[i].unit.UnitName = resultList[0].UnitName;
             }
             return classList;
         }
 
         #endregion
 
-        #region Get class list with unit details and staff details (title, name)
+        #region Get class list at level 2
+        //Get class list plus staff details and unit details
         public static List<Class> LoadFullClassList()
         {
             List<Class> classList = Class.getClassWithUnitDetails();
-            MySqlDataReader rdr = null;
-            conn = GetSqlConnection.GetConnection();
+            List<Staff> staffList = Staff.LoadAllStaffList();
 
-            for(int i=0; i<classList.Count;i++)
+            for(int i = 0; i<classList.Count; i++)
             {
-                if (classList[i].staff.ID != 0)
-                {
-                    try
-                    {
-                        conn.Open();
-                        MySqlCommand cmd = new MySqlCommand("select title, given_name, family_name, campus from staff where id=@id", conn);
-                        cmd.Parameters.AddWithValue("@id", classList[i].staff.ID);
-                        rdr = cmd.ExecuteReader();
-                        while(rdr.Read())
-                        {
-                            classList[i].staff.GivenName = rdr.GetString(1);
-                            classList[i].staff.FamilyName = rdr.GetString(2);
-                            if(Convert.IsDBNull(rdr[0]) || rdr.GetString(0) == "")
-                            {
-                                classList[i].staff.Title = "Unknown";
-                            }
-                            else
-                            {
-                                classList[i].staff.Title = rdr.GetString(0);
-                            }
+                var result = from Staff s in staffList
+                             where s.ID == classList[i].staff.ID
+                             select s;
 
-                            if (Convert.IsDBNull(rdr[3]) || rdr.GetString(3) == "")
-                            {
-                                classList[i].staff.campus = Campus.Notlocated;
-                            }
-                            else
-                            {
-                                classList[i].staff.campus = (Campus)Enum.Parse(typeof(Campus), rdr.GetString(3));
-                            }
-                        }
-                    }
-                    finally
-                    {
-                        if (rdr != null)
-                        {
-                            rdr.Close();
-                        }
-                        if (conn != null)
-                        {
-                            conn.Close();
-                        }
-                    }
-                }
+                List<Staff> resultList = new List<Staff>(result);
+
+                classList[i].staff.GivenName = resultList[0].GivenName;
+                classList[i].staff.FamilyName = resultList[0].FamilyName;
+                classList[i].staff.Title = resultList[0].Title;
+                classList[i].staff.campus = resultList[0].campus;
             }
             return classList;
         }

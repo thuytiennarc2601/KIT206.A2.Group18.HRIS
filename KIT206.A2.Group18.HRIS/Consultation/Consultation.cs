@@ -9,6 +9,7 @@ namespace KIT206.A2.Group18.HRIS
 {
     class Consultation
     {
+        #region Properties
         public Staff staff { get; set; }
 
         public Day day { get; set; }
@@ -16,6 +17,7 @@ namespace KIT206.A2.Group18.HRIS
         public TimeSpan StartTime { get; set; }
 
         public TimeSpan EndTime { get; set; }
+        #endregion
 
         private static MySqlConnection conn;
 
@@ -66,43 +68,19 @@ namespace KIT206.A2.Group18.HRIS
         public static List<Consultation> LoadFullConsultationList()
         {
             List<Consultation> conList = Consultation.GetAllConsultation();
-            MySqlDataReader rdr = null;
-            conn = GetSqlConnection.GetConnection();
+            List<Staff> staffList = Staff.LoadAllStaffList();
 
             for(int i = 0; i<conList.Count; i++)
             {
-                try
-                {
-                    conn.Open();
-                    MySqlCommand cmd = new MySqlCommand("select title, given_name, family_name from staff where id=@id", conn);
-                    cmd.Parameters.AddWithValue("@id", conList[i].staff.ID);
-                    rdr = cmd.ExecuteReader();
-                    while(rdr.Read())
-                    {
-                        conList[i].staff.GivenName = rdr.GetString(1);
-                        conList[i].staff.FamilyName = rdr.GetString(2);
-                        if(Convert.IsDBNull(rdr[0]) || rdr.GetString(0) == "")
-                        {
-                            conList[i].staff.Title = "Unknown";
-                        }
-                        else
-                        {
-                            conList[i].staff.Title = rdr.GetString(0);
-                        }
-                    }
-                }
+                var result = from Staff s in staffList
+                             where conList[i].staff.ID == s.ID
+                             select s; //LINQ
 
-                finally
-                {
-                    if (rdr != null)
-                    {
-                        rdr.Close();
-                    }
-                    if (conn != null)
-                    {
-                        conn.Close();
-                    }
-                }
+                List<Staff> resultList = new List<Staff>(result);
+
+                conList[i].staff.GivenName = resultList[0].GivenName;
+                conList[i].staff.FamilyName = resultList[0].FamilyName;
+                conList[i].staff.Title = resultList[0].Title;
             }
             return conList;
         }

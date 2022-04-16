@@ -20,12 +20,11 @@ namespace KIT206.A2.Group18.HRIS
         }
 
         #region Properties
-        private int _itemID;
         private string coordinatorInfo;
-        private string _unitCode;
         private int coorID;
         private int iniCoorID;
 
+        private int _itemID;
         [Category("Properties")]
         public int ItemID
         {
@@ -33,6 +32,7 @@ namespace KIT206.A2.Group18.HRIS
             set { _itemID = value; }
         }
 
+        private string _unitCode;
         [Category("Properties")]
         public string UnitCode
         {
@@ -54,7 +54,6 @@ namespace KIT206.A2.Group18.HRIS
             editNameTB.Text = unit.Coordinator.ID.ToString() + " | " + coordinatorInfo;
             this.Text = "Edit " + unitInfo.Text + " Coordinator";
         }
-
         #endregion
 
         //get all staff members that have name or id similar to the searching text
@@ -164,8 +163,9 @@ namespace KIT206.A2.Group18.HRIS
                 try
                 {
                     conn.Open();
-                    MySqlCommand cmd = new MySqlCommand("update unit set coordinator=@coorID where code='" + this.UnitCode + "'", conn);
+                    MySqlCommand cmd = new MySqlCommand("update unit set coordinator=@coorID where code=@code", conn);
                     cmd.Parameters.AddWithValue("@coorID", this.coorID);
+                    cmd.Parameters.AddWithValue("@code", this.UnitCode);
                     rdr = cmd.ExecuteReader();
                     while(rdr.Read()) { }
                 }

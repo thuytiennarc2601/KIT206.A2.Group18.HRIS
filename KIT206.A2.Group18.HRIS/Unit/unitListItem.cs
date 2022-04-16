@@ -66,15 +66,15 @@ namespace KIT206.A2.Group18.HRIS
         private void editCor_Click(object sender, EventArgs e)
         {
             editCoor editCoordinator = new editCoor();
-            editCoordinator.ItemID = this.ItemID;
-            editCoordinator.UnitCode = this.UnitCode;
+            editCoordinator.ItemID = this.ItemID; //pass the index of this unit in the unit list to 'editCoor'
+            editCoordinator.UnitCode = this.UnitCode; //pass the unit code to 'editCoor'
             editCoordinator.ShowDialog();
         }
 
         private void unitListItem_DoubleClick(object sender, EventArgs e)
         {
             unitDetailsView unitView = new unitDetailsView();
-            unitView.ItemID = this.ItemID;
+            unitView.ItemID = this.ItemID;  //pass the index of this unit in the unit list to 'unitDetailsView'
             unitView.ShowDialog();
         }
     }

@@ -10,6 +10,7 @@ namespace KIT206.A2.Group18.HRIS
     //for getting connection from database
     class GetSqlConnection
     {
+        //return MySql connection
         private static MySqlConnection conn;
 
         private const string server = "alacritas.cis.utas.edu.au";

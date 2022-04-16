@@ -10,6 +10,7 @@ using System.Windows.Forms;
 
 namespace KIT206.A2.Group18.HRIS
 {
+    //HRIS main view
     public partial class HRIS : Form
     {
         public HRIS()
@@ -307,14 +308,15 @@ namespace KIT206.A2.Group18.HRIS
         private bool chooseConsultation = false;
         #endregion
 
-        #region Click on a button
+        //use 4 different bool varibles to indicate what tab (staff, unit, class, consultation) is selected by user
+        #region Choose one of four tabs (staff, unit, class, consultation)
         //view staff list when clicking STAFF button
         private void staffListButton_Click(object sender, EventArgs e)
         {
             List<Staff> staffList = Staff.LoadAllStaffList();
             populateStaffList(staffList);
             chooseUnit = false;
-            chooseStaff = true; //when the staff button is clicked
+            chooseStaff = true; //staff button is clicked
             chooseClass = false;
             chooseConsultation = false;
         }
@@ -328,7 +330,7 @@ namespace KIT206.A2.Group18.HRIS
             chooseUnit = false;
             chooseStaff = false;
             chooseClass = false;
-            chooseConsultation = true; //when the consultation button is clicked
+            chooseConsultation = true; //consultation button is clicked
         }
 
         //view unit list when click on CLASS button
@@ -336,7 +338,7 @@ namespace KIT206.A2.Group18.HRIS
         {
             List<Unit> unitList = Unit.LoadAllUnit();
             populateUnitList(unitList);
-            chooseUnit = true; //when the unit button is clicked
+            chooseUnit = true; //unit button is clicked
             chooseStaff = false;
             chooseClass = false;
             chooseConsultation = false;
@@ -349,7 +351,7 @@ namespace KIT206.A2.Group18.HRIS
             populateClassList(classList);
             chooseUnit = false;
             chooseStaff = false;
-            chooseClass = true; //when the class button is clicked
+            chooseClass = true; //class button is clicked
             chooseConsultation = false;
         }
 
@@ -369,24 +371,21 @@ namespace KIT206.A2.Group18.HRIS
         //generates a list on staff list view
         private void populateStaffList(List<Staff> staffList)
         {
-            
-            int element_num = staffList.Count;
-            staffListItem[] listView = new staffListItem[element_num];
-
             //clear all items from the last choice before displaying the new ones
             if (listHolder.Controls.Count > 0)
             {
                 listHolder.Controls.Clear();
             }
 
-            //if the staff list is empty
+            //if the staff list is empty, inform user that the list is empty
             if (staffList.Count <= 0)
             {
                 emptyList empty = new emptyList();
                 listHolder.Controls.Add(empty);
             }
-            else //if not
+            else //if not, generate the staff list with some details
             {
+                staffListItem[] listView = new staffListItem[staffList.Count];
                 for (int i = 0; i < staffList.Count; i++)
                 {
                     listView[i] = new staffListItem();
@@ -416,23 +415,21 @@ namespace KIT206.A2.Group18.HRIS
         //generate unit list retrieved from database
         private void populateUnitList(List<Unit> unitList)
         {
-            int count = unitList.Count;
-            unitListItem[] unitView = new unitListItem[count];
-
             //clear all last items
             if (listHolder.Controls.Count > 0)
             {
                 listHolder.Controls.Clear();
             }
 
-            //if the unit list is empty
+            //if the unit list is empty, inform user that the list is empty
             if (unitList.Count <= 0)
             {
                 emptyList empty = new emptyList();
                 listHolder.Controls.Add(empty);
             }
-            else //if not
+            else //if not, display all units
             {
+                unitListItem[] unitView = new unitListItem[unitList.Count];
                 for (int i = 0; i < unitList.Count; i++)
                 {
                     unitView[i] = new unitListItem();
@@ -451,20 +448,21 @@ namespace KIT206.A2.Group18.HRIS
         //Display all classes on main view
         private void populateClassList(List<Class> classList)
         {
-            classListItem[] classView = new classListItem[classList.Count];
-
+            //clear all items from the last choice before displaying the new ones
             if(listHolder.Controls.Count > 0)
             {
                 listHolder.Controls.Clear();
             }
 
+            //if there is no class, inform user that the list is empty
             if(classList.Count <= 0)
             {
                 emptyList empty = new emptyList();
                 listHolder.Controls.Add(empty);
             }
-            else
+            else //if not, display all classes
             {
+                classListItem[] classView = new classListItem[classList.Count];
                 for (int i = 0; i < classList.Count; i++)
                 {
                     classView[i] = new classListItem();
@@ -483,22 +481,20 @@ namespace KIT206.A2.Group18.HRIS
         #region Generate Consultation List
         private void populateConsultationList(List<Consultation> conList)
         {
-            consultationListItem[] conView = new consultationListItem[conList.Count]; 
-
+            //clear all items from the last choice before displaying the new ones
             if(listHolder.Controls.Count > 0)
             {
                 listHolder.Controls.Clear();
             }
-
+            //if there is no consultation, inform user that the list is empty
             if(conList.Count <= 0)
             {
                 emptyList empty = new emptyList();
                 listHolder.Controls.Add(empty);
             }
-            else
+            else //if not, display all consultations
             {
-
-
+                consultationListItem[] conView = new consultationListItem[conList.Count];
                 for (int i = 0; i<conList.Count; i++)
                 {
                     conView[i] = new consultationListItem();
@@ -514,16 +510,8 @@ namespace KIT206.A2.Group18.HRIS
         }
         #endregion
 
-        private void HRIS_Load(object sender, EventArgs e)
-        {
-            chooseStaff = true;
-
-            List<Staff> staffList = Staff.LoadAllStaffList();
-            populateStaffList(staffList);
-        }
-
         #region Load tabs when activated
-        //load a specific list after an action based on the chosen tab
+        //load a specific list when the form is activated based on the chosen tab
         private void HRIS_Activated(object sender, EventArgs e)
         {
             if (chooseStaff)
@@ -560,10 +548,10 @@ namespace KIT206.A2.Group18.HRIS
         {
             List<Staff> staffList = Staff.LoadAllStaffList();
             var result = from Staff s in staffList
-                         where s.GivenName.ToLower().Contains(searchText) || s.FamilyName.ToLower().Contains(searchText)
-                                || (s.ID).ToString().Contains(searchText) || s.Email.ToLower().Contains(searchText)
-                                || s.Title.ToLower().Contains(searchText) || (s.campus).ToString().ToLower().Contains(searchText)
-                         select s;
+                         where (s.GivenName).ToLower().Contains(searchText) || (s.FamilyName).ToLower().Contains(searchText)
+                                || (s.ID).ToString().Contains(searchText) || (s.Email).ToLower().Contains(searchText)
+                                || (s.Title).ToLower().Contains(searchText) || (s.campus).ToString().ToLower().Contains(searchText)
+                         select s; //LINQ
 
             List<Staff> resultList = new List<Staff>(result);
             populateStaffList(resultList);
@@ -577,7 +565,7 @@ namespace KIT206.A2.Group18.HRIS
                          where (u.UnitCode).ToLower().Contains(searchText) || (u.UnitName).ToLower().Contains(searchText)
                                || (u.Coordinator.ID).ToString().Contains(searchText) || (u.Coordinator.GivenName).ToLower().Contains(searchText)
                                || (u.Coordinator.FamilyName).ToLower().Contains(searchText) || (u.Coordinator.Title).ToLower().Contains(searchText)
-                         select u;
+                         select u; //LINQ
 
             List<Unit> resultList = new List<Unit>(result);
             populateUnitList(resultList);
@@ -593,7 +581,7 @@ namespace KIT206.A2.Group18.HRIS
                                || (c.staff.FamilyName).ToLower().Contains(searchText) || (c.staff.Title).ToLower().Contains(searchText)
                                || c.StartTime.ToString().Contains(searchText) || c.EndTime.ToString().Contains(searchText) ||
                                (c.day).ToString().ToLower().Contains(searchText) || (c.staff.campus).ToString().ToLower().Contains(searchText)
-                         select c;
+                         select c; //LINQ
 
             List<Class> resultList = new List<Class>(result);
             populateClassList(resultList);
@@ -607,7 +595,7 @@ namespace KIT206.A2.Group18.HRIS
                          where (c.staff.GivenName).ToLower().Contains(searchText) || (c.staff.FamilyName).ToLower().Contains(searchText)
                                 || (c.staff.ID).ToString().Contains(searchText) || (c.StartTime).ToString().Contains(searchText) ||
                                 (c.EndTime).ToString().Contains(searchText) || (c.day).ToString().ToLower().Contains(searchText)
-                         select c;
+                         select c; //LINQ
 
             List<Consultation> resultList = new List<Consultation>(result);
             populateConsultationList(resultList);
@@ -619,7 +607,7 @@ namespace KIT206.A2.Group18.HRIS
         private void Search()
         {
             string searchText = searchBar.Text.ToLower();
-            if (chooseStaff)
+            if (chooseStaff) //if tab 'staff' is chosen, results are related to staff details
             {
                 if (searchText == "")
                 {
@@ -632,7 +620,7 @@ namespace KIT206.A2.Group18.HRIS
                     returnStaffListOnSearch(searchText);
                 }
             }
-            else if (chooseUnit)
+            else if (chooseUnit) //if tab 'unit' is chosen, results are related to unit details
             {
                 if (searchText == "")
                 {
@@ -645,7 +633,7 @@ namespace KIT206.A2.Group18.HRIS
                     returnUnitListOnSearch(searchText);
                 }
             }
-            else if (chooseClass)
+            else if (chooseClass) //if tab 'class' is chosen, results are related to class details
             {
                 if (searchText == "")
                 {
@@ -658,7 +646,7 @@ namespace KIT206.A2.Group18.HRIS
                     returnClassListOnSearch(searchText);
                 }
             }
-            else if (chooseConsultation)
+            else if (chooseConsultation) //if tab 'consultation' is choosen, results are related to consultation details
             {
                 if (searchText == "")
                 {
@@ -674,6 +662,16 @@ namespace KIT206.A2.Group18.HRIS
         }
         #endregion
 
+        //Load staff list when the system starts
+        private void HRIS_Load(object sender, EventArgs e)
+        {
+            chooseStaff = true;
+
+            List<Staff> staffList = Staff.LoadAllStaffList();
+            populateStaffList(staffList);
+        }
+
+        //search by pressing 'Enter'
         private void searchBar_KeyPress(object sender, KeyPressEventArgs e)
         {
             if(Convert.ToInt32(e.KeyChar) == 13)
@@ -682,6 +680,7 @@ namespace KIT206.A2.Group18.HRIS
             }
         }
 
+        //search by clicking on 'Search' button
         private void searchButton_Click(object sender, EventArgs e)
         {
             Search();
