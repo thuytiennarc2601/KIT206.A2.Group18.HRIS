@@ -15,8 +15,7 @@ namespace KIT206.A2.Group18.HRIS
 
     class Staff
     {
-        private static MySqlConnection conn;
-
+        #region Staff Properties
         public int ID { get; set; }
 
         public string GivenName { get; set; }
@@ -37,14 +36,16 @@ namespace KIT206.A2.Group18.HRIS
 
         public byte[] Photo { get; set; }
 
-        #region Get all staff from database
+        private static MySqlConnection conn;
+        #endregion
+
+        #region Get all staff with full details from database
         //retrieves all STAFF from staff database
         public static List<Staff> LoadAllStaffList()
         {
             List<Staff> staffList = new List<Staff>();
             MySqlDataReader rdr = null;
             conn = GetSqlConnection.GetConnection();
-
             try
             {
                 conn.Open();
@@ -150,18 +151,19 @@ namespace KIT206.A2.Group18.HRIS
         #endregion
 
         #region Get Staff Name
-        //Get name of staff based on their ID
+        //Get name of staff using their ID
         public static string GetStaffName(int staffID)
         {
             string name = "";
+
             MySqlDataReader rdr = null;
             conn = GetSqlConnection.GetConnection();
 
             try
             {
                 conn.Open();
-                MySqlCommand cmd = new MySqlCommand("select given_name, family_name, title from staff where id='" + staffID + "'", conn);
-
+                MySqlCommand cmd = new MySqlCommand("select given_name, family_name, title from staff where id=@id", conn);
+                cmd.Parameters.AddWithValue("@id", staffID);
                 rdr = cmd.ExecuteReader();
                 while (rdr.Read())
                 {

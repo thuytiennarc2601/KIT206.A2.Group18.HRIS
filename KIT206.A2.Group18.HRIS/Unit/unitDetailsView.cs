@@ -46,11 +46,11 @@ namespace KIT206.A2.Group18.HRIS
 
             var result = from Class c in classList
                          where c.unit.UnitCode == UnitCode
-                         select c;
+                         select c; //LINQ, get classes using unitcode
 
             List<Class> resultList = new List<Class>(result);
 
-            if (resultList.Count == 0)
+            if (resultList.Count == 0) //if the unit has no class, inform user
             {
                 Label empty = new Label();
                 empty.Name = "emptyLabel";
@@ -61,7 +61,7 @@ namespace KIT206.A2.Group18.HRIS
 
                 classHolder.Controls.Add(empty);
             }
-            else
+            else //if not, display those classes
             {
                 classDetails[] classView = new classDetails[resultList.Count];
                 for (int i = 0; i < resultList.Count; i++)

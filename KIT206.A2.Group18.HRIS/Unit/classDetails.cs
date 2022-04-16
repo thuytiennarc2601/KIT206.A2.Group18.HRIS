@@ -49,7 +49,5 @@ namespace KIT206.A2.Group18.HRIS
             get { return _classStaff; }
             set { _classStaff = value; classStaff.Text = value; }
         }
-
-
     }
 }

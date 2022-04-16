@@ -14,12 +14,12 @@ namespace KIT206.A2.Group18.HRIS
 {
     public partial class addStaffInfo : Form
     {
-
-        private static MySqlConnection conn;
         public addStaffInfo()
         {
             InitializeComponent();
         }
+
+        private static MySqlConnection conn;
 
         #region Properties
         private int _itemID;
@@ -37,7 +37,7 @@ namespace KIT206.A2.Group18.HRIS
         #endregion
 
         #region Generate category options
-        //if a staff mem's category is yet added, display a list of categories, else show the staff's category
+        //if a staff mem's category is yet added, display a list of categories, else show the his/her category
         private void categoryOptions(List<Staff> staffList, Staff staff)
         {
             if (staff.category == Category.unknown)
@@ -61,7 +61,7 @@ namespace KIT206.A2.Group18.HRIS
         #endregion
 
         #region Generate campus options
-        //if a staff mem's campus is yet added, display a list of title, else show the staff's title
+        //if a staff mem's campus is yet added, display a list of title, else show the his/her campus
         private void campusOptions(List<Staff> staffList, Staff staff)
         {
             if (staff.campus == Campus.Notlocated)
@@ -97,6 +97,7 @@ namespace KIT206.A2.Group18.HRIS
             FNameTB.Text = staff.FamilyName;
             FNameTB.Enabled = false;
 
+            //staff's phone, email, room cannot be modified if they are already added
             contactTB.Text = staff.Phone;
             if (staff.Phone != "No number added")
             {
@@ -127,22 +128,12 @@ namespace KIT206.A2.Group18.HRIS
         }
         #endregion
 
-        #region Validation
-        //for checking any invalid data
-        private bool validation()
-        {
-            bool valid = true;
-            return valid;
-        }
-        #endregion
-
-        #region Load all data when loading form
+        #region Load all data into the form
         //Load all data when starting loading the form
         private void addStaffInfo_Load(object sender, EventArgs e)
         {
             List<Staff> staffList = Staff.LoadAllStaffList();
-
-            Staff staff = staffList[this.ItemID];
+            Staff staff = staffList[this.ItemID]; //get staff from the staff list using its index
 
             this.Text = "Edit " + staff.GivenName + " " + staff.FamilyName + "'s Information";
             categoryOptions(staffList, staff);
@@ -162,7 +153,7 @@ namespace KIT206.A2.Group18.HRIS
         }
 
         #region Load photo from desktop file
-        //load staff photo from file and convert that photo to a byte array
+        //load staff photo from desktop's file and convert that photo to a byte array
         private void imageButton_Click(object sender, EventArgs e)
         {
             if (openImage.ShowDialog() == DialogResult.OK)
@@ -171,6 +162,15 @@ namespace KIT206.A2.Group18.HRIS
                 staffAvatar.Image = Image.FromFile(filePath);
                 _imageByteArray = (byte[])(new ImageConverter().ConvertTo(Image.FromFile(filePath), typeof(Byte[])));
             }
+        }
+        #endregion
+
+        #region Validation
+        //for checking any invalid data
+        private bool validation()
+        {
+            bool valid = true;
+            return valid;
         }
         #endregion
 
@@ -189,7 +189,9 @@ namespace KIT206.A2.Group18.HRIS
 
                     if (titleTB.Text != "Unknown") //edit title
                     {
-                        MySqlCommand cmdTitle = new MySqlCommand("update staff set title ='" + titleTB.Text + "' where id = '" + this._staffID + "'", conn);
+                        MySqlCommand cmdTitle = new MySqlCommand("update staff set title =@title where id = @id", conn);
+                        cmdTitle.Parameters.AddWithValue("@title", titleTB.Text);
+                        cmdTitle.Parameters.AddWithValue("@id", _staffID);
                         rdr = cmdTitle.ExecuteReader();
                         while (rdr.Read()) { }
                         rdr.Close();
@@ -197,7 +199,9 @@ namespace KIT206.A2.Group18.HRIS
 
                     if (_category != "Select..") //add category
                     {
-                        MySqlCommand cmdCate = new MySqlCommand("update staff set category ='" + _category + "' where id = '" + this._staffID + "'", conn);
+                        MySqlCommand cmdCate = new MySqlCommand("update staff set category =@category where id = @id", conn);
+                        cmdCate.Parameters.AddWithValue("@category", _category);
+                        cmdCate.Parameters.AddWithValue("@id", _staffID);
                         rdr = cmdCate.ExecuteReader();
                         while (rdr.Read()) { }
                         rdr.Close();
@@ -205,7 +209,9 @@ namespace KIT206.A2.Group18.HRIS
 
                     if (contactTB.Text != "No number added") //add contact
                     {
-                        MySqlCommand cmdContact = new MySqlCommand("update staff set phone ='" + contactTB.Text + "' where id = '" + this._staffID + "'", conn);
+                        MySqlCommand cmdContact = new MySqlCommand("update staff set phone =@phone where id = @id", conn);
+                        cmdContact.Parameters.AddWithValue("@phone", contactTB.Text);
+                        cmdContact.Parameters.AddWithValue("@id", _staffID);
                         rdr = cmdContact.ExecuteReader();
                         while (rdr.Read()) { }
                         rdr.Close();
@@ -213,7 +219,9 @@ namespace KIT206.A2.Group18.HRIS
 
                     if (emailTB.Text != "No email added") //add email
                     {
-                        MySqlCommand cmdEmail = new MySqlCommand("update staff set email ='" + emailTB.Text + "' where id = '" + this._staffID + "'", conn);
+                        MySqlCommand cmdEmail = new MySqlCommand("update staff set email =@email where id =@id", conn);
+                        cmdEmail.Parameters.AddWithValue("@email", emailTB.Text);
+                        cmdEmail.Parameters.AddWithValue("@id", _staffID);
                         rdr = cmdEmail.ExecuteReader();
                         while (rdr.Read()) { }
                         rdr.Close();
@@ -221,7 +229,9 @@ namespace KIT206.A2.Group18.HRIS
 
                     if (roomTB.Text != "No room assigned") //add room
                     {
-                        MySqlCommand cmdRoom = new MySqlCommand("update staff set room ='" + roomTB.Text + "' where id = '" + this._staffID + "'", conn);
+                        MySqlCommand cmdRoom = new MySqlCommand("update staff set room =@room where id =@id", conn);
+                        cmdRoom.Parameters.AddWithValue("@room", roomTB.Text);
+                        cmdRoom.Parameters.AddWithValue("@id", _staffID);
                         rdr = cmdRoom.ExecuteReader();
                         while (rdr.Read()) { }
                         rdr.Close();
@@ -229,16 +239,19 @@ namespace KIT206.A2.Group18.HRIS
 
                     if (_campus != "Select..") // add campus
                     {
-                        MySqlCommand cmdTitle = new MySqlCommand("update staff set campus ='" + _campus + "' where id = '" + this._staffID + "'", conn);
-                        rdr = cmdTitle.ExecuteReader();
+                        MySqlCommand cmdCampus = new MySqlCommand("update staff set campus =@campus where id =@id", conn);
+                        cmdCampus.Parameters.AddWithValue("@campus", _campus);
+                        cmdCampus.Parameters.AddWithValue("@id", _staffID);
+                        rdr = cmdCampus.ExecuteReader();
                         while (rdr.Read()) { }
                         rdr.Close();
                     }
 
-                    if (_imageByteArray != null)
+                    if (_imageByteArray != null) //edit photo
                     {
-                        MySqlCommand cmdPhoto = new MySqlCommand("update staff set photo = @_imageByteArray where id = '" + this._staffID + "'", conn);
+                        MySqlCommand cmdPhoto = new MySqlCommand("update staff set photo = @_imageByteArray where id = @id", conn);
                         cmdPhoto.Parameters.AddWithValue("@_imageByteArray", _imageByteArray);
+                        cmdPhoto.Parameters.AddWithValue("@id", _staffID);
                         rdr = cmdPhoto.ExecuteReader();
                         while (rdr.Read()) { }
                         rdr.Close();

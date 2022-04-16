@@ -9,16 +9,18 @@ namespace KIT206.A2.Group18.HRIS
 {
     class Unit
     {
+        #region Unit Properties
         public string UnitCode { get; set; }
 
         public string UnitName { get; set; }
 
         public Staff Coordinator { get; set; }
+        #endregion
 
         private static MySqlConnection conn;
 
-        #region Load all units
-        //Load all units from database
+        #region Load all units at level 0
+        //Load all units from database without staff details
         public static List<Unit> LoadAllUnit()
         {
             List<Unit> unitList = new List<Unit>();
@@ -59,50 +61,26 @@ namespace KIT206.A2.Group18.HRIS
         }
         #endregion
 
-        #region Load a unit list with staff details (title, name)
+        #region Load a unit list at level 1
+        //get all units with staff details
         public static List<Unit> LoadFullUnitList()
         {
             List<Unit> unitList = Unit.LoadAllUnit();
-            MySqlDataReader rdr = null;
-            conn = GetSqlConnection.GetConnection();
+            List<Staff> staffList = Staff.LoadAllStaffList();
 
             for(int i = 0; i<unitList.Count; i++)
             {
-                try
-                {
-                    conn.Open();
-                    MySqlCommand cmd = new MySqlCommand("select title, given_name, family_name from staff where id=@id", conn);
-                    cmd.Parameters.AddWithValue("@id", unitList[i].Coordinator.ID);
-                    rdr = cmd.ExecuteReader();
+                var result = from Staff s in staffList
+                             where s.ID == unitList[i].Coordinator.ID
+                             select s; //LINQ
 
-                    while(rdr.Read())
-                    {
-                        unitList[i].Coordinator.GivenName = rdr.GetString(1);
-                        unitList[i].Coordinator.FamilyName = rdr.GetString(2);
+                List<Staff> resultList = new List<Staff>(result);
 
-                        if(Convert.IsDBNull(rdr[0]) || rdr.GetString(0) == "")
-                        {
-                            unitList[i].Coordinator.Title = "Unknown";
-                        }
-                        else
-                        {
-                            unitList[i].Coordinator.Title = rdr.GetString(0);
-                        }
-                    }
-                }
-                finally
-                {
-                    if(rdr!=null)
-                    {
-                        rdr.Close();
-                    }
-                    if(conn!=null)
-                    {
-                        conn.Close();
-                    }
-                }
+                unitList[i].Coordinator.GivenName = resultList[0].GivenName;
+                unitList[i].Coordinator.FamilyName = resultList[0].FamilyName;
+                unitList[i].Coordinator.Title = resultList[0].Title;
+
             }
-
             return unitList;
         }
         #endregion
