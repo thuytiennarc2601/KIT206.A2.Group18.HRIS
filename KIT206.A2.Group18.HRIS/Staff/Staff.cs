@@ -9,9 +9,9 @@ using System.IO;
 namespace KIT206.A2.Group18.HRIS
 {
 
-    public enum Campus { Hobart, Launceston, Notlocated }
+    public enum Campus { Hobart, Launceston }
 
-    public enum Category { admin, technical, casual, academic, unknown }
+    public enum Category { Academic, Technical, Admin, Casual }
 
     class Staff
     {
