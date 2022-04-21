@@ -6,13 +6,17 @@
         xmlns:local="clr-namespace:HRIS.WPF"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        <Image x:Name="staff" Height="100" Width="100" Source="/staff3.png" Margin="48,44,652,290" MouseLeftButtonDown="staff_MouseLeftButtonDown"/>
-        <Image x:Name="Class" Height="100" Width="100" Source="/class1.png" Margin="206,44,494,290" MouseLeftButtonDown="Class_MouseLeftButtonDown"/>
-        <Image x:Name="Consultation" Height="100" Width="100" Margin="359,44,341,290" Source="/consultation 1.png" MouseLeftButtonDown="Consultation_MouseLeftButtonDown"/>
-        <Image x:Name="Unit" Height="100" Width="100" Margin="543,44,157,290" Source="/unit2.png" MouseLeftButtonDown="Unit_MouseLeftButtonDown"/>
-        <ListBox x:Name="GeneralListBox" HorizontalAlignment="Left" Height="214" Margin="48,162,0,0" VerticalAlignment="Top" Width="195" ItemsSource="{Binding Source={StaticResource staffList}}" SelectionChanged="ListBox_SelectionChanged"/>
-        <Label Content="HRIS" Height="28" Margin="26,10,26,0" VerticalAlignment="Top" HorizontalContentAlignment="Center"/>
+    <Grid Height="434" VerticalAlignment="Bottom">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="400*"/>
+            <ColumnDefinition Width="400*"/>
+        </Grid.ColumnDefinitions>
+        <Image x:Name="staff" Height="69" Width="100" Source="/staff3.png" Margin="43,13,0,0" MouseLeftButtonDown="staff_MouseLeftButtonDown" HorizontalAlignment="Left" Grid.IsSharedSizeScope="True" VerticalAlignment="Top"/>
+        <Image x:Name="Class" Height="69" Width="100" Source="/class1.png" Margin="0,13,59,0" MouseLeftButtonDown="Class_MouseLeftButtonDown" HorizontalAlignment="Right" Grid.IsSharedSizeScope="True" VerticalAlignment="Top"/>
+        <Image x:Name="Consultation" Height="69" Width="100" Margin="53,13,0,0" Source="/consultation 1.png" MouseLeftButtonDown="Consultation_MouseLeftButtonDown" Grid.Column="1" HorizontalAlignment="Left" Grid.IsSharedSizeScope="True" VerticalAlignment="Top"/>
+        <Image x:Name="Unit" Height="69" Width="100" Margin="0,13,37,0" Source="/unit2.png" MouseLeftButtonDown="Unit_MouseLeftButtonDown" Grid.Column="1" HorizontalAlignment="Right" Grid.IsSharedSizeScope="True" VerticalAlignment="Top"/>
+        <ListBox x:Name="GeneralListBox" Margin="17,101,17,0" Width="366" SelectionChanged="ListBox_SelectionChanged" HorizontalAlignment="Left" VerticalAlignment="Stretch"/>
+        <Label Content="HRIS" Margin="26,0,26,-1" VerticalAlignment="Top" HorizontalContentAlignment="Center" Grid.ColumnSpan="2" HorizontalAlignment="Center" Grid.IsSharedSizeScope="True"/>
 
     </Grid>
 </Window>

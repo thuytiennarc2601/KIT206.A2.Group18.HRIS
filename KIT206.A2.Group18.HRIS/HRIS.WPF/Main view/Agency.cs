@@ -38,7 +38,7 @@ namespace KIT206.A2.Group18.HRIS
             return conn;
         }
 
-        #region Get All Classes at level 0
+        #region Get All Classes
         //Retrieve all classes from database without staff or unit details
         public static List<Class> LoadAllClasses()
         {
@@ -85,28 +85,6 @@ namespace KIT206.A2.Group18.HRIS
             return classList;
         }
         #endregion
-       
-        /*
-        #region Get a Class list at level 1
-        //get class list plus unit details 
-        public static List<Class> getClassWithUnitDetails()
-        {
-            List<Class> classList = LoadAllClasses();
-            List<Unit> unitList = Unit.LoadAllUnit();
-            for (int i = 0; i < classList.Count; i++)
-            {
-                var result = from Unit u in unitList
-                             where u.UnitCode == classList[i].unit.UnitCode
-                             select u;
-                List<Unit> resultList = new List<Unit>(result);
-
-                classList[i].unit.UnitName = resultList[0].UnitName;
-            }
-            return classList;
-        }
-
-        #endregion
-        */
         #region
         //Retrieve all units from database
         public static List<Unit> LoadAllUnits()
@@ -346,31 +324,60 @@ namespace KIT206.A2.Group18.HRIS
             return classes;
         }
         #endregion
-        /*
-        #region Get class list at level 2
-        //Get class list plus staff details and unit details
-        public static List<Class> LoadFullClassList()
+        #region
+        public static void DeleteConsultation(int id, Day day, TimeSpan Start, TimeSpan End)
         {
-            List<Class> classList = Class.getClassWithUnitDetails();
-            List<Staff> staffList = Staff.LoadAllStaffList();
+            List<Class> classes = new List<Class>();
 
-            for (int i = 0; i < classList.Count; i++)
+            MySqlConnection conn = GetConnection();
+            MySqlDataReader rdr = null;
+
+            try
             {
-                var result = from Staff s in staffList
-                             where s.ID == classList[i].staff.ID
-                             select s;
+                conn.Open();
 
-                List<Staff> resultList = new List<Staff>(result);
+                MySqlCommand cmd = new MySqlCommand("delete " +
+                                                    "from class" +
+                                                    "where (staff_id=?id) and (day=?day) and (start=?Start) and (end=?End)", conn);
 
-                classList[i].staff.GivenName = resultList[0].GivenName;
-                classList[i].staff.FamilyName = resultList[0].FamilyName;
-                classList[i].staff.Title = resultList[0].Title;
-                classList[i].staff.campus = resultList[0].campus;
+                cmd.Parameters.AddWithValue("id", id);
+                cmd.Parameters.AddWithValue("day", day);
+                cmd.Parameters.AddWithValue("start", Start);
+                cmd.Parameters.AddWithValue("end", End);
+                rdr = cmd.ExecuteReader();
+
+                while (rdr.Read())
+                {
+                    classes.Add(new Class
+                    {
+                        unit = new Unit { UnitCode = rdr.GetString(0) },
+                        campus = ParseEnum<Campus>(rdr.GetString(1)),
+                        day = ParseEnum<Day>(rdr.GetString(2)),
+                        type = ParseEnum<Type>(rdr.GetString(3)),
+                        StartTime = rdr.GetTimeSpan(4),
+                        EndTime = rdr.GetTimeSpan(5),
+                        Room = rdr.GetString(6),
+                        staff = new Staff { ID = rdr.GetInt32(7) }
+                    });
+                }
             }
-            return classList;
+            catch (MySqlException e)
+            {
+                ReportError("loading classes for staff selected", e);
+            }
+            finally
+            {
+                if (rdr != null)
+                {
+                    rdr.Close();
+                }
+                if (conn != null)
+                {
+                    conn.Close();
+                }
+            }
         }
         #endregion
-        */
         private static void ReportError(string msg, Exception e)
         {
             if (reportingErrors)
