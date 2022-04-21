@@ -325,12 +325,10 @@ namespace KIT206.A2.Group18.HRIS
         }
         #endregion
         #region
-        public static void DeleteConsultation(int id, Day day, TimeSpan Start, TimeSpan End)
+        public static void DeleteConsultation(int id, Day day, TimeOnly Start, TimeOnly End)
         {
-            List<Class> classes = new List<Class>();
 
             MySqlConnection conn = GetConnection();
-            MySqlDataReader rdr = null;
 
             try
             {
@@ -344,33 +342,14 @@ namespace KIT206.A2.Group18.HRIS
                 cmd.Parameters.AddWithValue("day", day);
                 cmd.Parameters.AddWithValue("start", Start);
                 cmd.Parameters.AddWithValue("end", End);
-                rdr = cmd.ExecuteReader();
-
-                while (rdr.Read())
-                {
-                    classes.Add(new Class
-                    {
-                        unit = new Unit { UnitCode = rdr.GetString(0) },
-                        campus = ParseEnum<Campus>(rdr.GetString(1)),
-                        day = ParseEnum<Day>(rdr.GetString(2)),
-                        type = ParseEnum<Type>(rdr.GetString(3)),
-                        StartTime = rdr.GetTimeSpan(4),
-                        EndTime = rdr.GetTimeSpan(5),
-                        Room = rdr.GetString(6),
-                        staff = new Staff { ID = rdr.GetInt32(7) }
-                    });
-                }
+                cmd.ExecuteNonQuery();
             }
             catch (MySqlException e)
             {
-                ReportError("loading classes for staff selected", e);
+                ReportError("deleting consultation selected", e);
             }
             finally
             {
-                if (rdr != null)
-                {
-                    rdr.Close();
-                }
                 if (conn != null)
                 {
                     conn.Close();

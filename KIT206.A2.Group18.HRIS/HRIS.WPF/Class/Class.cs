@@ -22,9 +22,9 @@ namespace KIT206.A2.Group18.HRIS
 
         public Day day { get; set; }
 
-        public TimeSpan StartTime { get; set; }
+        public TimeOnly StartTime { get; set; }
 
-        public TimeSpan EndTime { get; set; }
+        public TimeOnly EndTime { get; set; }
 
         public Type type { get; set; }
 
