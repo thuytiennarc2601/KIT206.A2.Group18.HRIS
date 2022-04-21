@@ -16,5 +16,10 @@ namespace KIT206.A2.Group18.HRIS
 
         public Staff Coordinator { get; set; }
         #endregion
+        public override string ToString()
+        {
+
+            return UnitCode + " " + UnitName + " by " + Coordinator;
+        }
     }
 }

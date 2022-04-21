@@ -40,7 +40,6 @@ namespace KIT206.A2.Group18.HRIS
         #endregion
         public override string ToString()
         {
-            //For the purposes of this week's demonstration this returns only the name
             return GivenName + " " + FamilyName;
         }
     }

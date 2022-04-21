@@ -18,6 +18,10 @@ namespace KIT206.A2.Group18.HRIS
 
         public TimeSpan EndTime { get; set; }
         #endregion
+        public override string ToString()
+        {
 
+            return staff + " " + day + " " + StartTime + " " + EndTime;
+        }
     }
 }

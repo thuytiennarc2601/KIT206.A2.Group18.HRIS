@@ -31,72 +31,9 @@ namespace KIT206.A2.Group18.HRIS
         public string Room { get; set; }
         #endregion
 
-        private static MySqlConnection conn;
-
-        #region Get All Classes at level 0
-        //Retrieve all classes from database without staff or unit details
-        public static List<Class> LoadAllClasses()
+        public override string ToString()
         {
-            List<Class> classList = new List<Class>();
-
-            MySqlDataReader rdr = null;
-            conn = Agency.GetConnection();
-
-            try
-            {
-                conn.Open();
-                MySqlCommand cmd = new MySqlCommand("select unit_code, campus, day, type, start, end, room, staff from class", conn);
-                rdr = cmd.ExecuteReader();
-                while (rdr.Read())
-                {
-                    Class classResult = new Class();
-                    classResult.unit = new Unit();
-                    classResult.staff = new Staff();
-
-                    classResult.unit.UnitCode = rdr.GetString(0);
-                    classResult.campus = (Campus)Enum.Parse(typeof(Campus), rdr.GetString(1));
-                    classResult.day = (Day)Enum.Parse(typeof(Day), rdr.GetString(2));
-                    /*
-                    if(Convert.IsDBNull(rdr[3]) || rdr.GetString(3) =="")
-                    {
-                        classResult.type = Type.Undefined;
-                    }
-                    else
-                    {
-                    */
-                    classResult.type = (Type)Enum.Parse(typeof(Type), rdr.GetString(3));
-                    //}
-
-
-                    classResult.StartTime = (TimeSpan)rdr[4];
-                    classResult.EndTime = (TimeSpan)rdr[5];
-                    classResult.Room = rdr.GetString(6);
-
-                    if (Convert.IsDBNull(rdr[7]))
-                    {
-                        classResult.staff.ID = 0;
-                    }
-                    else
-                    {
-                        classResult.staff.ID = rdr.GetInt32(7);
-                    }
-                    classList.Add(classResult);
-                }
-            }
-            finally
-            {
-                if (rdr != null)
-                {
-                    rdr.Close();
-                }
-                if (conn != null)
-                {
-                    conn.Close();
-                }
-            }
-
-            return classList;
+            return unit + " " + day + " " + StartTime + " " + EndTime;
         }
-        #endregion
     }
 }

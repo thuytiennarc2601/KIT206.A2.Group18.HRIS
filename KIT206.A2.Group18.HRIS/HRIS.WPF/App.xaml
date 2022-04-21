@@ -7,7 +7,19 @@
         <local:Controller x:Key="controller"/>
         <ObjectDataProvider x:Key="staffList"
                             ObjectInstance="{StaticResource controller}"
-                            MethodName="GetViewableList">
+                            MethodName="GetViewableStaffList">
+        </ObjectDataProvider>
+        <ObjectDataProvider x:Key="unitList"
+                            ObjectInstance="{StaticResource controller}"
+                            MethodName="GetViewableUnitList">
+        </ObjectDataProvider>
+        <ObjectDataProvider x:Key="classList"
+                            ObjectInstance="{StaticResource controller}"
+                            MethodName="GetViewableClassList">
+        </ObjectDataProvider>
+        <ObjectDataProvider x:Key="consultationList"
+                            ObjectInstance="{StaticResource controller}"
+                            MethodName="GetViewableConsultationList">
         </ObjectDataProvider>
     </Application.Resources>
 </Application>

@@ -11,7 +11,8 @@
         <Image x:Name="Class" Height="100" Width="100" Source="/class1.png" Margin="206,44,494,290" MouseLeftButtonDown="Class_MouseLeftButtonDown"/>
         <Image x:Name="Consultation" Height="100" Width="100" Margin="359,44,341,290" Source="/consultation 1.png" MouseLeftButtonDown="Consultation_MouseLeftButtonDown"/>
         <Image x:Name="Unit" Height="100" Width="100" Margin="543,44,157,290" Source="/unit2.png" MouseLeftButtonDown="Unit_MouseLeftButtonDown"/>
-        <ListBox HorizontalAlignment="Left" Height="214" Margin="48,162,0,0" VerticalAlignment="Top" Width="195" ItemsSource="{Binding Source={StaticResource staffList}}" SelectionChanged="ListBox_SelectionChanged"/>
+        <ListBox x:Name="GeneralListBox" HorizontalAlignment="Left" Height="214" Margin="48,162,0,0" VerticalAlignment="Top" Width="195" ItemsSource="{Binding Source={StaticResource staffList}}" SelectionChanged="ListBox_SelectionChanged"/>
+        <Label Content="HRIS" Height="28" Margin="26,10,26,0" VerticalAlignment="Top" HorizontalContentAlignment="Center"/>
 
     </Grid>
 </Window>

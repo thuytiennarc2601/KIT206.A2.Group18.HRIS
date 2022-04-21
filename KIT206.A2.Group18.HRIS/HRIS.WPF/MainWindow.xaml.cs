@@ -31,21 +31,25 @@ namespace HRIS.WPF
 
         private void staff_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
+            GeneralListBox.ItemsSource = controller.GetViewableStaffList();
             MessageBox.Show("staff is pressed!");
         }
 
         private void Class_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
+            GeneralListBox.ItemsSource = controller.GetViewableClassList();
             MessageBox.Show("class is pressed!");
         }
 
         private void Consultation_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
+            GeneralListBox.ItemsSource = controller.GetViewableConsultationList();
             MessageBox.Show("consultation is pressed!");
         }
 
         private void Unit_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
+            GeneralListBox.ItemsSource = controller.GetViewableUnitList();
             MessageBox.Show("unit is pressed!");
         }
 
