@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using KIT206.A2.Group18.HRIS;
 
 namespace HRIS.WPF
 {
@@ -20,9 +21,37 @@ namespace HRIS.WPF
     /// </summary>
     public partial class MainWindow : Window
     {
+        private const string STAFF_LIST_KEY = "staffList";
+        private Controller controller;
         public MainWindow()
         {
             InitializeComponent();
+            controller = (Controller)(Application.Current.FindResource(STAFF_LIST_KEY) as ObjectDataProvider).ObjectInstance;
+        }
+
+        private void staff_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            MessageBox.Show("staff is pressed!");
+        }
+
+        private void Class_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            MessageBox.Show("class is pressed!");
+        }
+
+        private void Consultation_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            MessageBox.Show("consultation is pressed!");
+        }
+
+        private void Unit_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            MessageBox.Show("unit is pressed!");
+        }
+
+        private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
         }
     }
 }

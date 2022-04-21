@@ -40,14 +40,14 @@ namespace KIT206.A2.Group18.HRIS
             List<Class> classList = new List<Class>();
 
             MySqlDataReader rdr = null;
-            conn = GetSqlConnection.GetConnection();
+            conn = Agency.GetConnection();
 
             try
             {
                 conn.Open();
                 MySqlCommand cmd = new MySqlCommand("select unit_code, campus, day, type, start, end, room, staff from class", conn);
                 rdr = cmd.ExecuteReader();
-                while(rdr.Read())
+                while (rdr.Read())
                 {
                     Class classResult = new Class();
                     classResult.unit = new Unit();
@@ -64,15 +64,15 @@ namespace KIT206.A2.Group18.HRIS
                     else
                     {
                     */
-                        classResult.type = (Type)Enum.Parse(typeof(Type), rdr.GetString(3));
+                    classResult.type = (Type)Enum.Parse(typeof(Type), rdr.GetString(3));
                     //}
-                    
-                    
+
+
                     classResult.StartTime = (TimeSpan)rdr[4];
                     classResult.EndTime = (TimeSpan)rdr[5];
                     classResult.Room = rdr.GetString(6);
 
-                    if(Convert.IsDBNull(rdr[7]))
+                    if (Convert.IsDBNull(rdr[7]))
                     {
                         classResult.staff.ID = 0;
                     }
@@ -85,60 +85,16 @@ namespace KIT206.A2.Group18.HRIS
             }
             finally
             {
-                if(rdr != null)
+                if (rdr != null)
                 {
                     rdr.Close();
                 }
-                if(conn != null)
+                if (conn != null)
                 {
                     conn.Close();
                 }
             }
 
-            return classList;
-        }
-        #endregion
-
-        #region Get a Class list at level 1
-        //get class list plus unit details 
-        public static List<Class> getClassWithUnitDetails ()
-        {
-            List<Class> classList = Class.LoadAllClasses();
-            List<Unit> unitList = Unit.LoadAllUnit();
-            for (int i = 0; i < classList.Count; i++)
-            {
-                var result = from Unit u in unitList
-                             where u.UnitCode == classList[i].unit.UnitCode
-                             select u;
-                List<Unit> resultList = new List<Unit>(result);
-
-                classList[i].unit.UnitName = resultList[0].UnitName;
-            }
-            return classList;
-        }
-
-        #endregion
-
-        #region Get class list at level 2
-        //Get class list plus staff details and unit details
-        public static List<Class> LoadFullClassList()
-        {
-            List<Class> classList = Class.getClassWithUnitDetails();
-            List<Staff> staffList = Staff.LoadAllStaffList();
-
-            for(int i = 0; i<classList.Count; i++)
-            {
-                var result = from Staff s in staffList
-                             where s.ID == classList[i].staff.ID
-                             select s;
-
-                List<Staff> resultList = new List<Staff>(result);
-
-                classList[i].staff.GivenName = resultList[0].GivenName;
-                classList[i].staff.FamilyName = resultList[0].FamilyName;
-                classList[i].staff.Title = resultList[0].Title;
-                classList[i].staff.campus = resultList[0].campus;
-            }
             return classList;
         }
         #endregion

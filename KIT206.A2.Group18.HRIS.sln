@@ -5,6 +5,8 @@ VisualStudioVersion = 17.1.32414.318
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HRIS.WPF", "KIT206.A2.Group18.HRIS\HRIS.WPF\HRIS.WPF.csproj", "{0AF2D0CB-911B-4DF3-B666-A8C40C1BCEEF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KIT206.A2.Group18.HRIS", "KIT206.A2.Group18.HRIS\KIT206.A2.Group18.HRIS.csproj", "{C8768826-29C6-43D1-8D5C-0116400710B5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{0AF2D0CB-911B-4DF3-B666-A8C40C1BCEEF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0AF2D0CB-911B-4DF3-B666-A8C40C1BCEEF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0AF2D0CB-911B-4DF3-B666-A8C40C1BCEEF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C8768826-29C6-43D1-8D5C-0116400710B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C8768826-29C6-43D1-8D5C-0116400710B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C8768826-29C6-43D1-8D5C-0116400710B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C8768826-29C6-43D1-8D5C-0116400710B5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

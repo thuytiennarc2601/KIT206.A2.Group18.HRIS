@@ -4,6 +4,10 @@
              xmlns:local="clr-namespace:HRIS.WPF"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <local:Controller x:Key="controller"/>
+        <ObjectDataProvider x:Key="staffList"
+                            ObjectInstance="{StaticResource controller}"
+                            MethodName="GetViewableList">
+        </ObjectDataProvider>
     </Application.Resources>
 </Application>
