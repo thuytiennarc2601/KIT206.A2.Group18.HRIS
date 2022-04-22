@@ -15,9 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Reference Include="MySql.Data">
-      <HintPath>..\..\..\..\Tutorial\Week 8\Tut 9\bin\Debug\netcoreapp3.1\MySql.Data.dll</HintPath>
-    </Reference>
+    <PackageReference Include="MySql.Data" Version="8.0.28" />
   </ItemGroup>
 
   <ItemGroup>

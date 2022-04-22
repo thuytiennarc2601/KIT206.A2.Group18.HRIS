@@ -59,8 +59,8 @@ namespace KIT206.A2.Group18.HRIS
                         campus = ParseEnum<Campus>(rdr.GetString(1)), 
                         day = ParseEnum<Day>(rdr.GetString(2)), 
                         type = ParseEnum<Type>(rdr.GetString(3)), 
-                        StartTime = rdr.GetTimeSpan(4), 
-                        EndTime = rdr.GetTimeSpan(5), 
+                        StartTime = TimeOnly.ParseExact(rdr.GetString(4), "HH:mm:ss"),
+                        EndTime = TimeOnly.ParseExact(rdr.GetString(5), "HH:mm:ss"), 
                         Room = rdr.GetString(6), 
                         staff = new Staff { ID = rdr.GetInt32(7) } 
                     });
@@ -148,8 +148,8 @@ namespace KIT206.A2.Group18.HRIS
                     {
                         staff = new Staff { ID = rdr.GetInt32(0) },
                         day = ParseEnum<Day>(rdr.GetString(1)),
-                        StartTime = rdr.GetTimeSpan(2),
-                        EndTime = rdr.GetTimeSpan(3)
+                        StartTime = TimeOnly.ParseExact(rdr.GetString(2), "HH:mm:ss"),
+                        EndTime = TimeOnly.ParseExact(rdr.GetString(3), "HH:mm:ss"),
                     });
                 }
             }
@@ -247,8 +247,8 @@ namespace KIT206.A2.Group18.HRIS
                     {
                         staff = new Staff { ID = rdr.GetInt32(0) },
                         day = ParseEnum<Day>(rdr.GetString(1)),
-                        StartTime = rdr.GetTimeSpan(2),
-                        EndTime = rdr.GetTimeSpan(3)
+                        StartTime = TimeOnly.ParseExact(rdr.GetString(2), "HH:mm:ss"),
+                        EndTime = TimeOnly.ParseExact(rdr.GetString(3), "HH:mm:ss"),
                     });
                 }
             }
@@ -298,8 +298,8 @@ namespace KIT206.A2.Group18.HRIS
                         campus = ParseEnum<Campus>(rdr.GetString(1)),
                         day = ParseEnum<Day>(rdr.GetString(2)),
                         type = ParseEnum<Type>(rdr.GetString(3)),
-                        StartTime = rdr.GetTimeSpan(4),
-                        EndTime = rdr.GetTimeSpan(5),
+                        StartTime = TimeOnly.ParseExact(rdr.GetString(4), "HH:mm:ss"),
+                        EndTime = TimeOnly.ParseExact(rdr.GetString(5), "HH:mm:ss"),
                         Room = rdr.GetString(6),
                         staff = new Staff { ID = rdr.GetInt32(7) }
                     });
