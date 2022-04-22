@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
 using System.IO;
 
-namespace KIT206.A2.Group18.HRIS
+
+namespace HRIS.WPF
 {
 
     public enum Campus { Hobart, Launceston }

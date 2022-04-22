@@ -5,7 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
 
-namespace KIT206.A2.Group18.HRIS
+
+namespace HRIS.WPF
 {
     class Unit
     {

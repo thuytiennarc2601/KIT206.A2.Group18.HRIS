@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
 using System.Windows;
 
-namespace KIT206.A2.Group18.HRIS
+
+namespace HRIS.WPF
 {
     //for getting connection from database
     class Agency
@@ -362,7 +363,7 @@ namespace KIT206.A2.Group18.HRIS
         #endregion
         //Add a consultation time for a staff
         #region
-        public static void AddConsultation(int id, Day day, TimeOnly Start, TimeOnly End)
+        public static void AddConsultation(int id, string day, string Start, string End)
         {
 
             MySqlConnection conn = GetConnection();

@@ -17,7 +17,10 @@
         <Image x:Name="Unit" Height="69" Width="100" Margin="0,13,37,0" Source="/unit2.png" MouseLeftButtonDown="Unit_MouseLeftButtonDown" Grid.Column="1" HorizontalAlignment="Right" Grid.IsSharedSizeScope="True" VerticalAlignment="Top"/>
         <ListBox x:Name="GeneralListBox" Margin="17,101,17,0" Width="366" SelectionChanged="ListBox_SelectionChanged" HorizontalAlignment="Left" VerticalAlignment="Stretch"/>
         <Label Content="HRIS" Margin="26,0,26,-1" VerticalAlignment="Top" HorizontalContentAlignment="Center" Grid.ColumnSpan="2" HorizontalAlignment="Center" Grid.IsSharedSizeScope="True"/>
-        <Button x:Name="Delete" Grid.Column="1" Content="Button" HorizontalAlignment="Left" Margin="103,158,0,0" VerticalAlignment="Top" MouseDown="Delete_MouseDown"/>
+        <Button x:Name="Delete" Grid.Column="1" Content="Button" HorizontalAlignment="Left" Margin="113,99,0,0" VerticalAlignment="Top" MouseDown="Delete_MouseDown"/>
+        <Button x:Name="addConsultation" Grid.Column="1" Content="Add Consultation&#xD;&#xA;" HorizontalAlignment="Left" Margin="267,101,0,0" VerticalAlignment="Top" Click="addConsultation_Click"/>
+        <Button Content="Button" HorizontalAlignment="Left" Margin="-101,26,0,0" VerticalAlignment="Top"/>
+        <local:UserControl1 x:Name="addConsultationDetailWindow" HorizontalAlignment="Left" Margin="10,142,0,0" VerticalAlignment="Top" Grid.Column="1" Width="368"/>
 
     </Grid>
 </Window>

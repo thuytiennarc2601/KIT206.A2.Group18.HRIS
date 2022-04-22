@@ -1,4 +1,4 @@
-﻿using KIT206.A2.Group18.HRIS;
+﻿
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -65,6 +65,10 @@ namespace HRIS.WPF
         public void DeleteConsultation(int id, Day day, TimeOnly Start, TimeOnly End)
         {
 
+        }
+        public void AddConsultation(int id, string day, string Start, string End)
+        {
+            Agency.AddConsultation(id, day, Start, End);
         }
     }
 }
