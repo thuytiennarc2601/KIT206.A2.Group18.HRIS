@@ -62,5 +62,9 @@ namespace HRIS.WPF
         {
             return VisibleConsultations;
         }
+        public void DeleteConsultation(int id, Day day, TimeOnly Start, TimeOnly End)
+        {
+
+        }
     }
 }

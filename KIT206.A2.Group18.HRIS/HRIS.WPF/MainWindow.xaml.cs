@@ -57,5 +57,10 @@ namespace HRIS.WPF
         {
 
         }
+
+        private void Delete_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            controller.
+        }
     }
 }
