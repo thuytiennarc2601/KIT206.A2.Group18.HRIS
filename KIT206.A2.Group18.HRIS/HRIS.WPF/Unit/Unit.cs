@@ -19,7 +19,7 @@ namespace KIT206.A2.Group18.HRIS
         public override string ToString()
         {
 
-            return UnitCode + " " + UnitName + " by " + Coordinator.GivenName + " " + Coordinator.FamilyName;
+            return UnitCode + " " + UnitName + " by ";// + Coordinator.GivenName + " " + Coordinator.FamilyName;
         }
     }
 }
