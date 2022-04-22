@@ -1,22 +1,71 @@
-﻿<Window x:Class="HRIS.WPF.MainWindow"
+﻿<Window x:Name="HRIS" x:Class="HRIS.WPF.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HRIS.WPF"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid Height="434" VerticalAlignment="Bottom">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="400*"/>
-            <ColumnDefinition Width="400*"/>
-        </Grid.ColumnDefinitions>
-        <Image x:Name="staff" Height="69" Width="100" Source="/staff3.png" Margin="43,13,0,0" MouseLeftButtonDown="staff_MouseLeftButtonDown" HorizontalAlignment="Left" Grid.IsSharedSizeScope="True" VerticalAlignment="Top"/>
-        <Image x:Name="Class" Height="69" Width="100" Source="/class1.png" Margin="0,13,59,0" MouseLeftButtonDown="Class_MouseLeftButtonDown" HorizontalAlignment="Right" Grid.IsSharedSizeScope="True" VerticalAlignment="Top"/>
-        <Image x:Name="Consultation" Height="69" Width="100" Margin="53,13,0,0" Source="/consultation 1.png" MouseLeftButtonDown="Consultation_MouseLeftButtonDown" Grid.Column="1" HorizontalAlignment="Left" Grid.IsSharedSizeScope="True" VerticalAlignment="Top"/>
-        <Image x:Name="Unit" Height="69" Width="100" Margin="0,13,37,0" Source="/unit2.png" MouseLeftButtonDown="Unit_MouseLeftButtonDown" Grid.Column="1" HorizontalAlignment="Right" Grid.IsSharedSizeScope="True" VerticalAlignment="Top"/>
-        <ListBox x:Name="GeneralListBox" Margin="17,101,17,0" Width="366" SelectionChanged="ListBox_SelectionChanged" HorizontalAlignment="Left" VerticalAlignment="Stretch"/>
-        <Label Content="HRIS" Margin="26,0,26,-1" VerticalAlignment="Top" HorizontalContentAlignment="Center" Grid.ColumnSpan="2" HorizontalAlignment="Center" Grid.IsSharedSizeScope="True"/>
+        Title="MainWindow" Height="550" Width="900" ResizeMode="CanResizeWithGrip" MinHeight="550" MinWidth="900" Loaded="HRIS_Loaded">
+    <Grid x:Name="listContainer" Height="514" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+        <Label x:Name="sysTitle" Content="Human Resource Information System" HorizontalContentAlignment="Center" FontFamily="Georgia" Foreground="#FF6F6C6A" FontSize="36" FontWeight="Bold" Height="56" Margin="10,-5,10,463" Grid.ColumnSpan="2"/>
+        <Grid Height="105" Margin="93,51,93,358" Width="714" Grid.ColumnSpan="2">
+            <Button x:Name="staffButton"  Content="" HorizontalAlignment="Left" VerticalAlignment="Center" Height="105" Width="170" Cursor="Hand" Click="staffButton_Click">
+                <Button.Template>
+                    <ControlTemplate>
+                        <Image Name="Image" Stretch="Fill" Source="/resources/staff.png" />
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="Image" Property="Source" Value="/resources/staff.png" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+            <Button x:Name="unitButton" Content="" HorizontalAlignment="Left" VerticalAlignment="Center" Height="105" Width="182" Cursor="Hand" Margin="175,0,0,0" Click="unitButton_Click">
+                <Button.Template>
+                    <ControlTemplate>
+                        <Image Name="Image" Stretch="Fill" Source="/resources/unit2.png" />
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="Image" Property="Source" Value="/resources/unit2.png" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+            <Button x:Name="classButton" Content="" HorizontalAlignment="Left" VerticalAlignment="Center" Height="105" Width="180" Cursor="Hand" Margin="362,0,0,0" Click="classButton_Click">
+                <Button.Template>
+                    <ControlTemplate>
+                        <Image Name="Image" Stretch="Fill" Source="/resources/class1.png" />
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="Image" Property="Source" Value="/resources/class1.png" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+            <Button x:Name="conButton" Content="" HorizontalAlignment="Left" VerticalAlignment="Center" Height="105" Width="167" Cursor="Hand" Margin="547,0,0,0" Click="conButton_Click">
+                <Button.Template>
+                    <ControlTemplate>
+                        <Image Name="Image" Stretch="Fill" Source="/resources/consultation 1.png" />
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="Image" Property="Source" Value="/resources/consultation 1.png" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+        </Grid>
+        <Grid Height="358" Margin="93,161,93,-5" Width="714" Background="Silver" Grid.ColumnSpan="2">
 
+            <TextBox x:Name="searchBar" HorizontalAlignment="Left" Margin="20,10,0,0" TextWrapping="Wrap" Text="Searching..." VerticalAlignment="Top" Width="250" Height="25" BorderBrush="White" Foreground="#FFAFAFAF" FontStyle="Italic" FontFamily="Calibri" FontSize="16"/>
+            <Button x:Name="addUnitBtn" Content="Add Unit" HorizontalAlignment="Left" Margin="385,10,0,0" VerticalAlignment="Top" Height="25" Width="91" Cursor="Hand" Foreground="Black" BorderBrush="White" Background="#FFCBCBCB" FontFamily="Calibri" FontSize="16"/>
+            <Button x:Name="addClassBtn" Content="Add Class" HorizontalAlignment="Left" Margin="481,10,0,0" VerticalAlignment="Top" Height="25" Width="91" Cursor="Hand" Foreground="White" BorderBrush="White" Background="#FF6C6C6C" FontFamily="Calibri" FontSize="16"/>
+            <Button x:Name="addConBtn" Content="Add Consultation" HorizontalAlignment="Left" Margin="577,10,0,0" VerticalAlignment="Top" Height="25" Width="117" Cursor="Hand" Foreground="Black" BorderBrush="White" Background="#FFCBCBCB" FontFamily="Calibri" FontSize="16"/>
+            <ListBox x:Name="GeneralListBox" d:ItemsSource="{d:SampleData ItemCount=5}" Height="288" VerticalAlignment="Top" HorizontalAlignment="Center" Width="674" Margin="0,50,0,0"/>
+
+        </Grid>
     </Grid>
 </Window>

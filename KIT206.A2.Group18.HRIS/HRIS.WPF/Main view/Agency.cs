@@ -20,11 +20,6 @@ namespace KIT206.A2.Group18.HRIS
         private const string db = "hris";
         private const string user = "kit206g12a";
         private const string pwd = "group12a";
-
-        public static T ParseEnum<T>(string value)
-        {
-            return (T)Enum.Parse(typeof(T), value);
-        }
         public static MySqlConnection GetConnection()
         {
             if (conn == null)
@@ -38,8 +33,12 @@ namespace KIT206.A2.Group18.HRIS
             return conn;
         }
 
-        #region Get All Classes
-        //Retrieve all classes from database without staff or unit details
+        public static T ParseEnum<T>(string value)
+        {
+            return (T)Enum.Parse(typeof(T), value);
+        }
+
+        #region Load All Classes
         public static List<Class> LoadAllClasses()
         {
             List<Class> classList = new List<Class>();
@@ -85,7 +84,7 @@ namespace KIT206.A2.Group18.HRIS
             return classList;
         }
         #endregion
-        #region
+        #region Load All Units
         //Retrieve all units from database
         public static List<Unit> LoadAllUnits()
         {
@@ -128,7 +127,7 @@ namespace KIT206.A2.Group18.HRIS
             return unitList;
         }
         #endregion
-        #region
+        #region Load All Consultations
         //Retrieve all consultations from database
         public static List<Consultation> LoadAllConsultations()
         {
@@ -172,7 +171,7 @@ namespace KIT206.A2.Group18.HRIS
             return consultationList;
         }
         #endregion
-        #region
+        #region Load All Staff from HRIS database
         //Retrieve all staffs from database
         public static List<Staff> LoadAllStaffs()
         {
@@ -180,7 +179,6 @@ namespace KIT206.A2.Group18.HRIS
 
             MySqlDataReader rdr = null;
             conn = GetConnection();
-
             try
             {
                 conn.Open();
@@ -188,19 +186,53 @@ namespace KIT206.A2.Group18.HRIS
                 rdr = cmd.ExecuteReader();
                 while (rdr.Read())
                 {
-                    staffList.Add(new Staff
+                    Staff result = new Staff();
+                    result.ID = rdr.GetInt32(0);
+                    result.GivenName = rdr.GetString(1);
+                    result.FamilyName = rdr.GetString (2);
+
+                    if (Convert.IsDBNull(rdr[3]) || rdr.GetString(3) == "")
                     {
-                        ID = rdr.GetInt32(0),
-                        GivenName = rdr.GetString(1),
-                        FamilyName = rdr.GetString(2),
-                        Title = rdr.GetString(3),
-                        campus = ParseEnum<Campus>(rdr.GetString(4)),
-                        Phone = rdr.GetString(5),
-                        Room = rdr.GetString(6),
-                        Email = rdr.GetString(7),
-                        //Photo = (byte[]) rdr[8],
-                        category = ParseEnum<Category>(rdr.GetString(9))
-                    });
+                        result.Title = "Unknown";
+                    }
+                    else { result.Title = rdr.GetString(3); }
+
+                    if(Convert.IsDBNull(rdr[4]) || rdr.GetString(4) == "")
+                    {
+                        result.campus = Campus.Unknown;
+                    }
+                    else { result.campus = ParseEnum<Campus>(rdr.GetString(4)); }
+
+                    if(Convert.IsDBNull(rdr[5]) || rdr.GetString(5) == "")
+                    {
+                        result.Phone = "No contact added";
+                    }
+                    else { result.Phone = rdr.GetString(5); }
+
+                    if(Convert.IsDBNull(rdr[6]) || rdr.GetString(6) == "")
+                    {
+                        result.Room = "Unknown";
+                    }
+                    else { result.Room = rdr.GetString(6); }
+
+                    if(Convert.IsDBNull(rdr[7]) || rdr.GetString(7) == "")
+                    {
+                        result.Email = "No email added";
+                    }
+                    else { result.Email = rdr.GetString(7); }
+
+                    if(!Convert.IsDBNull(rdr[8]))
+                    {
+                        result.Photo = (byte[])rdr[8];
+                    }
+
+                    if(Convert.IsDBNull(rdr[9]) || rdr.GetString(9) == "")
+                    {
+                        result.category = Category.uncategorised;
+                    }
+                    else { result.category = ParseEnum<Category>(rdr.GetString(9)); }
+
+                    staffList.Add(result);
                 }
             }
             catch (MySqlException e)

@@ -29,33 +29,60 @@ namespace HRIS.WPF
             controller = (Controller)(Application.Current.FindResource(STAFF_LIST_KEY) as ObjectDataProvider).ObjectInstance;
         }
 
-        private void staff_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            GeneralListBox.ItemsSource = controller.GetViewableStaffList();
-            MessageBox.Show("staff is pressed!");
-        }
 
-        private void Class_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            GeneralListBox.ItemsSource = controller.GetViewableClassList();
-            MessageBox.Show("class is pressed!");
-        }
 
-        private void Consultation_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            GeneralListBox.ItemsSource = controller.GetViewableConsultationList();
-            MessageBox.Show("consultation is pressed!");
-        }
+        //private void staff_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        //{
+        //    GeneralListBox.ItemsSource = controller.GetViewableStaffList();
+        //    MessageBox.Show("staff is pressed!");
+        //}
 
-        private void Unit_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            GeneralListBox.ItemsSource = controller.GetViewableUnitList();
-            MessageBox.Show("unit is pressed!");
-        }
+        //private void Class_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        //{
+        //    GeneralListBox.ItemsSource = controller.GetViewableClassList();
+        //    MessageBox.Show("class is pressed!");
+        //}
+
+        //private void Consultation_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        //{
+        //    GeneralListBox.ItemsSource = controller.GetViewableConsultationList();
+        //    MessageBox.Show("consultation is pressed!");
+        //}
+
+        //private void Unit_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        //{
+        //    GeneralListBox.ItemsSource = controller.GetViewableUnitList();
+        //    MessageBox.Show("unit is pressed!");
+        //}
 
         private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
+        }
+
+        private void staffButton_Click(object sender, RoutedEventArgs e)
+        {
+            GeneralListBox.ItemsSource = controller.GetViewableStaffItemList();
+        }
+
+        private void HRIS_Loaded(object sender, RoutedEventArgs e)
+        {
+            GeneralListBox.ItemsSource = controller.GetViewableStaffItemList();
+        }
+
+        private void unitButton_Click(object sender, RoutedEventArgs e)
+        {
+            GeneralListBox.ItemsSource = controller.GetViewableUnitItemList();
+        }
+
+        private void classButton_Click(object sender, RoutedEventArgs e)
+        {
+            GeneralListBox.ItemsSource = controller.GetViewableClassItemList();
+        }
+
+        private void conButton_Click(object sender, RoutedEventArgs e)
+        {
+            GeneralListBox.ItemsSource = controller.GetViewableConsulItemList();
         }
     }
 }

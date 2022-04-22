@@ -8,10 +8,9 @@ using System.IO;
 
 namespace KIT206.A2.Group18.HRIS
 {
+    public enum Campus { Hobart, Launceston, Unknown }
 
-    public enum Campus { Hobart, Launceston }
-
-    public enum Category { academic, technical, admin, casual }
+    public enum Category { academic, technical, admin, casual, uncategorised }
 
     class Staff
     {
@@ -38,9 +37,15 @@ namespace KIT206.A2.Group18.HRIS
         public List<Consultation> Consultations { get; set; }
         public List<Class> Classes { get; set; }
         #endregion
+
+
         public override string ToString()
         {
             return GivenName + " " + FamilyName;
         }
+
+
+
+
     }
 }
