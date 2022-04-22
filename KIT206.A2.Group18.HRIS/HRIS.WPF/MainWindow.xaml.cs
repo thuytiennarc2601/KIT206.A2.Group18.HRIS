@@ -60,7 +60,7 @@ namespace HRIS.WPF
 
         private void Delete_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            controller.
+            MessageBox.Show("delete is pressed!");
         }
     }
 }

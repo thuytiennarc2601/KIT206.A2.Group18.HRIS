@@ -222,6 +222,7 @@ namespace KIT206.A2.Group18.HRIS
             return staffList;
         }
         #endregion
+        //Retrieve consultations of selected staff
         #region
         public static List<Consultation> LoadConsultations(int id)
         {
@@ -271,6 +272,7 @@ namespace KIT206.A2.Group18.HRIS
             return consultations;
         }
         #endregion
+        //Retrieve classes of selected staff
         #region
         public static List<Class> LoadClasses(int id)
         {
@@ -324,6 +326,7 @@ namespace KIT206.A2.Group18.HRIS
             return classes;
         }
         #endregion
+        //Delete consultation from database
         #region
         public static void DeleteConsultation(int id, Day day, TimeOnly Start, TimeOnly End)
         {
@@ -335,7 +338,7 @@ namespace KIT206.A2.Group18.HRIS
                 conn.Open();
 
                 MySqlCommand cmd = new MySqlCommand("delete " +
-                                                    "from class" +
+                                                    "from consultation" +
                                                     "where (staff_id=?id) and (day=?day) and (start=?Start) and (end=?End)", conn);
 
                 cmd.Parameters.AddWithValue("id", id);
@@ -357,6 +360,37 @@ namespace KIT206.A2.Group18.HRIS
             }
         }
         #endregion
+        //Add a consultation time for a staff
+        #region
+        public static void AddConsultation(int id, Day day, TimeOnly Start, TimeOnly End)
+        {
+
+            MySqlConnection conn = GetConnection();
+
+            try
+            {
+                conn.Open();
+
+                MySqlCommand cmd = new MySqlCommand("INSERT INTO consultation (staff_id, day, start, end) VALUES ('" + id + "', '" + day + "', '" + Start + "', '" + End + "')", conn);
+                cmd.ExecuteNonQuery();
+
+
+
+            }
+            catch (MySqlException e)
+            {
+                ReportError("Adding consultation", e);
+            }
+            finally
+            {
+                conn.Close();
+
+            }
+
+
+        }
+        #endregion
+        //Report error
         private static void ReportError(string msg, Exception e)
         {
             if (reportingErrors)
