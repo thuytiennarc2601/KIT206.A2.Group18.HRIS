@@ -39,8 +39,7 @@ namespace HRIS.WPF
             return conn;
         }
 
-        #region Get All Classes
-        //Retrieve all classes from database without staff or unit details
+        #region Retrieve All Classes
         public static List<Class> LoadAllClasses()
         {
             List<Class> classList = new List<Class>();
@@ -51,7 +50,9 @@ namespace HRIS.WPF
             try
             {
                 conn.Open();
-                MySqlCommand cmd = new MySqlCommand("select unit_code, campus, day, type, start, end, room, staff from class", conn);
+                MySqlCommand cmd = new MySqlCommand("select c.unit_code, c.campus, c.day, c.type, c.start, c.end, c.room, c.staff, " +
+                    "s.given_name, s.family_name, s.title, s.campus, s.phone, s.room, s.email, s.photo, s.category  " +
+                    "from class as c inner join staff as s on c.staff = s.id", conn);
                 rdr = cmd.ExecuteReader();
                 while (rdr.Read())
                 {
@@ -63,7 +64,17 @@ namespace HRIS.WPF
                         StartTime = TimeOnly.ParseExact(rdr.GetString(4), "HH:mm:ss"),
                         EndTime = TimeOnly.ParseExact(rdr.GetString(5), "HH:mm:ss"), 
                         Room = rdr.GetString(6), 
-                        staff = new Staff { ID = rdr.GetInt32(7) } 
+                        staff = new Staff { ID = rdr.GetInt32(7),
+                            GivenName = rdr.GetString(8),
+                            FamilyName = rdr.GetString(9),
+                            Title = rdr.GetString(10),
+                            campus = ParseEnum<Campus>(rdr.GetString(11)),
+                            Phone = rdr.GetString(12),
+                            Room = rdr.GetString(13),
+                            Email = rdr.GetString(14),
+                            //Photo = rdr.Get
+                            category = ParseEnum<Category>(rdr.GetString(16))
+                        } 
                     });
                 }
             }
@@ -86,8 +97,7 @@ namespace HRIS.WPF
             return classList;
         }
         #endregion
-        #region
-        //Retrieve all units from database
+        #region Retrive all units from database
         public static List<Unit> LoadAllUnits()
         {
             List<Unit> unitList = new List<Unit>();
@@ -98,7 +108,9 @@ namespace HRIS.WPF
             try
             {
                 conn.Open();
-                MySqlCommand cmd = new MySqlCommand("select code, title, coordinator from unit", conn);
+                MySqlCommand cmd = new MySqlCommand("select u.code, u.title, u.coordinator, " +
+                    "s.given_name, s.family_name, s.title, s.campus, s.phone, s.room, s.email, s.photo, s.category " +
+                    "from unit as u inner join staff as s on u.coordinator = s.id", conn);
                 rdr = cmd.ExecuteReader();
                 while (rdr.Read())
                 {
@@ -106,7 +118,17 @@ namespace HRIS.WPF
                     {
                         UnitCode = rdr.GetString(0),
                         UnitName = rdr.GetString(1),
-                        Coordinator = new Staff { ID = rdr.GetInt32(2) },
+                        Coordinator = new Staff { ID = rdr.GetInt32(2),
+                            GivenName = rdr.GetString(3),
+                            FamilyName = rdr.GetString(4),
+                            Title = rdr.GetString(5),
+                            campus = ParseEnum<Campus>(rdr.GetString(6)),
+                            Phone = rdr.GetString(7),
+                            Room = rdr.GetString(8),
+                            Email = rdr.GetString(9),
+                            //Photo = rdr.Get
+                            category = ParseEnum<Category>(rdr.GetString(11))
+                        },
                     });
                 }
             }
@@ -129,11 +151,11 @@ namespace HRIS.WPF
             return unitList;
         }
         #endregion
-        //Retrieve all consultations from database
-        #region
+        #region Retrieve all consultations from database
         public static List<Consultation> LoadAllConsultations()
         {
             List<Consultation> consultationList = new List<Consultation>();
+            List<Staff> staffList = new List<Staff>();
 
             MySqlDataReader rdr = null;
             conn = GetConnection();
@@ -141,13 +163,24 @@ namespace HRIS.WPF
             try
             {
                 conn.Open();
-                MySqlCommand cmd = new MySqlCommand("select staff_id, day, start, end from consultation", conn);
+                MySqlCommand cmd = new MySqlCommand("select con.staff_id, con.day, con.start, con.end, s.given_name, s.family_name, s.title, s.campus, s.phone, s.room, s.email, s.photo, s.category" +
+                    " from consultation as con inner join staff as s on con.staff_id = s.id", conn);
                 rdr = cmd.ExecuteReader();
                 while (rdr.Read())
                 {
                     consultationList.Add(new Consultation
                     {
-                        staff = new Staff { ID = rdr.GetInt32(0) },
+                        staff = new Staff { ID = rdr.GetInt32(0), 
+                            GivenName = rdr.GetString(4), 
+                            FamilyName = rdr.GetString(5), 
+                            Title = rdr.GetString(6),
+                            campus = ParseEnum<Campus>(rdr.GetString(7)),
+                            Phone = rdr.GetString(8),
+                            Room = rdr.GetString(9),
+                            Email = rdr.GetString(10),
+                            //Photo = rdr.Get
+                            category = ParseEnum<Category>(rdr.GetString(12))
+                        },
                         day = ParseEnum<Day>(rdr.GetString(1)),
                         StartTime = TimeOnly.ParseExact(rdr.GetString(2), "HH:mm:ss"),
                         EndTime = TimeOnly.ParseExact(rdr.GetString(3), "HH:mm:ss"),
@@ -173,8 +206,7 @@ namespace HRIS.WPF
             return consultationList;
         }
         #endregion
-        #region
-        //Retrieve all staffs from database
+        #region Retrieve all staffs from database
         public static List<Staff> LoadAllStaffs()
         {
             List<Staff> staffList = new List<Staff>();
@@ -223,8 +255,7 @@ namespace HRIS.WPF
             return staffList;
         }
         #endregion
-        //Retrieve consultations of selected staff
-        #region
+        #region Retrieve consultations of selected staff
         public static List<Consultation> LoadConsultations(int id)
         {
             List<Consultation> consultations = new List<Consultation>();
@@ -273,8 +304,7 @@ namespace HRIS.WPF
             return consultations;
         }
         #endregion
-        //Retrieve classes of selected staff
-        #region
+        #region Retrieve classes of selected staff
         public static List<Class> LoadClasses(int id)
         {
             List<Class> classes = new List<Class>();
@@ -327,9 +357,8 @@ namespace HRIS.WPF
             return classes;
         }
         #endregion
-        //Delete consultation from database
-        #region
-        public static void DeleteConsultation(int id, Day day, TimeOnly Start, TimeOnly End)
+        #region Delete a consultation
+        public static void DeleteConsultation(int id, string day, string Start, string End)
         {
 
             MySqlConnection conn = GetConnection();
@@ -338,14 +367,10 @@ namespace HRIS.WPF
             {
                 conn.Open();
 
-                MySqlCommand cmd = new MySqlCommand("delete " +
-                                                    "from consultation" +
-                                                    "where (staff_id=?id) and (day=?day) and (start=?Start) and (end=?End)", conn);
+                MySqlCommand cmd = new MySqlCommand("DELETE " +
+                                                    "FROM consultation " +
+                                                    "WHERE staff_id =" + id + " AND day='" + day + "'" + " AND start='" + Start + "'" + " AND end='" + End + "'", conn);
 
-                cmd.Parameters.AddWithValue("id", id);
-                cmd.Parameters.AddWithValue("day", day);
-                cmd.Parameters.AddWithValue("start", Start);
-                cmd.Parameters.AddWithValue("end", End);
                 cmd.ExecuteNonQuery();
             }
             catch (MySqlException e)
@@ -360,9 +385,8 @@ namespace HRIS.WPF
                 }
             }
         }
-        #endregion
-        //Add a consultation time for a staff
-        #region
+        #endregion Delete consultation from database
+        #region Add a consultation time for a staff
         public static void AddConsultation(int id, string day, string Start, string End)
         {
 

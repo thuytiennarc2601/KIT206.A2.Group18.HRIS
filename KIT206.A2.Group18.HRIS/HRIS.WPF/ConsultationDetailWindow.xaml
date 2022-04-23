@@ -14,7 +14,7 @@
         <Button x:Name="editConsultation" Content="EDIT DETAILS" Margin="422,80,118,20" FontFamily="Calibri" Foreground="White" Background="#FF7BA8D7" BorderBrush="White" FontSize="14" Height="30
                 " Width="103"/>
         <Button x:Name="conCancelBtn" Content="CANCEL" Margin="530,80,10,20" FontFamily="Calibri" Foreground="White" Background="#FF7BA8D7" BorderBrush="White" FontSize="14" Height="30
-                " Width="103"/>
+                " Width="103" Click="conCancelBtn_Click"/>
 
     </Grid>
 </Window>

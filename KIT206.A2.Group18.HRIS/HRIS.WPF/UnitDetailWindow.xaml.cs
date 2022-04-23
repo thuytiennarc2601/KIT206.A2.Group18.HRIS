@@ -22,9 +22,9 @@ namespace HRIS.WPF
         public UnitDetailWindow(Unit unit)
         {
             InitializeComponent();
-            unitName.Content = unit.UnitName;
-            unitCode.Content = unit.UnitCode;
-            unitCoordinator.Content = unit.Coordinator;
+            unitName.Content = "Unit Name: "+unit.UnitName;
+            unitCode.Content = "Unit Code: "+unit.UnitCode;
+            unitCoordinator.Content = "Unit Coordinator: " + unit.Coordinator.Title + " " + unit.Coordinator;
         }
     }
 }

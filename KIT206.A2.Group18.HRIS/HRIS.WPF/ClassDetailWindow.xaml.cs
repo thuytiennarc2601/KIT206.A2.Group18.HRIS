@@ -22,9 +22,9 @@ namespace HRIS.WPF
         public ClassDetailWindow(Class classdetail)
         {
             InitializeComponent();
-            unitInfo.Content = classdetail.unit;
+            unitInfo.Content = classdetail.unit.UnitCode + " " + classdetail.unit;
             classInfo.Content = classdetail.type + " | " + classdetail.staff;
-            classLocation.Content = classdetail.campus;
+            classLocation.Content = "Room " + classdetail.Room + " | " +classdetail.campus + " campus";
             classTime.Content = classdetail.day + " | " + classdetail.StartTime + " - " + classdetail.EndTime;
         }
     }

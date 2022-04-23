@@ -51,12 +51,6 @@ namespace HRIS.WPF
         }
         public ObservableCollection<Unit> GetViewableUnitList()
         {
-            /*
-            foreach (Unit u in unit)
-            {
-                u.Coordinator = Agency.LoadConsultations(e.ID);
-            }
-            */
             return VisibleUnits;
         }
         public ObservableCollection<Class> GetViewableClassList()
@@ -67,9 +61,9 @@ namespace HRIS.WPF
         {
             return VisibleConsultations;
         }
-        public void DeleteConsultation(int id, Day day, TimeOnly Start, TimeOnly End)
+        public void DeleteConsultation(int id, string day, string Start, string End)
         {
-
+            //Agency.DeleteConsultation(id, day.ToString(), Start.ToString("HH:mm:ss"), End.ToString("HH:mm:ss"));
         }
         public void AddConsultation(int id, string day, string Start, string End)
         {

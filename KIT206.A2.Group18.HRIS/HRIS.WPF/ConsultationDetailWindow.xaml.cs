@@ -19,12 +19,28 @@ namespace HRIS.WPF
     /// </summary>
     public partial class ConsultationDetailWindow : Window
     {
+        private int id;
+        private Day day;
+        private TimeOnly Start;
+        private TimeOnly End;
+        private Controller controller;
         public ConsultationDetailWindow(Consultation consultation)
         {
             InitializeComponent();
             staffDetails.Content = consultation.staff.Title + " " + consultation.staff;
-            staffID.Content = consultation.staff.ID;
-            consultationTime.Content = consultation.StartTime + " - " + consultation.EndTime;
+            staffID.Content = "Staff ID: " + consultation.staff.ID;
+            consultationTime.Content =consultation.day + " | "+  consultation.StartTime + " - " + consultation.EndTime;
+            id = consultation.staff.ID;
+            day = consultation.day;
+            Start = consultation.StartTime;
+            End = consultation.EndTime;
+        }
+
+        private void conCancelBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Agency.DeleteConsultation(id, day.ToString(), Start.ToString("HH:mm:ss"), End.ToString("HH:mm:ss"));
+            MessageBox.Show("Consultation Time Cancelled!");
+            Close();
         }
     }
 }

@@ -22,11 +22,11 @@ namespace HRIS.WPF
         public StaffDetailWindow(Staff staff)
         {
             InitializeComponent();
-            staffInfo.Content = staff.Title + " " + staff;
-            staffID.Content = staff.ID;
-            staffEmail.Content = staff.Email;
-            staffCampus.Content = staff.campus;
-            staffCate.Content = staff.category;
+            staffInfo.Content = "Staff: "+staff.Title + " " + staff;
+            staffID.Content = "Staff ID: "+staff.ID;
+            staffEmail.Content ="Email: "+ staff.Email;
+            staffCampus.Content ="Location: " + staff.Room + " | " + staff.campus;
+            staffCate.Content = "Employment Type: " + staff.category;
         }
     }
 }

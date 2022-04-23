@@ -97,16 +97,15 @@ namespace HRIS.WPF
             }
         }
         /*
-private void Delete_MouseDown(object sender, MouseButtonEventArgs e)
-{
-MessageBox.Show("delete is pressed!");
-}
-
-private void addConsultation_Click(object sender, RoutedEventArgs e)
-{
-controller.AddConsultation(Int32.Parse(addConsultationDetailWindow.staffIDTextBox.Text), addConsultationDetailWindow.dayComboBox.Text, addConsultationDetailWindow.startTextBox.Text, addConsultationDetailWindow.endTextBox.Text);
-MessageBox.Show("add consultation is pressed!");
-}
-*/
+        private void Delete_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+        MessageBox.Show("delete is pressed!");
+        }
+        */
+        private void addConsultation_Click(object sender, RoutedEventArgs e)
+        {
+            //controller.AddConsultation(Int32.Parse(addConsultationDetailWindow.staffIDTextBox.Text), addConsultationDetailWindow.dayComboBox.Text, addConsultationDetailWindow.startTextBox.Text, addConsultationDetailWindow.endTextBox.Text);
+            MessageBox.Show("add consultation is pressed!");
+        }
     }
 }
