@@ -28,6 +28,7 @@ namespace HRIS.WPF
         #region Staff Item Properties
         private string _staffInfo;
         private string _staffID;
+        private int _id;
         private string _staffEmail;
         private string _staffLocation;
         private string _staffCategory;
@@ -43,6 +44,12 @@ namespace HRIS.WPF
         {
             get { return _staffID; }
             set { _staffID = value; this.staffID.Content = value; }
+        }
+
+        public int ID
+        {
+            get { return _id; }
+            set { _id = value; }
         }
 
         public string StaffCategory

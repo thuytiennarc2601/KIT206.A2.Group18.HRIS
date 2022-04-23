@@ -8,7 +8,7 @@ using System.Windows;
 
 namespace KIT206.A2.Group18.HRIS
 {
-    //for getting connection from database
+    //establishes connection with database, contains all functions relating to database
     class Agency
     {
         private static bool reportingErrors = false;

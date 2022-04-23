@@ -10,9 +10,12 @@
   <ItemGroup>
     <None Remove="class1.png" />
     <None Remove="consultation 1.png" />
+    <None Remove="dd40c7fbc2671538ddfd587528b254c6.jpg" />
+    <None Remove="icons8-search-30.png" />
     <None Remove="resources\avatar.png" />
     <None Remove="resources\class1.png" />
     <None Remove="resources\consultation 1.png" />
+    <None Remove="resources\icons8-search-30.png" />
     <None Remove="resources\staff.png" />
     <None Remove="resources\staff3.png" />
     <None Remove="resources\unit2.png" />
@@ -27,9 +30,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="dd40c7fbc2671538ddfd587528b254c6.jpg" />
+    <Resource Include="icons8-search-30.png" />
     <Resource Include="resources\avatar.png" />
     <Resource Include="resources\class1.png" />
     <Resource Include="resources\consultation 1.png" />
+    <Resource Include="resources\icons8-search-30.png" />
     <Resource Include="resources\staff.png" />
     <Resource Include="resources\staff3.png" />
     <Resource Include="resources\unit2.png" />

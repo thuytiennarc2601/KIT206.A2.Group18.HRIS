@@ -14,30 +14,15 @@ namespace HRIS.WPF
 {
     class Controller
     {
-        //private List<Staff> staff;
-        //private List<Unit> unit;
-        //private List<Class> classes;
-        //private List<Consultation> consultation;
-
         private List<staffListItem> staffItem;
         private List<unitListItems> unitItem;
         private List<classListItems> classItem;
         private List<consultationListItem> consultationItem;
-        //public List<Staff> Workers { get { return staff; } set { } }
-
-        //private ObservableCollection<Staff> viewableStaff;
-        //private ObservableCollection<Unit> viewableUnit;
-        //private ObservableCollection<Class> viewableClasses;
-        //private ObservableCollection<Consultation> viewableConsultation;
 
         private ObservableCollection<staffListItem> viewableStaffItem;
         private ObservableCollection<unitListItems> viewableUnitItem;
         private ObservableCollection<classListItems> viewableClassItem;
         private ObservableCollection<consultationListItem > viewableConsultationItem;
-        //public ObservableCollection<Staff> VisibleStaffs { get { return viewableStaff; } set { } }
-        //public ObservableCollection<Unit> VisibleUnits { get { return viewableUnit; } set { } }
-        //public ObservableCollection<Class> VisibleClasses { get { return viewableClasses; } set { } }
-        //public ObservableCollection<Consultation> VisibleConsultations { get { return viewableConsultation; } set { } }
 
         public ObservableCollection<staffListItem> VisibleStaffItem { get { return viewableStaffItem; } set { } }
         public ObservableCollection<unitListItems> VisibleUnitItem { get { return viewableUnitItem; } set { } }
@@ -60,22 +45,6 @@ namespace HRIS.WPF
             //generate a list of consultation items
             consultationItem = AddConsultationInfoToItem();
             viewableConsultationItem = new ObservableCollection<consultationListItem>(consultationItem);
-
-            //should use LINQ
-            //foreach (Staff e in staff)
-            //{
-            //    e.Consultations = Agency.LoadConsultations(e.ID);
-            //    e.Classes = Agency.LoadClasses(e.ID);
-            //}
-
-            //unitItem = Agency.LoadAllUnits();
-            //viewableUnit = new ObservableCollection<Unit>(unit);
-
-            //classes = Agency.LoadAllClasses();
-            //viewableClasses = new ObservableCollection<Class>(classes);
-
-            //consultation = Agency.LoadAllConsultations();
-            //viewableConsultation = new ObservableCollection<Consultation>(consultation);
         }
 
         #region Display Staff List
@@ -90,6 +59,7 @@ namespace HRIS.WPF
                 for (int i = 0; i < staff.Count; i++)
                 {
                     staffListItem item = new staffListItem();
+                    item.ID = staff[i].ID;
                     item.StaffInfo = staff[i].Title + ". " + staff[i].GivenName + " " + staff[i].FamilyName;
                     item.StaffID = "ID: " + staff[i].ID.ToString();
                     item.StaffCategory = staff[i].category.ToString().ToUpper();
@@ -102,7 +72,7 @@ namespace HRIS.WPF
                     }
                     else
                     {
-                        item.StaffPhoto = ByteToImage(staff[i].Photo);
+                        item.StaffPhoto = Staff.ByteToImage(staff[i].Photo);
                     }
                     items.Add(item);
                 }
@@ -110,19 +80,6 @@ namespace HRIS.WPF
             return items;
         }
 
-        //Convert from byte array to imagesource
-        public static ImageSource ByteToImage(byte[] imageData)
-        {
-            BitmapImage biImg = new BitmapImage();
-            MemoryStream ms = new MemoryStream(imageData);
-            biImg.BeginInit();
-            biImg.StreamSource = ms;
-            biImg.EndInit();
-
-            ImageSource imgSrc = biImg as ImageSource;
-
-            return imgSrc;
-        }
         #endregion
 
         #region Display Unit List
@@ -227,22 +184,7 @@ namespace HRIS.WPF
             return items;
         }
         #endregion
-        //public ObservableCollection<Staff> GetViewableStaffList()
-        //{
-        //    return VisibleStaffs;
-        //}
-        //public ObservableCollection<Unit> GetViewableUnitList()
-        //{
-        //    return VisibleUnits;
-        //}
-        //public ObservableCollection<Class> GetViewableClassList()
-        //{
-        //    return VisibleClasses;
-        //}
-        //public ObservableCollection<Consultation> GetViewableConsultationList()
-        //{
-        //    return VisibleConsultations;
-        //}
+
         public ObservableCollection<staffListItem> GetViewableStaffItemList()
         {
             return VisibleStaffItem;

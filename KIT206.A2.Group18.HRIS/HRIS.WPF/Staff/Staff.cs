@@ -5,6 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
 using System.IO;
+using System.Drawing;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
 namespace KIT206.A2.Group18.HRIS
 {
@@ -44,7 +47,19 @@ namespace KIT206.A2.Group18.HRIS
             return GivenName + " " + FamilyName;
         }
 
+        //Convert from byte array to imagesource
+        public static ImageSource ByteToImage(byte[] imageData)
+        {
+            BitmapImage biImg = new BitmapImage();
+            MemoryStream ms = new MemoryStream(imageData);
+            biImg.BeginInit();
+            biImg.StreamSource = ms;
+            biImg.EndInit();
 
+            ImageSource imgSrc = biImg as ImageSource;
+
+            return imgSrc;
+        }
 
 
     }

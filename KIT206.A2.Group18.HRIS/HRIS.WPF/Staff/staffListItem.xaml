@@ -5,18 +5,17 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:HRIS.WPF"
              mc:Ignorable="d" 
-             d:DesignHeight="133.034" Width="643">
-    <Grid x:Name="staffItem1" Background="White" MouseEnter="staffItem1_MouseEnter" MouseLeave="staffItem1_MouseLeave" Height="140" VerticalAlignment="Top"
-          >
-        <Image x:Name="staffPhoto" Margin="23,4,487,10" Stretch="Fill" OpacityMask="Black"/>
+             d:DesignHeight="133.034" Width="627">
+    <Grid x:Name="staffItem1" Background="White" Height="140" Width="Auto">
+        <Image x:Name="staffPhoto" HorizontalAlignment="Left" Margin="23,4,0,10" Stretch="Fill" OpacityMask="Black" Width="136"/>
 
         <Label x:Name="staffInfo" Content="Dr. Lindsay Wells" Margin="181,3,58,96" FontFamily="Georgia" Foreground="#FF729F54" FontSize="22" FontWeight="Bold"/>
         <Label x:Name="staffID" Content="ID: 000000" Margin="181,28,48,82" FontFamily="Century Gothic" Foreground="#FF9D9D9D" FontSize="16" Height="30"/>
         <Label x:Name="staffEmail" Content="Email: abd@utas.edu.au" Margin="181,79,48,31" FontFamily="Century Gothic" Foreground="#FF9D9D9D" FontSize="16" Height="30"/>
         <Label x:Name="staffCampus" Content="Room C0 | Hobart campus" Margin="181,100,48,10" FontFamily="Century Gothic" Foreground="#FF9D9D9D" FontSize="16" Height="30"/>
         <Label x:Name="staffCate" Content="TECHNICAL" Margin="181,58,48,52" FontFamily="Century Gothic" Foreground="#FF9D9D9D" FontSize="16" Height="30"/>
-        <Button x:Name="editInfoBtn" Content="EDIT DETAILS" Margin="542,95,10,15" Background="#FF799A4D" Width="91" Height="30" FontFamily="Calibri" Foreground="White" BorderBrush="White" FontSize="14" Cursor="Hand"/>
-        
+        <Button x:Name="editInfoBtn" Content="EDIT DETAILS" Margin="0,95,22,15" Background="#FF799A4D" Width="91" Height="30" FontFamily="Calibri" Foreground="White" BorderBrush="White" FontSize="14" Cursor="Hand" HorizontalAlignment="Right"/>
+
 
     </Grid>
 </UserControl>
