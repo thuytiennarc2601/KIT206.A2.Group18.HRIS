@@ -22,21 +22,17 @@ namespace HRIS.WPF
     {
         private const string STAFF_LIST_KEY = "staffList";
         private Controller controller;
-        private Window subWindow;
         private ListType listType;
-        public enum ListType { Staff, Class, Unit, Consultation};
+        private StaffDetailWindow subStaffWindow;
+        private UnitDetailWindow subUnitWindow;
+        private ClassDetailWindow subClassWindow;
+        private ConsultationDetailWindow subConsultationWindow;
+        public enum ListType { Staff, Class, Unit, Consultation };
         public MainWindow()
         {
             InitializeComponent();
             controller = (Controller)(Application.Current.FindResource(STAFF_LIST_KEY) as ObjectDataProvider).ObjectInstance;
-            
         }
-
-        private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
-
         private void staffButton_Click(object sender, RoutedEventArgs e)
         {
             GeneralListBox.ItemsSource = controller.GetViewableStaffList();
@@ -73,39 +69,57 @@ namespace HRIS.WPF
                 switch (listType)
                 {
                     case ListType.Staff:
-                        subWindow = new StaffDetailWindow((Staff) e.AddedItems[0]);
-                        subWindow.Show();
+                        subStaffWindow = new StaffDetailWindow((Staff)e.AddedItems[0]);
+                        subStaffWindow.Show();
                         break;
-                        
+
                     case ListType.Class:
-                        subWindow = new ClassDetailWindow((Class)e.AddedItems[0]);
-                        subWindow.Show();
+                        subClassWindow = new ClassDetailWindow((Class)e.AddedItems[0]);
+                        subClassWindow.Show();
                         break;
-                        
-                        
+
+
                     case ListType.Unit:
-                        subWindow = new UnitDetailWindow((Unit)e.AddedItems[0]);
-                        subWindow.Show();
+                        subUnitWindow = new UnitDetailWindow((Unit)e.AddedItems[0]);
+                        subUnitWindow.Show();
                         break;
-                        
+
                     case ListType.Consultation:
-                        subWindow = new ConsultationDetailWindow((Consultation)e.AddedItems[0]);
-                        subWindow.Show();
+                        subConsultationWindow = new ConsultationDetailWindow((Consultation)e.AddedItems[0]);
+                        subConsultationWindow.Show();
                         break;
-                        
+
                 }
             }
         }
-        /*
-        private void Delete_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-        MessageBox.Show("delete is pressed!");
-        }
-        */
         private void addConsultation_Click(object sender, RoutedEventArgs e)
         {
             //controller.AddConsultation(Int32.Parse(addConsultationDetailWindow.staffIDTextBox.Text), addConsultationDetailWindow.dayComboBox.Text, addConsultationDetailWindow.startTextBox.Text, addConsultationDetailWindow.endTextBox.Text);
             MessageBox.Show("add consultation is pressed!");
+        }
+
+        private void refresh_Click(object sender, RoutedEventArgs e)
+        {
+            controller = new Controller();
+            switch (listType)
+            {
+                case ListType.Staff:
+                    GeneralListBox.ItemsSource = controller.GetViewableStaffList();
+                    break;
+
+                case ListType.Class:
+                    GeneralListBox.ItemsSource = controller.GetViewableClassList();
+                    break;
+
+
+                case ListType.Unit:
+                    GeneralListBox.ItemsSource = controller.GetViewableUnitList();
+                    break;
+
+                case ListType.Consultation:
+                    GeneralListBox.ItemsSource = controller.GetViewableConsultationList();
+                    break;
+            }
         }
     }
 }

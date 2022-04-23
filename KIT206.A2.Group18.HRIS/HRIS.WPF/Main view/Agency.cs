@@ -51,13 +51,13 @@ namespace HRIS.WPF
             {
                 conn.Open();
                 MySqlCommand cmd = new MySqlCommand("select c.unit_code, c.campus, c.day, c.type, c.start, c.end, c.room, c.staff, " +
-                    "s.given_name, s.family_name, s.title, s.campus, s.phone, s.room, s.email, s.photo, s.category  " +
-                    "from class as c inner join staff as s on c.staff = s.id", conn);
+                    "s.given_name, s.family_name, s.title, s.campus, s.phone, s.room, s.email, s.photo, s.category,  u.title, u.coordinator  " +
+                    "from class as c join staff as s on c.staff = s.id join unit as u on u.code = c.unit_code", conn);
                 rdr = cmd.ExecuteReader();
                 while (rdr.Read())
                 {
                     classList.Add(new Class { 
-                        unit = new Unit { UnitCode = rdr.GetString(0) }, 
+                        unit = new Unit { UnitCode = rdr.GetString(0), UnitName = rdr.GetString(17) }, 
                         campus = ParseEnum<Campus>(rdr.GetString(1)), 
                         day = ParseEnum<Day>(rdr.GetString(2)), 
                         type = ParseEnum<Type>(rdr.GetString(3)), 
@@ -415,6 +415,39 @@ namespace HRIS.WPF
 
         }
         #endregion
+        #region Edit details of a class
+        public static void EditClassDetail(string new_campus, string new_day, string new_start, string new_end, string new_type, string new_room, string new_staffID, string unitCode, string campus, string day, string start, string end, string type, string room, int staffID)
+        {
+
+            MySqlConnection conn = GetConnection();
+
+            try
+            {
+                conn.Open();
+
+                MySqlCommand cmd = new MySqlCommand("UPDATE class" +
+                                                    " SET unit_code='" + unitCode + "',campus='" + new_campus + "',day='" + new_day + "',start='" + new_start + 
+                                                    "',end='" + new_end + "',type='" + new_type + "',room='" + new_room + "',staff='" + new_staffID + "'" +
+                                                    " WHERE unit_code ='" + unitCode + "' AND campus='" + campus + "'" + " AND day='" + day + "'" 
+                                                    + " AND start='" + start + "'" + " AND end='" + end + "'"
+                                                    + " AND type='" + type + "'" + " AND room='" + room + "'"
+                                                    + " AND staff='" + staffID + "'", conn);
+
+                cmd.ExecuteNonQuery();
+            }
+            catch (MySqlException e)
+            {
+                ReportError("Editing class details", e);
+            }
+            finally
+            {
+                if (conn != null)
+                {
+                    conn.Close();
+                }
+            }
+        }
+        #endregion Edit details of a class
         //Report error
         private static void ReportError(string msg, Exception e)
         {

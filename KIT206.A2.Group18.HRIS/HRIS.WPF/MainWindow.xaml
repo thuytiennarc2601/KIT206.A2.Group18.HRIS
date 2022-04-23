@@ -63,7 +63,7 @@
             <TextBox x:Name="searchBar" HorizontalAlignment="Left" Margin="20,10,0,0" TextWrapping="Wrap" Text="Searching..." VerticalAlignment="Top" Width="250" Height="25" BorderBrush="White" Foreground="#FFAFAFAF" FontStyle="Italic" FontFamily="Calibri" FontSize="16"/>
             <Button x:Name="addUnitBtn" Content="Add Unit" HorizontalAlignment="Left" Margin="385,10,0,0" VerticalAlignment="Top" Height="25" Width="91" Cursor="Hand" Foreground="Black" BorderBrush="White" Background="#FFCBCBCB" FontFamily="Calibri" FontSize="16"/>
             <Button x:Name="addClassBtn" Content="Add Class" HorizontalAlignment="Left" Margin="481,10,0,0" VerticalAlignment="Top" Height="25" Width="91" Cursor="Hand" Foreground="White" BorderBrush="White" Background="#FF6C6C6C" FontFamily="Calibri" FontSize="16"/>
-            <Button x:Name="addConBtn" Content="Add Consultation" HorizontalAlignment="Left" Margin="577,10,0,0" VerticalAlignment="Top" Height="25" Width="117" Cursor="Hand" Foreground="Black" BorderBrush="White" Background="#FFCBCBCB" FontFamily="Calibri" FontSize="16"/>
+            <Button x:Name="refresh" Content="Refresh" HorizontalAlignment="Left" Margin="577,10,0,0" VerticalAlignment="Top" Height="25" Width="117" Cursor="Hand" Foreground="Black" BorderBrush="White" Background="#FFCBCBCB" FontFamily="Calibri" FontSize="16" Click="refresh_Click"/>
             <ListBox x:Name="GeneralListBox" Height="288" VerticalAlignment="Top" HorizontalAlignment="Center" Width="674" Margin="0,50,0,0" SelectionChanged="GeneralListBox_SelectionChanged"/>
 
         </Grid>

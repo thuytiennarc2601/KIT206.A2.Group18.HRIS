@@ -20,7 +20,7 @@ namespace HRIS.WPF
         public override string ToString()
         {
 
-            return UnitCode + " " + UnitName; //+ " by " + Coordinator.GivenName + " " + Coordinator.FamilyName;
+            return UnitName; //+ " by " + Coordinator.GivenName + " " + Coordinator.FamilyName;
         }
     }
 }

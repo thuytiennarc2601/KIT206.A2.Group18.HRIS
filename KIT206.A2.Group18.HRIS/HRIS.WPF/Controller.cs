@@ -63,11 +63,16 @@ namespace HRIS.WPF
         }
         public void DeleteConsultation(int id, string day, string Start, string End)
         {
-            //Agency.DeleteConsultation(id, day.ToString(), Start.ToString("HH:mm:ss"), End.ToString("HH:mm:ss"));
+            Agency.DeleteConsultation(id, day, Start, End);
         }
         public void AddConsultation(int id, string day, string Start, string End)
         {
             Agency.AddConsultation(id, day, Start, End);
+        }
+        public void EditClassDetail(string new_campus, string new_day, string new_start, string new_end, string new_type, string new_room, string new_staffID,
+            string unitCode, string campus, string day, string start, string end, string type, string room, int staffID)
+        {
+            Agency.EditClassDetail(new_campus, new_day, new_start, new_end, new_type, new_room, new_staffID, unitCode, campus, day, start, end, type, room, staffID);
         }
     }
 }

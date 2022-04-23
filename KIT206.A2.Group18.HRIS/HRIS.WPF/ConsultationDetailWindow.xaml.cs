@@ -24,9 +24,13 @@ namespace HRIS.WPF
         private TimeOnly Start;
         private TimeOnly End;
         private Controller controller;
+        private const string CONSULTATION_LIST_KEY = "consultationList";
+        public bool consultationDeleted = false;
+        public bool windowOpened = false;
         public ConsultationDetailWindow(Consultation consultation)
         {
             InitializeComponent();
+            controller = (Controller)(Application.Current.FindResource(CONSULTATION_LIST_KEY) as ObjectDataProvider).ObjectInstance;
             staffDetails.Content = consultation.staff.Title + " " + consultation.staff;
             staffID.Content = "Staff ID: " + consultation.staff.ID;
             consultationTime.Content =consultation.day + " | "+  consultation.StartTime + " - " + consultation.EndTime;
@@ -34,13 +38,16 @@ namespace HRIS.WPF
             day = consultation.day;
             Start = consultation.StartTime;
             End = consultation.EndTime;
+            windowOpened = true;
         }
 
         private void conCancelBtn_Click(object sender, RoutedEventArgs e)
         {
-            Agency.DeleteConsultation(id, day.ToString(), Start.ToString("HH:mm:ss"), End.ToString("HH:mm:ss"));
+            controller.DeleteConsultation(id, day.ToString(), Start.ToString("HH:mm:ss"), End.ToString("HH:mm:ss"));
             MessageBox.Show("Consultation Time Cancelled!");
+            consultationDeleted = true;
             Close();
+            windowOpened = false;
         }
     }
 }

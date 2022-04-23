@@ -5,14 +5,37 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HRIS.WPF"
         mc:Ignorable="d"
-        Title="ClassDetailWindow" Height="450" Width="800">
+        Title="ClassDetailWindow" Height="500
+        " Width="600">
     <Grid x:Name="classItem">
-        <Label x:Name="unitInfo" Content="KIT109 | Game Fundamentals" Margin="10,10,10,103" FontFamily="Georgia" Foreground="#FFD7C282" FontSize="20" FontWeight="Bold"/>
-        <Label x:Name="classInfo" Content="Lecture | Staff: Linsday Wells" Margin="10,38,0,80" FontFamily="Century Gothic" Foreground="#FF6F6F6F" FontSize="16" FontWeight="Bold"/>
-        <Label x:Name="classLocation" Content="Room C0 | Hobart campus" Margin="10,70,224,37" FontFamily="Century Gothic" Foreground="#FF868686" FontSize="18"/>
-        <Label x:Name="classTime" Content="Thursday | 11:00 - 12:00" Margin="10,97,224,10" FontFamily="Century Gothic" Foreground="#FF868686" FontSize="18"/>
-        <Button x:Name="editClassBtn" Content="EDIT DETAILS" Margin="511,91,26,24" FontSize="14" FontFamily="Calibri" BorderBrush="White" Background="#FFD7C282" Foreground="White"/>
-        <Rectangle HorizontalAlignment="Stretch" Height="5" Margin="0,145,0,0" Stroke="#FFBDBDBD" VerticalAlignment="Stretch" Width="643" Fill="#FFBDBDBD"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="83*"/>
+            <ColumnDefinition Width="37*"/>
+        </Grid.ColumnDefinitions>
+        <Label x:Name="unitInfo" Content="KIT109 | Game Fundamentals" Margin="21,10,10,103" FontFamily="Georgia" Foreground="#FFD7C282" FontSize="20" FontWeight="Bold" Grid.ColumnSpan="2"/>
+        <Label x:Name="classInfo" Content="Lecture | Staff: Linsday Wells" Margin="21,38,0,80" FontFamily="Century Gothic" Foreground="#FF6F6F6F" FontSize="16" FontWeight="Bold" Grid.ColumnSpan="2"/>
+        <Label x:Name="classLocation" Content="Room C0 | Hobart campus" Margin="21,70,12,37" FontFamily="Century Gothic" Foreground="#FF868686" FontSize="18"/>
+        <Label x:Name="classTime" Content="Thursday | 11:00 - 12:00" Margin="21,103,12,10" FontFamily="Century Gothic" Foreground="#FF868686" FontSize="18"/>
+        <Label x:Name="new_classInfo" Content="User Edit Class Detail" Margin="21,162,10,10" FontFamily="Century Gothic" Foreground="#FF6F6F6F" FontSize="16" FontWeight="Bold"/>
+        <Label x:Name="new_classRoom" Content="Room" Margin="21,196,10,10" FontFamily="Century Gothic" Foreground="#FF868686" FontSize="18"/>
+        <Label x:Name="new_classCampus" Content="Campus" Margin="21,230,10,10" FontFamily="Century Gothic" Foreground="#FF868686" FontSize="18"/>
+        <Label x:Name="new_classDay" Content="Day" Margin="21,260,10,10" FontFamily="Century Gothic" Foreground="#FF868686" FontSize="18"/>
+        <Label x:Name="new_classStartTime" Content="Start Time" Margin="21,294,10,10" FontFamily="Century Gothic" Foreground="#FF868686" FontSize="18"/>
+        <Label x:Name="new_classEndTime" Content="EndTime" Margin="21,327,10,10" FontFamily="Century Gothic" Foreground="#FF868686" FontSize="18"/>
+        <Label x:Name="new_staffID" Content="Staff" Margin="21,357,10,10" FontFamily="Century Gothic" Foreground="#FF868686" FontSize="18"/>
+        <Label x:Name="new_type" Content="Type" Margin="21,386,10,23" FontFamily="Century Gothic" Foreground="#FF868686" FontSize="18"/>
+        <ComboBox x:Name="newCampus" Height="25" Margin="121,235,35,0" VerticalAlignment="Top" ItemsSource="{Binding Source={StaticResource campusValues}}"
+                  SelectedIndex="0"/>
+        <TextBox x:Name="newRoom" Height="25" Margin="121,200,35,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" />
+        <ComboBox x:Name="newDay" Height="25" Margin="121,264,35,0" VerticalAlignment="Top" ItemsSource="{Binding Source={StaticResource dayValues}}"
+                  SelectedIndex="0"/>
+        <TextBox x:Name="newStartTime" Height="25" Margin="121,298,35,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top"/>
+        <TextBox x:Name="newEndTime" Height="25" Margin="121,327,35,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top"/>
+        <TextBox x:Name="newStaffID" Height="29" Margin="121,357,35,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top"/>
+        <ComboBox x:Name="newType" Height="25" Margin="121,386,35,0" VerticalAlignment="Top" ItemsSource="{Binding Source={StaticResource typeValues}}"
+                  SelectedIndex="0"/>
+        <Button x:Name="editClassBtn" Content="EDIT DETAILS" Margin="0,421,0,0" FontSize="14" FontFamily="Calibri" BorderBrush="White" Background="#FFD7C282" Foreground="White" Click="editClassBtn_Click" HorizontalAlignment="Right" Width="99" VerticalAlignment="Top" Height="34"/>
+        <Rectangle Margin="0,152,0,0" Stroke="#FFBDBDBD" Fill="#FFBDBDBD" Grid.ColumnSpan="2" VerticalAlignment="Top" Height="1"/>
 
     </Grid>
 </Window>
