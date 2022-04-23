@@ -7,11 +7,11 @@ using MySql.Data.MySqlClient;
 
 namespace HRIS.WPF
 {
-    enum Type { Lecture, Tutorial, Practical, Workshop }
+    public enum Type { Lecture, Tutorial, Practical, Workshop }
 
-    enum Day { Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday}
+    public enum Day { Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday}
 
-    class Class
+    public class Class
     {
         #region Class Properties
         public Unit unit { get; set; }

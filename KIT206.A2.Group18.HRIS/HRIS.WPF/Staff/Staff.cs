@@ -14,7 +14,7 @@ namespace HRIS.WPF
 
     public enum Category { academic, technical, admin, casual }
 
-    class Staff
+    public class Staff
     {
         #region Staff Properties
         public int ID { get; set; }

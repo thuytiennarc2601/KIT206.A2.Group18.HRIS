@@ -14,8 +14,7 @@ namespace HRIS.WPF
         private List<Unit> unit;
         private List<Class> classes;
         private List<Consultation> consultation;
-        //public List<Staff> Workers { get { return staff; } set { } }
-
+        
         private ObservableCollection<Staff> viewableStaff;
         private ObservableCollection<Unit> viewableUnit;
         private ObservableCollection<Class> viewableClasses;
@@ -52,6 +51,12 @@ namespace HRIS.WPF
         }
         public ObservableCollection<Unit> GetViewableUnitList()
         {
+            /*
+            foreach (Unit u in unit)
+            {
+                u.Coordinator = Agency.LoadConsultations(e.ID);
+            }
+            */
             return VisibleUnits;
         }
         public ObservableCollection<Class> GetViewableClassList()

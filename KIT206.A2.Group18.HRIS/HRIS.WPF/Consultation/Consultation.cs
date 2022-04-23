@@ -8,7 +8,7 @@ using MySql.Data.MySqlClient;
 
 namespace HRIS.WPF
 {
-    class Consultation
+    public class Consultation
     {
         #region Properties
         public Staff staff { get; set; }

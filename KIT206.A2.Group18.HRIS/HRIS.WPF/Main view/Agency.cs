@@ -129,8 +129,8 @@ namespace HRIS.WPF
             return unitList;
         }
         #endregion
-        #region
         //Retrieve all consultations from database
+        #region
         public static List<Consultation> LoadAllConsultations()
         {
             List<Consultation> consultationList = new List<Consultation>();

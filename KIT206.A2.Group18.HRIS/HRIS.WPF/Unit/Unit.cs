@@ -8,7 +8,7 @@ using MySql.Data.MySqlClient;
 
 namespace HRIS.WPF
 {
-    class Unit
+    public class Unit
     {
         #region Unit Properties
         public string UnitCode { get; set; }
