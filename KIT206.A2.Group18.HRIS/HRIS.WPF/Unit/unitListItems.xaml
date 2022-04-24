@@ -4,21 +4,11 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:HRIS.WPF"
-             mc:Ignorable="d" Width="627" Height="122">
+             mc:Ignorable="d" Width="668" Height="122">
     <Grid x:Name="unitItem" Background="White" Margin="0,0,0,0" >
         <Label x:Name="unitName" Content="Game Fundamentals" Margin="18,10,10,80" FontFamily="Georgia" Foreground="#FFE57BB1" FontSize="20" FontWeight="Bold"/>
         <Label x:Name="unitCode" Content="KIT109" Margin="18,38,298,53" Foreground="#FF868686" FontFamily="Century Gothic" FontSize="16" FontWeight="Bold"/>
         <Label x:Name="unitCoordinator" Content="Coordinator: Lindsay Wells" Margin="18,79,165,7" FontFamily="Century Gothic" FontSize="18"/>
-        <Button x:Name="editCoorBtn" HorizontalAlignment="Right" Content="EDIT COORDINATOR" Margin="0,78,21,16" FontFamily="Calibri" Background="#FFE57BB1" BorderBrush="White" Foreground="White" FontSize="14" Width="131"/>
-        <Rectangle x:Name="seperator" Margin="0,118,0,0" Stroke="#FFC9C9C9" Fill="#FFBDBDBD" RenderTransformOrigin="0.5,0.5" Height="4">
-            <Rectangle.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform ScaleY="-1"/>
-                    <SkewTransform/>
-                    <RotateTransform/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </Rectangle.RenderTransform>
-        </Rectangle>
+        <Button x:Name="editCoorBtn" HorizontalAlignment="Right" Content="EDIT COORDINATOR" Margin="0,77,20,15" FontFamily="Calibri" Background="#FFE57BB1" BorderBrush="White" Foreground="White" FontSize="14" Width="131" Height="30"/>
     </Grid>
 </UserControl>

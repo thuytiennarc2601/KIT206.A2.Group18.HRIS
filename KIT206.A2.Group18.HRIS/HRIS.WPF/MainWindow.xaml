@@ -5,25 +5,29 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HRIS.WPF"
         mc:Ignorable="d"
-        Title="MainWindow" Height="580" Width="1200" ResizeMode="CanResizeWithGrip" MinHeight="580" MinWidth="900" Loaded="HRIS_Loaded">
+        Title="MainWindow" Height="580" Width="900" ResizeMode="CanResizeWithGrip" MinHeight="580" MinWidth="900" Loaded="HRIS_Loaded">
     <Grid x:Name="listContainer" Margin="0,0,0,-6">
         <Grid.RowDefinitions>
-            <RowDefinition Height="55*"/>
-            <RowDefinition Height="135*"/>
-            <RowDefinition Height="390*"/>
+            <RowDefinition Height="79*"/>
+            <RowDefinition Height="116*"/>
+            <RowDefinition Height="375*"/>
         </Grid.RowDefinitions>
 
-        <Label x:Name="sysTitle" Content="Human Resource Information System" HorizontalContentAlignment="Center" FontFamily="Georgia" Foreground="#FF6F6C6A" FontSize="36" FontWeight="Bold" Margin="10,3,10,119" Grid.RowSpan="2"/>
+        <Label x:Name="sysTitle" Content="" HorizontalContentAlignment="Center" Width="Auto" Height="Auto" Margin="10,3,10,0">
+            <Label.Background>
+                <ImageBrush ImageSource="/title.png"/>
+            </Label.Background>
+        </Label>
 
         <!--#Region Set of list buttons -->
-        <Grid Margin="93,11,93,11" Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+        <Grid Margin="93,11,93,11" Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="173*"/>
                 <ColumnDefinition Width="187*"/>
                 <ColumnDefinition Width="186*"/>
                 <ColumnDefinition Width="168*"/>
             </Grid.ColumnDefinitions>
-            <Button x:Name="staffButton"  Content="" Height="Auto" Width="Auto" Cursor="Hand" Click="staffButton_Click" Margin="0,0,5,0">
+            <Button x:Name="staffButton"  Content="" Height="Auto" Width="Auto" Cursor="Hand" Click="staffButton_Click" Margin="0,-11,0,0">
                 <Button.Template>
                     <ControlTemplate>
                         <Image Name="Image" Stretch="Fill" Source="/resources/staff.png" />
@@ -35,7 +39,7 @@
                     </ControlTemplate>
                 </Button.Template>
             </Button>
-            <Button x:Name="unitButton" Content="" Height="Auto" Width="Auto" Cursor="Hand" Click="unitButton_Click" Grid.Column="1" BorderBrush="Black" Margin="0,0,5,0">
+            <Button x:Name="unitButton" Content="" Height="Auto" Width="Auto" Cursor="Hand" Click="unitButton_Click" BorderBrush="Black" Margin="5,-11,3,0" Grid.Column="1">
                 <Button.Template>
                     <ControlTemplate>
                         <Image Name="Image" Stretch="Fill" Source="/resources/unit2.png" />
@@ -47,7 +51,7 @@
                     </ControlTemplate>
                 </Button.Template>
             </Button>
-            <Button x:Name="classButton" Content="" Height="Auto" Width="Auto" Cursor="Hand" Click="classButton_Click" Grid.Column="2" Margin="0,0,5,0">
+            <Button x:Name="classButton" Content="" Height="Auto" Width="Auto" Cursor="Hand" Click="classButton_Click" Grid.Column="2" Margin="2,-11,0,0">
                 <Button.Template>
                     <ControlTemplate>
                         <Image Name="Image" Stretch="Fill" Source="/resources/class1.png" />
@@ -59,7 +63,7 @@
                     </ControlTemplate>
                 </Button.Template>
             </Button>
-            <Button x:Name="conButton" Content="" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Height="Auto" Width="Auto" Cursor="Hand" Click="conButton_Click" Grid.Column="3">
+            <Button x:Name="conButton" Content="" Height="Auto" Width="Auto" Cursor="Hand" Click="conButton_Click" Grid.Column="3" Margin="5,-11,0,0">
                 <Button.Template>
                     <ControlTemplate>
                         <Image Name="Image" Stretch="Fill" Source="/resources/consultation 1.png" />
@@ -75,49 +79,22 @@
         <!--#endregion-->
 
 
-        <Grid x:Name="container" Margin="93,5,93,20" Background="#FFC3C3C3" Grid.Row="2" Height="Auto" Width="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+        <Grid x:Name="container" Margin="93,5,93,20" Background="#FFC3C3C3" Grid.Row="2" Height="Auto" Width="Auto">
             <!--#region List display view -->
-            <TextBox x:Name="searchBar" HorizontalAlignment="Left" Margin="20,9,0,0" TextWrapping="Wrap" Text="Searching..." VerticalAlignment="Top" Width="250" Height="26" BorderBrush="White" Foreground="#FFAFAFAF" FontStyle="Italic" FontFamily="Calibri" FontSize="16"/>
-            <Button x:Name="searchButton" Content="" HorizontalAlignment="Left" Margin="270,9,0,0" VerticalAlignment="Top" Height="26" Width="26
-                    " BorderBrush="#FFDADADA">
+            <TextBox x:Name="searchBar" HorizontalAlignment="Left" Margin="20,6,0,0" TextWrapping="Wrap" Text="Searching..." VerticalAlignment="Top" Width="250" Height="29" BorderBrush="White" Foreground="#FFAFAFAF" FontStyle="Italic" FontFamily="Calibri" FontSize="16"/>
+            <Button x:Name="searchButton" Content="" HorizontalAlignment="Left" Margin="270,6,0,0" VerticalAlignment="Top" Height="29" Width="30" BorderBrush="#FFDADADA">
                 <Button.Background>
                     <ImageBrush ImageSource="/icons8-search-30.png"/>
                 </Button.Background>
             </Button>
-            <Label x:Name="DisplayInform" Content="Displaying Consultation List" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="301,11,0,0" VerticalAlignment="Top" FontFamily="Century Gothic" FontStyle="Italic" Foreground="White"/>
-            <Button x:Name="AddButton" Content="Add a unit" HorizontalAlignment="Right" Margin="0,9,20,0" VerticalAlignment="Top" Height="26" Width="144" Cursor="Hand" Foreground="White" BorderBrush="White" Background="#FF646464" FontFamily="Calibri" FontSize="16"/>
-            <ListBox x:Name="GeneralListBox" d:ItemsSource="{d:SampleData ItemCount=5}" Height="Auto" VerticalAlignment="Top" HorizontalAlignment="Left" Width="658" Margin="20,40,20,0" BorderBrush="White" SelectionChanged="ListBox_SelectionChanged"/>
-            <!--#endregion-->
-
-            <!--#region Display staff detail in a sub-panel -->
-            <Grid x:Name="StaffDetailView" Height="Auto" Margin="683,40,20,0" Width="Auto" Background="White" Visibility="Visible">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="120*"/>
-                    <ColumnDefinition Width="191*"/>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="19*"/>
-                    <RowDefinition Height="18*"/>
-                    <RowDefinition Height="16*"/>
-                </Grid.RowDefinitions>
-                <Image x:Name="StaffPhoto" HorizontalAlignment="Left" Height="Auto" Margin="15,10,0,0" VerticalAlignment="Top" Width="Auto" OpacityMask="White" Source="/dd40c7fbc2671538ddfd587528b254c6.jpg"/>
-                <Label x:Name="StaffName" Content="Dr. Lindsay Wells" HorizontalAlignment="Left" Margin="3,6,0,0" VerticalAlignment="Top" FontFamily="Georgia" Foreground="#FF729F54" FontSize="18" FontWeight="Bold" Height="30" Width="175" Grid.Column="1"/>
-                <Label x:Name="StaffID" Content="ID: 00000" HorizontalAlignment="Left" Margin="4,28,0,0" VerticalAlignment="Top" FontFamily="Century Gothic" Foreground="#FF2D2D2D" FontSize="14" Height="27" Width="70" Grid.Column="1"/>
-                <Label x:Name="StaffCategory" Content="ACADEMIC" HorizontalAlignment="Left" Margin="3,47,0,0" VerticalAlignment="Top" FontFamily="Century Gothic" Foreground="#FF2D2D2D" FontSize="14" FontWeight="Bold" Height="26" Width="86" Grid.Column="1"/>
-                <Label x:Name="StaffLocation" Content="Room: C203 | Launceston" HorizontalAlignment="Left" Margin="10,56,0,0" VerticalAlignment="Top" FontFamily="Century Gothic" Foreground="#FF2D2D2D" FontSize="14" Grid.Row="2" Height="24" Width="189" Grid.ColumnSpan="2"/>
-                <Label x:Name="StaffContact" Content="Phone: (03)62000000" HorizontalAlignment="Left" Margin="3,66,0,0" VerticalAlignment="Top" FontFamily="Century Gothic" Foreground="#FF2D2D2D" FontSize="14" Height="27" Width="149" Grid.Column="1"/>
-                <Label x:Name="StaffEmail" Content="Email: abd@utas.edu.au" HorizontalAlignment="Left" Margin="3,87,0,0" VerticalAlignment="Top" FontFamily="Century Gothic" Foreground="#FF2D2D2D" FontSize="14" Height="27" Width="176" Grid.Column="1"/>
-                <Label x:Name="unitLabel" Content="UNITS" HorizontalAlignment="Left" Margin="10,5,0,72" FontFamily="Century Gothic" FontSize="14" FontWeight="Bold" Width="46" Grid.Row="1"/>
-                <ListView x:Name="StaffUnitList" d:ItemsSource="{d:SampleData ItemCount=5}" Foreground="#FF5F5F5F" FontFamily="Calibri" VerticalAlignment="Top"  FontSize="14" Height="71" Margin="10,36,10,0" Grid.Row="1" BorderBrush="White" Grid.ColumnSpan="2">
-                    <ListView.View>
-                        <GridView>
-                            <GridViewColumn/>
-                        </GridView>
-                    </ListView.View>
-                </ListView>
-                <Label x:Name="ConsultationLabel" Content="CONSULTATION" HorizontalAlignment="Left" Margin="10,4,0,0" VerticalAlignment="Top" FontFamily="Century Gothic" FontSize="14" FontWeight="Bold" Grid.Row="2" Height="26" Width="114" Grid.ColumnSpan="2"/>
-                <Label x:Name="StaffConsultationTime" Content="Monday | 10AM - 12PM" HorizontalAlignment="Left" Margin="10,30,0,0" VerticalAlignment="Top" FontFamily="Century Gothic" Foreground="#FF2D2D2D" FontSize="14" Grid.Row="2" Height="26" Width="172" Grid.ColumnSpan="2"/>
-            </Grid>
+            <Label x:Name="DisplayInform" Content="Displaying Consultation List" HorizontalContentAlignment="Left" HorizontalAlignment="Left" Margin="300,6,0,0" VerticalAlignment="Top" FontFamily="Century Gothic" FontStyle="Italic" Foreground="White" Height="29" FontSize="14"/>
+            <Button x:Name="AddButton" Content="Add a unit" HorizontalAlignment="Right" Margin="0,6,54,0" VerticalAlignment="Top" Height="29" Width="144" Cursor="Hand" Foreground="White" BorderBrush="White" Background="#FF646464" FontFamily="Calibri" FontSize="16"/>
+            <ListBox x:Name="GeneralListBox" d:ItemsSource="{d:SampleData ItemCount=5}" Height="Auto" Width="Auto" Margin="0,40,0,0" BorderBrush="#FFC8C8C8" SelectionChanged="ListBox_SelectionChanged" SizeChanged="GeneralListBox_SizeChanged"/>
+            <Button x:Name="RefreshButton" Content="" HorizontalAlignment="Right" Margin="0,6,20,0" VerticalAlignment="Top" Height="29" Width="29" Cursor="Hand" Foreground="White" BorderBrush="White" FontFamily="Calibri" FontSize="16">
+                <Button.Background>
+                    <ImageBrush ImageSource="/icons8-refresh-30.png"/>
+                </Button.Background>
+            </Button>
             <!--#endregion-->
 
         </Grid>

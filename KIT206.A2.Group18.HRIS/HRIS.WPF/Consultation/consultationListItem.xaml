@@ -5,12 +5,11 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:HRIS.WPF"
              mc:Ignorable="d" 
-             d:DesignHeight="130" Width="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+             Height="130" Width="668">
     <Grid x:Name="consultationItem" Background="White">
         <Label x:Name="staffDetails" Content="Dr. Lindsay Wells" Margin="10,10,153,81" Foreground="#FF7BA8D7" FontFamily="Georgia" FontSize="22" FontWeight="Bold"/>
         <Label x:Name="staffID" Content="ID: 000000" Margin="10,38,321,62" FontFamily="Century Gothic" Foreground="#FF787878" FontSize="18" FontWeight="Normal" FontStyle="Normal"/>
         <Label x:Name="consultationTime" Content="Monday | 11:00 - 12:00" Margin="10,80,226,17" FontFamily="Century Gothic" Foreground="#FF787878" FontSize="18" FontWeight="Bold"/>
-        <Rectangle HorizontalAlignment="Center" Height="4" Margin="0,126,0,0" Stroke="#FFBDBDBD" VerticalAlignment="Top" Width="627" Fill="#FFBDBDBD"/>
         <Button x:Name="editConsultation" HorizontalAlignment='Right' Content="EDIT DETAILS" Margin="401,80,123,20" FontFamily="Calibri" Foreground="White" Background="#FF7BA8D7" BorderBrush="White" FontSize="14" Height="30" Width="103"/>
         <Button x:Name="conCancelBtn" HorizontalAlignment="Right" Content="CANCEL" Margin="509,80,15,20" FontFamily="Calibri" Foreground="White" Background="#FF7BA8D7" BorderBrush="White" FontSize="14" Height="30" Width="103"/>
 

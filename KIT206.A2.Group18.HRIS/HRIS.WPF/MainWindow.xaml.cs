@@ -23,9 +23,11 @@ namespace HRIS.WPF
     /// </summary>
     public partial class MainWindow : Window
     {
-        private const int MIN_WIDTH_WITH_SUB_PANEL = 1200;
         private const string STAFF_LIST_KEY = "staffList";
+        private const int DIFFER_LIST_BOX = 32;
         private Controller controller;
+
+        private double differSize = 0;
         public MainWindow()
         {
             InitializeComponent();
@@ -39,104 +41,169 @@ namespace HRIS.WPF
         private bool choseConsultation = false;
         #endregion
 
-
-        //private void staff_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        //{
-        //    GeneralListBox.ItemsSource = controller.GetViewableStaffList();
-        //    MessageBox.Show("staff is pressed!");
-        //}
-
-        //private void Class_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        //{
-        //    GeneralListBox.ItemsSource = controller.GetViewableClassList();
-        //    MessageBox.Show("class is pressed!");
-        //}
-
-        //private void Consultation_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        //{
-        //    GeneralListBox.ItemsSource = controller.GetViewableConsultationList();
-        //    MessageBox.Show("consultation is pressed!");
-        //}
-
-        //private void Unit_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        //{
-        //    GeneralListBox.ItemsSource = controller.GetViewableUnitList();
-        //    MessageBox.Show("unit is pressed!");
-        //}
-
         private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            staffListItem selectedStaff = (staffListItem)GeneralListBox.SelectedItem;
-            if (choseStaff)
-            {
-                
-                ShowStaffDetails(selectedStaff.ID);
-                this.MinWidth = MIN_WIDTH_WITH_SUB_PANEL;
-                this.StaffDetailView.Visibility = Visibility.Visible;
-                
-            }
-            MessageBox.Show(selectedStaff.StaffInfo);
+
         }
 
         private void HRIS_Loaded(object sender, RoutedEventArgs e)
         {
             GeneralListBox.ItemsSource = controller.GetViewableStaffItemList();
-            this.Width = this.MinWidth;
-            this.StaffDetailView.Visibility = Visibility.Hidden;
             choseStaff = true;
+            ChangeContentOnTab("Displaying Staff List", "Nothing", choseStaff);
         }
 
         private void staffButton_Click(object sender, RoutedEventArgs e)
         {
             GeneralListBox.ItemsSource = controller.GetViewableStaffItemList();
-            choseStaff = true;
+            choseStaff = true; //staff tab is chosen
             choseUnit = false;
             choseClass = false;
             choseConsultation = false;
+            SetNewSize();
+            ChangeContentOnTab("Displaying Staff List", "Nothing", choseStaff);
         }
 
         private void unitButton_Click(object sender, RoutedEventArgs e)
         {
             GeneralListBox.ItemsSource = controller.GetViewableUnitItemList();
+            choseStaff = false;
+            choseUnit = true; //Unit tab is chosen
+            choseClass = false;
+            choseConsultation = false;
+            SetNewSize();
+            ChangeContentOnTab("Displaying Unit List", "Add Unit", choseUnit);
         }
 
         private void classButton_Click(object sender, RoutedEventArgs e)
         {
             GeneralListBox.ItemsSource = controller.GetViewableClassItemList();
+            choseStaff = false;
+            choseUnit = false;
+            choseClass = true; //class tab is chosen
+            choseConsultation = false;
+            SetNewSize();
+            ChangeContentOnTab("Displaying Class List", "Add Class", choseClass);
         }
 
         private void conButton_Click(object sender, RoutedEventArgs e)
         {
             GeneralListBox.ItemsSource = controller.GetViewableConsulItemList();
+            choseStaff = false;
+            choseUnit = false;
+            choseClass = false;
+            choseConsultation = true; //consultation tab is chosen
+            SetNewSize();
+            ChangeContentOnTab("Displaying Consultation List", "Add Consultation", choseConsultation);
         }
 
-        #region Load Staff Details Into MainView.StaffDetailView By StaffID 
-        private void ShowStaffDetails(int staffID)
+        private void GeneralListBox_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-            List<Staff> staffList = Agency.LoadAllStaffs();
+            differSize = ChangeListItemSize();
+        }
 
-            var getStaff = from Staff s in staffList
-                           where s.ID == staffID
-                           select s;
+        //Makes GeneralListBox Responsive
+        #region Set a new size to GeneralListBox's items when size changed
+        private double ChangeListItemSize()
+        {
+            double size = 0;
 
-            List<Staff> result = new List<Staff>(getStaff);
-
-            if (result[0].Photo == null || result[0].Photo.Length == 0)
+            if(GeneralListBox.Items.Count > 0)
             {
-                this.StaffPhoto.Source = new BitmapImage(new System.Uri("https://www.shareicon.net/data/128x128/2016/07/10/793851_people_512x512.png"));
+                for(int i = 0; i < GeneralListBox.Items.Count; i++)
+                {
+                    if (choseStaff)
+                    {
+                        staffListItem staffItem = (staffListItem)GeneralListBox.Items[i];
+                        staffItem.Width = GeneralListBox.ActualWidth - DIFFER_LIST_BOX;
+                        
+                        if(size == 0)
+                        {
+                            size = staffItem.Width;
+                        }
+                    }
+                    if(choseUnit)
+                    {
+                        unitListItems unitItem = (unitListItems)GeneralListBox.Items[i];
+                        unitItem.Width = GeneralListBox.ActualWidth - DIFFER_LIST_BOX;
+                        if(size == 0)
+                        {
+                            size = unitItem.Width;
+                        }
+                    }
+                    if(choseClass)
+                    {
+                        classListItems classItem = (classListItems)GeneralListBox.Items[i];
+                        classItem.Width = GeneralListBox.ActualWidth - DIFFER_LIST_BOX;
+                        if(size == 0)
+                        {
+                            size = classItem.Width;
+                        }
+                    }
+                    if(choseConsultation)
+                    {
+                        consultationListItem conItem = (consultationListItem)GeneralListBox.Items[i];
+                        conItem.Width = GeneralListBox.ActualWidth - DIFFER_LIST_BOX;
+                        if(size == 0)
+                        {
+                            size = conItem.Width;
+                        }
+                    }
+                }
             }
-            else
-            {
-                this.StaffPhoto.Source = Staff.ByteToImage(result[0].Photo);
-            }
-            this.StaffName.Content = result[0].Title + ". " + result[0].GivenName + " " + result[0].FamilyName;
-            this.StaffID.Content = result[0].ID.ToString();
-            this.StaffCategory.Content = result[0].category.ToString().ToUpper();
-            this.StaffContact.Content = "Phone: " + result[0].Phone;
-            this.StaffEmail.Content = "Email: " + result[0].Email;
-            this.StaffLocation.Content = "Room: " + result[0].Room + " | " + result[0].campus.ToString();
-
+            return size;
         }
         #endregion
+
+        #region Set the new size to GeneralListBox's items when choosing a tab
+        private void SetNewSize()
+        {
+            if(GeneralListBox.Items.Count > 0)
+            {
+                for (int i = 0; i < GeneralListBox.Items.Count; i++)
+                {
+                    if(choseStaff && differSize != 0)
+                    {
+                        staffListItem staffItem = (staffListItem)GeneralListBox.Items[i];
+                        staffItem.Width = differSize;
+                    }
+                    if(choseUnit)
+                    {
+                        unitListItems unitItem = (unitListItems)GeneralListBox.Items[i];
+                        unitItem.Width = differSize;
+                    }
+                    if(choseClass)
+                    {
+                        classListItems classItem = (classListItems)GeneralListBox.Items[i];
+                        classItem.Width = differSize;
+                    }
+                    if(choseConsultation)
+                    {
+                        consultationListItem conItem = (consultationListItem)GeneralListBox.Items[i];
+                        conItem.Width = differSize;
+                    }
+                }
+            }
+        }
+        #endregion
+
+        //Change Add Button content and inform user what list is shown
+        #region Change Add button and display message
+        private void ChangeContentOnTab(string displayMessage, string buttonContent, bool choice)
+        {
+            if(choseStaff)
+            {
+                this.AddButton.Visibility = Visibility.Collapsed;
+                this.DisplayInform.Content = displayMessage;
+            }
+            else if(choice)
+            {
+                this.AddButton.Visibility= Visibility.Visible;
+                this.AddButton.Content = buttonContent;
+                this.DisplayInform.Content = displayMessage;
+            }
+        }
+        #endregion
+
     }
 }
