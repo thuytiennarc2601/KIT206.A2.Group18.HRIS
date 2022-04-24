@@ -44,5 +44,9 @@ namespace HRIS.WPF
         {
             return GivenName + " " + FamilyName;
         }
+        public StaffDetailWindow ExportWindowView(Staff staff)
+        {
+            return new StaffDetailWindow(staff);
+        }
     }
 }

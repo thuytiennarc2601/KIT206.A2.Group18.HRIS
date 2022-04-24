@@ -32,12 +32,6 @@ namespace HRIS.WPF
             staff = Agency.LoadAllStaffs();
             viewableStaff = new ObservableCollection<Staff>(staff); 
 
-            foreach (Staff e in staff)
-            {
-                e.Consultations = Agency.LoadConsultations(e.ID);
-                e.Classes = Agency.LoadClasses(e.ID);
-            }
-
             unit = Agency.LoadAllUnits();
             viewableUnit = new ObservableCollection<Unit>(unit);
 
