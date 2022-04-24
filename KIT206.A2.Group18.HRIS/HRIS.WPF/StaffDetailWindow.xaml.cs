@@ -22,6 +22,13 @@ namespace HRIS.WPF
         public StaffDetailWindow(Staff staff)
         {
             InitializeComponent();
+            if (staff.Photo == null || staff.Photo.Length == 0)
+            {
+                staffPhoto.Source = new BitmapImage(new System.Uri("https://www.shareicon.net/data/128x128/2016/07/10/793851_people_512x512.png"));
+            }
+            else { 
+                staffPhoto.Source = Controller.ByteToImage(staff.Photo);
+            }
             staffInfo.Content = "Staff: "+staff.Title + " " + staff;
             staffID.Content = "Staff ID: "+staff.ID;
             staffEmail.Content ="Email: "+ staff.Email;

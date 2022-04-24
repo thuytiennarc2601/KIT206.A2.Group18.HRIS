@@ -5,6 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
 using System.Windows;
+using System.IO;
+using System.Drawing;
+
 
 
 namespace HRIS.WPF
@@ -72,7 +75,7 @@ namespace HRIS.WPF
                             Phone = rdr.GetString(12),
                             Room = rdr.GetString(13),
                             Email = rdr.GetString(14),
-                            //Photo = rdr.Get
+                            Photo = (byte[])rdr[15],
                             category = ParseEnum<Category>(rdr.GetString(16))
                         } 
                     });
@@ -213,14 +216,22 @@ namespace HRIS.WPF
 
             MySqlDataReader rdr = null;
             conn = GetConnection();
+            byte[] data = null;
 
             try
             {
                 conn.Open();
                 MySqlCommand cmd = new MySqlCommand("select id, given_name, family_name, title, campus, phone, room, email, photo, category from staff", conn);
+                //MySqlCommand cmdphoto = new MySqlCommand("SELECT photo FROM staff", conn);
                 rdr = cmd.ExecuteReader();
+                //bindata = (byte[])(cmd.ExecuteScalar());
                 while (rdr.Read())
                 {
+                    if (!rdr.IsDBNull(8))
+                    {
+                        data = (byte[]) rdr[8];
+                    }
+                   
                     staffList.Add(new Staff
                     {
                         ID = rdr.GetInt32(0),
@@ -231,7 +242,7 @@ namespace HRIS.WPF
                         Phone = rdr.GetString(5),
                         Room = rdr.GetString(6),
                         Email = rdr.GetString(7),
-                        //Photo = (byte[]) rdr[8],
+                        Photo = data,
                         category = ParseEnum<Category>(rdr.GetString(9))
                     });
                 }

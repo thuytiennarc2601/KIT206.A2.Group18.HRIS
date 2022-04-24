@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
 using System.IO;
+using System.Windows.Controls;
 
 
 namespace HRIS.WPF

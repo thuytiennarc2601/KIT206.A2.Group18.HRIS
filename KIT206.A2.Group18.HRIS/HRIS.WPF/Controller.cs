@@ -1,10 +1,12 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.IO;
 
 namespace HRIS.WPF
 {
@@ -73,6 +75,18 @@ namespace HRIS.WPF
             string unitCode, string campus, string day, string start, string end, string type, string room, int staffID)
         {
             Agency.EditClassDetail(new_campus, new_day, new_start, new_end, new_type, new_room, new_staffID, unitCode, campus, day, start, end, type, room, staffID);
+        }
+        public static ImageSource ByteToImage(byte[] imageData)
+        {
+            BitmapImage biImg = new BitmapImage();
+            MemoryStream ms = new MemoryStream(imageData);
+            biImg.BeginInit();
+            biImg.StreamSource = ms;
+            biImg.EndInit();
+
+            ImageSource imgSrc = biImg as ImageSource;
+
+            return imgSrc;
         }
     }
 }
