@@ -19,35 +19,28 @@ namespace HRIS.WPF
         private List<classListItems> classItem;
         private List<consultationListItem> consultationItem;
 
-        private ObservableCollection<staffListItem> viewableStaffItem;
-        private ObservableCollection<unitListItems> viewableUnitItem;
-        private ObservableCollection<classListItems> viewableClassItem;
-        private ObservableCollection<consultationListItem > viewableConsultationItem;
+        //private ObservableCollection<staffListItem> viewableStaffItem;
+        //private ObservableCollection<unitListItems> viewableUnitItem;
+        //private ObservableCollection<classListItems> viewableClassItem;
+        //private ObservableCollection<consultationListItem > viewableConsultationItem;
 
-        public ObservableCollection<staffListItem> VisibleStaffItem { get { return viewableStaffItem; } set { } }
-        public ObservableCollection<unitListItems> VisibleUnitItem { get { return viewableUnitItem; } set { } }
-        public ObservableCollection <classListItems> VisibleClassItem { get { return viewableClassItem; } set { } }
-        public ObservableCollection<consultationListItem> VisibleConsultationItem { get { return viewableConsultationItem; } set { } }
-        public Controller ()
-        {
-            //generate a list of staff items
-            staffItem = AddStaffInfoToItem();
-            viewableStaffItem = new ObservableCollection<staffListItem>(staffItem);
+        //public ObservableCollection<staffListItem> VisibleStaffItem { get { return viewableStaffItem; } set { } }
+        //public ObservableCollection<unitListItems> VisibleUnitItem { get { return viewableUnitItem; } set { } }
+        //public ObservableCollection <classListItems> VisibleClassItem { get { return viewableClassItem; } set { } }
+        //public ObservableCollection<consultationListItem> VisibleConsultationItem { get { return viewableConsultationItem; } set { } }
+        //public Controller ()
+        //{
+            
 
-            //generate a list of unit items
-            unitItem = AddUnitInfoToItem();
-            viewableUnitItem = new ObservableCollection<unitListItems>(unitItem);
+            
 
-            //generate a list of class items
-            classItem = AddClassInfoToItem();
-            viewableClassItem = new ObservableCollection<classListItems>(classItem);
+            
 
-            //generate a list of consultation items
-            consultationItem = AddConsultationInfoToItem();
-            viewableConsultationItem = new ObservableCollection<consultationListItem>(consultationItem);
-        }
+            
+        //}
 
-        #region Display Staff List
+        //Load details and display lists of four entities
+        #region Load Staff List Into GeneralListBox
         //Load all staff info into the main listbox
         private List<staffListItem> AddStaffInfoToItem()
         {
@@ -60,7 +53,7 @@ namespace HRIS.WPF
                 {
                     staffListItem item = new staffListItem();
                     item.ID = staff[i].ID;
-                    item.StaffInfo = staff[i].Title + ". " + staff[i].GivenName + " " + staff[i].FamilyName;
+                    item.StaffInfo = staff[i].ToString();
                     item.StaffID = "ID: " + staff[i].ID.ToString();
                     item.StaffCategory = staff[i].category.ToString().ToUpper();
                     item.StaffEmail = "Email: " + staff[i].Email;
@@ -72,7 +65,7 @@ namespace HRIS.WPF
                     }
                     else
                     {
-                        item.StaffPhoto = Staff.ByteToImage(staff[i].Photo);
+                        item.StaffPhoto = ImageDealer.ByteToImage(staff[i].Photo);
                     }
                     items.Add(item);
                 }
@@ -82,7 +75,7 @@ namespace HRIS.WPF
 
         #endregion
 
-        #region Display Unit List
+        #region Load Unit List Into GeneralListBox
         //Load units info to the main listbox
         private List<unitListItems> AddUnitInfoToItem()
         {
@@ -112,7 +105,7 @@ namespace HRIS.WPF
         }
         #endregion
 
-        #region Display Class List
+        #region Load Class List Into GeneralListBox
         //Load classes' details into the main listbox
         private List<classListItems> AddClassInfoToItem()
         {
@@ -154,7 +147,7 @@ namespace HRIS.WPF
         }
         #endregion
 
-        #region Display Consultation List
+        #region Load Consultation List Into GeneralListBox
         //Load all consultations' details into the main listbox
         private List<consultationListItem> AddConsultationInfoToItem()
         {
@@ -185,21 +178,144 @@ namespace HRIS.WPF
         }
         #endregion
 
-        public ObservableCollection<staffListItem> GetViewableStaffItemList()
+        #region Return Item List
+        public List<staffListItem> GetViewableStaffItemList()
         {
-            return VisibleStaffItem;
+            //generate a list of staff items
+            staffItem = AddStaffInfoToItem();
+            return staffItem;
         }
-        public ObservableCollection<unitListItems> GetViewableUnitItemList()
+        public List<unitListItems> GetViewableUnitItemList()
         {
-            return VisibleUnitItem;
+            //generate a list of unit items
+            unitItem = AddUnitInfoToItem();
+            return unitItem;
         }
-        public ObservableCollection<classListItems> GetViewableClassItemList()
+        public List<classListItems> GetViewableClassItemList()
         {
-            return VisibleClassItem;
+            //generate a list of class items
+            classItem = AddClassInfoToItem();
+            return classItem;
         }
-        public ObservableCollection<consultationListItem> GetViewableConsulItemList()
+        public List<consultationListItem> GetViewableConsulItemList()
         {
-            return VisibleConsultationItem;
+            //generate a list of consultation items
+            consultationItem = AddConsultationInfoToItem();
+            return consultationItem;
         }
+        #endregion
+
+        //STAFF MANAGEMENT: Show Staff Details, Add Staff Info
+        //Show staff member's details (their information, their units and their consultations)
+        #region Show A Staff Member Details
+        public static StaffDetailView ShowStaffDetails(int StaffID)
+        {
+            Staff shownStaff = Staff.GetStaffByID(StaffID);
+            List<Unit> thisStaffUnits = Unit.GetUnitsByStaffID(StaffID);
+            List<Consultation> thisStaffConsultations = Consultation.GetConsultationByStaffID(StaffID);
+            StaffDetailView detailView = new StaffDetailView();
+
+            detailView.Title = shownStaff.ToString() + " Information";
+
+            //set staff data
+            if (shownStaff.Photo == null || shownStaff.Photo.Length == 0)
+            {
+                detailView.StaffPhoto.Source = new BitmapImage(new System.Uri("https://www.shareicon.net/data/128x128/2016/07/10/793851_people_512x512.png"));
+            }
+            else
+            {
+                detailView.StaffPhoto.Source = ImageDealer.ByteToImage(shownStaff.Photo);
+            }
+            detailView.StaffName.Content = shownStaff.ToString();
+            detailView.StaffID.Content = "ID: " + StaffID.ToString();
+            detailView.StaffCategory.Content = shownStaff.category.ToString().ToUpper();
+            detailView.StaffPhone.Content = "Phone: " + shownStaff.Phone;
+            detailView.StaffEmail.Content = "Email: " + shownStaff.Email;
+
+            if (thisStaffUnits.Count > 0)
+            {
+                detailView.UnitList.ItemsSource = thisStaffUnits;
+            }
+
+            if( thisStaffConsultations.Count > 0)
+            {
+                detailView.ConsultationList.ItemsSource = thisStaffConsultations;
+            }
+
+            return detailView;
+        }
+        #endregion
+
+        //Load staff details into AddStaffInfoView.
+        #region Load Staff Details Into AddStaffInfoView
+        public static AddStaffInfoView LoadStaffDetails(int StaffID)
+        {
+            AddStaffInfoView addInfoView = new AddStaffInfoView();
+            Staff shownStaff = Staff.GetStaffByID(StaffID);
+
+            //set staff data
+            if (shownStaff.Photo == null || shownStaff.Photo.Length == 0)
+            {
+                addInfoView.StaffPhoto.Source = new BitmapImage(new System.Uri("https://www.shareicon.net/data/128x128/2016/07/10/793851_people_512x512.png"));
+            }
+            else
+            {
+                addInfoView.StaffPhoto.Source = ImageDealer.ByteToImage(shownStaff.Photo);
+            }
+            addInfoView.TitleTB.Text = shownStaff.Title;
+            addInfoView.GNameTB.Text = shownStaff.GivenName;
+            addInfoView.GNameTB.IsEnabled = false;
+            addInfoView.FNameTB.Text = shownStaff.FamilyName;
+            addInfoView.FNameTB.IsEnabled = false;
+
+            if(shownStaff.category == Category.uncategorised)
+            {
+                addInfoView.CategoryCB.Items.Add("Select..");
+                foreach(string category in Enum.GetNames(typeof(Category)))
+                {
+                    if(category != "uncategorised")
+                    {
+                        addInfoView.CategoryCB.Items.Add(category.ToUpper());
+                    }
+                }
+                addInfoView.CategoryCB.SelectedIndex = 0;
+            } else{ addInfoView.CategoryCB.Items.Add(shownStaff.category.ToString().ToUpper()); addInfoView.CategoryCB.SelectedIndex = 0;}
+
+            addInfoView.ContactTB.Text = shownStaff.Phone;
+            if(shownStaff.Phone != "No contact added")
+            {
+                addInfoView.ContactTB.IsEnabled = false;
+            }
+
+            addInfoView.EmailTB.Text = shownStaff.Email;
+            if(shownStaff.Email != "No email added")
+            {
+                addInfoView.EmailTB.IsEnabled = false;
+            }
+
+            addInfoView.RoomTB.Text = shownStaff.Room;
+            if(shownStaff.Room != "Unknown")
+            {
+                addInfoView.RoomTB.IsEnabled = false;
+            }
+
+            if(shownStaff.campus == Campus.Unknown)
+            {
+                addInfoView.CampusCB.Items.Add("Select..");
+                foreach(string campus in Enum.GetNames(typeof(Campus)))
+                {
+                    if(campus != "Unknown")
+                    {
+                        addInfoView.CampusCB.Items.Add(campus);
+                    }
+                }
+                addInfoView.CampusCB.SelectedIndex = 0;
+            }
+            else { addInfoView.CampusCB.Items.Add(shownStaff.campus); addInfoView.CampusCB.SelectedIndex = 0;}
+
+            return addInfoView;
+        }
+        #endregion
+
     }
 }

@@ -11,7 +11,9 @@
     <None Remove="class1.png" />
     <None Remove="consultation 1.png" />
     <None Remove="icons8-refresh-30.png" />
+    <None Remove="icons8-save-30.png" />
     <None Remove="icons8-search-30.png" />
+    <None Remove="icons8-upload-30.png" />
     <None Remove="resources\avatar.png" />
     <None Remove="resources\class1.png" />
     <None Remove="resources\consultation 1.png" />
@@ -32,7 +34,9 @@
 
   <ItemGroup>
     <Resource Include="icons8-refresh-30.png" />
+    <Resource Include="icons8-save-30.png" />
     <Resource Include="icons8-search-30.png" />
+    <Resource Include="icons8-upload-30.png" />
     <Resource Include="resources\avatar.png" />
     <Resource Include="resources\class1.png" />
     <Resource Include="resources\consultation 1.png" />

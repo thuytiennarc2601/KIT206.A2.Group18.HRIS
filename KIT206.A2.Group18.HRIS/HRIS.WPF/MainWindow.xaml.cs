@@ -43,7 +43,16 @@ namespace HRIS.WPF
 
         private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            if (choseStaff)
+            {
+                staffListItem selectedStaff = (staffListItem)GeneralListBox.SelectedItem;
+                if (selectedStaff != null)
+                {
+                    StaffDetailView detailView = Controller.ShowStaffDetails(selectedStaff.ID);
+                    detailView.ShowDialog();
+                }
+            }
+            
         }
 
         private void HRIS_Loaded(object sender, RoutedEventArgs e)
@@ -53,6 +62,7 @@ namespace HRIS.WPF
             ChangeContentOnTab("Displaying Staff List", "Nothing", choseStaff);
         }
 
+        #region Set of click functions
         private void staffButton_Click(object sender, RoutedEventArgs e)
         {
             GeneralListBox.ItemsSource = controller.GetViewableStaffItemList();
@@ -96,11 +106,34 @@ namespace HRIS.WPF
             SetNewSize();
             ChangeContentOnTab("Displaying Consultation List", "Add Consultation", choseConsultation);
         }
+        #endregion
 
         private void GeneralListBox_SizeChanged(object sender, SizeChangedEventArgs e)
         {
             differSize = ChangeListItemSize();
         }
+
+        #region Load an entity list again when HRIS is re-activated
+        private void HRIS_Activated(object sender, EventArgs e)
+        {
+            if (choseStaff)
+            {
+                GeneralListBox.ItemsSource = controller.GetViewableStaffItemList();
+            }
+            if (choseUnit)
+            {
+                GeneralListBox.ItemsSource = controller.GetViewableUnitItemList();
+            }
+            if (choseClass)
+            {
+                GeneralListBox.ItemsSource = controller.GetViewableClassItemList();
+            }
+            if (choseConsultation)
+            {
+                GeneralListBox.ItemsSource = controller.GetViewableConsulItemList();
+            }
+        }
+        #endregion
 
         //Makes GeneralListBox Responsive
         #region Set a new size to GeneralListBox's items when size changed
@@ -204,6 +237,7 @@ namespace HRIS.WPF
             }
         }
         #endregion
+
 
     }
 }

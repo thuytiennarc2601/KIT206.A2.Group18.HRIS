@@ -38,6 +38,7 @@ namespace KIT206.A2.Group18.HRIS
             return (T)Enum.Parse(typeof(T), value);
         }
 
+        //Load lists of four entities
         #region Load All Classes
         public static List<Class> LoadAllClasses()
         {
@@ -254,6 +255,8 @@ namespace KIT206.A2.Group18.HRIS
             return staffList;
         }
         #endregion
+
+        //SHOULD USE LINQ TO GET SPECIFIC DATA
         #region
         public static List<Consultation> LoadConsultations(int id)
         {
@@ -356,7 +359,64 @@ namespace KIT206.A2.Group18.HRIS
             return classes;
         }
         #endregion
-        #region
+
+        //STAFF OPERATIONS
+        #region Add/Update A Staff Member's information
+        public static void UpdateStaffInfo(int StaffID, string Title, string Category, string Phone, string Room, string Email, string Campus, byte[] Photo)
+        {
+            MySqlConnection conn = GetConnection();
+
+            try
+            {
+                conn.Open();
+                AddStaffInfoHelper("Unknown", "title", StaffID, Title, conn);
+                AddStaffInfoHelper("Select..", "category", StaffID, Category, conn);
+                AddStaffInfoHelper("No contact added", "phone", StaffID, Phone, conn);
+                AddStaffInfoHelper("Unknown", "room", StaffID, Room, conn);
+                AddStaffInfoHelper("No email added", "email", StaffID, Email, conn);
+                AddStaffInfoHelper("Select..", "campus", StaffID, Campus, conn);
+
+                if (Photo.Length > 0)
+                {
+                    MySqlCommand cmdPhoto = new MySqlCommand("update staff set photo=@photo where id=@id", conn);
+                    cmdPhoto.Parameters.AddWithValue("@photo", Photo);
+                    cmdPhoto.Parameters.AddWithValue("@id", StaffID);
+                    cmdPhoto.ExecuteNonQuery();
+                }
+            }
+            catch (MySqlException e)
+            {
+                ReportError("deleting consultation selected", e);
+            }
+            finally
+            {
+                if (conn != null)
+                {
+                    conn.Close();
+                }
+            }
+            MessageBox.Show("Updated successfully");
+        }
+
+        private static void AddStaffInfoHelper(string condition, string field, int StaffID, string value, MySqlConnection conn)
+        {
+            if (value != condition)
+            {
+                MySqlCommand cmd = new MySqlCommand("update staff set " + field + "=@field where id=@id", conn);
+                cmd.Parameters.AddWithValue("@field", value);
+                cmd.Parameters.AddWithValue("@id", StaffID);
+                cmd.ExecuteNonQuery();
+            }
+        }
+        #endregion
+
+
+
+
+
+        //CONSULTATION OPERATIONS
+        //Delete a consultation
+        #region Delete Consultation
         public static void DeleteConsultation(int id, Day day, TimeOnly Start, TimeOnly End)
         {
 
@@ -388,7 +448,11 @@ namespace KIT206.A2.Group18.HRIS
                 }
             }
         }
-        #endregion
+        #endregion 
+
+
+
+
         private static void ReportError(string msg, Exception e)
         {
             if (reportingErrors)

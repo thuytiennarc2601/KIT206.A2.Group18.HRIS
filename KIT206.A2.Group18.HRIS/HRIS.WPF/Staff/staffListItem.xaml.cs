@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using KIT206.A2.Group18.HRIS;
 
 namespace HRIS.WPF
 {
@@ -20,9 +21,13 @@ namespace HRIS.WPF
     /// </summary>
     public partial class staffListItem : UserControl
     {
+        private const string STAFF_LIST_KEY = "staffList";
+        private Controller controller;
+
         public staffListItem()
         {
             InitializeComponent();
+            //controller = (Controller)(Application.Current.FindResource(STAFF_LIST_KEY) as ObjectDataProvider).ObjectInstance;
         }
 
         #region Staff Item Properties
@@ -78,16 +83,11 @@ namespace HRIS.WPF
 
         #endregion
 
-        private void staffItem1_MouseEnter(object sender, MouseEventArgs e)
+        private void editInfoBtn_Click(object sender, RoutedEventArgs e)
         {
-            //this.selectBar.Fill = new SolidColorBrush(Color.FromRgb(85, 132, 57));
-            //this.selectBar.Stroke = new SolidColorBrush(Color.FromRgb(85, 132, 57));
-        }
-
-        private void staffItem1_MouseLeave(object sender, MouseEventArgs e)
-        {
-            //this.selectBar.Fill = new SolidColorBrush(Colors.White);
-            //this.selectBar.Stroke = new SolidColorBrush(Colors.White);
+            AddStaffInfoView view = Controller.LoadStaffDetails(ID);
+            view.StaffID = ID;
+            view.ShowDialog();
         }
     }
 }

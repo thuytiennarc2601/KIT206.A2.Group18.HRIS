@@ -18,8 +18,20 @@ namespace KIT206.A2.Group18.HRIS
         #endregion
         public override string ToString()
         {
-
-            return UnitCode + " " + UnitName + " by ";// + Coordinator.GivenName + " " + Coordinator.FamilyName;
+            return UnitCode + " | " + UnitName;
         }
+
+        #region Return A Unit List By Its Staff's ID
+        public static List<Unit> GetUnitsByStaffID(int StaffID)
+        {
+            List<Unit> unitList = Agency.LoadAllUnits();
+            var getUnit = from Unit u in unitList
+                          where u.Coordinator.ID == StaffID
+                          select u;
+            List<Unit> resultUnit = new List<Unit>(getUnit);
+
+            return resultUnit;
+        }
+        #endregion
     }
 }

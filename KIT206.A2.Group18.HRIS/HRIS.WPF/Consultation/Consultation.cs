@@ -21,7 +21,20 @@ namespace KIT206.A2.Group18.HRIS
         public override string ToString()
         {
 
-            return staff + " " + day + " " + StartTime + " " + EndTime;
+            return day + " | " + StartTime + " - " + EndTime;
         }
+
+        #region Return the Consultation of A Staff Member
+        public static List<Consultation> GetConsultationByStaffID(int StaffID)
+        {
+            List<Consultation> conList = Agency.LoadAllConsultations();
+            var getConsultation = from Consultation c in conList
+                                  where c.staff.ID == StaffID
+                                  select c;
+            List<Consultation> resultConsultation = new List<Consultation>(getConsultation);
+
+            return resultConsultation;
+        }
+        #endregion
     }
 }

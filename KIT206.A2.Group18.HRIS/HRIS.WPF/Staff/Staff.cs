@@ -3,11 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using MySql.Data.MySqlClient;
-using System.IO;
-using System.Drawing;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
 
 namespace KIT206.A2.Group18.HRIS
 {
@@ -44,23 +39,25 @@ namespace KIT206.A2.Group18.HRIS
 
         public override string ToString()
         {
-            return GivenName + " " + FamilyName;
+            return Title + ". " +  GivenName + " " + FamilyName;
         }
 
-        //Convert from byte array to imagesource
-        public static ImageSource ByteToImage(byte[] imageData)
+        //Return a staff by its ID
+        #region Return A Staff By Its ID
+        public static Staff GetStaffByID(int StaffID)
         {
-            BitmapImage biImg = new BitmapImage();
-            MemoryStream ms = new MemoryStream(imageData);
-            biImg.BeginInit();
-            biImg.StreamSource = ms;
-            biImg.EndInit();
+            Staff staff = new Staff();
+            List<Staff> staffList = Agency.LoadAllStaffs();
 
-            ImageSource imgSrc = biImg as ImageSource;
+            var getStaff = from Staff s in staffList
+                           where s.ID == StaffID
+                           select s;
+            List<Staff> resultStaff = new List<Staff>(getStaff);
+            staff = resultStaff[0];
 
-            return imgSrc;
+            return staff;
         }
-
+        #endregion
 
     }
 }
