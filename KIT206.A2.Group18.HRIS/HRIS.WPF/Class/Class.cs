@@ -33,7 +33,21 @@ namespace KIT206.A2.Group18.HRIS
 
         public override string ToString()
         {
-            return unit + " " + day + " " + StartTime + " " + EndTime;
+            return type.ToString() + " | " + day + " | " + StartTime + " - " + EndTime + " | " + Room + " | " + campus.ToString();
         }
+
+        #region Get A List Of Classes Of A Unit
+        public static List<Class> GetClassesByUnitCode(string UnitCode)
+        {
+            List<Class> classList = Agency.LoadAllClasses();
+            var getClass = from Class c in classList
+                           where c.unit.UnitCode == UnitCode
+                           select c;
+
+            List<Class> result = new List<Class>(getClass);
+
+            return result;
+        }
+        #endregion
     }
 }

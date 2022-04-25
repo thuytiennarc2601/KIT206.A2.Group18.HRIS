@@ -410,7 +410,34 @@ namespace KIT206.A2.Group18.HRIS
         }
         #endregion
 
+        //UNIT OPERATIONS
+        #region Update Unit Coordinator
+        public static void UpdateUnitCoordinator(string UnitCode, int StaffID)
+        {
+            MySqlConnection conn = GetConnection();
 
+            try
+            {
+                conn.Open();
+                MySqlCommand cmd = new MySqlCommand("update unit set coordinator=@coordinator where code=@code", conn);
+                cmd.Parameters.AddWithValue("@coordinator", StaffID);
+                cmd.Parameters.AddWithValue("@code", UnitCode);
+                cmd.ExecuteNonQuery();
+            }
+            catch (MySqlException e)
+            {
+                ReportError("deleting consultation selected", e);
+            }
+            finally
+            {
+                if (conn != null)
+                {
+                    conn.Close();
+                }
+            }
+            MessageBox.Show("Coordinator updated successfully");
+        }
+        #endregion
 
 
 
@@ -449,9 +476,6 @@ namespace KIT206.A2.Group18.HRIS
             }
         }
         #endregion 
-
-
-
 
         private static void ReportError(string msg, Exception e)
         {

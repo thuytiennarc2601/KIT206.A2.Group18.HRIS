@@ -41,6 +41,7 @@ namespace HRIS.WPF
         private bool choseConsultation = false;
         #endregion
 
+        #region Display a dialog when a GeneralListBox's item is chosen
         private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (choseStaff)
@@ -52,8 +53,19 @@ namespace HRIS.WPF
                     detailView.ShowDialog();
                 }
             }
-            
+
+            if(choseUnit)
+            {
+                unitListItems selectedUnit = (unitListItems)GeneralListBox.SelectedItem;
+                if(selectedUnit != null)
+                {
+                    EditUnitView view = Controller.ShowUnitDetails(selectedUnit.UnitCode, selectedUnit.StaffID);
+                    view.Code = selectedUnit.UnitCode;
+                    view.ShowDialog();
+                }
+            }
         }
+        #endregion
 
         private void HRIS_Loaded(object sender, RoutedEventArgs e)
         {
@@ -119,18 +131,22 @@ namespace HRIS.WPF
             if (choseStaff)
             {
                 GeneralListBox.ItemsSource = controller.GetViewableStaffItemList();
+                SetNewSize();
             }
             if (choseUnit)
             {
                 GeneralListBox.ItemsSource = controller.GetViewableUnitItemList();
+                SetNewSize();
             }
             if (choseClass)
             {
                 GeneralListBox.ItemsSource = controller.GetViewableClassItemList();
+                SetNewSize();
             }
             if (choseConsultation)
             {
                 GeneralListBox.ItemsSource = controller.GetViewableConsulItemList();
+                SetNewSize();
             }
         }
         #endregion

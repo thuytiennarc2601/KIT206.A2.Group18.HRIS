@@ -42,18 +42,34 @@ namespace KIT206.A2.Group18.HRIS
             return Title + ". " +  GivenName + " " + FamilyName;
         }
 
+        //Return a staff list by a search text
+        #region Search for a Staff Member
+        public static List<Staff> GetStaffListBySearchText(string SearchText)
+        {
+            SearchText = SearchText.ToLower();
+            List<Staff> staffList = Agency.LoadAllStaffs();
+            var getStaff = from Staff s in staffList
+                           where (s.ID).ToString().Contains(SearchText) || s.GivenName.ToLower().Contains(SearchText) || s.FamilyName.ToLower().Contains(SearchText)
+                           select s;
+
+            List<Staff> result = new List<Staff>(getStaff);
+
+            return result;
+
+        }
+        #endregion
+
         //Return a staff by its ID
         #region Return A Staff By Its ID
         public static Staff GetStaffByID(int StaffID)
         {
-            Staff staff = new Staff();
             List<Staff> staffList = Agency.LoadAllStaffs();
 
             var getStaff = from Staff s in staffList
                            where s.ID == StaffID
                            select s;
             List<Staff> resultStaff = new List<Staff>(getStaff);
-            staff = resultStaff[0];
+            Staff staff = resultStaff[0];
 
             return staff;
         }

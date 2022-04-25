@@ -14,30 +14,10 @@ namespace HRIS.WPF
 {
     class Controller
     {
-        private List<staffListItem> staffItem;
-        private List<unitListItems> unitItem;
-        private List<classListItems> classItem;
-        private List<consultationListItem> consultationItem;
-
-        //private ObservableCollection<staffListItem> viewableStaffItem;
-        //private ObservableCollection<unitListItems> viewableUnitItem;
-        //private ObservableCollection<classListItems> viewableClassItem;
-        //private ObservableCollection<consultationListItem > viewableConsultationItem;
-
-        //public ObservableCollection<staffListItem> VisibleStaffItem { get { return viewableStaffItem; } set { } }
-        //public ObservableCollection<unitListItems> VisibleUnitItem { get { return viewableUnitItem; } set { } }
-        //public ObservableCollection <classListItems> VisibleClassItem { get { return viewableClassItem; } set { } }
-        //public ObservableCollection<consultationListItem> VisibleConsultationItem { get { return viewableConsultationItem; } set { } }
-        //public Controller ()
-        //{
-            
-
-            
-
-            
-
-            
-        //}
+        private List<staffListItem> staffItems;
+        private List<unitListItems> unitItems;
+        private List<classListItems> classItems;
+        private List<consultationListItem> consultationItems;
 
         //Load details and display lists of four entities
         #region Load Staff List Into GeneralListBox
@@ -92,12 +72,8 @@ namespace HRIS.WPF
                     item.UnitCode = unitList[i].UnitCode.ToUpper();
                     item.StaffID = unitList[i].Coordinator.ID;
 
-                    //LINQ
-                    var getStaff = from Staff s in staffList
-                                   where s.ID == item.StaffID
-                                   select s;
-                    List<Staff> result = new List<Staff>(getStaff);
-                    item.StaffName = "Coordinator: " + result[0].Title + ". " + result[0].GivenName + " " + result[0].FamilyName;  
+                    Staff staff = Staff.GetStaffByID(item.StaffID);
+                    item.StaffName = "Coordinator: " + staff.ToString();  
                     items.Add(item);
                 }
             }
@@ -122,22 +98,12 @@ namespace HRIS.WPF
                     item.UnitCode = classList[i].unit.UnitCode;
                     item.StaffID = classList[i].staff.ID;
 
-                    //LINQ
-                    var getUnit = from Unit u in unitList
-                                  where u.UnitCode == item.UnitCode
-                                  select u;
-                    List<Unit> resultUnit = new List<Unit>(getUnit);
-                    item.UnitDetails = item.UnitCode.ToUpper() + " | " + resultUnit[0].UnitName;
+                    Unit unit = Unit.GetUnitByCode(item.UnitCode);
+                    item.UnitDetails = unit.ToString();
 
-                    //LINQ
-                    var getStaff = from Staff s in staffList
-                                   where s.ID == item.StaffID
-                                   select s;
+                    Staff staff = Staff.GetStaffByID(item.StaffID);
 
-                    List<Staff> resultStaff = new List<Staff>(getStaff);
-                    string staffName = resultStaff[0].Title + ". " + resultStaff[0].GivenName + resultStaff[0].FamilyName;
-
-                    item.ClassType = classList[i].type.ToString() + " | Staff: " + staffName;
+                    item.ClassType = classList[i].type.ToString() + " | Staff: " + staff.ToString();
                     item.ClassTime = classList[i].day.ToString() + " | " + classList[i].StartTime.ToString() + " - " + classList[i].EndTime.ToString();
                     item.ClassLocation = "Room: " + classList[i].Room + " | " + classList[i].campus.ToString() + " campus";
                     items.Add(item);
@@ -162,13 +128,9 @@ namespace HRIS.WPF
                     consultationListItem item = new consultationListItem();
                     item.StaffID = conList[i].staff.ID;
 
-                    var getStaff = from Staff s in staffList
-                                   where s.ID == item.StaffID
-                                   select s;
+                    Staff staff = Staff.GetStaffByID(item.StaffID);
 
-                    List<Staff> resultList = new List<Staff>(getStaff);
-
-                    item.StaffName = resultList[0].Title + ". " + resultList[0].GivenName + " " + resultList[0].FamilyName;
+                    item.StaffName = staff.ToString();
                     item.ID = "ID: " + item.StaffID.ToString();
                     item.ConTime = conList[i].day.ToString() + " | " + conList[i].StartTime.ToString() + " - " + conList[i].EndTime.ToString();
                     items.Add(item);
@@ -182,26 +144,26 @@ namespace HRIS.WPF
         public List<staffListItem> GetViewableStaffItemList()
         {
             //generate a list of staff items
-            staffItem = AddStaffInfoToItem();
-            return staffItem;
+            staffItems = AddStaffInfoToItem();
+            return staffItems;
         }
         public List<unitListItems> GetViewableUnitItemList()
         {
             //generate a list of unit items
-            unitItem = AddUnitInfoToItem();
-            return unitItem;
+            unitItems = AddUnitInfoToItem();
+            return unitItems;
         }
         public List<classListItems> GetViewableClassItemList()
         {
             //generate a list of class items
-            classItem = AddClassInfoToItem();
-            return classItem;
+            classItems = AddClassInfoToItem();
+            return classItems;
         }
         public List<consultationListItem> GetViewableConsulItemList()
         {
             //generate a list of consultation items
-            consultationItem = AddConsultationInfoToItem();
-            return consultationItem;
+            consultationItems = AddConsultationInfoToItem();
+            return consultationItems;
         }
         #endregion
 
@@ -245,14 +207,14 @@ namespace HRIS.WPF
             return detailView;
         }
         #endregion
-
-        //Load staff details into AddStaffInfoView.
+        //Load staff details into AddStaffInfoView
         #region Load Staff Details Into AddStaffInfoView
         public static AddStaffInfoView LoadStaffDetails(int StaffID)
         {
             AddStaffInfoView addInfoView = new AddStaffInfoView();
             Staff shownStaff = Staff.GetStaffByID(StaffID);
 
+            addInfoView.Title = shownStaff.ToString();
             //set staff data
             if (shownStaff.Photo == null || shownStaff.Photo.Length == 0)
             {
@@ -317,5 +279,28 @@ namespace HRIS.WPF
         }
         #endregion
 
+        //UNIT MANAGEMENT: Show Unit Details, Search For A Staff Member, Add A New Unit
+        //Show unit details (with classes) and allow users to change unit coordination
+        #region Show A Unit Details
+        public static EditUnitView ShowUnitDetails(string UnitCode, int StaffID)
+        {
+            EditUnitView view = new EditUnitView();
+            List<Class> classes = Class.GetClassesByUnitCode(UnitCode);
+            Staff staff = Staff.GetStaffByID(StaffID);
+
+            Unit unit = Unit.GetUnitByCode(UnitCode);
+
+            view.UnitName.Content = unit.UnitName;
+            view.UnitCode.Content = unit.UnitCode.ToUpper();
+
+            if (classes.Count > 0)
+            {
+                view.ClassList.ItemsSource = classes;
+            }
+            view.CoordinatorTB.Text = StaffID.ToString() + " | " + staff.ToString();
+
+            return view;
+        }
+        #endregion
     }
 }

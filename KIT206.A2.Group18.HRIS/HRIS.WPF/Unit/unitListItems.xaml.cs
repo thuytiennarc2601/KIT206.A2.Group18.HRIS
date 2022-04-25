@@ -56,5 +56,12 @@ namespace HRIS.WPF
         }
 
         #endregion
+
+        private void editCoorBtn_Click(object sender, RoutedEventArgs e)
+        {
+            EditUnitView view = Controller.ShowUnitDetails(UnitCode, StaffID);
+            view.Code = UnitCode;
+            view.ShowDialog();
+        }
     }
 }
