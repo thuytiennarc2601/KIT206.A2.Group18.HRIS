@@ -84,6 +84,8 @@ namespace KIT206.A2.Group18.HRIS
             return classList;
         }
         #endregion
+
+
         #region Load All Units
         //Retrieve all units from database
         public static List<Unit> LoadAllUnits()
@@ -389,6 +391,34 @@ namespace KIT206.A2.Group18.HRIS
             }
         }
         #endregion
+
+        public static void AddClass(string code, Campus campus, Day day, TimeOnly start, TimeOnly end, Type type, string room, string staff)
+        {
+
+            MySqlConnection conn = GetConnection();
+
+            try
+            {
+                conn.Open();
+
+                MySqlCommand cmd = new MySqlCommand("INSERT INTO researcher (code, campus, day, start, end, type, room, staff)" +
+                                                    "VALUE (@code, @campus, @day, @start, @end, @type, @room, @staff", conn);
+                cmd.ExecuteNonQuery();
+                cmd.AddWithValue("@code", code);
+
+
+            }
+            catch (MySqlException e)
+            {
+                ReportError("Adding staff", e);
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+
+        }
         private static void ReportError(string msg, Exception e)
         {
             if (reportingErrors)

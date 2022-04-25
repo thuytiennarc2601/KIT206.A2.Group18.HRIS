@@ -31,6 +31,10 @@ namespace KIT206.A2.Group18.HRIS
         public string Room { get; set; }
         #endregion
 
+        public void AddClass(string code, Campus campus, Day day, TimeOnly start, TimeOnly end, Type type, string room, string staff)
+        {
+            Agency.AddClass(code, campus, day, start, end, type, room, staff);
+        }
         public override string ToString()
         {
             return unit + " " + day + " " + StartTime + " " + EndTime;

@@ -203,6 +203,13 @@ namespace HRIS.WPF
                 this.DisplayInform.Content = displayMessage;
             }
         }
+
+        private void add_Click(object sender, RoutedEventArgs e)
+        {
+            addClassWindow myDialog = new addClassWindow();
+
+            myDialog.ShowDialog();
+        }
         #endregion
 
     }
