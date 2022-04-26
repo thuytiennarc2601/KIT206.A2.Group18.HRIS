@@ -410,9 +410,75 @@ namespace KIT206.A2.Group18.HRIS
         }
         #endregion
 
+        //CLASS OPERATIONS
+        public static void AddClass(string code, string campus, string day, TimeOnly start, TimeOnly end, string type, string room, int staff)
+        {
+            MySqlConnection conn = GetConnection();
 
+            try
+            {
+                conn.Open();
 
+                MySqlCommand cmd = new MySqlCommand("insert into class(unit_code, campus, day, start, end, type, room, staff)" +
+                    " values (@code, @campus, @day, @start, @end, @type, @room, @staff)", conn);
+                    //'" + code + "', '" + campus + "', '" + day + "', '" + start + "', '" + end + "', '" + type + "', '" + room + "', '" + staff + "')"
+                cmd.Parameters.AddWithValue("@code", code);
+                cmd.Parameters.AddWithValue("@campus", campus);
+                cmd.Parameters.AddWithValue("@day", day);
+                cmd.Parameters.AddWithValue("@start", start);
+                cmd.Parameters.AddWithValue("@end", end);
+                cmd.Parameters.AddWithValue("@type", type);
+                cmd.Parameters.AddWithValue("@room", room);
+                cmd.Parameters.AddWithValue("@staff", staff);
+                
+                //cmd.ExecuteNonQuery();
+                MessageBox.Show(code + ", " + campus + ", " + day + ", " + start + ", " + end + ", " + type + ", " + room + ", " + staff);
+            }
+            catch (MySqlException e)
+            {
+                ReportError("Adding Class selected", e);
+            }
+            finally
+            {
+                if (conn != null)
+                {
+                    conn.Close();
+                }
+            }
+        }
 
+        public static List<Class> StaffDropBox()
+        {
+            List<Class> staff_id = new List<Class>();
+            MySqlConnection conn = GetConnection(); //open connection
+
+            try
+            {
+                conn.Open();
+
+                MySqlCommand cmd = new MySqlCommand("select id " +
+                                                    "from staff " +
+                                                    "order by name ASC", conn);
+
+                MySqlDataReader reader = cmd.ExecuteReader();
+
+                cmd.Dispose();
+                reader.Close();
+                conn.Close();
+            }
+            catch (MySqlException e)
+            {
+                ReportError("Adding Class selected", e);
+            }
+            finally
+            {
+                if (conn != null)
+                {
+                    conn.Close();
+                }
+            }
+            return staff_id;
+        }
 
         //CONSULTATION OPERATIONS
         //Delete a consultation

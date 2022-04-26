@@ -31,6 +31,7 @@ namespace KIT206.A2.Group18.HRIS
         public string Room { get; set; }
         #endregion
 
+
         public override string ToString()
         {
             return unit + " " + day + " " + StartTime + " " + EndTime;

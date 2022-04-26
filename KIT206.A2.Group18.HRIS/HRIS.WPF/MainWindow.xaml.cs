@@ -238,6 +238,14 @@ namespace HRIS.WPF
         }
         #endregion
 
+        private void add_Click(object sender, RoutedEventArgs e)
+        {
+            if (choseClass)
+            {
+                addClassView myDialog = new addClassView();
 
+                myDialog.ShowDialog();
+            }
+        }
     }
 }
