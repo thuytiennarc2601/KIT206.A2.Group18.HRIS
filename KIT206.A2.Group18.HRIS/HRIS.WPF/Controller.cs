@@ -134,8 +134,8 @@ namespace HRIS.WPF
                     item.ID = "ID: " + item.StaffID.ToString();
                     item.ConTime = conList[i].day.ToString() + " | " + conList[i].StartTime.ToString() + " - " + conList[i].EndTime.ToString();
                     item.ConsultationDay = conList[i].day.ToString();
-                    item.Start = conList[i].StartTime;
-                    item.End = conList[i].EndTime;
+                    item.Start = conList[i].StartTime.ToString("HH:mm:ss");
+                    item.End = conList[i].EndTime.ToString("HH:mm:ss");
                     items.Add(item);
                 }
             }

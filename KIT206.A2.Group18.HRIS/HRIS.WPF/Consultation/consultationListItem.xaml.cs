@@ -33,8 +33,8 @@ namespace HRIS.WPF
         private string _conTime;
 
         private string _day;
-        private TimeOnly _start;
-        private TimeOnly _end;
+        private string _start;
+        private string _end;
 
         //Properties for Displaying data
         public int StaffID
@@ -62,13 +62,13 @@ namespace HRIS.WPF
         }
 
         //Properties for functionality
-        public TimeOnly Start
+        public string Start
         {
             get { return _start; }
             set { _start = value; }
 
         }
-        public TimeOnly End
+        public string End
         {
             get { return _end; }
             set { _end = value; }

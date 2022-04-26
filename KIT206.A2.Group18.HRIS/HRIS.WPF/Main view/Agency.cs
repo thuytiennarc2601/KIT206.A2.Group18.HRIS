@@ -472,7 +472,7 @@ namespace KIT206.A2.Group18.HRIS
 
         //CONSULTATION OPERATIONS
         #region Delete Consultation
-        public static void DeleteConsultation(int id, string day, TimeOnly Start, TimeOnly End)
+        public static void DeleteConsultation(int id, string day, string Start, string End)
         {
 
             MySqlConnection conn = GetConnection();
@@ -482,13 +482,13 @@ namespace KIT206.A2.Group18.HRIS
                 conn.Open();
                 
                 MySqlCommand cmd = new MySqlCommand("delete " +
-                                                    "from class" +
-                                                    "where (staff_id=?id) and (day=?day) and (start=?Start) and (end=?End)", conn);
+                                                    "from consultation" +
+                                                    "where (staff_id=@id) and (day=@day) and (start=@Start) and (end=@End)", conn);
 
-                cmd.Parameters.AddWithValue("id", id);
-                cmd.Parameters.AddWithValue("day", day);
-                cmd.Parameters.AddWithValue("start", Start);
-                cmd.Parameters.AddWithValue("end", End);
+                cmd.Parameters.AddWithValue("@id", id);
+                cmd.Parameters.AddWithValue("@day", day);
+                cmd.Parameters.AddWithValue("@Start", Start);
+                cmd.Parameters.AddWithValue("@End", End);
                 cmd.ExecuteNonQuery();
                 
             }
