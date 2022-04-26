@@ -41,7 +41,19 @@ namespace HRIS.WPF
         private bool choseConsultation = false;
         #endregion
 
-        #region Display a dialog when a GeneralListBox's item is chosen
+        private void HRIS_Loaded(object sender, RoutedEventArgs e)
+        {
+            GeneralListBox.ItemsSource = controller.GetViewableStaffItemList();
+            choseStaff = true;
+            ChangeContentOnTab("Displaying Staff List", "Nothing", choseStaff);
+        }
+
+        private void GeneralListBox_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            differSize = ChangeListItemSize();
+        }
+
+        #region Display a functioning dialog when a GeneralListBox's item is chosen
         private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (choseStaff)
@@ -67,14 +79,7 @@ namespace HRIS.WPF
         }
         #endregion
 
-        private void HRIS_Loaded(object sender, RoutedEventArgs e)
-        {
-            GeneralListBox.ItemsSource = controller.GetViewableStaffItemList();
-            choseStaff = true;
-            ChangeContentOnTab("Displaying Staff List", "Nothing", choseStaff);
-        }
-
-        #region Set of click functions
+        #region Functions for clicking Staff button, Unit button, Class button, Consultation button
         private void staffButton_Click(object sender, RoutedEventArgs e)
         {
             GeneralListBox.ItemsSource = controller.GetViewableStaffItemList();
@@ -120,10 +125,26 @@ namespace HRIS.WPF
         }
         #endregion
 
-        private void GeneralListBox_SizeChanged(object sender, SizeChangedEventArgs e)
+        #region Perform different operations based on the chosen tab when clicking Add Button 
+        private void AddButton_Click(object sender, RoutedEventArgs e)
         {
-            differSize = ChangeListItemSize();
+            if(choseUnit)
+            {
+                AddUnitView view = Controller.ShowAddUnit();
+                view.ShowDialog();
+            }
+
+            if(choseClass)
+            {
+
+            }
+
+            if(choseConsultation)
+            {
+
+            }
         }
+        #endregion
 
         #region Load an entity list again when HRIS is re-activated
         private void HRIS_Activated(object sender, EventArgs e)
@@ -237,7 +258,7 @@ namespace HRIS.WPF
         #endregion
 
         //Change Add Button content and inform user what list is shown
-        #region Change Add button and display message
+        #region Change Add Button content and display message
         private void ChangeContentOnTab(string displayMessage, string buttonContent, bool choice)
         {
             if(choseStaff)
@@ -252,8 +273,8 @@ namespace HRIS.WPF
                 this.DisplayInform.Content = displayMessage;
             }
         }
-        #endregion
 
+        #endregion
 
     }
 }

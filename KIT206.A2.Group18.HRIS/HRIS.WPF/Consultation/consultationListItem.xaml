@@ -11,7 +11,7 @@
         <Label x:Name="staffID" Content="ID: 000000" Margin="10,38,321,62" FontFamily="Century Gothic" Foreground="#FF787878" FontSize="18" FontWeight="Normal" FontStyle="Normal"/>
         <Label x:Name="consultationTime" Content="Monday | 11:00 - 12:00" Margin="10,80,226,17" FontFamily="Century Gothic" Foreground="#FF787878" FontSize="18" FontWeight="Bold"/>
         <Button x:Name="editConsultation" HorizontalAlignment='Right' Content="EDIT DETAILS" Margin="401,80,123,20" FontFamily="Calibri" Foreground="White" Background="#FF7BA8D7" BorderBrush="White" FontSize="14" Height="30" Width="103"/>
-        <Button x:Name="conCancelBtn" HorizontalAlignment="Right" Content="CANCEL" Margin="509,80,15,20" FontFamily="Calibri" Foreground="White" Background="#FF7BA8D7" BorderBrush="White" FontSize="14" Height="30" Width="103"/>
+        <Button x:Name="conCancelBtn" HorizontalAlignment="Right" Content="CANCEL" Margin="509,80,15,20" FontFamily="Calibri" Foreground="White" Background="#FF7BA8D7" BorderBrush="White" FontSize="14" Height="30" Width="103" Click="conCancelBtn_Click"/>
 
     </Grid>
 </UserControl>

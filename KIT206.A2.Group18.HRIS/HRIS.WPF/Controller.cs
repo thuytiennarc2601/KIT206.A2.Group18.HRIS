@@ -133,6 +133,9 @@ namespace HRIS.WPF
                     item.StaffName = staff.ToString();
                     item.ID = "ID: " + item.StaffID.ToString();
                     item.ConTime = conList[i].day.ToString() + " | " + conList[i].StartTime.ToString() + " - " + conList[i].EndTime.ToString();
+                    item.ConsultationDay = conList[i].day.ToString();
+                    item.Start = conList[i].StartTime;
+                    item.End = conList[i].EndTime;
                     items.Add(item);
                 }
             }
@@ -302,5 +305,12 @@ namespace HRIS.WPF
             return view;
         }
         #endregion
+
+        //Show AddUnitView
+        public static AddUnitView ShowAddUnit()
+        {
+            AddUnitView view = new AddUnitView();
+            return view;
+        }
     }
 }

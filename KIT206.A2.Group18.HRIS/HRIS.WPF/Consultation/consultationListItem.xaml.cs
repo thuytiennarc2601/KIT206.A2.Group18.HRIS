@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using KIT206.A2.Group18.HRIS;
 
 namespace HRIS.WPF
 {
@@ -31,6 +32,11 @@ namespace HRIS.WPF
         private string _staffName;
         private string _conTime;
 
+        private string _day;
+        private TimeOnly _start;
+        private TimeOnly _end;
+
+        //Properties for Displaying data
         public int StaffID
         {
             get { return _staffID; }
@@ -54,6 +60,30 @@ namespace HRIS.WPF
             get { return _conTime; }
             set { _conTime = value; this.consultationTime.Content = value; }
         }
+
+        //Properties for functionality
+        public TimeOnly Start
+        {
+            get { return _start; }
+            set { _start = value; }
+
+        }
+        public TimeOnly End
+        {
+            get { return _end; }
+            set { _end = value; }
+        }
+
+        public string ConsultationDay
+        {
+            get { return _day; }   
+            set { _day = value; }
+        }
         #endregion
+
+        private void conCancelBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Agency.DeleteConsultation(StaffID, ConsultationDay, Start, End);
+        }
     }
 }

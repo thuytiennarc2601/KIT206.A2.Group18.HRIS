@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
 using System.Windows;
 
+
 namespace KIT206.A2.Group18.HRIS
 {
     //establishes connection with database, contains all functions relating to database
@@ -439,28 +440,19 @@ namespace KIT206.A2.Group18.HRIS
         }
         #endregion
 
-
-
-        //CONSULTATION OPERATIONS
-        //Delete a consultation
-        #region Delete Consultation
-        public static void DeleteConsultation(int id, Day day, TimeOnly Start, TimeOnly End)
+        #region Add A New Unit
+        public static void AddNewUnit(string UnitCode, string UnitName, int StaffID)
         {
-
             MySqlConnection conn = GetConnection();
 
             try
             {
                 conn.Open();
+                MySqlCommand cmd = new MySqlCommand("insert into unit(code, title, coordinator) values(@code, @title, @coordinator)", conn);
+                cmd.Parameters.AddWithValue("@code", UnitCode);
+                cmd.Parameters.AddWithValue("@title", UnitName);
+                cmd.Parameters.AddWithValue("@coordinator", StaffID);
 
-                MySqlCommand cmd = new MySqlCommand("delete " +
-                                                    "from class" +
-                                                    "where (staff_id=?id) and (day=?day) and (start=?Start) and (end=?End)", conn);
-
-                cmd.Parameters.AddWithValue("id", id);
-                cmd.Parameters.AddWithValue("day", day);
-                cmd.Parameters.AddWithValue("start", Start);
-                cmd.Parameters.AddWithValue("end", End);
                 cmd.ExecuteNonQuery();
             }
             catch (MySqlException e)
@@ -474,6 +466,44 @@ namespace KIT206.A2.Group18.HRIS
                     conn.Close();
                 }
             }
+            MessageBox.Show("Unit added successfully");
+        }
+        #endregion
+
+        //CONSULTATION OPERATIONS
+        #region Delete Consultation
+        public static void DeleteConsultation(int id, string day, TimeOnly Start, TimeOnly End)
+        {
+
+            MySqlConnection conn = GetConnection();
+
+            try
+            {
+                conn.Open();
+                
+                MySqlCommand cmd = new MySqlCommand("delete " +
+                                                    "from class" +
+                                                    "where (staff_id=?id) and (day=?day) and (start=?Start) and (end=?End)", conn);
+
+                cmd.Parameters.AddWithValue("id", id);
+                cmd.Parameters.AddWithValue("day", day);
+                cmd.Parameters.AddWithValue("start", Start);
+                cmd.Parameters.AddWithValue("end", End);
+                cmd.ExecuteNonQuery();
+                
+            }
+            catch (MySqlException e)
+            {
+                ReportError("deleting consultation selected", e);
+            }
+            finally
+            {
+                if (conn != null)
+                {
+                    conn.Close();
+                }
+            }
+            MessageBox.Show("Consultation cancelled");
         }
         #endregion 
 

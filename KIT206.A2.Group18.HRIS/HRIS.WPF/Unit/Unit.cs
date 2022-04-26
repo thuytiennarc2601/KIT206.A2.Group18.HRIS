@@ -38,13 +38,36 @@ namespace KIT206.A2.Group18.HRIS
         public static Unit GetUnitByCode(string UnitCode)
         {
             List<Unit> unitList = Agency.LoadAllUnits();
+            Unit unit = new Unit();
             var getUnit = from Unit u in unitList
-                          where u.UnitCode == UnitCode
+                          where u.UnitCode.ToLower() == UnitCode.ToLower()
                           select u;
 
             List<Unit> result = new List<Unit>(getUnit);
 
-            Unit unit = result[0];
+            if (result.Count > 0)
+            {
+                unit = result[0];
+            } else { unit.UnitCode = ""; }
+            return unit;
+        }
+        #endregion
+
+        #region Get A Unit By Its Title
+        public static Unit GetUnitByTitle(string UnitName)
+        {
+            List<Unit> unitList = Agency.LoadAllUnits();
+            Unit unit = new Unit();
+            var getUnit = from Unit u in unitList
+                          where u.UnitName.ToLower() == UnitName.ToLower()
+                          select u;
+
+            List<Unit> result = new List<Unit>(getUnit);
+            if (result.Count > 0)
+            {
+                unit = result[0];
+            } else { unit.UnitName = ""; }
+
             return unit;
         }
         #endregion
