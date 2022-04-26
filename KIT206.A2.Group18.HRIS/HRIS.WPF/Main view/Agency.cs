@@ -480,17 +480,17 @@ namespace KIT206.A2.Group18.HRIS
             try
             {
                 conn.Open();
-                
-                MySqlCommand cmd = new MySqlCommand("delete " +
-                                                    "from consultation" +
-                                                    "where staff_id=@id and day=@day and start=@start and end=@end", conn);
+
+                MySqlCommand cmd = new MySqlCommand("DELETE " +
+                                                    "FROM consultation " +
+                                                    "WHERE staff_id =@id AND day=@day AND start=@start AND end=@end", conn);
 
                 cmd.Parameters.AddWithValue("@id", id);
                 cmd.Parameters.AddWithValue("@day", day);
                 cmd.Parameters.AddWithValue("@start", Start);
                 cmd.Parameters.AddWithValue("@end", End);
                 cmd.ExecuteNonQuery();
-                
+
             }
             catch (MySqlException e)
             {
