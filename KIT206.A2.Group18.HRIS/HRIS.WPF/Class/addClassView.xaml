@@ -34,11 +34,12 @@
         <Label x:Name="addLabel" Content="Edit Format" Margin="10,10,10,235" FontFamily="Georgia" Foreground="#FFD7C282" FontSize="20" FontWeight="Bold" Grid.ColumnSpan="4"/>
         <Button x:Name="editClassBtn" Click="addClass_Click" Content="SUBMIT" Margin="23,301,208,40" FontSize="14" FontFamily="Calibri" BorderBrush="White" Background="#FFD7C282" Foreground="White" Grid.Column="1" Grid.ColumnSpan="2"/>
         <Label Content="ID" HorizontalAlignment="Left" Height="25" Margin="18,54,0,0" VerticalAlignment="Top" Width="42" Grid.ColumnSpan="2"/>
-        <ComboBox x:Name="comboBox_staff" MouseDoubleClick="staff_Click" Margin="17,41,0,300" Grid.Column="2" HorizontalAlignment="Left" Width="93"/>
+
+
         <Label Content="Unit code" Margin="129,54,38,205" Grid.Column="2"/>
         <TextBox x:Name="textBox_code" HorizontalAlignment="Left" Height="20" Margin="198,57,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="93" Grid.Column="2" Grid.ColumnSpan="2"/>
         <Label Content="Campus" Margin="10,84,9,168" Grid.ColumnSpan="2"/>
-        <ComboBox x:Name="comboBox_campus" Margin="0,86,155,254" Grid.Column="2" RenderTransformOrigin="0.5,0.5" ItemsSource="{Binding Source={StaticResource enmCampus}}" HorizontalAlignment="Right" Width="93"/>
+        <ComboBox x:Name="comboBox_campus" Margin="0,99,155,241" Grid.Column="2" RenderTransformOrigin="0.5,0.5" ItemsSource="{Binding Source={StaticResource enmCampus}}" HorizontalAlignment="Right" Width="93"/>
         <Label Content="Day" Margin="132,97,34,157" Grid.Column="2"/>
         <ComboBox x:Name="comboBox_day" Margin="198,87,0,254" Grid.Column="2" Grid.ColumnSpan="2" ItemsSource="{Binding Source={StaticResource enmDay}}" HorizontalAlignment="Left" Width="93"/>
         <Label Content="Start" Margin="9,129,10,127" Grid.ColumnSpan="2"/>
@@ -47,6 +48,7 @@
         <ComboBox x:Name="comboBox_type" Margin="198,168,0,168" Grid.Column="2" Grid.ColumnSpan="2" ItemsSource="{Binding Source={StaticResource enmType}}" HorizontalAlignment="Left" Width="93"/>
         <Label Content="Room" Margin="133,255,34,0" Grid.Column="2"/>
         <TextBox x:Name="textBox_room" HorizontalAlignment="Left" Height="29" Margin="198,251,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="93" Grid.Column="2" Grid.ColumnSpan="2"/>
+        <ComboBox Loaded="staff_Loaded" x:Name="comboBox_staff" Grid.Column="2" Margin="17,45,155,295"/>
 
     </Grid>
 </Window>

@@ -14,6 +14,7 @@ using System.Windows.Shapes;
 using KIT206.A2.Group18.HRIS;
 using Type = KIT206.A2.Group18.HRIS.Type;
 using System.Text.RegularExpressions;
+using MySql.Data.MySqlClient;
 
 namespace HRIS.WPF
 {
@@ -27,26 +28,30 @@ namespace HRIS.WPF
             InitializeComponent();
         }
 
-        /*private int _staff;
-        private string fileImageName = "";
-        public int StaffID
+
+        private void staff_Loaded(object sender, EventArgs e)
         {
-            get { return _id; }
-            set { _id = value; }
-        }*/
-        private void staff_Click(object sender, EventArgs e)
-        {
-            Agency.staffDrop
+            
+            List<int> list = new List<int>();
+            list = Agency.LoadID();
+
+            // ... Get the ComboBox reference.
+            var comboBox = sender as ComboBox;
+                // ... Assign the ItemsSource to the List.
+            comboBox.ItemsSource = list;
+
+                // ... Make the first item selected.
+            comboBox.SelectedIndex = 0;
         }
 
         private void addClass_Click(object sender, RoutedEventArgs e)
         {
-            //int staff = this.textBox_staff;
+            int staff = (int)comboBox_staff.SelectedItem;
             string code = this.textBox_code.Text;
             string room = this.textBox_room.Text;
-            string campus = this.comboBox_campus.SelectedItem.ToString();
-            string day = this.comboBox_day.SelectedItem.ToString();
-            string type = this.comboBox_type.SelectedItem.ToString();
+            Campus campus = (Campus)comboBox_campus.SelectedItem;
+            Day day = (Day)comboBox_day.SelectedItem;
+            Type type = (Type)comboBox_type.SelectedItem;
             TimeOnly start = new TimeOnly(11, 0, 0);
             TimeOnly end = new TimeOnly(13, 0, 0);
 

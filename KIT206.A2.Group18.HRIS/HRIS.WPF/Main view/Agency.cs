@@ -411,7 +411,7 @@ namespace KIT206.A2.Group18.HRIS
         #endregion
 
         //CLASS OPERATIONS
-        public static void AddClass(string code, string campus, string day, TimeOnly start, TimeOnly end, string type, string room, int staff)
+        public static void AddClass(string code, Campus campus, Day day, TimeOnly start, TimeOnly end, Type type, string room, int staff)
         {
             MySqlConnection conn = GetConnection();
 
@@ -447,37 +447,47 @@ namespace KIT206.A2.Group18.HRIS
             }
         }
 
-        public static List<Class> StaffDropBox()
+        public static List<int> LoadID()
         {
-            List<Class> staff_id = new List<Class>();
-            MySqlConnection conn = GetConnection(); //open connection
+            List<int> list = new List<int>();
 
+            MySqlDataReader rdr = null;
+            conn = GetConnection();
             try
             {
                 conn.Open();
+                
+                MySqlCommand cmd = new MySqlCommand("select id" +
+                                                    "from staff" +
+                                                    "order by id ASC", conn);
+                //MessageBox.Show("el");
+                rdr = cmd.ExecuteReader();
 
-                MySqlCommand cmd = new MySqlCommand("select id " +
-                                                    "from staff " +
-                                                    "order by name ASC", conn);
-
-                MySqlDataReader reader = cmd.ExecuteReader();
-
-                cmd.Dispose();
-                reader.Close();
-                conn.Close();
+                while (rdr.Read())
+                {
+                    list.Add(rdr.GetInt32(7));
+                }
             }
             catch (MySqlException e)
             {
-                ReportError("Adding Class selected", e);
+                ReportError("loading id", e);
             }
             finally
             {
+                if (rdr != null)
+                {
+                    rdr.Close();
+                }
                 if (conn != null)
                 {
                     conn.Close();
                 }
             }
-            return staff_id;
+            foreach (var el in list)
+            {
+                MessageBox.Show("el");
+            }
+            return list;
         }
 
         //CONSULTATION OPERATIONS
