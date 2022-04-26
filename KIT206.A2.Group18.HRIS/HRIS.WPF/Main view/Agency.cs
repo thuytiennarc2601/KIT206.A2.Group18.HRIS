@@ -430,9 +430,10 @@ namespace KIT206.A2.Group18.HRIS
                 cmd.Parameters.AddWithValue("@type", type);
                 cmd.Parameters.AddWithValue("@room", room);
                 cmd.Parameters.AddWithValue("@staff", staff);
-                
-                //cmd.ExecuteNonQuery();
+
                 MessageBox.Show(code + ", " + campus + ", " + day + ", " + start + ", " + end + ", " + type + ", " + room + ", " + staff);
+                cmd.ExecuteNonQuery();
+                
             }
             catch (MySqlException e)
             {
@@ -457,15 +458,13 @@ namespace KIT206.A2.Group18.HRIS
             {
                 conn.Open();
                 
-                MySqlCommand cmd = new MySqlCommand("select id" +
-                                                    "from staff" +
-                                                    "order by id ASC", conn);
-                //MessageBox.Show("el");
+                MySqlCommand cmd = new MySqlCommand("SELECT id FROM staff order by id ASC", conn);
+               
                 rdr = cmd.ExecuteReader();
 
                 while (rdr.Read())
                 {
-                    list.Add(rdr.GetInt32(7));
+                    list.Add(rdr.GetInt32(0));
                 }
             }
             catch (MySqlException e)
@@ -482,10 +481,6 @@ namespace KIT206.A2.Group18.HRIS
                 {
                     conn.Close();
                 }
-            }
-            foreach (var el in list)
-            {
-                MessageBox.Show("el");
             }
             return list;
         }
