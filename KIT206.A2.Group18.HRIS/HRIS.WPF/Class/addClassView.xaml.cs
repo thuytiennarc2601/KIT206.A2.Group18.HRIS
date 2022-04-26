@@ -35,27 +35,41 @@ namespace HRIS.WPF
             List<int> list = new List<int>();
             list = Agency.LoadID();
 
-            // ... Get the ComboBox reference.
-            var comboBox = sender as ComboBox;
                 // ... Assign the ItemsSource to the List.
-            comboBox.ItemsSource = list;
+            comboBox_staff.ItemsSource = list;
 
                 // ... Make the first item selected.
-            comboBox.SelectedIndex = 0;
+            comboBox_staff.SelectedIndex = 0;
+        }
+
+        private void unit_Loaded(object sender, RoutedEventArgs e)
+        {
+
+            List<string> list = new List<string>();
+            list = Agency.LoadCode();
+
+            
+            // ... Assign the ItemsSource to the List.
+            comboBox_code.ItemsSource = list;
+
+            // ... Make the first item selected.
+            comboBox_code.SelectedIndex = 0;
         }
 
         private void addClass_Click(object sender, RoutedEventArgs e)
         {
             int staff = (int)comboBox_staff.SelectedItem;
-            string code = this.textBox_code.Text;
+            string code = (string)comboBox_code.SelectedItem;
             string room = this.textBox_room.Text;
             Campus campus = (Campus)comboBox_campus.SelectedItem;
             Day day = (Day)comboBox_day.SelectedItem;
             Type type = (Type)comboBox_type.SelectedItem;
-            TimeOnly start = new TimeOnly(11, 0, 0);
-            TimeOnly end = new TimeOnly(13, 0, 0);
+            TimeOnly start = new TimeOnly(11,0);
+            TimeOnly end = new TimeOnly(13,0);
+           
+            
 
-            Agency.AddClass(code, campus, day, start, end, type, room, staff);
+            Agency.AddClass(code, campus.ToString(), day.ToString(), start.ToString("HH:mm:ss"), end.ToString("HH:mm:ss"), type.ToString(), room, staff);
             MessageBox.Show("Updated successully!");
         }
     }

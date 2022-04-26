@@ -411,7 +411,7 @@ namespace KIT206.A2.Group18.HRIS
         #endregion
 
         //CLASS OPERATIONS
-        public static void AddClass(string code, Campus campus, Day day, TimeOnly start, TimeOnly end, Type type, string room, int staff)
+        public static void AddClass(string code, string campus, string day, string start, string end, string type, string room, int staff)
         {
             MySqlConnection conn = GetConnection();
 
@@ -419,9 +419,10 @@ namespace KIT206.A2.Group18.HRIS
             {
                 conn.Open();
 
-                MySqlCommand cmd = new MySqlCommand("insert into class(unit_code, campus, day, start, end, type, room, staff)" +
-                    " values (@code, @campus, @day, @start, @end, @type, @room, @staff)", conn);
-                    //'" + code + "', '" + campus + "', '" + day + "', '" + start + "', '" + end + "', '" + type + "', '" + room + "', '" + staff + "')"
+                MySqlCommand cmd = new MySqlCommand("INSERT INTO class (unit_code, campus, day, start, end, type, room, staff) " +
+                    " VALUES (@code, @campus, @day, @start, @end, @type, @room, @staff", conn);
+                //'" + code + "', '" + campus + "', '" + day + "', '" + start + "', '" + end + "', '" + type + "', '" + room + "', '" + staff + "')"
+                //@code, @campus, @day, @start, @end, @type, @room, @staff
                 cmd.Parameters.AddWithValue("@code", code);
                 cmd.Parameters.AddWithValue("@campus", campus);
                 cmd.Parameters.AddWithValue("@day", day);
@@ -429,10 +430,12 @@ namespace KIT206.A2.Group18.HRIS
                 cmd.Parameters.AddWithValue("@end", end);
                 cmd.Parameters.AddWithValue("@type", type);
                 cmd.Parameters.AddWithValue("@room", room);
-                cmd.Parameters.AddWithValue("@staff", staff);
+                cmd.Parameters.AddWithValue("@taff", staff);
 
                 MessageBox.Show(code + ", " + campus + ", " + day + ", " + start + ", " + end + ", " + type + ", " + room + ", " + staff);
                 cmd.ExecuteNonQuery();
+               
+
                 
             }
             catch (MySqlException e)
@@ -450,10 +453,11 @@ namespace KIT206.A2.Group18.HRIS
 
         public static List<int> LoadID()
         {
-            List<int> list = new List<int>();
+            List<int> id = new List<int>();
+
 
             MySqlDataReader rdr = null;
-            conn = GetConnection();
+            MySqlConnection conn = GetConnection();
             try
             {
                 conn.Open();
@@ -464,7 +468,7 @@ namespace KIT206.A2.Group18.HRIS
 
                 while (rdr.Read())
                 {
-                    list.Add(rdr.GetInt32(0));
+                    id.Add(rdr.GetInt32(0));
                 }
             }
             catch (MySqlException e)
@@ -482,7 +486,44 @@ namespace KIT206.A2.Group18.HRIS
                     conn.Close();
                 }
             }
-            return list;
+            return id;
+        }
+
+        public static List<string> LoadCode()
+        {
+            List<string> unit = new List<string>();
+
+
+            MySqlDataReader rdr = null;
+            MySqlConnection conn = GetConnection();
+            try
+            {
+                conn.Open();
+                MySqlCommand cmd = new MySqlCommand("SELECT code FROM unit order by code ASC", conn);
+                
+                rdr = cmd.ExecuteReader();
+
+                while (rdr.Read())
+                {
+                    unit.Add(rdr.GetString(0));
+                }
+            }
+            catch (MySqlException e)
+            {
+                ReportError("loading unit", e);
+            }
+            finally
+            {
+                if (rdr != null)
+                {
+                    rdr.Close();
+                }
+                if (conn != null)
+                {
+                    conn.Close();
+                }
+            }
+            return unit;
         }
 
         //CONSULTATION OPERATIONS
