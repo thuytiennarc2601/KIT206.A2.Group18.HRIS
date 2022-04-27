@@ -13,8 +13,6 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using KIT206.A2.Group18.HRIS;
 using Type = KIT206.A2.Group18.HRIS.Type;
-using System.Text.RegularExpressions;
-using MySql.Data.MySqlClient;
 
 namespace HRIS.WPF
 {
@@ -31,7 +29,6 @@ namespace HRIS.WPF
 
         private void staff_Loaded(object sender, EventArgs e)
         {
-            
             List<int> list = new List<int>();
             list = Agency.LoadID();
 
@@ -42,19 +39,16 @@ namespace HRIS.WPF
             comboBox_staff.SelectedIndex = 0;
         }
 
-        private void unit_Loaded(object sender, RoutedEventArgs e)
+        private void unit_Loaded(object sender, EventArgs e)
         {
-
             List<string> list = new List<string>();
             list = Agency.LoadCode();
 
-            
-            // ... Assign the ItemsSource to the List.
             comboBox_code.ItemsSource = list;
-
             // ... Make the first item selected.
             comboBox_code.SelectedIndex = 0;
         }
+
 
         private void addClass_Click(object sender, RoutedEventArgs e)
         {
@@ -64,13 +58,20 @@ namespace HRIS.WPF
             Campus campus = (Campus)comboBox_campus.SelectedItem;
             Day day = (Day)comboBox_day.SelectedItem;
             Type type = (Type)comboBox_type.SelectedItem;
-            TimeOnly start = new TimeOnly(11,0);
+            //string start = this.start_hour.Text + this.start_minute.Text;
+            TimeOnly start = new TimeOnly(13,0);
             TimeOnly end = new TimeOnly(13,0);
-           
-            
+            //string end = (string)lstBox_start.SelectedItem;
 
-            Agency.AddClass(code, campus.ToString(), day.ToString(), start.ToString("HH:mm:ss"), end.ToString("HH:mm:ss"), type.ToString(), room, staff);
-            MessageBox.Show("Updated successully!");
+            if (Agency.checkValidateClass(code, campus.ToString(), day.ToString(), start.ToString("HH:mm:ss"), room, staff))
+            {
+                Agency.AddClass(code, campus.ToString(), day.ToString(), start.ToString("HH:mm:ss"), end.ToString("HH:mm:ss"), type.ToString(), room, staff);
+                MessageBox.Show("Updated successully!");
+            }
+            else
+            {
+                MessageBox.Show("This room has been booked");
+            }
         }
     }
 }

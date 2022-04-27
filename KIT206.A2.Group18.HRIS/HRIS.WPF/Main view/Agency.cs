@@ -420,9 +420,8 @@ namespace KIT206.A2.Group18.HRIS
                 conn.Open();
 
                 MySqlCommand cmd = new MySqlCommand("INSERT INTO class (unit_code, campus, day, start, end, type, room, staff) " +
-                    " VALUES (@code, @campus, @day, @start, @end, @type, @room, @staff", conn);
-                //'" + code + "', '" + campus + "', '" + day + "', '" + start + "', '" + end + "', '" + type + "', '" + room + "', '" + staff + "')"
-                //@code, @campus, @day, @start, @end, @type, @room, @staff
+                    " VALUES (@code, @campus, @day, @start, @end, @type, @room, @staff)", conn);
+               
                 cmd.Parameters.AddWithValue("@code", code);
                 cmd.Parameters.AddWithValue("@campus", campus);
                 cmd.Parameters.AddWithValue("@day", day);
@@ -430,13 +429,9 @@ namespace KIT206.A2.Group18.HRIS
                 cmd.Parameters.AddWithValue("@end", end);
                 cmd.Parameters.AddWithValue("@type", type);
                 cmd.Parameters.AddWithValue("@room", room);
-                cmd.Parameters.AddWithValue("@taff", staff);
+                cmd.Parameters.AddWithValue("@staff", staff);
 
-                MessageBox.Show(code + ", " + campus + ", " + day + ", " + start + ", " + end + ", " + type + ", " + room + ", " + staff);
                 cmd.ExecuteNonQuery();
-               
-
-                
             }
             catch (MySqlException e)
             {
@@ -524,6 +519,153 @@ namespace KIT206.A2.Group18.HRIS
                 }
             }
             return unit;
+        }
+
+        public static Boolean checkValidateClass(string code, string campus, string day, string start, string room, int staff)
+        {
+            List<string> campusList = new List<string>();
+            List<string> dayList = new List<string>();
+            List<string> startList = new List<string>();
+            Boolean check = true;
+
+            MySqlDataReader rdr = null;
+            MySqlConnection conn = GetConnection();
+
+            try
+            {
+                conn.Open();
+                MySqlCommand cmd = new MySqlCommand("SELECT campus, day, start " +
+                                                    "FROM class " +
+                                                    "WHERE room=@room ", conn);
+
+                cmd.Parameters.AddWithValue("@room", room);
+
+                rdr = cmd.ExecuteReader();
+
+                
+
+                while (rdr.Read())
+                {
+                    campusList.Add(rdr.GetString(0));
+                    dayList.Add(rdr.GetString(1));
+                    startList.Add(rdr.GetString(2));
+                }
+            }
+            catch (MySqlException e)
+            {
+                ReportError("validating...", e);
+            }
+            finally
+            {
+                if (rdr != null)
+                {
+                    rdr.Close();
+                }
+                if (conn != null)
+                {
+                    conn.Close();
+                }
+            }
+
+            int count = 0;
+
+            foreach (string s in campusList)
+            {
+                if ((s == campus) && (dayList[count] == day) && (startList[count] == start))
+                {
+                    check = false;
+                }
+                count++;
+            }
+            return check;
+        }
+
+        public static void AddConsultation(string day, string start, string end, int staff)
+        {
+            MySqlConnection conn = GetConnection();
+
+            try
+            {
+                conn.Open();
+
+                MySqlCommand cmd = new MySqlCommand("INSERT INTO consultation (staff_id, day, start, end) " +
+                    " VALUES (@staff, @day, @start, @end)", conn);
+
+                cmd.Parameters.AddWithValue("@day", day);
+                cmd.Parameters.AddWithValue("@start", start);
+                cmd.Parameters.AddWithValue("@end", end);
+                cmd.Parameters.AddWithValue("@staff", staff);
+
+                cmd.ExecuteNonQuery();
+            }
+            catch (MySqlException e)
+            {
+                ReportError("Adding Class selected", e);
+            }
+            finally
+            {
+                if (conn != null)
+                {
+                    conn.Close();
+                }
+            }
+        }
+
+        public static Boolean checkValidateConsul(string day, string start, int staff)
+        {
+            List<string> dayList = new List<string>();
+            List<string> startList = new List<string>();
+            Boolean check = true;
+
+            MySqlDataReader rdr = null;
+            MySqlConnection conn = GetConnection();
+
+            try
+            {
+                conn.Open();
+                MySqlCommand cmd = new MySqlCommand("SELECT day, start " +
+                                                    "FROM consultation " +
+                                                    "WHERE staff_id=@staff ", conn);
+
+                cmd.Parameters.AddWithValue("@staff", staff);
+
+                rdr = cmd.ExecuteReader();
+
+
+                while (rdr.Read())
+                {
+                    dayList.Add(rdr.GetString(0));
+                    startList.Add(rdr.GetString(1));
+                }
+            }
+            catch (MySqlException e)
+            {
+                ReportError("validating...", e);
+            }
+            finally
+            {
+                if (rdr != null)
+                {
+                    rdr.Close();
+                }
+                if (conn != null)
+                {
+                    conn.Close();
+                }
+            }
+
+            int count = 0;
+
+            foreach (string s in dayList)
+            {
+                if ((s == day) && (startList[count] == start))
+                {
+                    check = false;
+                }
+                count++;
+            }
+
+            return check;
         }
 
         //CONSULTATION OPERATIONS

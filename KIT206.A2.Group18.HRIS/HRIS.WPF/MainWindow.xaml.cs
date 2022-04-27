@@ -246,6 +246,13 @@ namespace HRIS.WPF
 
                 myDialog.ShowDialog();
             }
+            else if (choseConsultation)
+            {
+                addConsultationView myDialog = new addConsultationView();
+
+                myDialog.ShowDialog();
+            }
         }
+
     }
 }

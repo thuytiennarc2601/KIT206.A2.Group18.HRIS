@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:HRIS.WPF"
         xmlns:x1="clr-namespace:KIT206.A2.Group18.HRIS"
         mc:Ignorable="d"
-        Title="addClassView" Height="400" Width="450" WindowStartupLocation="CenterOwner" ResizeMode="CanResizeWithGrip" MinHeight="300" MinWidth="400">
+        Title="addClassView" MaxHeight="400" MaxWidth="469" MinHeight="400" MinWidth="450" WindowStartupLocation="CenterOwner">
     <Window.Resources>
         <ObjectDataProvider x:Key="enmCampus" MethodName="GetValues" ObjectType="{x:Type x1:Campus}">
             <ObjectDataProvider.MethodParameters>
@@ -24,29 +24,57 @@
             </ObjectDataProvider.MethodParameters>
         </ObjectDataProvider>
     </Window.Resources>
-    <Grid x:Name="add">
+    <Grid x:Name="add" MaxHeight="400" MaxWidth="469" MinHeight="400" MinWidth="450" Background="#FFFFE7BC">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="19*"/>
-            <ColumnDefinition Width="59*"/>
-            <ColumnDefinition Width="236*"/>
-            <ColumnDefinition Width="86*"/>
+            <ColumnDefinition Width="22*"/>
+            <ColumnDefinition Width="69*"/>
+            <ColumnDefinition Width="224*"/>
+            <ColumnDefinition Width="38*"/>
+            <ColumnDefinition Width="101*"/>
         </Grid.ColumnDefinitions>
-        <Label x:Name="addLabel" Margin="10,10,10,235" FontFamily="Georgia" Foreground="#FFD7C282" FontSize="20" FontWeight="Bold" Grid.ColumnSpan="4"/>
-        <Button x:Name="editClassBtn" Click="addClass_Click" Content="SUBMIT" Margin="23,301,208,40" FontSize="14" FontFamily="Calibri" BorderBrush="White" Background="#FFD7C282" Foreground="White" Grid.Column="1" Grid.ColumnSpan="2"/>
-        <Label Content="ID" HorizontalAlignment="Left" Height="25" Margin="18,54,0,0" VerticalAlignment="Top" Width="42" Grid.ColumnSpan="2"/>
-        <Label Content="Unit code" Margin="129,54,38,205" Grid.Column="2"/>
-        <ComboBox Text="-- Select Unit --" x:Name="comboBox_code" Loaded="unit_Loaded" Grid.Column="2" ScrollViewer.HorizontalScrollBarVisibility="Visible" IsEditable="True" Margin="198,54,48,297" Grid.ColumnSpan="2"/>
-        <Label Content="Campus" Margin="10,84,9,168" Grid.ColumnSpan="2"/>
-        <ComboBox Text="-- Select Campus --" x:Name="comboBox_campus" Margin="0,99,141,251" Grid.Column="2" RenderTransformOrigin="0.5,0.5" ScrollViewer.HorizontalScrollBarVisibility="Visible" IsEditable="True" ItemsSource="{Binding Source={StaticResource enmCampus}}" HorizontalAlignment="Right" Width="117"/>
-        <Label Content="Day" Margin="132,97,34,157" Grid.Column="2"/>
-        <ComboBox Text="-- Select Day --" x:Name="comboBox_day" Margin="198,100,0,251" Grid.Column="2" Grid.ColumnSpan="2" ScrollViewer.HorizontalScrollBarVisibility="Visible" IsEditable="True" ItemsSource="{Binding Source={StaticResource enmDay}}" HorizontalAlignment="Left" Width="116"/>
-        <Label Content="Start" Margin="10,141,9,114" Grid.ColumnSpan="2"/>
-        <Label Content="End" Margin="10,216,9,39" Grid.ColumnSpan="2"/>
-        <Label Content="Type" Margin="133,175,34,80" Grid.Column="2"/>
-        <ComboBox Text="-- Select Type --" x:Name="comboBox_type" Margin="198,168,0,185" Grid.Column="2" Grid.ColumnSpan="2" ScrollViewer.HorizontalScrollBarVisibility="Visible" IsEditable="True" ItemsSource="{Binding Source={StaticResource enmType}}" HorizontalAlignment="Left" Width="116"/>
-        <Label Content="Room" Margin="133,255,34,0" Grid.Column="2"/>
-        <TextBox x:Name="textBox_room" HorizontalAlignment="Left" Height="29" Margin="198,255,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="116" Grid.Column="2" Grid.ColumnSpan="2"/>
-        <ComboBox Text="-- Select Staff --"  Loaded="staff_Loaded" x:Name="comboBox_staff" Grid.Column="2" Margin="7,54,141,297" ScrollViewer.HorizontalScrollBarVisibility="Visible" IsEditable="True" />
-        
+        <Label x:Name="addLabel" Margin="10,10,10,235" FontFamily="Georgia" Foreground="#FFD7C282" FontSize="20" FontWeight="Bold" Grid.ColumnSpan="5"/>
+        <Button MinHeight="50" MaxHeight="50" MinWidth="100" MaxWidth="100" x:Name="editClassBtn" Click="addClass_Click" Content="SUBMIT" Margin="85,312,38,29" FontSize="18" FontFamily="Verdana" BorderBrush="White" Background="#FF0E0C04" Foreground="White" Grid.Column="2"/>
+        <Label Content="ID" HorizontalAlignment="Left" MinHeight="25" MaxHeight="25" Margin="11,42,0,0" VerticalAlignment="Top" MinWidth="42" MaxWidth="42" Grid.ColumnSpan="2" Height="24" Width="40"/>
+        <Label Content="Unit code" Margin="138,42,31,218" Grid.Column="2" Grid.ColumnSpan="2"/>
+        <ComboBox Text="-- Select Unit --" x:Name="comboBox_code" Loaded="unit_Loaded" MinHeight="25" MaxHeight="25" MinWidth="110" MaxWidth="110" Grid.Column="2" ScrollViewer.HorizontalScrollBarVisibility="Visible" IsEditable="True" Margin="222,30,25,321" Grid.ColumnSpan="3"/>
+        <Label Content="Campus" Margin="8,86,11,166" Grid.ColumnSpan="2"/>
+        <ComboBox Text="-- Select Campus --" x:Name="comboBox_campus" MinHeight="25" MaxHeight="25" MinWidth="110" MaxWidth="110" Margin="0,75,123,275" Grid.Column="1" RenderTransformOrigin="0.5,0.5" ScrollViewer.HorizontalScrollBarVisibility="Visible" IsEditable="True" ItemsSource="{Binding Source={StaticResource enmCampus}}" HorizontalAlignment="Right" Width="117" Grid.ColumnSpan="2"/>
+        <Label Content="Day" Margin="138,128,28,126" Grid.Column="2" Grid.ColumnSpan="2"/>
+        <ComboBox Text="-- Select Day --" x:Name="comboBox_day" MinHeight="25" MaxHeight="25" MinWidth="110" MaxWidth="110" Margin="0,122,0,230" Grid.Column="3" Grid.ColumnSpan="2" ScrollViewer.HorizontalScrollBarVisibility="Visible" IsEditable="True" ItemsSource="{Binding Source={StaticResource enmDay}}" HorizontalAlignment="Left" Width="116"/>
+        <Label Content="Start" Margin="11,186,9,70" Grid.ColumnSpan="2"/>
+        <Label Content="End" Margin="140,184,8,71" Grid.Column="2"/>
+        <Label Content="Type" Margin="11,129,211,126" Grid.ColumnSpan="3"/>
+        <ComboBox Text="-- Select Type --" x:Name="comboBox_type" MinHeight="25" MaxHeight="25" MinWidth="110" MaxWidth="110" Margin="71,122,0,230" Grid.Column="1" Grid.ColumnSpan="2" ScrollViewer.HorizontalScrollBarVisibility="Visible" IsEditable="True" ItemsSource="{Binding Source={StaticResource enmType}}" HorizontalAlignment="Left" Width="116"/>
+        <Label Content="Room" Margin="138,86,29,169" Grid.Column="2" Grid.ColumnSpan="2"/>
+        <TextBox x:Name="textBox_room" Text="  Room" HorizontalAlignment="Left" MinHeight="25" MaxHeight="25" Margin="0,87,0,0" TextWrapping="Wrap" VerticalAlignment="Top" MinWidth="110" MaxWidth="110" Grid.Column="3" Grid.ColumnSpan="2"/>
+        <ComboBox Text="-- Select Staff --"  Loaded="staff_Loaded" x:Name="comboBox_staff" MinHeight="25" MaxHeight="25" MinWidth="110" MaxWidth="110" Grid.Column="1" Margin="63,30,117,321" ScrollViewer.HorizontalScrollBarVisibility="Visible" IsEditable="True" Grid.ColumnSpan="2" />
+        <TextBox x:Name="start_hour" MaxLength="2" MaxWidth="40" MinWidth="40" MinHeight="25" MaxHeight="25" TextWrapping="Wrap" Text="HH" Grid.Column="1" Margin="71,190,191,185" Grid.ColumnSpan="2"/>
+        <Label Content=":" Grid.Column="2" Margin="45,190,162,-190"/>
+        <TextBox x:Name="start_minute" MaxLength="2" MaxWidth="40" MinWidth="40" MinHeight="25" MaxHeight="25" TextWrapping="Wrap" Text="MM" Grid.Column="2" Margin="62,182,129,177" RenderTransformOrigin="-0.278,1"/>
+        <Rectangle Grid.Column="2" HorizontalAlignment="Left" Height="290" Margin="129,-3,0,0" Stroke="Black" VerticalAlignment="Top" Width="4">
+            <Rectangle.Fill>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FFACA68D" Offset="0.905"/>
+                    <GradientStop Color="#FFE7BE5A" Offset="0.735"/>
+                </LinearGradientBrush>
+            </Rectangle.Fill>
+        </Rectangle>
+        <Rectangle Grid.Column="3" HorizontalAlignment="Left" Height="719" Margin="29,-71,0,0" Stroke="Black" VerticalAlignment="Top" Width="4" RenderTransformOrigin="0.5,0.5">
+            <Rectangle.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-90.015"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Rectangle.RenderTransform>
+            <Rectangle.Fill>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FFACA68D" Offset="0.905"/>
+                    <GradientStop Color="#FFE7BE5A" Offset="0.735"/>
+                </LinearGradientBrush>
+            </Rectangle.Fill>
+        </Rectangle>
+
     </Grid>
 </Window>
