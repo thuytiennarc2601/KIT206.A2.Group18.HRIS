@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:HRIS.WPF"
         xmlns:x1="clr-namespace:KIT206.A2.Group18.HRIS"
         mc:Ignorable="d"
-        Title="addConsultationView" MaxHeight="400" MaxWidth="469" MinHeight="400" MinWidth="450" WindowStartupLocation="CenterOwner">
+        Title="addConsultationView" MaxHeight="297" MaxWidth="400" MinHeight="297" MinWidth="400" WindowStartupLocation="CenterOwner" Height="331" Width="445">
     <Window.Resources>
         <ObjectDataProvider x:Key="enmDay" MethodName="GetValues" ObjectType="{x:Type x1:Day}">
             <ObjectDataProvider.MethodParameters>
@@ -14,7 +14,7 @@
             </ObjectDataProvider.MethodParameters>
         </ObjectDataProvider>
     </Window.Resources>
-    <Grid x:Name="add" MaxHeight="400" MaxWidth="469" MinHeight="400" MinWidth="450" Background="#FFFFE7BC">
+    <Grid x:Name="add" MaxHeight="297" MaxWidth="400" MinHeight="297" MinWidth="400" Background="#FFFFE7BC" Margin="0,0,0,-6">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="22*"/>
             <ColumnDefinition Width="69*"/>
@@ -23,17 +23,19 @@
             <ColumnDefinition Width="101*"/>
         </Grid.ColumnDefinitions>
         <Label x:Name="addLabel" Margin="10,10,10,235" FontFamily="Georgia" Foreground="#FFD7C282" FontSize="20" FontWeight="Bold" Grid.ColumnSpan="5"/>
-        <Button MinHeight="50" MaxHeight="50" MinWidth="100" MaxWidth="100" x:Name="editClassBtn" Click="addConsultation_Click" Content="SUBMIT" Margin="85,312,38,29" FontSize="18" FontFamily="Verdana" BorderBrush="White" Background="#FF0E0C04" Foreground="White" Grid.Column="2"/>
-        <Label Content="ID" HorizontalAlignment="Left" MinHeight="25" MaxHeight="25" Margin="11,42,0,0" VerticalAlignment="Top" MinWidth="42" MaxWidth="42" Grid.ColumnSpan="2" Height="24" Width="40"/>
-        <Label Content="Day" Margin="140,42,26,212" Grid.Column="2" Grid.ColumnSpan="2"/>
-        <ComboBox Text="-- Select Day --" x:Name="comboBox_day" MinHeight="25" MaxHeight="25" MinWidth="110" MaxWidth="110" Margin="0,31,0,322" Grid.Column="3" Grid.ColumnSpan="2" ScrollViewer.HorizontalScrollBarVisibility="Visible" IsEditable="True" ItemsSource="{Binding Source={StaticResource enmDay}}" HorizontalAlignment="Left" Width="116"/>
-        <Label Content="Start" Margin="11,88,9,168" Grid.ColumnSpan="2"/>
-        <Label Content="End" Margin="140,88,8,167" Grid.Column="2"/>
-        <ComboBox Text="-- Select Staff --"  Loaded="staff_Loaded" x:Name="comboBox_staff" MinHeight="25" MaxHeight="25" MinWidth="110" MaxWidth="110" Grid.Column="1" Margin="63,30,117,321" ScrollViewer.HorizontalScrollBarVisibility="Visible" IsEditable="True" Grid.ColumnSpan="2" />
-        <TextBox x:Name="start_hour" MaxLength="2" MaxWidth="40" MinWidth="40" MinHeight="25" MaxHeight="25" TextWrapping="Wrap" Text="HH" Grid.Column="2" Margin="0,90,191,285"/>
-        <Label Content=":" Grid.Column="2" Margin="45,90,162,-90"/>
-        <TextBox x:Name="start_minute" MaxLength="2" MaxWidth="40" MinWidth="40" MinHeight="25" MaxHeight="25" TextWrapping="Wrap" Text="MM" Grid.Column="2" Margin="68,82,123,277" RenderTransformOrigin="-0.278,1"/>
-        <Rectangle Grid.Column="2" HorizontalAlignment="Left" Height="290" Margin="129,-3,0,0" Stroke="Black" VerticalAlignment="Top" Width="4">
+        <Rectangle Grid.ColumnSpan="5" HorizontalAlignment="Left" Height="96" Margin="-12,191,0,0" Stroke="Black" VerticalAlignment="Top" Width="429" Fill="White"/>
+
+        <Button MinHeight="50" MaxHeight="50" MinWidth="100" MaxWidth="100" x:Name="editClassBtn" Click="addConsultation_Click" Content="SUBMIT" Margin="70,171,28,-10" FontSize="18" FontFamily="Verdana" BorderBrush="White" Background="#FF0E0C04" Foreground="White" Grid.Column="2"/>
+        <Label Content="ID" HorizontalAlignment="Left" MinHeight="25" MaxHeight="25" Margin="11,37,0,0" VerticalAlignment="Top" MinWidth="42" MaxWidth="42" Grid.ColumnSpan="2" Height="24" Width="40"/>
+        <Label Content="Day" Margin="140,37,26,217" Grid.Column="2" Grid.ColumnSpan="2"/>
+        <ComboBox Text="-- Select Day --" x:Name="comboBox_day" MinHeight="25" MaxHeight="25" MinWidth="110" MaxWidth="110" Margin="0,37,0,235" Grid.Column="3" Grid.ColumnSpan="2" ScrollViewer.HorizontalScrollBarVisibility="Visible" IsEditable="True" ItemsSource="{Binding Source={StaticResource enmDay}}" HorizontalAlignment="Left" Width="116"/>
+        <Label Content="Start at" Margin="10,88,10,168" Grid.ColumnSpan="2"/>
+        <Label Content="End at" Margin="140,88,8,167" Grid.Column="2"/>
+        <ComboBox Text="-- Select Staff --"  Loaded="staff_Loaded" x:Name="comboBox_staff" MinHeight="25" MaxHeight="25" MinWidth="110" MaxWidth="110" Grid.Column="1" Margin="50,37,99,235" ScrollViewer.HorizontalScrollBarVisibility="Visible" IsEditable="True" Grid.ColumnSpan="2" />
+        <TextBox x:Name="start_hour" MaxLength="2" MaxWidth="40" MinWidth="40" MinHeight="25" MaxHeight="25" TextWrapping="Wrap" Text="HH" Grid.Column="1" Margin="51,90,168,182" Grid.ColumnSpan="2"/>
+        <Label Content=":" Grid.Column="2" Margin="35,88,137,-89"/>
+        <TextBox x:Name="start_minute" MaxLength="2" MaxWidth="40" MinWidth="40" MinHeight="25" MaxHeight="25" TextWrapping="Wrap" Text="MM" Grid.Column="2" Margin="59,90,99,182" RenderTransformOrigin="-0.278,1"/>
+        <Rectangle Grid.Column="2" HorizontalAlignment="Left" Height="191" Margin="116,0,0,0" Stroke="Black" VerticalAlignment="Top" Width="4">
             <Rectangle.Fill>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="#FFACA68D" Offset="0.905"/>
@@ -41,7 +43,7 @@
                 </LinearGradientBrush>
             </Rectangle.Fill>
         </Rectangle>
-        <Rectangle Grid.Column="3" HorizontalAlignment="Left" Height="719" Margin="29,-71,0,0" Stroke="Black" VerticalAlignment="Top" Width="4" RenderTransformOrigin="0.5,0.5">
+        <Rectangle Grid.Column="3" HorizontalAlignment="Left" Height="719" Margin="30,-167,0,0" Stroke="Black" VerticalAlignment="Top" Width="4" RenderTransformOrigin="0.5,0.5" Grid.ColumnSpan="2">
             <Rectangle.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -57,5 +59,8 @@
                 </LinearGradientBrush>
             </Rectangle.Fill>
         </Rectangle>
+        <TextBox x:Name="end_hour" MaxLength="2" MaxWidth="40" MinWidth="40" MinHeight="25" MaxHeight="25" TextWrapping="Wrap" Text="HH" Grid.Column="3" Margin="0,90,82,182" Grid.ColumnSpan="2"/>
+        <Label Content=":" Grid.Column="4" Margin="14,88,52,159"/>
+        <TextBox x:Name="end_minute" MaxLength="2" MaxWidth="40" MinWidth="40" MinHeight="25" MaxHeight="25" TextWrapping="Wrap" Text="MM" Grid.Column="4" Margin="37,90,12,182" RenderTransformOrigin="-0.278,1"/>
     </Grid>
 </Window>

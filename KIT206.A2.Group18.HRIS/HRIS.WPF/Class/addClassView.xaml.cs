@@ -49,6 +49,14 @@ namespace HRIS.WPF
             comboBox_code.SelectedIndex = 0;
         }
 
+        private string TimeDoubleDigitConverter(string time)
+        {
+            if (time.Length < 2)
+            {
+                time = "0" + time;
+            }
+            return time;
+        }
 
         private void addClass_Click(object sender, RoutedEventArgs e)
         {
@@ -58,14 +66,17 @@ namespace HRIS.WPF
             Campus campus = (Campus)comboBox_campus.SelectedItem;
             Day day = (Day)comboBox_day.SelectedItem;
             Type type = (Type)comboBox_type.SelectedItem;
-            //string start = this.start_hour.Text + this.start_minute.Text;
-            TimeOnly start = new TimeOnly(13,0);
-            TimeOnly end = new TimeOnly(13,0);
-            //string end = (string)lstBox_start.SelectedItem;
+            string startHour = this.start_hour.Text;
+            string startMinute = this.start_minute.Text;
+            string endHour = this.end_hour.Text;
+            string endMinute = this.end_minute.Text;
 
-            if (Agency.checkValidateClass(code, campus.ToString(), day.ToString(), start.ToString("HH:mm:ss"), room, staff))
+            string start = TimeDoubleDigitConverter(startHour) + ":" + TimeDoubleDigitConverter(startMinute) + ":00";
+            string end = TimeDoubleDigitConverter(endHour) + ":" + TimeDoubleDigitConverter(endMinute) + ":00";
+
+            if (Agency.checkValidateClass(code, campus.ToString(), day.ToString(), start, room, staff))
             {
-                Agency.AddClass(code, campus.ToString(), day.ToString(), start.ToString("HH:mm:ss"), end.ToString("HH:mm:ss"), type.ToString(), room, staff);
+                Agency.AddClass(code, campus.ToString(), day.ToString(), start, end, type.ToString(), room, staff);
                 MessageBox.Show("Updated successully!");
             }
             else
