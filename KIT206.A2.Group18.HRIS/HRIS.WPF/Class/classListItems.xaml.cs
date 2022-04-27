@@ -33,6 +33,28 @@ namespace HRIS.WPF
         private string _classTime;
         private string _classLocation;
 
+        private string _day;
+        private string _campus;
+        private TimeOnly _start;
+
+        public string Day
+        {
+            get { return _day; }
+            set { _day = value; }
+        }
+
+        public string Campus
+        {
+            get { return _campus; }
+            set { _campus = value; }
+        }
+
+        public TimeOnly StartTime
+        {
+            get { return _start; }
+            set { _start = value; }
+        }
+
         public string UnitCode
         {
             get { return _unitCode; }
@@ -69,5 +91,15 @@ namespace HRIS.WPF
             set { _classLocation = value; this.classLocation.Content = value; }
         }
         #endregion
+
+        private void editClassBtn_Click(object sender, RoutedEventArgs e)
+        {
+            EditClassDetails view = Controller.LoadClassDetails(StaffID, UnitCode, Day, Campus, StartTime);
+            view.UnitCode = UnitCode;
+            view.Day = Day;
+            view.Campus = Campus;
+            view.ClassStart = StartTime;
+            view.ShowDialog();
+        }
     }
 }

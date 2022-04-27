@@ -49,5 +49,28 @@ namespace KIT206.A2.Group18.HRIS
             return result;
         }
         #endregion
+
+        #region Get A Specific Class Based On Its Unitcode, Day, Campus, StartTime
+        public static Class GetClassByPrimaryKeys(string code, string day, string campus, TimeOnly start)
+        {
+            Class thisClass = new Class();
+
+            Campus enumCampus = Agency.ParseEnum<Campus>(campus);
+            Day enumDay = Agency.ParseEnum<Day>(day);
+
+
+            List<Class> classList = Agency.LoadAllClasses();
+            var getClass = from Class c in classList
+                           where c.unit.UnitCode == code && c.day == enumDay && c.campus == enumCampus && c.StartTime == start
+                           select c;
+            List<Class> result = new List<Class>(getClass);
+            if(result.Count > 0)
+            {
+                thisClass = result[0];
+            } else { thisClass.unit.UnitCode = ""; }
+
+            return thisClass;   
+        }
+        #endregion
     }
 }

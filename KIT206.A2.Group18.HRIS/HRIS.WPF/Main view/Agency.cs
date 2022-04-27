@@ -55,16 +55,29 @@ namespace KIT206.A2.Group18.HRIS
                 rdr = cmd.ExecuteReader();
                 while (rdr.Read())
                 {
-                    classList.Add(new Class { 
-                        unit = new Unit { UnitCode = rdr.GetString(0) }, 
-                        campus = ParseEnum<Campus>(rdr.GetString(1)), 
-                        day = ParseEnum<Day>(rdr.GetString(2)), 
-                        type = ParseEnum<Type>(rdr.GetString(3)), 
-                        StartTime = TimeOnly.ParseExact(rdr.GetString(4), "HH:mm:ss"),
-                        EndTime = TimeOnly.ParseExact(rdr.GetString(5), "HH:mm:ss"), 
-                        Room = rdr.GetString(6), 
-                        staff = new Staff { ID = rdr.GetInt32(7) } 
-                    });
+                    Class result = new Class();
+
+                    result.unit = new Unit { UnitCode = rdr.GetString(0) };
+                    result.campus = ParseEnum<Campus>(rdr.GetString(1));
+                    result.day = ParseEnum<Day>(rdr.GetString(2));
+
+                    if(Convert.IsDBNull(rdr[3]) || rdr.GetString(3) == "")
+                    {
+                        result.type = Type.Undefined;
+                    }
+                    else { result.type = ParseEnum<Type>(rdr.GetString(3)); }
+
+                    result.StartTime = TimeOnly.ParseExact(rdr.GetString(4), "HH:mm:ss");
+                    result.EndTime = TimeOnly.ParseExact(rdr.GetString(5), "HH:mm:ss");
+                    result.Room = rdr.GetString(6);
+
+                    if (Convert.IsDBNull(rdr[7]))
+                    {
+                        result.staff = new Staff { ID = -1 };
+                    }
+                    else { result.staff = new Staff { ID = rdr.GetInt32(7) }; }
+
+                    classList.Add(result);
                 }
             }
             catch (MySqlException e)

@@ -76,6 +76,20 @@ namespace HRIS.WPF
                     view.ShowDialog();
                 }
             }
+
+            if(choseClass)
+            {
+                classListItems selectedClass = (classListItems)GeneralListBox.SelectedItem;
+                if( selectedClass != null)
+                {
+                    EditClassDetails view = Controller.LoadClassDetails(selectedClass.StaffID, selectedClass.UnitCode, selectedClass.Day, selectedClass.Campus, selectedClass.StartTime);
+                    view.UnitCode = selectedClass.UnitCode;
+                    view.Day = selectedClass.Day;
+                    view.Campus = selectedClass.Campus;
+                    view.ClassStart = selectedClass.StartTime;
+                    view.ShowDialog();
+                }
+            }
         }
         #endregion
 

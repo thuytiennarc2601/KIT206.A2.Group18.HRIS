@@ -97,6 +97,9 @@ namespace HRIS.WPF
                     classListItems item = new classListItems();
                     item.UnitCode = classList[i].unit.UnitCode;
                     item.StaffID = classList[i].staff.ID;
+                    item.Day = classList[i].day.ToString();
+                    item.Campus = classList[i].campus.ToString();
+                    item.StartTime = classList[i].StartTime;
 
                     Unit unit = Unit.GetUnitByCode(item.UnitCode);
                     item.UnitDetails = unit.ToString();
@@ -171,7 +174,7 @@ namespace HRIS.WPF
         #endregion
 
         //STAFF MANAGEMENT: Show Staff Details, Add Staff Info
-        //Show staff member's details (their information, their units and their consultations)
+            //Show staff member's details (their information, their units and their consultations)
         #region Show A Staff Member Details
         public static StaffDetailView ShowStaffDetails(int StaffID)
         {
@@ -210,7 +213,8 @@ namespace HRIS.WPF
             return detailView;
         }
         #endregion
-        //Load staff details into AddStaffInfoView
+
+            //Load staff details into AddStaffInfoView
         #region Load Staff Details Into AddStaffInfoView
         public static AddStaffInfoView LoadStaffDetails(int StaffID)
         {
@@ -283,7 +287,7 @@ namespace HRIS.WPF
         #endregion
 
         //UNIT MANAGEMENT: Show Unit Details, Search For A Staff Member, Add A New Unit
-        //Show unit details (with classes) and allow users to change unit coordination
+            //Show unit details (with classes) and allow users to change unit coordination
         #region Show A Unit Details
         public static EditUnitView ShowUnitDetails(string UnitCode, int StaffID)
         {
@@ -306,11 +310,77 @@ namespace HRIS.WPF
         }
         #endregion
 
-        //Show AddUnitView
+            //Show AddUnitView
+        #region Show AddUnitView
         public static AddUnitView ShowAddUnit()
         {
             AddUnitView view = new AddUnitView();
             return view;
         }
+        #endregion
+
+        //CLASS MANAGEMENT
+            //Load class details into EditClassDetails
+        #region Show Class Details And Allows Users To Edit That Class Information
+        public static EditClassDetails LoadClassDetails(int staffID, string code, string day, string campus, TimeOnly start)
+        {
+            EditClassDetails view = new EditClassDetails();
+
+            Class thisClass = Class.GetClassByPrimaryKeys(code, day, campus, start);
+            Unit unit = Unit.GetUnitByCode(code);
+            Staff staff = Staff.GetStaffByID(staffID);
+
+            view.UnitDetailsTB.Text = unit.ToString();
+            view.StaffDetailsTB.Text = staffID.ToString() + " | " + staff.ToString();
+
+            foreach (string dayName in Enum.GetNames(typeof(Day)))
+            {
+                view.DayList.Items.Add(dayName);
+            }
+            view.DayList.SelectedItem = day;
+
+            foreach (string campusName in Enum.GetNames(typeof(Campus)))
+            {
+                if (campusName != "Unknown")
+                {
+                    view.CampusList.Items.Add(campusName);
+                }
+            }
+            view.CampusList.SelectedItem = campus;
+
+            if (thisClass.type == KIT206.A2.Group18.HRIS.Type.Undefined)
+            {
+                view.TypeList.Items.Add("Select..");
+                foreach (string typeName in Enum.GetNames(typeof(KIT206.A2.Group18.HRIS.Type)))
+                {
+                    if (typeName != "Undefined")
+                    {
+                        view.TypeList.Items.Add(typeName);
+                    }
+                }
+                view.TypeList.SelectedIndex = 0;
+            }
+            else
+            {
+                foreach (string typeName in Enum.GetNames(typeof(KIT206.A2.Group18.HRIS.Type)))
+                {
+                    if (typeName != "Undefined")
+                    {
+                        view.TypeList.Items.Add(typeName);
+                    }
+                }
+                view.TypeList.SelectedItem = thisClass.type.ToString();
+            }
+
+            view.RoomTB.Text = thisClass.Room;
+
+            view.StartHourTB.Text = thisClass.StartTime.ToString("HH");
+            view.StartMinute.Text = thisClass.StartTime.ToString("mm");
+            view.EndHourTB.Text = thisClass.EndTime.ToString("HH");
+            view.EndMinuteTB.Text = thisClass.EndTime.ToString("mm");
+            return view;
+        }
+        #endregion
+
     }
 }
