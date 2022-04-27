@@ -56,16 +56,17 @@ namespace KIT206.A2.Group18.HRIS
                     classResult.unit.UnitCode = rdr.GetString(0);
                     classResult.campus = (Campus)Enum.Parse(typeof(Campus), rdr.GetString(1));
                     classResult.day = (Day)Enum.Parse(typeof(Day), rdr.GetString(2));
-
+                    /*
                     if(Convert.IsDBNull(rdr[3]) || rdr.GetString(3) =="")
                     {
                         classResult.type = Type.Undefined;
                     }
                     else
                     {
+                    */
                         classResult.type = (Type)Enum.Parse(typeof(Type), rdr.GetString(3));
-                    }
-
+                    //}
+                    
                     
                     classResult.StartTime = (TimeSpan)rdr[4];
                     classResult.EndTime = (TimeSpan)rdr[5];

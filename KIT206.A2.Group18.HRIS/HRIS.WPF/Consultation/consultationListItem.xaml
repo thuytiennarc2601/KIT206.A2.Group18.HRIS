@@ -1,0 +1,17 @@
+﻿<UserControl x:Class="HRIS.WPF.consultationListItem"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:HRIS.WPF"
+             mc:Ignorable="d" 
+             Height="130" Width="668">
+    <Grid x:Name="consultationItem" Background="White">
+        <Label x:Name="staffDetails" Content="Dr. Lindsay Wells" Margin="10,10,153,81" Foreground="#FF7BA8D7" FontFamily="Georgia" FontSize="22" FontWeight="Bold"/>
+        <Label x:Name="staffID" Content="ID: 000000" Margin="10,38,321,62" FontFamily="Century Gothic" Foreground="#FF787878" FontSize="18" FontWeight="Normal" FontStyle="Normal"/>
+        <Label x:Name="consultationTime" Content="Monday | 11:00 - 12:00" Margin="10,80,226,17" FontFamily="Century Gothic" Foreground="#FF787878" FontSize="18" FontWeight="Bold"/>
+        <Button x:Name="editConsultation" HorizontalAlignment='Right' Content="EDIT DETAILS" Margin="401,80,123,20" FontFamily="Calibri" Foreground="White" Background="#FF7BA8D7" BorderBrush="White" FontSize="14" Height="30" Width="103"/>
+        <Button x:Name="conCancelBtn" HorizontalAlignment="Right" Content="CANCEL" Margin="509,80,15,20" FontFamily="Calibri" Foreground="White" Background="#FF7BA8D7" BorderBrush="White" FontSize="14" Height="30" Width="103" Click="conCancelBtn_Click"/>
+
+    </Grid>
+</UserControl>

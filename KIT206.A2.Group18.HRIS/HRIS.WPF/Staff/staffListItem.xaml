@@ -1,0 +1,21 @@
+﻿<UserControl x:Name="staffItem" x:Class="HRIS.WPF.staffListItem"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:HRIS.WPF"
+             mc:Ignorable="d" 
+             Height="140" Width="668">
+    <Grid x:Name="staffItem1" Background="White">
+        <Image x:Name="staffPhoto" HorizontalAlignment="Left" Margin="23,4,0,10" Stretch="Fill" OpacityMask="Black" Width="136"/>
+
+        <Label x:Name="staffInfo" Content="Dr. Lindsay Wells" Margin="181,3,58,96" FontFamily="Georgia" Foreground="#FF729F54" FontSize="22" FontWeight="Bold"/>
+        <Label x:Name="staffID" Content="ID: 000000" Margin="181,28,48,82" FontFamily="Century Gothic" Foreground="#FF9D9D9D" FontSize="16" Height="30"/>
+        <Label x:Name="staffEmail" Content="Email: abd@utas.edu.au" Margin="181,79,48,31" FontFamily="Century Gothic" Foreground="#FF9D9D9D" FontSize="16" Height="30"/>
+        <Label x:Name="staffCampus" Content="Room C0 | Hobart campus" Margin="181,100,48,10" FontFamily="Century Gothic" Foreground="#FF9D9D9D" FontSize="16" Height="30"/>
+        <Label x:Name="staffCate" Content="TECHNICAL" Margin="181,58,48,52" FontFamily="Century Gothic" Foreground="#FF9D9D9D" FontSize="16" Height="30"/>
+        <Button x:Name="editInfoBtn" Content="EDIT DETAILS" Margin="0,95,22,15" Background="#FF799A4D" Width="91" Height="30" FontFamily="Calibri" Foreground="White" BorderBrush="White" FontSize="14" Cursor="Hand" HorizontalAlignment="Right" Click="editInfoBtn_Click"/>
+
+
+    </Grid>
+</UserControl>

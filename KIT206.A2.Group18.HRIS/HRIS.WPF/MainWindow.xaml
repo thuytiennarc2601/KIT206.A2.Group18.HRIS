@@ -1,0 +1,102 @@
+﻿<Window x:Name="HRIS" x:Class="HRIS.WPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:HRIS.WPF"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="580" Width="900" ResizeMode="CanResizeWithGrip" MinHeight="580" MinWidth="900" Loaded="HRIS_Loaded" Activated="HRIS_Activated">
+    <Grid x:Name="listContainer" Margin="0,0,0,-6">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="79*"/>
+            <RowDefinition Height="116*"/>
+            <RowDefinition Height="375*"/>
+        </Grid.RowDefinitions>
+
+        <Label x:Name="sysTitle" Content="" HorizontalContentAlignment="Center" Width="Auto" Height="Auto" Margin="10,3,10,0">
+            <Label.Background>
+                <ImageBrush ImageSource="/title.png"/>
+            </Label.Background>
+        </Label>
+
+        <!--#Region Set of list buttons -->
+        <Grid Margin="93,11,93,11" Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="173*"/>
+                <ColumnDefinition Width="187*"/>
+                <ColumnDefinition Width="186*"/>
+                <ColumnDefinition Width="168*"/>
+            </Grid.ColumnDefinitions>
+            <Button x:Name="staffButton"  Content="" Height="Auto" Width="Auto" Cursor="Hand" Click="staffButton_Click" Margin="0,-11,0,0">
+                <Button.Template>
+                    <ControlTemplate>
+                        <Image Name="Image" Stretch="Fill" Source="/resources/staff.png" />
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="Image" Property="Source" Value="/resources/staff.png" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+            <Button x:Name="unitButton" Content="" Height="Auto" Width="Auto" Cursor="Hand" Click="unitButton_Click" BorderBrush="Black" Margin="5,-11,3,0" Grid.Column="1">
+                <Button.Template>
+                    <ControlTemplate>
+                        <Image Name="Image" Stretch="Fill" Source="/resources/unit2.png" />
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="Image" Property="Source" Value="/resources/unit2.png" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+            <Button x:Name="classButton" Content="" Height="Auto" Width="Auto" Cursor="Hand" Click="classButton_Click" Grid.Column="2" Margin="2,-11,0,0">
+                <Button.Template>
+                    <ControlTemplate>
+                        <Image Name="Image" Stretch="Fill" Source="/resources/class1.png" />
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="Image" Property="Source" Value="/resources/class1.png" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+            <Button x:Name="conButton" Content="" Height="Auto" Width="Auto" Cursor="Hand" Click="conButton_Click" Grid.Column="3" Margin="5,-11,0,0">
+                <Button.Template>
+                    <ControlTemplate>
+                        <Image Name="Image" Stretch="Fill" Source="/resources/consultation 1.png" />
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="Image" Property="Source" Value="/resources/consultation 1.png" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+        </Grid>
+        <!--#endregion-->
+
+
+        <Grid x:Name="container" Margin="93,5,93,20" Background="#FFC3C3C3" Grid.Row="2" Height="Auto" Width="Auto">
+            <!--#region List display view -->
+            <TextBox x:Name="searchBar" HorizontalAlignment="Left" Margin="20,6,0,0" TextWrapping="Wrap" Text="Searching..." VerticalAlignment="Top" Width="250" Height="29" BorderBrush="White" Foreground="#FFAFAFAF" FontStyle="Italic" FontFamily="Calibri" FontSize="16"/>
+            <Button x:Name="searchButton" Content="" HorizontalAlignment="Left" Margin="270,6,0,0" VerticalAlignment="Top" Height="29" Width="30" BorderBrush="#FFDADADA">
+                <Button.Background>
+                    <ImageBrush ImageSource="/icons8-search-30.png"/>
+                </Button.Background>
+            </Button>
+            <Label x:Name="DisplayInform" Content="Displaying Message" HorizontalContentAlignment="Left" HorizontalAlignment="Left" Margin="300,6,0,0" VerticalAlignment="Top" FontFamily="Century Gothic" FontStyle="Italic" Foreground="White" Height="29" FontSize="14"/>
+            <Button x:Name="AddButton" Content="Add Button" HorizontalAlignment="Right" Margin="0,6,54,0" VerticalAlignment="Top" Height="29" Width="144" Cursor="Hand" Foreground="White" BorderBrush="White" Background="#FF646464" FontFamily="Calibri" FontSize="16" Click="AddButton_Click"/>
+            <ListBox x:Name="GeneralListBox" d:ItemsSource="{d:SampleData ItemCount=5}" Height="Auto" Width="Auto" Margin="0,40,0,0" BorderBrush="#FFC8C8C8" SelectionChanged="ListBox_SelectionChanged" SizeChanged="GeneralListBox_SizeChanged"/>
+            <Button x:Name="RefreshButton" Content="" HorizontalAlignment="Right" Margin="0,6,20,0" VerticalAlignment="Top" Height="29" Width="29" Cursor="Hand" Foreground="White" BorderBrush="White" FontFamily="Calibri" FontSize="16">
+                <Button.Background>
+                    <ImageBrush ImageSource="/icons8-refresh-30.png"/>
+                </Button.Background>
+            </Button>
+            <!--#endregion-->
+
+        </Grid>
+    </Grid>
+</Window>

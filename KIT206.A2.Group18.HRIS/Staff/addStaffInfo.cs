@@ -40,6 +40,7 @@ namespace KIT206.A2.Group18.HRIS
         //if a staff mem's category is yet added, display a list of categories, else show the his/her category
         private void categoryOptions(List<Staff> staffList, Staff staff)
         {
+            /*
             if (staff.category == Category.unknown)
             {
                 cateList.Items.Add("Select..");
@@ -54,9 +55,10 @@ namespace KIT206.A2.Group18.HRIS
             }
             else
             {
+            */
                 cateList.Items.Add(((staff.category).ToString()).ToUpper());
                 cateList.SelectedIndex = 0;
-            }
+            //}
         }
         #endregion
 
@@ -64,6 +66,7 @@ namespace KIT206.A2.Group18.HRIS
         //if a staff mem's campus is yet added, display a list of title, else show the his/her campus
         private void campusOptions(List<Staff> staffList, Staff staff)
         {
+            /*
             if (staff.campus == Campus.Notlocated)
             {
                 campusList.Items.Add("Select..");
@@ -78,9 +81,10 @@ namespace KIT206.A2.Group18.HRIS
             }
             else
             {
+            */
                 campusList.Items.Add(((staff.campus).ToString()).ToUpper());
                 campusList.SelectedIndex = 0;
-            }
+            //}
         }
         #endregion
 

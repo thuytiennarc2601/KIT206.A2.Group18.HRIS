@@ -64,6 +64,7 @@ namespace KIT206.A2.Group18.HRIS
                     result.GivenName = rdr.GetString(1); 
                     result.FamilyName = rdr.GetString(2); 
 
+                    /*
                     //get Title
                     if (Convert.IsDBNull(rdr[3]) || rdr.GetString(3) == "")
                     {
@@ -71,9 +72,11 @@ namespace KIT206.A2.Group18.HRIS
                     }
                     else
                     {
+                    */
                         result.Title = rdr.GetString(3);
-                    }
+                    //}
 
+                    /*
                     //get Campus
                     if (rdr.GetString(4) == "" || Convert.IsDBNull(rdr[4]))
                     {
@@ -81,9 +84,11 @@ namespace KIT206.A2.Group18.HRIS
                     }
                     else
                     {
+                    */
                         result.campus = (Campus)Enum.Parse(typeof(Campus), rdr.GetString(4));
-                    }
+                    //}
 
+                    /*
                     //get Email
                     if (rdr.GetString(5) == "" || Convert.IsDBNull(rdr[5]))
                     {
@@ -91,9 +96,10 @@ namespace KIT206.A2.Group18.HRIS
                     }
                     else
                     {
+                    */
                         result.Email = rdr.GetString(5);
-                    }
-
+                    //}
+                    /*
                     //get Phone
                     if( rdr.GetString(6) == "" || Convert.IsDBNull(rdr[6]))
                     {
@@ -101,9 +107,11 @@ namespace KIT206.A2.Group18.HRIS
                     }
                     else
                     {
+                    */
                         result.Phone = rdr.GetString(6);
-                    }
+                    //}
 
+                    /*
                     //get ROOM
                     if (rdr.GetString(7) == "" || Convert.IsDBNull(rdr[7]))
                     {
@@ -111,15 +119,19 @@ namespace KIT206.A2.Group18.HRIS
                     }
                     else
                     {
+                    */
                         result.Room = rdr.GetString(7);
-                    }
+                    //}
 
+                    /*
                     //get PHOTO
                     if (!Convert.IsDBNull(rdr[8]))
                     {
+                    */
                         result.Photo = (byte[])rdr[8];
-                    }
+                    //}
 
+                    /*
                     //get CATEGORY
                     if (rdr.GetString(9) == "" || Convert.IsDBNull(rdr[9]))
                     {
@@ -127,8 +139,9 @@ namespace KIT206.A2.Group18.HRIS
                     }
                     else
                     {
+                    */
                         result.category = (Category)Enum.Parse(typeof(Category), rdr.GetString(9));
-                    }
+                    //}
 
                     staffList.Add(result);
                 }
@@ -219,6 +232,7 @@ namespace KIT206.A2.Group18.HRIS
                     string room = "";
                     string campus = "";
 
+                    /*
                     //get Campus
                     if (rdr.GetString(0) == "" || Convert.IsDBNull(rdr[0]))
                     {
@@ -226,8 +240,9 @@ namespace KIT206.A2.Group18.HRIS
                     }
                     else
                     {
+                    */
                         campus = rdr.GetString(0);
-                    }
+                    //}
 
                     //get ROOM
                     if (rdr.GetString(1) == "" || Convert.IsDBNull(rdr[1]))
