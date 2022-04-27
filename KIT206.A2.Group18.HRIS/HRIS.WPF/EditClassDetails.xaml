@@ -9,13 +9,7 @@
     <Grid x:Name="container" Background="LightGray">
         <Grid x:Name="DetailsHolder" Background="White" Margin="20,20,20,20">
             <Label x:Name="UnitCodeLB" Foreground="Black" Content="Unit details:" HorizontalAlignment="Left" Margin="10,15,0,0" VerticalAlignment="Top" FontFamily="Century Gothic" FontSize="16" FontWeight="Bold"/>
-            <TextBox x:Name="UnitDetailsTB" VerticalContentAlignment="Center" BorderBrush="LightGray" Foreground="DarkGray" HorizontalAlignment="Left" Margin="10,45,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="216" Text="text" FontFamily="Calibri" FontSize="16" Height="29" KeyDown="UnitDetailsTB_KeyDown"/>
-            <Button x:Name="SearchUnitButton" BorderBrush="LightGray" Content="" HorizontalAlignment="Left" Margin="226,45,0,0" VerticalAlignment="Top" Width="29" RenderTransformOrigin="1.543,-1.32" Height="29" Click="SearchUnitButton_Click">
-                <Button.Background>
-                    <ImageBrush ImageSource="/icons8-search-30.png"/>
-                </Button.Background>
-            </Button>
-            <ListBox x:Name="UnitList" d:ItemsSource="{d:SampleData ItemCount=5}" Foreground="DarkGray" BorderBrush="LightGray"  FontFamily="Calibri" FontSize="14" Margin="10,72,320,187" SelectionChanged="UnitList_SelectionChanged"/>
+            <TextBox x:Name="UnitDetailsTB" VerticalContentAlignment="Center" BorderBrush="LightGray" Foreground="DarkGray" HorizontalAlignment="Left" Margin="10,45,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="216" Text="text" FontFamily="Calibri" FontSize="16" Height="29" IsEnabled="False"/>
             <Label x:Name="StaffDetailsLB" Foreground="Black" Content="Staff details:" HorizontalAlignment="Left" Margin="287,15,0,0" VerticalAlignment="Top" FontFamily="Century Gothic" FontSize="16" FontWeight="Bold"/>
             <TextBox x:Name="StaffDetailsTB" VerticalContentAlignment="Center" BorderBrush="LightGray" Foreground="DarkGray" HorizontalAlignment="Left" Margin="286,45,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="216" Text="text" FontFamily="Calibri" FontSize="16" Height="29" KeyDown="StaffDetailsTB_KeyDown"/>
             <Button x:Name="SearchStaffButton" BorderBrush="LightGray" Content="" HorizontalAlignment="Left" Margin="502,45,0,0" VerticalAlignment="Top" Width="29" RenderTransformOrigin="1.543,-1.32" Height="29" Click="SearchStaffButton_Click">
@@ -23,31 +17,30 @@
                     <ImageBrush ImageSource="/icons8-search-30.png"/>
                 </Button.Background>
             </Button>
-            <ListBox x:Name="StaffList" d:ItemsSource="{d:SampleData ItemCount=5}" Foreground="DarkGray" BorderBrush="LightGray"  FontFamily="Calibri" FontSize="14" Margin="286,74,43,187" SelectionChanged="StaffList_SelectionChanged"/>
-            <Label x:Name="CampusLB" Foreground="Black" Content="Campus:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center" FontFamily="Century Gothic" FontSize="16" FontWeight="Bold"/>
-            <ComboBox x:Name="CampusList" VerticalContentAlignment="Center" Foreground="DarkGray" HorizontalAlignment="Left" Margin="10,187,0,0" VerticalAlignment="Top" Width="216" FontFamily="Calibri" FontSize="14" Height="29"/>
-            <Label x:Name="DayLB" Foreground="Black" Content="Day:" HorizontalAlignment="Left" Margin="283,0,0,0" VerticalAlignment="Center" FontFamily="Century Gothic" FontSize="16" FontWeight="Bold"/>
-            <ComboBox x:Name="DayList" VerticalContentAlignment="Center" Foreground="DarkGray" HorizontalAlignment="Left" Margin="285,187,0,0" VerticalAlignment="Top" Width="216" FontFamily="Calibri" FontSize="14" Height="29"/>
-            <Label x:Name="StartLB" Foreground="Black" Content="Start at:" HorizontalAlignment="Left" Margin="10,221,0,0" VerticalAlignment="Top" FontFamily="Century Gothic" FontSize="16" FontWeight="Bold"/>
-            <TextBox x:Name="StartHourTB" VerticalContentAlignment="Center" BorderBrush="LightGray" Foreground="DarkGray" HorizontalAlignment="Left" Margin="78,222,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="35" Text="text" FontFamily="Calibri" FontSize="16" Height="29"/>
-            <Label x:Name="__" Foreground="Black" Content=":" HorizontalAlignment="Left" Margin="113,222,0,0" VerticalAlignment="Top" FontFamily="Century Gothic" FontSize="16" FontWeight="Bold"/>
-            <TextBox x:Name="StartMinute" VerticalContentAlignment="Center" BorderBrush="LightGray" Foreground="DarkGray" HorizontalAlignment="Left" Margin="132,223,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="35" Text="text" FontFamily="Calibri" FontSize="16" Height="29"/>
-            <Label x:Name="noticeStartTime" Foreground="DarkGray" Content="(24-hour format)" HorizontalAlignment="Left" Margin="167,229,0,0" VerticalAlignment="Top" FontFamily="Calibri" FontSize="10" FontWeight="Normal" FontStyle="Italic"/>
-            <Label x:Name="EndLB" Foreground="Black" Content="End at:" HorizontalAlignment="Left" Margin="280,222,0,0" VerticalAlignment="Top" FontFamily="Century Gothic" FontSize="16" FontWeight="Bold"/>
-            <TextBox x:Name="EndHourTB" VerticalContentAlignment="Center" BorderBrush="LightGray" Foreground="DarkGray" HorizontalAlignment="Left" Margin="344,223,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="35" Text="text" FontFamily="Calibri" FontSize="16" Height="29"/>
-            <Label x:Name="___Copy" Foreground="Black" Content=":" HorizontalAlignment="Left" Margin="379,224,0,0" VerticalAlignment="Top" FontFamily="Century Gothic" FontSize="16" FontWeight="Bold" Height="28" Width="21"/>
-            <TextBox x:Name="EndMinuteTB" VerticalContentAlignment="Center" BorderBrush="LightGray" Foreground="DarkGray" HorizontalAlignment="Left" Margin="396,223,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="36" Text="text" FontFamily="Calibri" FontSize="16" Height="29"/>
-            <Label x:Name="noticeStartTime_Copy" Foreground="DarkGray" Content="(24-hour format)" HorizontalAlignment="Left" Margin="432,229,0,0" VerticalAlignment="Top" FontFamily="Calibri" FontSize="10" FontWeight="Normal" FontStyle="Italic"/>
-            <Label x:Name="TypeLB" Foreground="Black" Content="Type:" HorizontalAlignment="Left" Margin="10,251,0,0" VerticalAlignment="Top" FontFamily="Century Gothic" FontSize="16" FontWeight="Bold"/>
-            <ComboBox x:Name="TypeList" VerticalContentAlignment="Center" Foreground="DarkGray" HorizontalAlignment="Left" Margin="10,281,0,0" VerticalAlignment="Top" Width="216" FontFamily="Calibri" FontSize="14" Height="30"/>
-            <Label x:Name="RoomLB" Foreground="Black" Content="Room:" HorizontalAlignment="Left" Margin="285,251,0,0" VerticalAlignment="Top" FontFamily="Century Gothic" FontSize="16" FontWeight="Bold"/>
-            <TextBox x:Name="RoomTB" VerticalContentAlignment="Center" BorderBrush="LightGray" Foreground="DarkGray" HorizontalAlignment="Left" Margin="285,281,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="217" Text="text" FontFamily="Calibri" FontSize="16" Height="30"/>
-            <Button x:Name="SearchStaffButton_Copy" BorderBrush="LightGray" Content="" HorizontalAlignment="Left" Margin="502,1,0,0" VerticalAlignment="Top" Width="29" RenderTransformOrigin="1.543,-1.32" Height="29">
+            <ListBox x:Name="StaffList" d:ItemsSource="{d:SampleData ItemCount=5}" Foreground="DarkGray" BorderBrush="LightGray"  FontFamily="Calibri" FontSize="14" Margin="286,74,43,187" SelectionChanged="StaffList_SelectionChanged" Visibility="Hidden"/>
+            <Label x:Name="CampusLB" Foreground="Black" Content="Campus:" HorizontalAlignment="Left" Margin="10,79,0,0" VerticalAlignment="Top" FontFamily="Century Gothic" FontSize="16" FontWeight="Bold"/>
+            <ComboBox x:Name="CampusList" VerticalContentAlignment="Center" Foreground="DarkGray" HorizontalAlignment="Left" Margin="12,109,0,0" VerticalAlignment="Top" Width="216" FontFamily="Calibri" FontSize="14" Height="29"/>
+            <Label x:Name="DayLB" Foreground="Black" Content="Day:" HorizontalAlignment="Left" Margin="13,143,0,0" VerticalAlignment="Top" FontFamily="Century Gothic" FontSize="16" FontWeight="Bold"/>
+            <ComboBox x:Name="DayList" VerticalContentAlignment="Center" Foreground="DarkGray" HorizontalAlignment="Left" Margin="13,172,0,0" VerticalAlignment="Top" Width="216" FontFamily="Calibri" FontSize="14" Height="29"/>
+            <Label x:Name="StartLB" Foreground="Black" Content="Start at:" HorizontalAlignment="Left" Margin="12,211,0,0" VerticalAlignment="Top" FontFamily="Century Gothic" FontSize="16" FontWeight="Bold"/>
+            <TextBox x:Name="StartHourTB" MaxLength="2" VerticalContentAlignment="Center" BorderBrush="LightGray" Foreground="DarkGray" HorizontalAlignment="Left" Margin="80,212,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="35" Text="text" FontFamily="Calibri" FontSize="16" Height="29"/>
+            <Label x:Name="__" Foreground="Black" Content=":" HorizontalAlignment="Left" Margin="115,212,0,0" VerticalAlignment="Top" FontFamily="Century Gothic" FontSize="16" FontWeight="Bold"/>
+            <TextBox x:Name="StartMinute" MaxLength="2" VerticalContentAlignment="Center" BorderBrush="LightGray" Foreground="DarkGray" HorizontalAlignment="Left" Margin="134,213,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="35" Text="text" FontFamily="Calibri" FontSize="16" Height="29"/>
+            <Label x:Name="EndLB" Foreground="Black" Content="End at:" HorizontalAlignment="Left" Margin="15,259,0,0" VerticalAlignment="Top" FontFamily="Century Gothic" FontSize="16" FontWeight="Bold"/>
+            <TextBox x:Name="EndHourTB" MaxLength="2" VerticalContentAlignment="Center" BorderBrush="LightGray" Foreground="DarkGray" HorizontalAlignment="Left" Margin="80,260,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="35" Text="text" FontFamily="Calibri" FontSize="16" Height="29"/>
+            <Label x:Name="___Copy" Foreground="Black" Content=":" HorizontalAlignment="Left" Margin="115,261,0,0" VerticalAlignment="Top" FontFamily="Century Gothic" FontSize="16" FontWeight="Bold" Height="28" Width="21"/>
+            <TextBox x:Name="EndMinuteTB" MaxLength="2" VerticalContentAlignment="Center" BorderBrush="LightGray" Foreground="DarkGray" HorizontalAlignment="Left" Margin="134,261,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="36" Text="text" FontFamily="Calibri" FontSize="16" Height="29"/>
+            <Label x:Name="noticeStartTime_Copy" Foreground="DarkGray" Content="(24-hour format)" HorizontalAlignment="Left" Margin="170,267,0,0" VerticalAlignment="Top" FontFamily="Calibri" FontSize="10" FontWeight="Normal" FontStyle="Italic"/>
+            <Label x:Name="TypeLB" Foreground="Black" Content="Type:" HorizontalAlignment="Left" Margin="287,162,0,0" VerticalAlignment="Top" FontFamily="Century Gothic" FontSize="16" FontWeight="Bold"/>
+            <ComboBox x:Name="TypeList" VerticalContentAlignment="Center" Foreground="DarkGray" HorizontalAlignment="Left" Margin="287,192,0,0" VerticalAlignment="Top" Width="216" FontFamily="Calibri" FontSize="14" Height="30"/>
+            <Label x:Name="RoomLB" Foreground="Black" Content="Room:" HorizontalAlignment="Left" Margin="287,227,0,0" VerticalAlignment="Top" FontFamily="Century Gothic" FontSize="16" FontWeight="Bold"/>
+            <TextBox x:Name="RoomTB" VerticalContentAlignment="Center" BorderBrush="LightGray" Foreground="DarkGray" HorizontalAlignment="Left" Margin="287,256,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="217" Text="text" FontFamily="Calibri" FontSize="16" Height="30"/>
+            <Button x:Name="SaveButton" BorderBrush="LightGray" Content="" HorizontalAlignment="Left" Margin="502,295,0,0" VerticalAlignment="Top" Width="29" RenderTransformOrigin="1.543,-1.32" Height="29" Click="SaveButton_Click">
                 <Button.Background>
                     <ImageBrush ImageSource="/icons8-save-30.png"/>
                 </Button.Background>
             </Button>
         </Grid>
-        <Rectangle x:Name="Seperator" HorizontalAlignment="Left" Height="304" Margin="286,0,0,0" Stroke="#FFD7C282" VerticalAlignment="Center" Width="4" Fill="#FFD7C282"/>
+        <Rectangle x:Name="Seperator" HorizontalAlignment="Left" Height="304" Margin="284,30,0,0" Stroke="#FFD7C282" VerticalAlignment="Top" Width="4" Fill="#FFD7C282"/>
     </Grid>
 </Window>

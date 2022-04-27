@@ -483,6 +483,69 @@ namespace KIT206.A2.Group18.HRIS
         }
         #endregion
 
+        //CLASS OPERATION
+        #region Edit Details Of A Class
+        public static void EditClassDetail(string code, string day,string campus, string start, string new_day, string new_start, string end, string type, string room, int staff)
+        {
+
+            MySqlConnection conn = GetConnection();
+
+            try
+            {
+                conn.Open();
+
+                MySqlCommand cmd = new MySqlCommand("UPDATE class" +
+                                                    " SET day=@new_day, room=@new_room, end=@new_end, start=@new_start WHERE unit_code=@code AND day=@day AND campus=@campus AND start=@start", conn);
+                cmd.Parameters.AddWithValue("@new_day", new_day);
+                cmd.Parameters.AddWithValue("@new_start", new_start);
+                cmd.Parameters.AddWithValue("@new_end", end);
+                cmd.Parameters.AddWithValue("@new_room", room);
+
+                cmd.Parameters.AddWithValue("@code", code);
+                cmd.Parameters.AddWithValue("@day", day);
+                cmd.Parameters.AddWithValue("@campus", campus);
+                cmd.Parameters.AddWithValue("@start", start);
+                cmd.ExecuteNonQuery();
+
+                if (staff != -1)
+                {
+                    MySqlCommand staffCmd = new MySqlCommand("update class set staff=@id where unit_code=@code and day=@day and campus=@campus and start=@start", conn);
+                    staffCmd.Parameters.AddWithValue("@id", staff);
+                    
+                    staffCmd.Parameters.AddWithValue("@code", code);
+                    staffCmd.Parameters.AddWithValue("@day", day);
+                    staffCmd.Parameters.AddWithValue("@campus", campus);
+                    staffCmd.Parameters.AddWithValue("@start", start);
+                    staffCmd.ExecuteNonQuery();
+                }
+
+                if(type != "Select..")
+                {
+                    MySqlCommand typeCmd = new MySqlCommand("update class set type=@type where unit_code=@code and day=@day and campus=@campus and start=@start", conn);
+                    typeCmd.Parameters.AddWithValue("@type", type);
+
+                    typeCmd.Parameters.AddWithValue("@code", code);
+                    typeCmd.Parameters.AddWithValue("@day", day);
+                    typeCmd.Parameters.AddWithValue("@campus", campus);
+                    typeCmd.Parameters.AddWithValue("@start", start);
+                    typeCmd.ExecuteNonQuery();
+                }
+                
+            }
+            catch (MySqlException e)
+            {
+                ReportError("Editing class details", e);
+            }
+            finally
+            {
+                if (conn != null)
+                {
+                    conn.Close();
+                }
+            }
+        }
+        #endregion Edit details of a class
+
         //CONSULTATION OPERATIONS
         #region Delete Consultation
         public static void DeleteConsultation(int id, string day, string Start, string End)

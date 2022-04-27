@@ -5,11 +5,16 @@ using System.Text;
 using System.Threading.Tasks;
 using KIT206.A2.Group18.HRIS;
 using System.Windows;
+using System.Text.RegularExpressions;
 
 namespace HRIS.WPF
 {
     class Validation
     {
+        private const int MIN_TIME_HOUR = 9; 
+        private const int MAX_TIME_HOUR = 17;
+        private const int MAX_TIME_MINUTE = 60;
+
         #region Validate Adding Unit Operation
         public static bool AddUnitValidation(string UnitCode, string UnitName, int StaffID)
         {
@@ -45,32 +50,60 @@ namespace HRIS.WPF
         }
         #endregion
 
+        #region Time Validation
+        //time: is the actual time to check
+        //starthour and endhour: use for check if the ending time is larger than starting time or not
+        //hour: twitch between hour and minute
+        public static bool TimeValidation(string time, string startHour, string endHour, bool hour)
+        {
+            bool valid = true;
+            var regex = @"[0-9][0-9]";
+            int timeNumber = Int32.Parse(time);
+            int startTimeInt = Int32.Parse(startHour);
+            int endTimeInt = Int32.Parse(endHour);
+            if (time != "")
+            {
+                if (!Regex.IsMatch(time, regex))
+                {
+                    valid = false;
+                    MessageBox.Show("Time requires non-negative numbers");
+                }
+                else if (hour && timeNumber < MIN_TIME_HOUR)
+                {
+                    valid = false;
+                    MessageBox.Show("Start working at 9:00AM");
+                }
+                else if (hour && timeNumber > MAX_TIME_HOUR)
+                {
+                    valid = false;
+                    MessageBox.Show("End working at 17:00PM");
+                }
+                else if (!hour && timeNumber > 60)
+                {
+                    valid = false;
+                    MessageBox.Show("Minute out of range");
+                }
+                else if(hour && endTimeInt < startTimeInt)
+                {
+                    valid = false;
+                    MessageBox.Show("Ending time must be larger than starting time");
+                }
+            }
+            return valid;
+        }
+        #endregion
+
         #region Validate Adding/Editing Class Operation
-        public static bool AddingEditClassValidation(string UnitDetails, string StaffDetails, int StaffID, string StartHour, string EndHour, string Room, string Campus, string Day)
+        public static bool AddingEditClassValidation(string StaffDetails, int StaffID, string Start, string End, string Room, string Campus, string Day)
         {
             //type and staff details can be empty
             bool valid = true;
 
             Staff staff = Staff.GetStaffByID(StaffID);
-            if(UnitDetails == "") //a unit must be choosen
-            {
-                valid = false;
-                MessageBox.Show("A unit required"); 
-            }
-            else if(StaffDetails != null || staff.ID == -1) //if staff details(textbox) is provided, staff id must exist
+            if(StaffDetails != null && staff.ID == -1) //if staff details(textbox) is provided, staff id must exist
             {
                 valid = false;
                 MessageBox.Show("This staff does not exist");
-            }
-            else if(StartHour == "") //Start hour cannot be empty
-            {
-                valid = false;
-                MessageBox.Show("Start time required");
-            }
-            else if(EndHour == "") //End hour cannot be empty
-            {
-                valid = false;
-                MessageBox.Show("End time required");
             }
             else if(Campus == "Select..") //campus cannot be empty
             {
@@ -87,7 +120,6 @@ namespace HRIS.WPF
                 valid = false;
                 MessageBox.Show("Room required");
             }
-
             return valid;
         }
         #endregion

@@ -63,22 +63,22 @@ namespace HRIS.WPF
 
         #region Show Search Result
         //Show unit search result
-        private void AddUnitToSearchResult()
-        {
-            if (this.UnitDetailsTB.Text != "")
-            {
-                List<Unit> result = Unit.GetUnitsBySearchText(this.UnitDetailsTB.Text);
-                if (result.Count > 0)
-                {
-                    this.UnitList.Visibility = Visibility.Visible;
-                    this.UnitList.ItemsSource = result;
-                }
-                else
-                {
-                    this.UnitList.Visibility = Visibility.Hidden;
-                }
-            }
-        }
+        //private void AddUnitToSearchResult()
+        //{
+        //    if (this.UnitDetailsTB.Text != "")
+        //    {
+        //        List<Unit> result = Unit.GetUnitsBySearchText(this.UnitDetailsTB.Text);
+        //        if (result.Count > 0)
+        //        {
+        //            this.UnitList.Visibility = Visibility.Visible;
+        //            this.UnitList.ItemsSource = result;
+        //        }
+        //        else
+        //        {
+        //            this.UnitList.Visibility = Visibility.Hidden;
+        //        }
+        //    }
+        //}
 
         //Show staff search result
         private void AddStaffToSearchResult()
@@ -100,14 +100,6 @@ namespace HRIS.WPF
 
         #endregion
 
-        private void UnitDetailsTB_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.Key == Key.Enter)
-            {
-                AddUnitToSearchResult();
-            }
-        }
-
         private void StaffDetailsTB_KeyDown(object sender, KeyEventArgs e)
         {
             if(e.Key == Key.Enter)
@@ -116,28 +108,62 @@ namespace HRIS.WPF
             }
         }
 
-        private void SearchUnitButton_Click(object sender, RoutedEventArgs e)
-        {
-            AddUnitToSearchResult();
-        }
-
         private void SearchStaffButton_Click(object sender, RoutedEventArgs e)
         {
             AddStaffToSearchResult();
         }
 
-        private void UnitList_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            Unit selectedUnit = (Unit)UnitList.SelectedItem;
-            this.UnitCode = selectedUnit.UnitCode;
-            this.UnitDetailsTB.Text = selectedUnit.ToString();
-        }
-
         private void StaffList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            Staff selectedStaff = (Staff)StaffList.SelectedItem;
-            this.StaffID = selectedStaff.ID;
-            this.StaffDetailsTB.Text = selectedStaff.ID.ToString() + selectedStaff.ToString();
+            
+            if (this.StaffList.SelectedItem != null)
+            {
+                Staff selectedStaff = (Staff)StaffList.SelectedItem;
+                this.StaffID = selectedStaff.ID;
+                this.StaffDetailsTB.Text = selectedStaff.ID.ToString() + " | " + selectedStaff.ToString();
+                this.StaffList.Visibility = Visibility.Hidden;
+                MessageBox.Show(StaffID.ToString());
+            }
+        }
+
+        private void SaveButton_Click(object sender, RoutedEventArgs e)
+        {
+            string code = this.UnitCode;
+            string campus = this.Campus;
+            string day = this.Day;
+            string start = this.ClassStart.ToString("HH:mm:ss");
+            string startHour = this.StartHourTB.Text;
+            string startMinute = this.StartMinute.Text;
+            string endHour = this.EndHourTB.Text;
+            string endMinute = this.EndMinuteTB.Text;
+            string new_type = (string)this.TypeList.SelectedItem;
+            string new_day = (string)this.DayList.SelectedItem;
+            string room = this.RoomTB.Text;
+            int staff = this.StaffID;
+
+            if (Validation.TimeValidation(this.StartHourTB.Text, this.StartHourTB.Text, this.EndHourTB.Text, true)
+                && Validation.TimeValidation(this.EndHourTB.Text, this.StartHourTB.Text, this.EndHourTB.Text, true)
+                && Validation.TimeValidation(this.StartMinute.Text, this.StartHourTB.Text, this.EndHourTB.Text, false)
+                && Validation.TimeValidation(this.EndMinuteTB.Text, this.StartHourTB.Text, this.EndHourTB.Text, false))
+            {
+                string new_start = TimeDoubleDigitConverter(startHour) + ":" + TimeDoubleDigitConverter(startMinute) + ":00";
+                string new_end = TimeDoubleDigitConverter(endHour) + ":" + TimeDoubleDigitConverter(endMinute) + ":00";
+
+                if(Validation.AddingEditClassValidation(this.StaffDetailsTB.Text, staff, new_start, new_end, room, campus, day))
+                {
+                    Agency.EditClassDetail(code, day, campus, start, new_day, new_start, new_end, new_type, room, staff);
+                    this.Close();
+                }
+            }
+        }
+
+        private string TimeDoubleDigitConverter(string time)
+        {
+            if(time.Length < 2)
+            {
+                time = "0" + time;
+            }
+            return time;
         }
     }
 }

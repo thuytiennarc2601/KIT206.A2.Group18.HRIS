@@ -330,8 +330,12 @@ namespace HRIS.WPF
             Unit unit = Unit.GetUnitByCode(code);
             Staff staff = Staff.GetStaffByID(staffID);
 
+            view.StaffID = staffID;
             view.UnitDetailsTB.Text = unit.ToString();
-            view.StaffDetailsTB.Text = staffID.ToString() + " | " + staff.ToString();
+            if (staff.ID != -1)
+            {
+                view.StaffDetailsTB.Text = staffID.ToString() + " | " + staff.ToString();
+            }
 
             foreach (string dayName in Enum.GetNames(typeof(Day)))
             {
@@ -339,14 +343,8 @@ namespace HRIS.WPF
             }
             view.DayList.SelectedItem = day;
 
-            foreach (string campusName in Enum.GetNames(typeof(Campus)))
-            {
-                if (campusName != "Unknown")
-                {
-                    view.CampusList.Items.Add(campusName);
-                }
-            }
-            view.CampusList.SelectedItem = campus;
+            view.CampusList.Items.Add(campus);
+            view.CampusList.SelectedIndex = 0;
 
             if (thisClass.type == KIT206.A2.Group18.HRIS.Type.Undefined)
             {
