@@ -53,6 +53,24 @@ namespace HRIS.WPF
             differSize = ChangeListItemSize();
         }
 
+        private void searchBar_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (searchBar.Text != "")
+            {
+                if (choseStaff)
+                {
+                    if (e.Key == Key.Enter)
+                    {
+                        List<Staff> staffResult = Controller.ReturnStaffBySearchText(searchBar.Text);
+                        if (staffResult.Count > 0)
+                        {
+                            GeneralListBox.ItemsSource = staffResult;
+                        } 
+                    }
+                }
+            }
+        }
+
         #region Display a functioning dialog when a GeneralListBox's item is chosen
         private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -290,5 +308,6 @@ namespace HRIS.WPF
 
         #endregion
 
+       
     }
 }

@@ -42,7 +42,7 @@ namespace KIT206.A2.Group18.HRIS
             return Title + ". " +  GivenName + " " + FamilyName;
         }
 
-        //Return a staff list by a search text
+        //Return a staff list by a search text (using only ID and Name)
         #region Search for a Staff Member
         public static List<Staff> GetStaffListBySearchText(string SearchText)
         {
@@ -55,7 +55,27 @@ namespace KIT206.A2.Group18.HRIS
             List<Staff> result = new List<Staff>(getStaff);
 
             return result;
+        }
+        #endregion
 
+        //Return a staff list by a search text (expanded)
+        //use ID, Name, Email, Campus, Category
+        #region Search For A Staff Expanded
+        public static List<Staff> GetStaffBySearchTextExpanded(string searchText)
+        {
+            searchText = searchText.ToLower();
+            List<Staff> staffList = Agency.LoadAllStaffs();
+            var getStaff = from Staff s in staffList
+                           where (s.ID).ToString().Contains(searchText)
+                              || s.GivenName.ToLower().Contains(searchText)
+                              || s.FamilyName.ToLower().Contains(searchText)
+                              || s.Email.ToLower().Contains(searchText)
+                              || s.campus.ToString().ToLower().Contains(searchText)
+                              || s.category.ToString().ToLower().Contains(searchText)
+                           select s;
+            List<Staff> result = new List<Staff>(getStaff);
+
+            return result;
         }
         #endregion
 
@@ -77,6 +97,8 @@ namespace KIT206.A2.Group18.HRIS
             return staff;
         }
         #endregion
+
+        
 
     }
 }

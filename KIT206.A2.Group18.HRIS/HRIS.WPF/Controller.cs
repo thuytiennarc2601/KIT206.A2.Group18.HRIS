@@ -173,6 +173,15 @@ namespace HRIS.WPF
         }
         #endregion
 
+        //Main Window Search function
+        #region Search For A Staff Member Or A Staff List By Search Text
+        public static List<Staff> ReturnStaffBySearchText(string searchText)
+        {
+            List<Staff> result = Staff.GetStaffBySearchTextExpanded(searchText);
+            return result;
+        }
+        #endregion
+
         //STAFF MANAGEMENT: Show Staff Details, Add Staff Info
             //Show staff member's details (their information, their units and their consultations)
         #region Show A Staff Member Details

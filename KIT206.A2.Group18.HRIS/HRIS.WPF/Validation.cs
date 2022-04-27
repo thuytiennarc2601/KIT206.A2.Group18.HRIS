@@ -94,16 +94,15 @@ namespace HRIS.WPF
         #endregion
 
         #region Validate Adding/Editing Class Operation
-        public static bool AddingEditClassValidation(string StaffDetails, int StaffID, string Start, string End, string Room, string Campus, string Day)
+        public static bool AddingEditClassValidation(int StaffID, string Start, string End, string Room, string Campus, string Day, string Type)
         {
-            //type and staff details can be empty
             bool valid = true;
 
             Staff staff = Staff.GetStaffByID(StaffID);
-            if(StaffDetails != null && staff.ID == -1) //if staff details(textbox) is provided, staff id must exist
+            if(StaffID == -1) //staff id must be required
             {
                 valid = false;
-                MessageBox.Show("This staff does not exist");
+                MessageBox.Show("Staff required");
             }
             else if(Campus == "Select..") //campus cannot be empty
             {
@@ -119,6 +118,11 @@ namespace HRIS.WPF
             {
                 valid = false;
                 MessageBox.Show("Room required");
+            }
+            else if(Type == "Select..")
+            {
+                valid = false;
+                MessageBox.Show("Type required");
             }
             return valid;
         }
