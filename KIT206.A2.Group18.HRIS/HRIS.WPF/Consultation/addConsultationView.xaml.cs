@@ -42,7 +42,7 @@ namespace HRIS.WPF
             Day day = (Day)comboBox_day.SelectedItem;
 
             //string start = this.start_hour.Text + this.start_minute.Text;
-            TimeOnly start = new TimeOnly(13, 0);
+            TimeOnly start = new TimeOnly(9, 0);
             TimeOnly end = new TimeOnly(13, 0);
             //string end = (string)lstBox_start.SelectedItem;
 
