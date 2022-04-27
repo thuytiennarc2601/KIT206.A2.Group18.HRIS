@@ -32,7 +32,7 @@ namespace HRIS.WPF
             List<int> list = new List<int>();
             list = Agency.LoadID();
 
-                // ... Assign the ItemsSource to the List.
+            // ... Assign the ItemsSource to the List.
             comboBox_staff.ItemsSource = list;
 
                 // ... Make the first item selected.
@@ -46,7 +46,8 @@ namespace HRIS.WPF
 
             comboBox_code.ItemsSource = list;
             // ... Make the first item selected.
-            comboBox_code.SelectedIndex = 0;
+
+            comboBox_code.SelectedItem = null;
         }
 
         private string TimeDoubleDigitConverter(string time)
@@ -63,25 +64,34 @@ namespace HRIS.WPF
             int staff = (int)comboBox_staff.SelectedItem;
             string code = (string)comboBox_code.SelectedItem;
             string room = this.textBox_room.Text;
-            Campus campus = (Campus)comboBox_campus.SelectedItem;
-            Day day = (Day)comboBox_day.SelectedItem;
-            Type type = (Type)comboBox_type.SelectedItem;
+            string campus = (string)comboBox_campus.SelectedItem;
+            string day = (string)comboBox_day.SelectedItem;
+            string type = (string)comboBox_type.SelectedItem;
             string startHour = this.start_hour.Text;
             string startMinute = this.start_minute.Text;
             string endHour = this.end_hour.Text;
             string endMinute = this.end_minute.Text;
 
-            string start = TimeDoubleDigitConverter(startHour) + ":" + TimeDoubleDigitConverter(startMinute) + ":00";
-            string end = TimeDoubleDigitConverter(endHour) + ":" + TimeDoubleDigitConverter(endMinute) + ":00";
+            if (Validation.TimeValidation(this.start_hour.Text, this.start_hour.Text, this.end_hour.Text, true)
+                && Validation.TimeValidation(this.end_hour.Text, this.start_hour.Text, this.end_hour.Text, true)
+                && Validation.TimeValidation(this.start_minute.Text, this.start_hour.Text, this.end_hour.Text, false)
+                && Validation.TimeValidation(this.end_minute.Text, this.start_hour.Text, this.end_hour.Text, false))
+            { 
+                string start = TimeDoubleDigitConverter(startHour) + ":" + TimeDoubleDigitConverter(startMinute) + ":00";
+                string end = TimeDoubleDigitConverter(endHour) + ":" + TimeDoubleDigitConverter(endMinute) + ":00";
 
-            if (Agency.checkValidateClass(code, campus.ToString(), day.ToString(), start, room, staff))
-            {
-                Agency.AddClass(code, campus.ToString(), day.ToString(), start, end, type.ToString(), room, staff);
-                MessageBox.Show("Updated successully!");
-            }
-            else
-            {
-                MessageBox.Show("This room has been booked");
+                if (Validation.AddClassValidation(code, campus, day, start, end, room))
+                {
+                    if (Agency.checkValidateClass(code, campus, day, start, end, room, staff))
+                    {
+                        Agency.AddClass(code, campus, day, start, end, type, room, staff);
+                        MessageBox.Show("Updated successully!");
+                    }
+                    else
+                    {
+                        MessageBox.Show("This room has been booked");
+                    }
+                }
             }
         }
     }

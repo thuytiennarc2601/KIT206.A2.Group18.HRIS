@@ -36,24 +36,45 @@ namespace HRIS.WPF
             // ... Make the first item selected.
             comboBox_staff.SelectedIndex = 0;
         }
+
+        private string TimeDoubleDigitConverter(string time)
+        {
+            if (time.Length < 2)
+            {
+                time = "0" + time;
+            }
+            return time;
+        }
+
         private void addConsultation_Click(object sender, RoutedEventArgs e)
         {
             int staff = (int)comboBox_staff.SelectedItem;
-            Day day = (Day)comboBox_day.SelectedItem;
+            string day = (string)comboBox_day.SelectedItem;
+            string startHour = this.start_hour.Text;
+            string startMinute = this.start_minute.Text;
+            string endHour = this.end_hour.Text;
+            string endMinute = this.end_minute.Text;
 
-            //string start = this.start_hour.Text + this.start_minute.Text;
-            TimeOnly start = new TimeOnly(9, 0);
-            TimeOnly end = new TimeOnly(13, 0);
-            //string end = (string)lstBox_start.SelectedItem;
+            if (Validation.TimeValidation(this.start_hour.Text, this.start_hour.Text, this.end_hour.Text, true)
+                && Validation.TimeValidation(this.end_hour.Text, this.start_hour.Text, this.end_hour.Text, true)
+                && Validation.TimeValidation(this.start_minute.Text, this.start_hour.Text, this.end_hour.Text, false)
+                && Validation.TimeValidation(this.end_minute.Text, this.start_hour.Text, this.end_hour.Text, false))
+            {
+                string start = TimeDoubleDigitConverter(startHour) + ":" + TimeDoubleDigitConverter(startMinute) + ":00";
+                string end = TimeDoubleDigitConverter(endHour) + ":" + TimeDoubleDigitConverter(endMinute) + ":00";
 
-            if (Agency.checkValidateConsul(day.ToString(), start.ToString("HH:mm:ss"), staff))
-            {
-                Agency.AddConsultation(day.ToString(), start.ToString("HH:mm:ss"), end.ToString("HH:mm:ss"), staff);
-                MessageBox.Show("Updated successully!");
-            }
-            else
-            {
-                MessageBox.Show("This staff already has a consultation on " + day + " at " + start);
+                if (Validation.AddConValidation(day))
+                {
+                    if (Agency.checkValidateConsul(day, start, end, staff))
+                    {
+                        Agency.AddConsultation(day, start, end, staff);
+                        MessageBox.Show("Updated successully!");
+                    }
+                    else
+                    {
+                        MessageBox.Show("This staff already has a consultation." );
+                    }
+                }
             }
         }
     }

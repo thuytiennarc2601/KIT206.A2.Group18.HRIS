@@ -54,16 +54,29 @@ namespace KIT206.A2.Group18.HRIS
                 rdr = cmd.ExecuteReader();
                 while (rdr.Read())
                 {
-                    classList.Add(new Class { 
-                        unit = new Unit { UnitCode = rdr.GetString(0) }, 
-                        campus = ParseEnum<Campus>(rdr.GetString(1)), 
-                        day = ParseEnum<Day>(rdr.GetString(2)), 
-                        type = ParseEnum<Type>(rdr.GetString(3)), 
-                        StartTime = TimeOnly.ParseExact(rdr.GetString(4), "HH:mm:ss"),
-                        EndTime = TimeOnly.ParseExact(rdr.GetString(5), "HH:mm:ss"), 
-                        Room = rdr.GetString(6), 
-                        staff = new Staff { ID = rdr.GetInt32(7) } 
-                    });
+                    Class result = new Class();
+
+                    result.unit = new Unit { UnitCode = rdr.GetString(0) };
+                    result.campus = ParseEnum<Campus>(rdr.GetString(1));
+                    result.day = ParseEnum<Day>(rdr.GetString(2));
+
+                    if (Convert.IsDBNull(rdr[3]) || rdr.GetString(3) == "")
+                    {
+                        result.type = Type.Undefined;
+                    }
+                    else { result.type = ParseEnum<Type>(rdr.GetString(3)); }
+
+                    result.StartTime = TimeOnly.ParseExact(rdr.GetString(4), "HH:mm:ss");
+                    result.EndTime = TimeOnly.ParseExact(rdr.GetString(5), "HH:mm:ss");
+                    result.Room = rdr.GetString(6);
+
+                    if (Convert.IsDBNull(rdr[7]))
+                    {
+                        result.staff = new Staff { ID = -1 };
+                    }
+                    else { result.staff = new Staff { ID = rdr.GetInt32(7) }; }
+
+                    classList.Add(result);
                 }
             }
             catch (MySqlException e)
@@ -450,7 +463,6 @@ namespace KIT206.A2.Group18.HRIS
         {
             List<int> id = new List<int>();
 
-
             MySqlDataReader rdr = null;
             MySqlConnection conn = GetConnection();
             try
@@ -521,11 +533,12 @@ namespace KIT206.A2.Group18.HRIS
             return unit;
         }
 
-        public static Boolean checkValidateClass(string code, string campus, string day, string start, string room, int staff)
+        public static Boolean checkValidateClass(string code, string campus, string day, string start, string end, string room, int staff)
         {
             List<string> campusList = new List<string>();
             List<string> dayList = new List<string>();
             List<string> startList = new List<string>();
+            List<string> endList = new List<string>();
             Boolean check = true;
 
             MySqlDataReader rdr = null;
@@ -534,7 +547,7 @@ namespace KIT206.A2.Group18.HRIS
             try
             {
                 conn.Open();
-                MySqlCommand cmd = new MySqlCommand("SELECT campus, day, start " +
+                MySqlCommand cmd = new MySqlCommand("SELECT campus, day, start, end " +
                                                     "FROM class " +
                                                     "WHERE room=@room ", conn);
 
@@ -549,6 +562,7 @@ namespace KIT206.A2.Group18.HRIS
                     campusList.Add(rdr.GetString(0));
                     dayList.Add(rdr.GetString(1));
                     startList.Add(rdr.GetString(2));
+                    endList.Add(rdr.GetString(3));
                 }
             }
             catch (MySqlException e)
@@ -569,11 +583,29 @@ namespace KIT206.A2.Group18.HRIS
 
             int count = 0;
 
+
             foreach (string s in campusList)
             {
+                //MessageBox.Show(s + " " + campus + " " + dayList[count] + " " + day + " " + startList[count] + " " + start);
                 if ((s == campus) && (dayList[count] == day) && (startList[count] == start))
                 {
                     check = false;
+                }
+                else if ((s == campus) && (dayList[count] == day) && (startList[count] != start))
+                {
+                    string a = start.Replace(":", string.Empty);
+                    int start_add = Int32.Parse(a);
+                    string b = startList[count].Replace(":",string.Empty);
+                    int start_class = Int32.Parse(b);
+                    string c = end.Replace(":", string.Empty);
+                    int end_add = Int32.Parse(c);
+                    string d = endList[count].Replace(":", string.Empty);
+                    int end_class = Int32.Parse(d);
+
+                    if (((start_class < start_add) && (start_add < end_class)) || ((start_class < end_add) && (end_add <= end_class)) || ((start_add < start_class) && (end_add > end_class)) || ((start_add > start_class) && (end_add < end_class)))
+                    {
+                        check = false;
+                    }
                 }
                 count++;
             }
@@ -611,10 +643,11 @@ namespace KIT206.A2.Group18.HRIS
             }
         }
 
-        public static Boolean checkValidateConsul(string day, string start, int staff)
+        public static Boolean checkValidateConsul(string day, string start, string end, int staff)
         {
             List<string> dayList = new List<string>();
             List<string> startList = new List<string>();
+            List<string> endList = new List<string>();
             Boolean check = true;
 
             MySqlDataReader rdr = null;
@@ -623,7 +656,7 @@ namespace KIT206.A2.Group18.HRIS
             try
             {
                 conn.Open();
-                MySqlCommand cmd = new MySqlCommand("SELECT day, start " +
+                MySqlCommand cmd = new MySqlCommand("SELECT day, start, end " +
                                                     "FROM consultation " +
                                                     "WHERE staff_id=@staff ", conn);
 
@@ -636,6 +669,7 @@ namespace KIT206.A2.Group18.HRIS
                 {
                     dayList.Add(rdr.GetString(0));
                     startList.Add(rdr.GetString(1));
+                    endList.Add(rdr.GetString(2));
                 }
             }
             catch (MySqlException e)
@@ -661,6 +695,22 @@ namespace KIT206.A2.Group18.HRIS
                 if ((s == day) && (startList[count] == start))
                 {
                     check = false;
+                }
+                else if ((s == day) && (startList[count] != start))
+                {
+                    string a = start.Replace(":", string.Empty);
+                    int start_add = Int32.Parse(a);
+                    string b = startList[count].Replace(":", string.Empty);
+                    int start_class = Int32.Parse(b);
+                    string c = end.Replace(":", string.Empty);
+                    int end_add = Int32.Parse(c);
+                    string d = endList[count].Replace(":", string.Empty);
+                    int end_class = Int32.Parse(d);
+
+                    if (((start_class < start_add) && (start_add < end_class)) || ((start_class < end_add) && (end_add <= end_class)) || ((start_add < start_class) && (end_add > end_class)) || ((start_add > start_class) && (end_add < end_class)))
+                    {
+                        check = false;
+                    }
                 }
                 count++;
             }
