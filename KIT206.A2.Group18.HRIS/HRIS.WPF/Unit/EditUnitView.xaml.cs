@@ -64,7 +64,7 @@ namespace HRIS.WPF
             if(this.StaffList.SelectedItem != null)
             {
                 Staff selectedStaff = (Staff)this.StaffList.SelectedItem;
-                this.CoordinatorTB.Text = selectedStaff.ID.ToString() + " | " + selectedStaff.ToString();
+                this.CoordinatorTB.Text = selectedStaff.ToString();
                 StaffID = selectedStaff.ID;
 
                 this.StaffList.Visibility = Visibility.Hidden;

@@ -53,24 +53,6 @@ namespace HRIS.WPF
             differSize = ChangeListItemSize();
         }
 
-        private void searchBar_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (searchBar.Text != "")
-            {
-                if (choseStaff)
-                {
-                    if (e.Key == Key.Enter)
-                    {
-                        List<Staff> staffResult = Controller.ReturnStaffBySearchText(searchBar.Text);
-                        if (staffResult.Count > 0)
-                        {
-                            GeneralListBox.ItemsSource = staffResult;
-                        } 
-                    }
-                }
-            }
-        }
-
         #region Display a functioning dialog when a GeneralListBox's item is chosen
         private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -168,12 +150,14 @@ namespace HRIS.WPF
 
             if(choseClass)
             {
-
+                AddClassView view = Controller.ShowAddClass();
+                view.ShowDialog();
             }
 
             if(choseConsultation)
             {
-
+                AddConsultationView view = Controller.ShowAddConsultation();
+                view.ShowDialog();
             }
         }
         #endregion
@@ -269,17 +253,17 @@ namespace HRIS.WPF
                         staffListItem staffItem = (staffListItem)GeneralListBox.Items[i];
                         staffItem.Width = differSize;
                     }
-                    if(choseUnit)
+                    if(choseUnit && differSize != 0)
                     {
                         unitListItems unitItem = (unitListItems)GeneralListBox.Items[i];
                         unitItem.Width = differSize;
                     }
-                    if(choseClass)
+                    if(choseClass && differSize != 0)
                     {
                         classListItems classItem = (classListItems)GeneralListBox.Items[i];
                         classItem.Width = differSize;
                     }
-                    if(choseConsultation)
+                    if(choseConsultation && differSize != 0)
                     {
                         consultationListItem conItem = (consultationListItem)GeneralListBox.Items[i];
                         conItem.Width = differSize;

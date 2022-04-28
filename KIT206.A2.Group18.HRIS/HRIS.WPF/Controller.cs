@@ -33,7 +33,6 @@ namespace HRIS.WPF
                     staffListItem item = new staffListItem();
                     item.ID = staff[i].ID;
                     item.StaffInfo = staff[i].ToString();
-                    item.StaffID = "ID: " + staff[i].ID.ToString();
                     item.StaffCategory = staff[i].category.ToString().ToUpper();
                     item.StaffEmail = "Email: " + staff[i].Email;
                     item.StaffLocation = "Room: " + staff[i].Room + " | " + staff[i].campus.ToString() + " campus";
@@ -132,7 +131,6 @@ namespace HRIS.WPF
                     Staff staff = Agency.GetStaffByID(item.StaffID);
 
                     item.StaffName = staff.ToString();
-                    item.ID = "ID: " + item.StaffID.ToString();
                     item.ConTime = conList[i].day.ToString() + " | " + conList[i].StartTime.ToString() + " - " + conList[i].EndTime.ToString();
                     item.ConsultationDay = conList[i].day.ToString();
                     item.Start = conList[i].StartTime.ToString("HH:mm:ss");
@@ -171,15 +169,6 @@ namespace HRIS.WPF
         }
         #endregion
 
-        //SEARCH FUNCTION
-        #region Search For A Staff Member Or A Staff List By Search Text
-        public static List<Staff> ReturnStaffBySearchText(string searchText)
-        {
-            List<Staff> result = Staff.GetStaffBySearchTextExpanded(searchText);
-            return result;
-        }
-        #endregion
-
         //STAFF MANAGEMENT: Show Staff Details, Add Staff Info
             //Show staff member's details (their information, their units and their consultations)
         #region Show A Staff Member Details
@@ -202,7 +191,6 @@ namespace HRIS.WPF
                 detailView.StaffPhoto.Source = ImageDealer.ByteToImage(shownStaff.Photo);
             }
             detailView.StaffName.Content = shownStaff.ToString();
-            detailView.StaffID.Content = "ID: " + StaffID.ToString();
             detailView.StaffCategory.Content = shownStaff.category.ToString().ToUpper();
             detailView.StaffPhone.Content = "Phone: " + shownStaff.Phone;
             detailView.StaffEmail.Content = "Email: " + shownStaff.Email;
@@ -309,7 +297,7 @@ namespace HRIS.WPF
             {
                 view.ClassList.ItemsSource = classes;
             }
-            view.CoordinatorTB.Text = StaffID.ToString() + " | " + staff.ToString();
+            view.CoordinatorTB.Text = staff.ToString();
 
             return view;
         }
@@ -325,6 +313,44 @@ namespace HRIS.WPF
         #endregion
 
         //CLASS MANAGEMENT
+            //Display AddClassView
+        #region Display AddClassView
+        public static AddClassView ShowAddClass()
+        {
+            AddClassView view = new AddClassView();
+
+            view.UnitList.ItemsSource = Agency.LoadAllUnits();
+            view.StaffList.ItemsSource = Agency.LoadAllStaffWithIDNAME();
+
+            view.DayList.Items.Add("Select..");
+            foreach (string name in Enum.GetNames(typeof(Day)))
+            {
+                view.DayList.Items.Add(name);
+            }
+            view.DayList.SelectedIndex = 0;
+
+            view.CampusList.Items.Add("Select..");
+            foreach (string name in Enum.GetNames(typeof(Campus)))
+            {
+                if (name != "Unknown")
+                {
+                    view.CampusList.Items.Add(name);
+                }
+            }
+            view.CampusList.SelectedIndex = 0;
+
+
+            view.TypeList.Items.Add("Select..");
+            foreach (string name in Enum.GetNames(typeof(KIT206.A2.Group18.HRIS.Type)))
+            {
+                view.TypeList.Items.Add(name);
+            }
+            view.TypeList.SelectedIndex = 0;
+
+            return view;
+        }
+        #endregion
+
             //Load class details into EditClassDetails
         #region Show Class Details And Allows Users To Edit That Class Information
         public static EditClassDetails LoadClassDetails(int staffID, string code, string day, string campus, TimeOnly start, TimeOnly end, string room, string type)
@@ -358,6 +384,25 @@ namespace HRIS.WPF
             view.StartMinute.Text = start.ToString("mm");
             view.EndHourTB.Text = end.ToString("HH");
             view.EndMinuteTB.Text = end.ToString("mm");
+            return view;
+        }
+        #endregion
+
+        //CONSULTATION MANAGEMENT
+        //Display AddConsultationView
+        #region Display AddConsultationView
+        public static AddConsultationView ShowAddConsultation()
+        {
+            AddConsultationView view = new AddConsultationView();
+
+            view.StaffList.ItemsSource = Agency.LoadAllStaffWithIDNAME();
+
+            view.DayList.Items.Add("Select..");
+            foreach(string name in Enum.GetNames (typeof(Day)))
+            {
+                view.DayList.Items.Add(name);
+            }
+            view.DayList.SelectedIndex = 0;
             return view;
         }
         #endregion

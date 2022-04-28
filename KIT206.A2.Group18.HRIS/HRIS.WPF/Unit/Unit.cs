@@ -50,21 +50,5 @@ namespace KIT206.A2.Group18.HRIS
             return resultUnit;
         }
         #endregion
-
-        #region Get A Unit By Search Text
-        public static List<Unit> GetUnitsBySearchText(string searchText)
-        {
-            List<Unit> unitList = Agency.LoadAllUnits();
-
-            var getUnit = from Unit u in unitList
-                          where u.UnitCode.ToLower().Contains(searchText.ToLower()) || u.UnitName.ToLower().Contains(searchText.ToLower())
-                          select u;
-
-            List<Unit> result = new List<Unit>(getUnit);
-
-            return result;
-        }
-
-        #endregion
     }
 }

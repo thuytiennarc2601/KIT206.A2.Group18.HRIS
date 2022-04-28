@@ -36,10 +36,9 @@ namespace KIT206.A2.Group18.HRIS
         public List<Class> Classes { get; set; }
         #endregion
 
-
         public override string ToString()
         {
-            return Title + ". " +  GivenName + " " + FamilyName;
+            return ID.ToString() + " | " + Title + ". " +  GivenName + " " + FamilyName;
         }
 
         //Return a staff list by a search text (using only ID and Name)
@@ -52,27 +51,6 @@ namespace KIT206.A2.Group18.HRIS
                            where (s.ID).ToString().Contains(SearchText) || s.GivenName.ToLower().Contains(SearchText) || s.FamilyName.ToLower().Contains(SearchText)
                            select s;
 
-            List<Staff> result = new List<Staff>(getStaff);
-
-            return result;
-        }
-        #endregion
-
-        //Return a staff list by a search text (expanded)
-        //use ID, Name, Email, Campus, Category
-        #region Search For A Staff Expanded
-        public static List<Staff> GetStaffBySearchTextExpanded(string searchText)
-        {
-            searchText = searchText.ToLower();
-            List<Staff> staffList = Agency.LoadAllStaffs();
-            var getStaff = from Staff s in staffList
-                           where (s.ID).ToString().Contains(searchText)
-                              || s.GivenName.ToLower().Contains(searchText)
-                              || s.FamilyName.ToLower().Contains(searchText)
-                              || s.Email.ToLower().Contains(searchText)
-                              || s.campus.ToString().ToLower().Contains(searchText)
-                              || s.category.ToString().ToLower().Contains(searchText)
-                           select s;
             List<Staff> result = new List<Staff>(getStaff);
 
             return result;

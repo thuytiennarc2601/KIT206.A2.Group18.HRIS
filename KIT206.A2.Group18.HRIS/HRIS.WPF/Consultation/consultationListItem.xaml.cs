@@ -28,7 +28,6 @@ namespace HRIS.WPF
 
         #region Consultation Properties
         private int _staffID;
-        private string _id;
         private string _staffName;
         private string _conTime;
 
@@ -41,12 +40,6 @@ namespace HRIS.WPF
         {
             get { return _staffID; }
             set { _staffID = value; }
-        }
-
-        public string ID
-        {
-            get { return _id; }
-            set { _id = value; this.staffID.Content = value; }
         }
 
         public string StaffName

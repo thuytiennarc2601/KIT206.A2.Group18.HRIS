@@ -356,6 +356,46 @@ namespace KIT206.A2.Group18.HRIS
         }
         #endregion
 
+        #region Load All Staff With Name And ID
+        public static List<Staff> LoadAllStaffWithIDNAME()
+        {
+            List<Staff> staffList = new List<Staff>();
+
+
+            MySqlDataReader rdr = null;
+            MySqlConnection conn = GetConnection();
+            try
+            {
+                conn.Open();
+
+                MySqlCommand cmd = new MySqlCommand("SELECT id, title, given_name, family_name FROM staff order by id ASC", conn);
+
+                rdr = cmd.ExecuteReader();
+
+                while (rdr.Read())
+                {
+                    staffList.Add(new Staff { ID = rdr.GetInt32(0), Title = rdr.GetString(1), GivenName = rdr.GetString(2), FamilyName = rdr.GetString(3) });
+                }
+            }
+            catch (MySqlException e)
+            {
+                ReportError("loading id", e);
+            }
+            finally
+            {
+                if (rdr != null)
+                {
+                    rdr.Close();
+                }
+                if (conn != null)
+                {
+                    conn.Close();
+                }
+            }
+            return staffList;
+        }
+        #endregion
+
         //UNIT OPERATIONS
         #region Load All Units
         //Retrieve all units from database
@@ -591,6 +631,106 @@ namespace KIT206.A2.Group18.HRIS
         }
         #endregion Edit details of a class
 
+        #region Add A New Class
+        public static void AddClass(string code, string campus, string day, string start, string end, string type, string room, int staff)
+        {
+            MySqlConnection conn = GetConnection();
+
+            try
+            {
+                conn.Open();
+
+                MySqlCommand cmd = new MySqlCommand("INSERT INTO class (unit_code, campus, day, start, end, type, room, staff) " +
+                    " VALUES (@code, @campus, @day, @start, @end, @type, @room, @staff)", conn);
+
+                cmd.Parameters.AddWithValue("@code", code);
+                cmd.Parameters.AddWithValue("@campus", campus);
+                cmd.Parameters.AddWithValue("@day", day);
+                cmd.Parameters.AddWithValue("@start", start);
+                cmd.Parameters.AddWithValue("@end", end);
+                cmd.Parameters.AddWithValue("@type", type);
+                cmd.Parameters.AddWithValue("@room", room);
+                cmd.Parameters.AddWithValue("@staff", staff);
+
+                cmd.ExecuteNonQuery();
+            }
+            catch (MySqlException e)
+            {
+                ReportError("Adding Class selected", e);
+            }
+            finally
+            {
+                if (conn != null)
+                {
+                    conn.Close();
+                }
+            }
+            MessageBox.Show("A class added successfully");
+        }
+        #endregion
+
+        #region Check If Room Is Available At A Specific Time Or Not
+        //Check if a room is available or not
+        public static Boolean checkValidateClass(string campus, string day, string start, string room)
+        {
+            List<string> campusList = new List<string>();
+            List<string> dayList = new List<string>();
+            List<string> startList = new List<string>();
+            Boolean check = true;
+
+            MySqlDataReader rdr = null;
+            MySqlConnection conn = GetConnection();
+
+            try
+            {
+                conn.Open();
+                MySqlCommand cmd = new MySqlCommand("SELECT campus, day, start " +
+                                                    "FROM class " +
+                                                    "WHERE room=@room ", conn);
+
+                cmd.Parameters.AddWithValue("@room", room);
+
+                rdr = cmd.ExecuteReader();
+
+
+
+                while (rdr.Read())
+                {
+                    campusList.Add(rdr.GetString(0));
+                    dayList.Add(rdr.GetString(1));
+                    startList.Add(rdr.GetString(2));
+                }
+            }
+            catch (MySqlException e)
+            {
+                ReportError("validating...", e);
+            }
+            finally
+            {
+                if (rdr != null)
+                {
+                    rdr.Close();
+                }
+                if (conn != null)
+                {
+                    conn.Close();
+                }
+            }
+
+            int count = 0;
+
+            foreach (string s in campusList)
+            {
+                if ((s == campus) && (dayList[count] == day) && (startList[count] == start))
+                {
+                    check = false;
+                }
+                count++;
+            }
+            return check;
+        }
+        #endregion
+
         //CONSULTATION OPERATIONS
         #region Load All Consultations
         //Retrieve all consultations from database
@@ -637,6 +777,40 @@ namespace KIT206.A2.Group18.HRIS
         }
         #endregion
 
+        #region Add A New Consultation
+        public static void AddConsultation(string day, string start, string end, int staff)
+        {
+            MySqlConnection conn = GetConnection();
+
+            try
+            {
+                conn.Open();
+
+                MySqlCommand cmd = new MySqlCommand("INSERT INTO consultation (staff_id, day, start, end) " +
+                    " VALUES (@staff, @day, @start, @end)", conn);
+
+                cmd.Parameters.AddWithValue("@day", day);
+                cmd.Parameters.AddWithValue("@start", start);
+                cmd.Parameters.AddWithValue("@end", end);
+                cmd.Parameters.AddWithValue("@staff", staff);
+
+                cmd.ExecuteNonQuery();
+            }
+            catch (MySqlException e)
+            {
+                ReportError("Adding a consultation", e);
+            }
+            finally
+            {
+                if (conn != null)
+                {
+                    conn.Close();
+                }
+            }
+            MessageBox.Show("A new consultation added");
+        }
+        #endregion
+
         #region Delete Consultation
         public static void DeleteConsultation(int id, string day, string Start, string End)
         {
@@ -671,7 +845,66 @@ namespace KIT206.A2.Group18.HRIS
             }
             MessageBox.Show("Consultation cancelled");
         }
-        #endregion 
+        #endregion
+
+        #region Check If A Consultation Time Is Valid Or Not
+        public static Boolean checkValidateConsul(string day, string start, int staff)
+        {
+            List<string> dayList = new List<string>();
+            List<string> startList = new List<string>();
+            Boolean check = true;
+
+            MySqlDataReader rdr = null;
+            MySqlConnection conn = GetConnection();
+
+            try
+            {
+                conn.Open();
+                MySqlCommand cmd = new MySqlCommand("SELECT day, start " +
+                                                    "FROM consultation " +
+                                                    "WHERE staff_id=@staff ", conn);
+
+                cmd.Parameters.AddWithValue("@staff", staff);
+
+                rdr = cmd.ExecuteReader();
+
+
+                while (rdr.Read())
+                {
+                    dayList.Add(rdr.GetString(0));
+                    startList.Add(rdr.GetString(1));
+                }
+            }
+            catch (MySqlException e)
+            {
+                ReportError("validating...", e);
+            }
+            finally
+            {
+                if (rdr != null)
+                {
+                    rdr.Close();
+                }
+                if (conn != null)
+                {
+                    conn.Close();
+                }
+            }
+
+            int count = 0;
+
+            foreach (string s in dayList)
+            {
+                if ((s == day) && (startList[count] == start))
+                {
+                    check = false;
+                }
+                count++;
+            }
+
+            return check;
+        }
+        #endregion
 
         private static void ReportError(string msg, Exception e)
         {

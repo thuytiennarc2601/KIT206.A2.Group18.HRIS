@@ -87,6 +87,26 @@ namespace HRIS.WPF
         }
         #endregion
 
+        #region Validate Adding Class (expanded)
+        public static bool AddingClassValidation(string code, string campus, string day, string start, string room)
+        {
+            bool valid = true;
+            if(code == "empty")
+            {
+                valid = false;
+                MessageBox.Show("A unit required");
+            }
+            
+            else if(!Agency.checkValidateClass(campus, day, start, room))
+            {
+                valid = false;
+                MessageBox.Show("Room clashed at period");
+            }
+
+            return valid;
+        }
+        #endregion
+
         #region Validate Adding/Editing Class Operation
         public static bool AddingEditClassValidation(int StaffID, string Start, string End, string Room, string Campus, string Day, string Type)
         {
@@ -115,6 +135,29 @@ namespace HRIS.WPF
             {
                 valid = false;
                 MessageBox.Show("Type required");
+            }
+            return valid;
+        }
+        #endregion
+
+        #region Validate Adding Consultation
+        public static bool AddingConsultationValidation(int staffId, string day, string start)
+        {
+            bool valid = true;
+            if(staffId == -1)
+            {
+                valid = false;
+                MessageBox.Show("Staff required");
+            }
+            else if(day == "Select..")
+            {
+                valid = false;
+                MessageBox.Show("Day required");
+            }
+            else if(!Agency.checkValidateConsul(day, start, staffId))
+            {
+                valid = false;
+                MessageBox.Show("This consultation is already exist");
             }
             return valid;
         }
