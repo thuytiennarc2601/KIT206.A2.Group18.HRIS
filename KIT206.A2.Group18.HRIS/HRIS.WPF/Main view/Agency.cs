@@ -671,61 +671,87 @@ namespace KIT206.A2.Group18.HRIS
 
         #region Check If Room Is Available At A Specific Time Or Not
         //Check if a room is available or not
-        public static Boolean checkValidateClass(string campus, string day, string start, string room)
+        public static Boolean checkValidateClass(string campus, string day, string start, string end, string room, int staff)
         {
             List<string> campusList = new List<string>();
             List<string> dayList = new List<string>();
             List<string> startList = new List<string>();
+            List<string> endList = new List<string>();
             Boolean check = true;
 
             MySqlDataReader rdr = null;
             MySqlConnection conn = GetConnection();
-
-            try
+            if (checkClassClash(day, start, end, staff))
             {
-                conn.Open();
-                MySqlCommand cmd = new MySqlCommand("SELECT campus, day, start " +
-                                                    "FROM class " +
-                                                    "WHERE room=@room ", conn);
-
-                cmd.Parameters.AddWithValue("@room", room);
-
-                rdr = cmd.ExecuteReader();
-
-
-
-                while (rdr.Read())
+                try
                 {
-                    campusList.Add(rdr.GetString(0));
-                    dayList.Add(rdr.GetString(1));
-                    startList.Add(rdr.GetString(2));
+                    conn.Open();
+                    MySqlCommand cmd = new MySqlCommand("SELECT campus, day, start, end " +
+                                                        "FROM class " +
+                                                        "WHERE room=@room ", conn);
+
+                    cmd.Parameters.AddWithValue("@room", room);
+
+                    rdr = cmd.ExecuteReader();
+
+
+                    while (rdr.Read())
+                    {
+                        campusList.Add(rdr.GetString(0));
+                        dayList.Add(rdr.GetString(1));
+                        startList.Add(rdr.GetString(2));
+                        endList.Add(rdr.GetString(3));
+                    }
+                }
+                catch (MySqlException e)
+                {
+                    ReportError("validating...", e);
+                }
+                finally
+                {
+                    if (rdr != null)
+                    {
+                        rdr.Close();
+                    }
+                    if (conn != null)
+                    {
+                        conn.Close();
+                    }
+                }
+
+                int count = 0;
+
+                foreach (string s in campusList)
+                {
+                    if ((s == campus) && (dayList[count] == day) && (startList[count] == start))
+                    {
+                        check = false;
+                        MessageBox.Show("Room clashed at period");
+                    }
+                    else if ((s == campus) && (dayList[count] == day) && (startList[count] != start))
+                    {
+                        string a = start.Replace(":", string.Empty);
+                        int start_add = Int32.Parse(a);
+                        string b = startList[count].Replace(":", string.Empty);
+                        int start_class = Int32.Parse(b);
+                        string c = end.Replace(":", string.Empty);
+                        int end_add = Int32.Parse(c);
+                        string d = endList[count].Replace(":", string.Empty);
+                        int end_class = Int32.Parse(d);
+
+                        if (((start_class < start_add) && (start_add < end_class)) || ((start_class < end_add) && (end_add <= end_class)) || ((start_add < start_class) && (end_add > end_class)) || ((start_add > start_class) && (end_add < end_class)))
+                        {
+                            check = false;
+                            MessageBox.Show("Room clashed at period");
+                        }
+                    }
+                    count++;
                 }
             }
-            catch (MySqlException e)
-            {
-                ReportError("validating...", e);
-            }
-            finally
-            {
-                if (rdr != null)
-                {
-                    rdr.Close();
-                }
-                if (conn != null)
-                {
-                    conn.Close();
-                }
-            }
-
-            int count = 0;
-
-            foreach (string s in campusList)
-            {
-                if ((s == campus) && (dayList[count] == day) && (startList[count] == start))
-                {
-                    check = false;
-                }
-                count++;
+            else
+            {  
+                check = false;
+                MessageBox.Show("This staff has class at this time.");
             }
             return check;
         }
@@ -847,11 +873,99 @@ namespace KIT206.A2.Group18.HRIS
         }
         #endregion
 
-        #region Check If A Consultation Time Is Valid Or Not
-        public static Boolean checkValidateConsul(string day, string start, int staff)
+        #region Check If A Consultation Time Of Specific Staff Is Not Clashing With Other Consultation
+        public static Boolean checkValidateConsul(string day, string start, string end, int staff)
         {
             List<string> dayList = new List<string>();
             List<string> startList = new List<string>();
+            List<string> endList = new List<string>();
+            Boolean check = true;
+
+            MySqlDataReader rdr = null;
+            MySqlConnection conn = GetConnection();
+
+            if (checkClassClash(day, start, end, staff))
+            {
+                try
+                {
+                    conn.Open();
+                    MySqlCommand cmd = new MySqlCommand("SELECT day, start, end " +
+                                                        "FROM consultation " +
+                                                        "WHERE staff_id=@staff ", conn);
+
+                    cmd.Parameters.AddWithValue("@staff", staff);
+
+                    rdr = cmd.ExecuteReader();
+
+
+                    while (rdr.Read())
+                    {
+                        dayList.Add(rdr.GetString(0));
+                        startList.Add(rdr.GetString(1));
+                        endList.Add(rdr.GetString(2));
+                    }
+                }
+                catch (MySqlException e)
+                {
+                    ReportError("validating...", e);
+                }
+                finally
+                {
+                    if (rdr != null)
+                    {
+                        rdr.Close();
+                    }
+                    if (conn != null)
+                    {
+                        conn.Close();
+                    }
+                }
+
+                int count = 0;
+
+                foreach (string s in dayList)
+                {
+                    if ((s == day) && (startList[count] == start))
+                    {
+                        check = false;
+                        MessageBox.Show("This staff has consultation at this time.");
+                    }
+                    else if ((s == day) && (startList[count] != start))
+                    {
+                        string a = start.Replace(":", string.Empty);
+                        int start_add = Int32.Parse(a);
+                        string b = startList[count].Replace(":", string.Empty);
+                        int start_class = Int32.Parse(b);
+                        string c = end.Replace(":", string.Empty);
+                        int end_add = Int32.Parse(c);
+                        string d = endList[count].Replace(":", string.Empty);
+                        int end_class = Int32.Parse(d);
+
+                        if (((start_class < start_add) && (start_add < end_class)) || ((start_class < end_add) && (end_add <= end_class)) || ((start_add < start_class) && (end_add > end_class)) || ((start_add > start_class) && (end_add < end_class)))
+                        {
+                            check = false;
+                            MessageBox.Show("This staff has consultation at this time.");
+                        }
+                    }
+                    count++;
+                }
+            }
+            else
+            {
+                check = false;
+                MessageBox.Show("This staff has class at this time.");
+            }
+            return check;
+        }
+        #endregion
+
+        //OTHER FUNCTION
+        #region Check If Staff Is Available Or Not
+        public static Boolean checkClassClash(string day, string start, string end, int staff)
+        {
+            List<string> dayList = new List<string>();
+            List<string> startList = new List<string>();
+            List<string> endList = new List<string>();
             Boolean check = true;
 
             MySqlDataReader rdr = null;
@@ -860,19 +974,17 @@ namespace KIT206.A2.Group18.HRIS
             try
             {
                 conn.Open();
-                MySqlCommand cmd = new MySqlCommand("SELECT day, start " +
-                                                    "FROM consultation " +
-                                                    "WHERE staff_id=@staff ", conn);
+                MySqlCommand cmd = new MySqlCommand("SELECT day, start, end FROM class WHERE staff=@staff ", conn);
 
                 cmd.Parameters.AddWithValue("@staff", staff);
 
                 rdr = cmd.ExecuteReader();
 
-
                 while (rdr.Read())
                 {
                     dayList.Add(rdr.GetString(0));
                     startList.Add(rdr.GetString(1));
+                    endList.Add(rdr.GetString(2));
                 }
             }
             catch (MySqlException e)
@@ -898,6 +1010,22 @@ namespace KIT206.A2.Group18.HRIS
                 if ((s == day) && (startList[count] == start))
                 {
                     check = false;
+                }
+                else if ((s == day) && (startList[count] != start))
+                {
+                    string a = start.Replace(":", string.Empty);
+                    int start_add = Int32.Parse(a);
+                    string b = startList[count].Replace(":", string.Empty);
+                    int start_class = Int32.Parse(b);
+                    string c = end.Replace(":", string.Empty);
+                    int end_add = Int32.Parse(c);
+                    string d = endList[count].Replace(":", string.Empty);
+                    int end_class = Int32.Parse(d);
+
+                    if (((start_class < start_add) && (start_add < end_class)) || ((start_class < end_add) && (end_add <= end_class)) || ((start_add < start_class) && (end_add > end_class)) || ((start_add > start_class) && (end_add < end_class)))
+                    {
+                        check = false;
+                    }
                 }
                 count++;
             }

@@ -48,7 +48,7 @@ namespace HRIS.WPF
                 string start = startHour + ":" + startMinute + ":00";
                 string end = endHour + ":" + endMinute + ":00";
 
-                if(Validation.AddingConsultationValidation(staff, day, start))
+                if(Validation.AddingConsultationValidation(staff, day, start, end))
                 {
                     Agency.AddConsultation(day, start, end, staff);
                     this.Close();

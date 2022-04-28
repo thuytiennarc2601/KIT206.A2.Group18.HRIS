@@ -60,7 +60,7 @@ namespace HRIS.WPF
                 string start = this.StartHour.Text + ":" + this.StartMinute.Text + ":00";
                 string end = this.EndHour.Text + ":" + this.EndMinute.Text + ":00";
 
-                if(Validation.AddingClassValidation(unitCode, campus, day, start, room) 
+                if(Validation.AddingClassValidation(unitCode, campus, day, start, end, room, staffID) 
                     && Validation.AddingEditClassValidation(staffID, start, end, room, campus, day, type))
                 {
                     Agency.AddClass(unitCode, campus, day, start, end, type, room, staffID);
