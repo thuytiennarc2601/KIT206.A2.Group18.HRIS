@@ -647,8 +647,7 @@ namespace KIT206.A2.Group18.HRIS
             {
                 conn.Open();
 
-                MySqlCommand cmd = new MySqlCommand("INSERT INTO consultation (staff_id, day, start, end) " +
-                    " VALUES (@staff, @day, @start, @end)", conn);
+                MySqlCommand cmd = new MySqlCommand(" UPDATE consultation SET day= @day, Start=@start, End=@end WHERE id=@staff", conn);
 
                 cmd.Parameters.AddWithValue("@id", id);
                 cmd.Parameters.AddWithValue("@day", day);
@@ -669,6 +668,83 @@ namespace KIT206.A2.Group18.HRIS
                 }
             }
             MessageBox.Show("Consultation Updated");
+        }
+        #endregion
+
+        #region Validate
+        public static Boolean checkValidateConsul(string day, string start, string end, int staff)
+        {
+            List<string> dayList = new List<string>();
+            List<string> startList = new List<string>();
+            List<string> endList = new List<string>();
+            Boolean check = true;
+
+            MySqlDataReader rdr = null;
+            MySqlConnection conn = GetConnection();
+
+            try
+            {
+                conn.Open();
+                MySqlCommand cmd = new MySqlCommand("SELECT day, start, end " +
+                                                    "FROM consultation " +
+                                                    "WHERE staff_id=@staff ", conn);
+
+                cmd.Parameters.AddWithValue("@staff", staff);
+
+                rdr = cmd.ExecuteReader();
+
+
+                while (rdr.Read())
+                {
+                    dayList.Add(rdr.GetString(0));
+                    startList.Add(rdr.GetString(1));
+                    endList.Add(rdr.GetString(2));
+                }
+            }
+            catch (MySqlException e)
+            {
+                ReportError("validating...", e);
+            }
+            finally
+            {
+                if (rdr != null)
+                {
+                    rdr.Close();
+                }
+                if (conn != null)
+                {
+                    conn.Close();
+                }
+            }
+
+            int count = 0;
+
+            foreach (string s in dayList)
+            {
+                if ((s == day) && (startList[count] == start))
+                {
+                    check = false;
+                }
+                else if ((s == day) && (startList[count] != start))
+                {
+                    string a = start.Replace(":", string.Empty);
+                    int start_add = Int32.Parse(a);
+                    string b = startList[count].Replace(":", string.Empty);
+                    int start_class = Int32.Parse(b);
+                    string c = end.Replace(":", string.Empty);
+                    int end_add = Int32.Parse(c);
+                    string d = endList[count].Replace(":", string.Empty);
+                    int end_class = Int32.Parse(d);
+
+                    if (((start_class < start_add) && (start_add < end_class)) || ((start_class < end_add) && (end_add <= end_class)) || ((start_add < start_class) && (end_add > end_class)) || ((start_add > start_class) && (end_add < end_class)))
+                    {
+                        check = false;
+                    }
+                }
+                count++;
+            }
+
+            return check;
         }
         #endregion
 

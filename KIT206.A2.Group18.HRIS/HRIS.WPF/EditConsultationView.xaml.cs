@@ -65,14 +65,23 @@ namespace HRIS.WPF
             set { _day = value; }
         }
         #endregion
+        
         private void saveBtn_Click(object sender, RoutedEventArgs e)
         {
             Agency.UpdateConsultation(StaffID, ConsultationDay, Start, End);
-            //EditConsultationView view = Controller.ShowStaffDetails(StaffID, ConsultationDay, Start1, End1);
-            //view.Code = StaffName;
-            //view.ShowDialog();
             this.Close();
         }
+
+        private string TimeDoubleDigitConverter(string time)
+        {
+            if (time.Length < 2)
+            {
+                time = "0" + time;
+            }
+            return time;
+        }
+
+        
 
         private void cancelBtn_Click(object sender, RoutedEventArgs e)
         {
