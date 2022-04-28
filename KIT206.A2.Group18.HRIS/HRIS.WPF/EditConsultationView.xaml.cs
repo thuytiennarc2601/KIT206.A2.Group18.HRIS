@@ -17,11 +17,11 @@ using KIT206.A2.Group18.HRIS;
 namespace HRIS.WPF
 {
     /// <summary>
-    /// Interaction logic for consultationListItem.xaml
+    /// Interaction logic for EditConsultationView.xaml
     /// </summary>
-    public partial class consultationListItem : UserControl
+    public partial class EditConsultationView : Window
     {
-        public consultationListItem()
+        public EditConsultationView()
         {
             InitializeComponent();
         }
@@ -45,23 +45,6 @@ namespace HRIS.WPF
             set { _staffID = value; }
         }
 
-        public string ID
-        {
-            get { return _id; }
-            set { _id = value; this.staffID.Content = value; }
-        }
-
-        public string StaffName
-        {
-            get { return _staffName; }
-            set { _staffName = value; this.staffDetails.Content = value; }
-        }
-
-        public string ConTime
-        {
-            get { return _conTime; }
-            set { _conTime = value; this.consultationTime.Content = value; }
-        }
 
         //Properties for functionality
         public TimeOnly Start1
@@ -75,25 +58,14 @@ namespace HRIS.WPF
             get { return _end1; }
             set { _end1 = value; }
         }
-        public string Start
-        {
-            get { return _start; }
-            set { _start = value; }
-
-        }
-        public string End
-        {
-            get { return _end; }
-            set { _end = value; }
-        }
 
         public string ConsultationDay
         {
-            get { return _day; }   
+            get { return _day; }
             set { _day = value; }
         }
         #endregion
-        private void conUpdateBtn_Click(object sender, RoutedEventArgs e)
+        private void saveBtn_Click(object sender, RoutedEventArgs e)
         {
             //Agency.UpdateConsultation(StaffID, ConsultationDay, Start, End);
             EditConsultationView view = Controller.ShowStaffDetails(StaffID, ConsultationDay, Start1, End1);
@@ -101,11 +73,12 @@ namespace HRIS.WPF
             view.ShowDialog();
         }
 
-        private void conCancelBtn_Click(object sender, RoutedEventArgs e)
+        private void cancelBtn_Click(object sender, RoutedEventArgs e)
         {
-            Agency.DeleteConsultation(StaffID, ConsultationDay, Start, End);
+            this.Close();
         }
 
-      
+
+
     }
 }

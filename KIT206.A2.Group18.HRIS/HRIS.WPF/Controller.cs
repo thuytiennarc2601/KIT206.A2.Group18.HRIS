@@ -362,5 +362,32 @@ namespace HRIS.WPF
         }
         #endregion
 
+        //CONSULTATION MANAGEMENT
+        //Load staff details in UpdateConsultation
+        #region Show staff consultation time
+        public static EditConsultationView ShowStaffDetails(int StaffID, string day, TimeOnly start, TimeOnly end)
+        {
+            EditConsultationView view = new EditConsultationView();
+        
+            Staff staff = Agency.GetStaffByID(StaffID);
+
+            //view.StaffID = staffID;
+            view.StaffDetailsTB.Text = StaffID.ToString() + " | " + staff.ToString();
+
+            foreach (string dayName in Enum.GetNames(typeof(Day)))
+            {
+                view.DayList.Items.Add(dayName);
+            }
+            view.DayList.SelectedItem = day;
+
+            view.StartHourTB.Text = start.ToString("HH");
+            view.StartMinuteTB.Text = start.ToString("mm");
+            view.EndHourTB.Text = end.ToString("HH");
+            view.EndMinuteTB.Text = end.ToString("mm");
+
+            return view;
+        }
+        #endregion
+
     }
 }
