@@ -59,7 +59,7 @@ namespace HRIS.WPF
 
         private void editCoorBtn_Click(object sender, RoutedEventArgs e)
         {
-            EditUnitView view = Controller.ShowUnitDetails(UnitCode, StaffID);
+            EditUnitView view = Controller.ShowUnitDetails(UnitCode, UnitName, StaffID);
             view.Code = UnitCode;
             view.ShowDialog();
         }

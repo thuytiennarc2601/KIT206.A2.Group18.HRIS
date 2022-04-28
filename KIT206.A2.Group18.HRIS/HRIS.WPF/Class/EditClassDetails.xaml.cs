@@ -62,24 +62,6 @@ namespace HRIS.WPF
         }
 
         #region Show Search Result
-        //Show unit search result
-        //private void AddUnitToSearchResult()
-        //{
-        //    if (this.UnitDetailsTB.Text != "")
-        //    {
-        //        List<Unit> result = Unit.GetUnitsBySearchText(this.UnitDetailsTB.Text);
-        //        if (result.Count > 0)
-        //        {
-        //            this.UnitList.Visibility = Visibility.Visible;
-        //            this.UnitList.ItemsSource = result;
-        //        }
-        //        else
-        //        {
-        //            this.UnitList.Visibility = Visibility.Hidden;
-        //        }
-        //    }
-        //}
-
         //Show staff search result
         private void AddStaffToSearchResult()
         {
@@ -132,11 +114,12 @@ namespace HRIS.WPF
             string campus = this.Campus;
             string day = this.Day;
             string start = this.ClassStart.ToString("HH:mm:ss");
+
             string startHour = this.StartHourTB.Text;
             string startMinute = this.StartMinute.Text;
             string endHour = this.EndHourTB.Text;
             string endMinute = this.EndMinuteTB.Text;
-            string new_type = (string)this.TypeList.SelectedItem;
+            string type = (string)this.TypeList.SelectedItem;
             string new_day = (string)this.DayList.SelectedItem;
             string room = this.RoomTB.Text;
             int staff = this.StaffID;
@@ -149,9 +132,9 @@ namespace HRIS.WPF
                 string new_start = TimeDoubleDigitConverter(startHour) + ":" + TimeDoubleDigitConverter(startMinute) + ":00";
                 string new_end = TimeDoubleDigitConverter(endHour) + ":" + TimeDoubleDigitConverter(endMinute) + ":00";
 
-                if(Validation.AddingEditClassValidation(this.StaffDetailsTB.Text, staff, new_start, new_end, room, campus, day))
+                if(Validation.AddingEditClassValidation(staff, new_start, new_end, room, campus, day, type))
                 {
-                    Agency.EditClassDetail(code, day, campus, start, new_day, new_start, new_end, new_type, room, staff);
+                    Agency.EditClassDetail(code, day, campus, start, new_day, new_start, new_end, type, room, staff);
                     this.Close();
                 }
             }

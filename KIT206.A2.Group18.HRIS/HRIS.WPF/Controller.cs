@@ -19,14 +19,13 @@ namespace HRIS.WPF
         private List<classListItems> classItems;
         private List<consultationListItem> consultationItems;
 
-        //Load details and display lists of four entities
+        //LOAD FOUR LISTS
         #region Load Staff List Into GeneralListBox
         //Load all staff info into the main listbox
         private List<staffListItem> AddStaffInfoToItem()
         {
             List<Staff> staff = Agency.LoadAllStaffs();
             List<staffListItem> items = new List<staffListItem>();
-
             if (staff.Count > 0)
             {
                 for (int i = 0; i < staff.Count; i++)
@@ -34,7 +33,6 @@ namespace HRIS.WPF
                     staffListItem item = new staffListItem();
                     item.ID = staff[i].ID;
                     item.StaffInfo = staff[i].ToString();
-                    item.StaffID = "ID: " + staff[i].ID.ToString();
                     item.StaffCategory = staff[i].category.ToString().ToUpper();
                     item.StaffEmail = "Email: " + staff[i].Email;
                     item.StaffLocation = "Room: " + staff[i].Room + " | " + staff[i].campus.ToString() + " campus";
@@ -60,7 +58,6 @@ namespace HRIS.WPF
         private List<unitListItems> AddUnitInfoToItem()
         {
             List<Unit> unitList = Agency.LoadAllUnits();
-            List<Staff> staffList = Agency.LoadAllStaffs();
             List<unitListItems> items = new List<unitListItems>();
 
             if(unitList.Count > 0)
@@ -72,7 +69,7 @@ namespace HRIS.WPF
                     item.UnitCode = unitList[i].UnitCode.ToUpper();
                     item.StaffID = unitList[i].Coordinator.ID;
 
-                    Staff staff = Staff.GetStaffByID(item.StaffID);
+                    Staff staff = Agency.GetStaffByID(item.StaffID);
                     item.StaffName = "Coordinator: " + staff.ToString();  
                     items.Add(item);
                 }
@@ -86,8 +83,6 @@ namespace HRIS.WPF
         private List<classListItems> AddClassInfoToItem()
         {
             List<Class> classList = Agency.LoadAllClasses();
-            List<Staff> staffList = Agency.LoadAllStaffs();
-            List<Unit> unitList = Agency.LoadAllUnits();
             List<classListItems> items = new List<classListItems>();
 
             if(classList.Count > 0)
@@ -100,15 +95,18 @@ namespace HRIS.WPF
                     item.Day = classList[i].day.ToString();
                     item.Campus = classList[i].campus.ToString();
                     item.StartTime = classList[i].StartTime;
+                    item.EndTime = classList[i].EndTime;
+                    item.Room = classList[i].Room;
+                    item.thisClassType = classList[i].type.ToString();
 
-                    Unit unit = Unit.GetUnitByCode(item.UnitCode);
+                    Unit unit = Agency.GetUnitByUnitCode(item.UnitCode);
                     item.UnitDetails = unit.ToString();
 
-                    Staff staff = Staff.GetStaffByID(item.StaffID);
+                    Staff staff = Agency.GetStaffByID(item.StaffID);
 
-                    item.ClassType = classList[i].type.ToString() + " | Staff: " + staff.ToString();
-                    item.ClassTime = classList[i].day.ToString() + " | " + classList[i].StartTime.ToString() + " - " + classList[i].EndTime.ToString();
-                    item.ClassLocation = "Room: " + classList[i].Room + " | " + classList[i].campus.ToString() + " campus";
+                    item.ClassType = item.thisClassType + " | Staff: " + staff.ToString();
+                    item.ClassTime = item.Day + " | " + item.StartTime + " - " + item.EndTime;
+                    item.ClassLocation = "Room: " + item.Room + " | " + item.Campus + " campus";
                     items.Add(item);
                 }    
             }
@@ -121,7 +119,6 @@ namespace HRIS.WPF
         private List<consultationListItem> AddConsultationInfoToItem()
         {
             List<Consultation> conList = Agency.LoadAllConsultations();
-            List<Staff> staffList = Agency.LoadAllStaffs();
             List<consultationListItem> items = new List<consultationListItem>();
 
             if(conList.Count > 0)
@@ -131,10 +128,9 @@ namespace HRIS.WPF
                     consultationListItem item = new consultationListItem();
                     item.StaffID = conList[i].staff.ID;
 
-                    Staff staff = Staff.GetStaffByID(item.StaffID);
+                    Staff staff = Agency.GetStaffByID(item.StaffID);
 
                     item.StaffName = staff.ToString();
-                    item.ID = "ID: " + item.StaffID.ToString();
                     item.ConTime = conList[i].day.ToString() + " | " + conList[i].StartTime.ToString() + " - " + conList[i].EndTime.ToString();
                     item.ConsultationDay = conList[i].day.ToString();
                     item.Start = conList[i].StartTime.ToString("HH:mm:ss");
@@ -178,7 +174,7 @@ namespace HRIS.WPF
         #region Show A Staff Member Details
         public static StaffDetailView ShowStaffDetails(int StaffID)
         {
-            Staff shownStaff = Staff.GetStaffByID(StaffID);
+            Staff shownStaff = Agency.GetStaffByID(StaffID);
             List<Unit> thisStaffUnits = Unit.GetUnitsByStaffID(StaffID);
             List<Consultation> thisStaffConsultations = Consultation.GetConsultationByStaffID(StaffID);
             StaffDetailView detailView = new StaffDetailView();
@@ -195,7 +191,6 @@ namespace HRIS.WPF
                 detailView.StaffPhoto.Source = ImageDealer.ByteToImage(shownStaff.Photo);
             }
             detailView.StaffName.Content = shownStaff.ToString();
-            detailView.StaffID.Content = "ID: " + StaffID.ToString();
             detailView.StaffCategory.Content = shownStaff.category.ToString().ToUpper();
             detailView.StaffPhone.Content = "Phone: " + shownStaff.Phone;
             detailView.StaffEmail.Content = "Email: " + shownStaff.Email;
@@ -219,7 +214,7 @@ namespace HRIS.WPF
         public static AddStaffInfoView LoadStaffDetails(int StaffID)
         {
             AddStaffInfoView addInfoView = new AddStaffInfoView();
-            Staff shownStaff = Staff.GetStaffByID(StaffID);
+            Staff shownStaff = Agency.GetStaffByID(StaffID);
 
             addInfoView.Title = shownStaff.ToString();
             //set staff data
@@ -289,22 +284,20 @@ namespace HRIS.WPF
         //UNIT MANAGEMENT: Show Unit Details, Search For A Staff Member, Add A New Unit
             //Show unit details (with classes) and allow users to change unit coordination
         #region Show A Unit Details
-        public static EditUnitView ShowUnitDetails(string UnitCode, int StaffID)
+        public static EditUnitView ShowUnitDetails(string UnitCode, string UnitName, int StaffID)
         {
             EditUnitView view = new EditUnitView();
             List<Class> classes = Class.GetClassesByUnitCode(UnitCode);
-            Staff staff = Staff.GetStaffByID(StaffID);
+            Staff staff = Agency.GetStaffByID(StaffID);
 
-            Unit unit = Unit.GetUnitByCode(UnitCode);
-
-            view.UnitName.Content = unit.UnitName;
-            view.UnitCode.Content = unit.UnitCode.ToUpper();
+            view.UnitName.Content = UnitName;
+            view.UnitCode.Content = UnitCode.ToUpper();
 
             if (classes.Count > 0)
             {
                 view.ClassList.ItemsSource = classes;
             }
-            view.CoordinatorTB.Text = StaffID.ToString() + " | " + staff.ToString();
+            view.CoordinatorTB.Text = staff.ToString();
 
             return view;
         }
@@ -320,22 +313,55 @@ namespace HRIS.WPF
         #endregion
 
         //CLASS MANAGEMENT
+            //Display AddClassView
+        #region Display AddClassView
+        public static AddClassView ShowAddClass()
+        {
+            AddClassView view = new AddClassView();
+
+            view.UnitList.ItemsSource = Agency.LoadAllUnits();
+            view.StaffList.ItemsSource = Agency.LoadAllStaffWithIDNAME();
+
+            view.DayList.Items.Add("Select..");
+            foreach (string name in Enum.GetNames(typeof(Day)))
+            {
+                view.DayList.Items.Add(name);
+            }
+            view.DayList.SelectedIndex = 0;
+
+            view.CampusList.Items.Add("Select..");
+            foreach (string name in Enum.GetNames(typeof(Campus)))
+            {
+                if (name != "Unknown")
+                {
+                    view.CampusList.Items.Add(name);
+                }
+            }
+            view.CampusList.SelectedIndex = 0;
+
+
+            view.TypeList.Items.Add("Select..");
+            foreach (string name in Enum.GetNames(typeof(KIT206.A2.Group18.HRIS.Type)))
+            {
+                view.TypeList.Items.Add(name);
+            }
+            view.TypeList.SelectedIndex = 0;
+
+            return view;
+        }
+        #endregion
+
             //Load class details into EditClassDetails
         #region Show Class Details And Allows Users To Edit That Class Information
-        public static EditClassDetails LoadClassDetails(int staffID, string code, string day, string campus, TimeOnly start)
+        public static EditClassDetails LoadClassDetails(int staffID, string code, string day, string campus, TimeOnly start, TimeOnly end, string room, string type)
         {
             EditClassDetails view = new EditClassDetails();
-
-            Class thisClass = Class.GetClassByPrimaryKeys(code, day, campus, start);
-            Unit unit = Unit.GetUnitByCode(code);
-            Staff staff = Staff.GetStaffByID(staffID);
+            Unit unit = Agency.GetUnitByUnitCode(code);
+            Staff staff = Agency.GetStaffByID(staffID);
 
             view.StaffID = staffID;
             view.UnitDetailsTB.Text = unit.ToString();
-            if (staff.ID != -1)
-            {
-                view.StaffDetailsTB.Text = staffID.ToString() + " | " + staff.ToString();
-            }
+            view.StaffDetailsTB.Text = staffID.ToString() + " | " + staff.ToString();
 
             foreach (string dayName in Enum.GetNames(typeof(Day)))
             {
@@ -346,36 +372,37 @@ namespace HRIS.WPF
             view.CampusList.Items.Add(campus);
             view.CampusList.SelectedIndex = 0;
 
-            if (thisClass.type == KIT206.A2.Group18.HRIS.Type.Undefined)
+            foreach (string typeName in Enum.GetNames(typeof(KIT206.A2.Group18.HRIS.Type)))
             {
-                view.TypeList.Items.Add("Select..");
-                foreach (string typeName in Enum.GetNames(typeof(KIT206.A2.Group18.HRIS.Type)))
-                {
-                    if (typeName != "Undefined")
-                    {
-                        view.TypeList.Items.Add(typeName);
-                    }
-                }
-                view.TypeList.SelectedIndex = 0;
+                view.TypeList.Items.Add(typeName);
             }
-            else
+            view.TypeList.SelectedItem = type;
+
+            view.RoomTB.Text = room;
+
+            view.StartHourTB.Text = start.ToString("HH");
+            view.StartMinute.Text = start.ToString("mm");
+            view.EndHourTB.Text = end.ToString("HH");
+            view.EndMinuteTB.Text = end.ToString("mm");
+            return view;
+        }
+        #endregion
+
+        //CONSULTATION MANAGEMENT
+        //Display AddConsultationView
+        #region Display AddConsultationView
+        public static AddConsultationView ShowAddConsultation()
+        {
+            AddConsultationView view = new AddConsultationView();
+
+            view.StaffList.ItemsSource = Agency.LoadAllStaffWithIDNAME();
+
+            view.DayList.Items.Add("Select..");
+            foreach(string name in Enum.GetNames (typeof(Day)))
             {
-                foreach (string typeName in Enum.GetNames(typeof(KIT206.A2.Group18.HRIS.Type)))
-                {
-                    if (typeName != "Undefined")
-                    {
-                        view.TypeList.Items.Add(typeName);
-                    }
-                }
-                view.TypeList.SelectedItem = thisClass.type.ToString();
+                view.DayList.Items.Add(name);
             }
-
-            view.RoomTB.Text = thisClass.Room;
-
-            view.StartHourTB.Text = thisClass.StartTime.ToString("HH");
-            view.StartMinute.Text = thisClass.StartTime.ToString("mm");
-            view.EndHourTB.Text = thisClass.EndTime.ToString("HH");
-            view.EndMinuteTB.Text = thisClass.EndTime.ToString("mm");
+            view.DayList.SelectedIndex = 0;
             return view;
         }
         #endregion

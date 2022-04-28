@@ -71,7 +71,7 @@ namespace HRIS.WPF
                 unitListItems selectedUnit = (unitListItems)GeneralListBox.SelectedItem;
                 if(selectedUnit != null)
                 {
-                    EditUnitView view = Controller.ShowUnitDetails(selectedUnit.UnitCode, selectedUnit.StaffID);
+                    EditUnitView view = Controller.ShowUnitDetails(selectedUnit.UnitCode, selectedUnit.UnitName, selectedUnit.StaffID);
                     view.Code = selectedUnit.UnitCode;
                     view.ShowDialog();
                 }
@@ -79,14 +79,14 @@ namespace HRIS.WPF
 
             if(choseClass)
             {
-                classListItems selectedClass = (classListItems)GeneralListBox.SelectedItem;
-                if( selectedClass != null)
+                classListItems tClass = (classListItems)GeneralListBox.SelectedItem;
+                if( tClass != null)
                 {
-                    EditClassDetails view = Controller.LoadClassDetails(selectedClass.StaffID, selectedClass.UnitCode, selectedClass.Day, selectedClass.Campus, selectedClass.StartTime);
-                    view.UnitCode = selectedClass.UnitCode;
-                    view.Day = selectedClass.Day;
-                    view.Campus = selectedClass.Campus;
-                    view.ClassStart = selectedClass.StartTime;
+                    EditClassDetails view = Controller.LoadClassDetails(tClass.StaffID, tClass.UnitCode, tClass.Day, tClass.Campus, tClass.StartTime, tClass.EndTime, tClass.Room, tClass.thisClassType);
+                    view.UnitCode = tClass.UnitCode;
+                    view.Day = tClass.Day;
+                    view.Campus = tClass.Campus;
+                    view.ClassStart = tClass.StartTime;
                     view.ShowDialog();
                 }
             }
@@ -150,12 +150,14 @@ namespace HRIS.WPF
 
             if(choseClass)
             {
-
+                AddClassView view = Controller.ShowAddClass();
+                view.ShowDialog();
             }
 
             if(choseConsultation)
             {
-
+                AddConsultationView view = Controller.ShowAddConsultation();
+                view.ShowDialog();
             }
         }
         #endregion
@@ -251,17 +253,17 @@ namespace HRIS.WPF
                         staffListItem staffItem = (staffListItem)GeneralListBox.Items[i];
                         staffItem.Width = differSize;
                     }
-                    if(choseUnit)
+                    if(choseUnit && differSize != 0)
                     {
                         unitListItems unitItem = (unitListItems)GeneralListBox.Items[i];
                         unitItem.Width = differSize;
                     }
-                    if(choseClass)
+                    if(choseClass && differSize != 0)
                     {
                         classListItems classItem = (classListItems)GeneralListBox.Items[i];
                         classItem.Width = differSize;
                     }
-                    if(choseConsultation)
+                    if(choseConsultation && differSize != 0)
                     {
                         consultationListItem conItem = (consultationListItem)GeneralListBox.Items[i];
                         conItem.Width = differSize;
@@ -290,5 +292,6 @@ namespace HRIS.WPF
 
         #endregion
 
+       
     }
 }

@@ -19,8 +19,7 @@ namespace HRIS.WPF
         public static bool AddUnitValidation(string UnitCode, string UnitName, int StaffID)
         {
             bool valid = true;
-            Unit UnitByCode = Unit.GetUnitByCode(UnitCode); 
-            Unit UnitByName = Unit.GetUnitByTitle(UnitName);
+            Unit CheckUnit = Unit.CheckUnitExist(UnitCode);
             if (UnitCode == "") //unitcode provided cannot be empty
             {
                 valid = false;
@@ -31,15 +30,10 @@ namespace HRIS.WPF
                 valid = false;
                 MessageBox.Show("Unit name required");
             }
-            else if(UnitByCode.UnitCode != "")  //unitcode cannot exist beforehand
+            else if(CheckUnit.UnitCode != "")  //unitcode cannot exist beforehand
             {
                 valid = false;
                 MessageBox.Show("This unit code already exist");                
-            }
-            else if(UnitByName.UnitName != "") //unitname cannot exist beforehand
-            {
-                valid = false;
-                MessageBox.Show("This unit name already exist");
             }
             else if (StaffID == -1) //staff cannot be empty
             {
@@ -66,7 +60,7 @@ namespace HRIS.WPF
                 if (!Regex.IsMatch(time, regex))
                 {
                     valid = false;
-                    MessageBox.Show("Time requires non-negative numbers");
+                    MessageBox.Show("Time requires 00:00 format");
                 }
                 else if (hour && timeNumber < MIN_TIME_HOUR)
                 {
@@ -93,17 +87,34 @@ namespace HRIS.WPF
         }
         #endregion
 
-        #region Validate Adding/Editing Class Operation
-        public static bool AddingEditClassValidation(string StaffDetails, int StaffID, string Start, string End, string Room, string Campus, string Day)
+        #region Validate Adding Class (expanded)
+        public static bool AddingClassValidation(string code, string campus, string day, string start, string room)
         {
-            //type and staff details can be empty
             bool valid = true;
-
-            Staff staff = Staff.GetStaffByID(StaffID);
-            if(StaffDetails != null && staff.ID == -1) //if staff details(textbox) is provided, staff id must exist
+            if(code == "empty")
             {
                 valid = false;
-                MessageBox.Show("This staff does not exist");
+                MessageBox.Show("A unit required");
+            }
+            
+            else if(!Agency.checkValidateClass(campus, day, start, room))
+            {
+                valid = false;
+                MessageBox.Show("Room clashed at period");
+            }
+
+            return valid;
+        }
+        #endregion
+
+        #region Validate Adding/Editing Class Operation
+        public static bool AddingEditClassValidation(int StaffID, string Start, string End, string Room, string Campus, string Day, string Type)
+        {
+            bool valid = true;
+            if(StaffID == -1) //staff id must be required
+            {
+                valid = false;
+                MessageBox.Show("Staff required");
             }
             else if(Campus == "Select..") //campus cannot be empty
             {
@@ -119,6 +130,34 @@ namespace HRIS.WPF
             {
                 valid = false;
                 MessageBox.Show("Room required");
+            }
+            else if(Type == "Select..")
+            {
+                valid = false;
+                MessageBox.Show("Type required");
+            }
+            return valid;
+        }
+        #endregion
+
+        #region Validate Adding Consultation
+        public static bool AddingConsultationValidation(int staffId, string day, string start)
+        {
+            bool valid = true;
+            if(staffId == -1)
+            {
+                valid = false;
+                MessageBox.Show("Staff required");
+            }
+            else if(day == "Select..")
+            {
+                valid = false;
+                MessageBox.Show("Day required");
+            }
+            else if(!Agency.checkValidateConsul(day, start, staffId))
+            {
+                valid = false;
+                MessageBox.Show("This consultation is already exist");
             }
             return valid;
         }

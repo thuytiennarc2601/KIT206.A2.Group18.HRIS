@@ -81,20 +81,9 @@
 
         <Grid x:Name="container" Margin="93,5,93,20" Background="#FFC3C3C3" Grid.Row="2" Height="Auto" Width="Auto">
             <!--#region List display view -->
-            <TextBox x:Name="searchBar" HorizontalAlignment="Left" Margin="20,6,0,0" TextWrapping="Wrap" Text="Searching..." VerticalAlignment="Top" Width="250" Height="29" BorderBrush="White" Foreground="#FFAFAFAF" FontStyle="Italic" FontFamily="Calibri" FontSize="16"/>
-            <Button x:Name="searchButton" Content="" HorizontalAlignment="Left" Margin="270,6,0,0" VerticalAlignment="Top" Height="29" Width="30" BorderBrush="#FFDADADA">
-                <Button.Background>
-                    <ImageBrush ImageSource="/icons8-search-30.png"/>
-                </Button.Background>
-            </Button>
-            <Label x:Name="DisplayInform" Content="Displaying Message" HorizontalContentAlignment="Left" HorizontalAlignment="Left" Margin="300,6,0,0" VerticalAlignment="Top" FontFamily="Century Gothic" FontStyle="Italic" Foreground="White" Height="29" FontSize="14"/>
-            <Button x:Name="AddButton" Content="Add Button" HorizontalAlignment="Right" Margin="0,6,54,0" VerticalAlignment="Top" Height="29" Width="144" Cursor="Hand" Foreground="White" BorderBrush="White" Background="#FF646464" FontFamily="Calibri" FontSize="16" Click="AddButton_Click"/>
+            <Label x:Name="DisplayInform" Content="Displaying Message" HorizontalContentAlignment="Left" HorizontalAlignment="Left" Margin="10,6,0,0" VerticalAlignment="Top" FontFamily="Century Gothic" FontStyle="Italic" Foreground="White" Height="29" FontSize="14"/>
+            <Button x:Name="AddButton" Content="Add Button" HorizontalAlignment="Right" Margin="0,6,10,0" VerticalAlignment="Top" Height="29" Width="144" Cursor="Hand" Foreground="White" BorderBrush="White" Background="#FF646464" FontFamily="Calibri" FontSize="16" Click="AddButton_Click"/>
             <ListBox x:Name="GeneralListBox" d:ItemsSource="{d:SampleData ItemCount=5}" Height="Auto" Width="Auto" Margin="0,40,0,0" BorderBrush="#FFC8C8C8" SelectionChanged="ListBox_SelectionChanged" SizeChanged="GeneralListBox_SizeChanged"/>
-            <Button x:Name="RefreshButton" Content="" HorizontalAlignment="Right" Margin="0,6,20,0" VerticalAlignment="Top" Height="29" Width="29" Cursor="Hand" Foreground="White" BorderBrush="White" FontFamily="Calibri" FontSize="16">
-                <Button.Background>
-                    <ImageBrush ImageSource="/icons8-refresh-30.png"/>
-                </Button.Background>
-            </Button>
             <!--#endregion-->
 
         </Grid>

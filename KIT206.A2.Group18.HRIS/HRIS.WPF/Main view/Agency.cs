@@ -39,238 +39,6 @@ namespace KIT206.A2.Group18.HRIS
             return (T)Enum.Parse(typeof(T), value);
         }
 
-        //Load lists of four entities
-        #region Load All Classes
-        public static List<Class> LoadAllClasses()
-        {
-            List<Class> classList = new List<Class>();
-
-            MySqlDataReader rdr = null;
-            conn = GetConnection();
-
-            try
-            {
-                conn.Open();
-                MySqlCommand cmd = new MySqlCommand("select unit_code, campus, day, type, start, end, room, staff from class", conn);
-                rdr = cmd.ExecuteReader();
-                while (rdr.Read())
-                {
-                    Class result = new Class();
-
-                    result.unit = new Unit { UnitCode = rdr.GetString(0) };
-                    result.campus = ParseEnum<Campus>(rdr.GetString(1));
-                    result.day = ParseEnum<Day>(rdr.GetString(2));
-
-                    if(Convert.IsDBNull(rdr[3]) || rdr.GetString(3) == "")
-                    {
-                        result.type = Type.Undefined;
-                    }
-                    else { result.type = ParseEnum<Type>(rdr.GetString(3)); }
-
-                    result.StartTime = TimeOnly.ParseExact(rdr.GetString(4), "HH:mm:ss");
-                    result.EndTime = TimeOnly.ParseExact(rdr.GetString(5), "HH:mm:ss");
-                    result.Room = rdr.GetString(6);
-
-                    if (Convert.IsDBNull(rdr[7]))
-                    {
-                        result.staff = new Staff { ID = -1 };
-                    }
-                    else { result.staff = new Staff { ID = rdr.GetInt32(7) }; }
-
-                    classList.Add(result);
-                }
-            }
-            catch (MySqlException e)
-            {
-                ReportError("loading classes", e);
-            }
-            finally
-            {
-                if (rdr != null)
-                {
-                    rdr.Close();
-                }
-                if (conn != null)
-                {
-                    conn.Close();
-                }
-            }
-
-            return classList;
-        }
-        #endregion
-        #region Load All Units
-        //Retrieve all units from database
-        public static List<Unit> LoadAllUnits()
-        {
-            List<Unit> unitList = new List<Unit>();
-
-            MySqlDataReader rdr = null;
-            conn = GetConnection();
-
-            try
-            {
-                conn.Open();
-                MySqlCommand cmd = new MySqlCommand("select code, title, coordinator from unit", conn);
-                rdr = cmd.ExecuteReader();
-                while (rdr.Read())
-                {
-                    unitList.Add(new Unit
-                    {
-                        UnitCode = rdr.GetString(0),
-                        UnitName = rdr.GetString(1),
-                        Coordinator = new Staff { ID = rdr.GetInt32(2) },
-                    });
-                }
-            }
-            catch (MySqlException e)
-            {
-                ReportError("loading units", e);
-            }
-            finally
-            {
-                if (rdr != null)
-                {
-                    rdr.Close();
-                }
-                if (conn != null)
-                {
-                    conn.Close();
-                }
-            }
-
-            return unitList;
-        }
-        #endregion
-        #region Load All Consultations
-        //Retrieve all consultations from database
-        public static List<Consultation> LoadAllConsultations()
-        {
-            List<Consultation> consultationList = new List<Consultation>();
-
-            MySqlDataReader rdr = null;
-            conn = GetConnection();
-
-            try
-            {
-                conn.Open();
-                MySqlCommand cmd = new MySqlCommand("select staff_id, day, start, end from consultation", conn);
-                rdr = cmd.ExecuteReader();
-                while (rdr.Read())
-                {
-                    consultationList.Add(new Consultation
-                    {
-                        staff = new Staff { ID = rdr.GetInt32(0) },
-                        day = ParseEnum<Day>(rdr.GetString(1)),
-                        StartTime = TimeOnly.ParseExact(rdr.GetString(2), "HH:mm:ss"),
-                        EndTime = TimeOnly.ParseExact(rdr.GetString(3), "HH:mm:ss"),
-                    });
-                }
-            }
-            catch (MySqlException e)
-            {
-                ReportError("loading consultations", e);
-            }
-            finally
-            {
-                if (rdr != null)
-                {
-                    rdr.Close();
-                }
-                if (conn != null)
-                {
-                    conn.Close();
-                }
-            }
-
-            return consultationList;
-        }
-        #endregion
-        #region Load All Staff from HRIS database
-        //Retrieve all staffs from database
-        public static List<Staff> LoadAllStaffs()
-        {
-            List<Staff> staffList = new List<Staff>();
-
-            MySqlDataReader rdr = null;
-            conn = GetConnection();
-            try
-            {
-                conn.Open();
-                MySqlCommand cmd = new MySqlCommand("select id, given_name, family_name, title, campus, phone, room, email, photo, category from staff", conn);
-                rdr = cmd.ExecuteReader();
-                while (rdr.Read())
-                {
-                    Staff result = new Staff();
-                    result.ID = rdr.GetInt32(0);
-                    result.GivenName = rdr.GetString(1);
-                    result.FamilyName = rdr.GetString (2);
-
-                    if (Convert.IsDBNull(rdr[3]) || rdr.GetString(3) == "")
-                    {
-                        result.Title = "Unknown";
-                    }
-                    else { result.Title = rdr.GetString(3); }
-
-                    if(Convert.IsDBNull(rdr[4]) || rdr.GetString(4) == "")
-                    {
-                        result.campus = Campus.Unknown;
-                    }
-                    else { result.campus = ParseEnum<Campus>(rdr.GetString(4)); }
-
-                    if(Convert.IsDBNull(rdr[5]) || rdr.GetString(5) == "")
-                    {
-                        result.Phone = "No contact added";
-                    }
-                    else { result.Phone = rdr.GetString(5); }
-
-                    if(Convert.IsDBNull(rdr[6]) || rdr.GetString(6) == "")
-                    {
-                        result.Room = "Unknown";
-                    }
-                    else { result.Room = rdr.GetString(6); }
-
-                    if(Convert.IsDBNull(rdr[7]) || rdr.GetString(7) == "")
-                    {
-                        result.Email = "No email added";
-                    }
-                    else { result.Email = rdr.GetString(7); }
-
-                    if(!Convert.IsDBNull(rdr[8]))
-                    {
-                        result.Photo = (byte[])rdr[8];
-                    }
-
-                    if(Convert.IsDBNull(rdr[9]) || rdr.GetString(9) == "")
-                    {
-                        result.category = Category.uncategorised;
-                    }
-                    else { result.category = ParseEnum<Category>(rdr.GetString(9)); }
-
-                    staffList.Add(result);
-                }
-            }
-            catch (MySqlException e)
-            {
-                ReportError("loading staffs", e);
-            }
-            finally
-            {
-                if (rdr != null)
-                {
-                    rdr.Close();
-                }
-                if (conn != null)
-                {
-                    conn.Close();
-                }
-            }
-
-            return staffList;
-        }
-        #endregion
-
-        //SHOULD USE LINQ TO GET SPECIFIC DATA
         #region
         public static List<Consultation> LoadConsultations(int id)
         {
@@ -319,7 +87,7 @@ namespace KIT206.A2.Group18.HRIS
 
             return consultations;
         }
-        #endregion
+        #endregion 
         #region
         public static List<Class> LoadClasses(int id)
         {
@@ -375,6 +143,89 @@ namespace KIT206.A2.Group18.HRIS
         #endregion
 
         //STAFF OPERATIONS
+        #region Load All Staff from HRIS database
+        //Retrieve all staffs from database
+        public static List<Staff> LoadAllStaffs()
+        {
+            List<Staff> staffList = new List<Staff>();
+            MySqlDataReader rdr = null;
+            conn = GetConnection();
+            try
+            {
+                conn.Open();
+                MySqlCommand cmd = new MySqlCommand("select id, given_name, family_name, title, campus, phone, room, email, photo, category from staff", conn);
+                rdr = cmd.ExecuteReader();
+                while (rdr.Read())
+                {
+                    Staff result = new Staff();
+                    result.ID = rdr.GetInt32(0);
+                    result.GivenName = rdr.GetString(1);
+                    result.FamilyName = rdr.GetString(2);
+
+                    if (Convert.IsDBNull(rdr[3]) || rdr.GetString(3) == "")
+                    {
+                        result.Title = "Unknown";
+                    }
+                    else { result.Title = rdr.GetString(3); }
+
+                    if (Convert.IsDBNull(rdr[4]) || rdr.GetString(4) == "")
+                    {
+                        result.campus = Campus.Unknown;
+                    }
+                    else { result.campus = ParseEnum<Campus>(rdr.GetString(4)); }
+
+                    if (Convert.IsDBNull(rdr[5]) || rdr.GetString(5) == "")
+                    {
+                        result.Phone = "No contact added";
+                    }
+                    else { result.Phone = rdr.GetString(5); }
+
+                    if (Convert.IsDBNull(rdr[6]) || rdr.GetString(6) == "")
+                    {
+                        result.Room = "Unknown";
+                    }
+                    else { result.Room = rdr.GetString(6); }
+
+                    if (Convert.IsDBNull(rdr[7]) || rdr.GetString(7) == "")
+                    {
+                        result.Email = "No email added";
+                    }
+                    else { result.Email = rdr.GetString(7); }
+
+                    if (!Convert.IsDBNull(rdr[8]))
+                    {
+                        result.Photo = (byte[])rdr[8];
+                    }
+
+                    if (Convert.IsDBNull(rdr[9]) || rdr.GetString(9) == "")
+                    {
+                        result.category = Category.uncategorised;
+                    }
+                    else { result.category = ParseEnum<Category>(rdr.GetString(9)); }
+
+                    staffList.Add(result);
+                }
+            }
+            catch (MySqlException e)
+            {
+                ReportError("loading all staff", e);
+            }
+            finally
+            {
+                if (rdr != null)
+                {
+                    rdr.Close();
+                }
+                if (conn != null)
+                {
+                    conn.Close();
+                }
+            }
+
+            return staffList;
+        }
+        #endregion
+
         #region Add/Update A Staff Member's information
         public static void UpdateStaffInfo(int StaffID, string Title, string Category, string Phone, string Room, string Email, string Campus, byte[] Photo)
         {
@@ -400,7 +251,7 @@ namespace KIT206.A2.Group18.HRIS
             }
             catch (MySqlException e)
             {
-                ReportError("deleting consultation selected", e);
+                ReportError("update staff information", e);
             }
             finally
             {
@@ -424,7 +275,213 @@ namespace KIT206.A2.Group18.HRIS
         }
         #endregion
 
+        #region Get A Staff Member By ID
+        public static Staff GetStaffByID(int id)
+        {
+            MySqlConnection conn = GetConnection();
+            MySqlDataReader rdr = null;
+            Staff result = new Staff();
+
+            try
+            {
+                conn.Open();
+                MySqlCommand cmd = new MySqlCommand("select id, given_name, family_name, title, campus, phone, room, email, photo, category from staff where id=@id", conn);
+                cmd.Parameters.AddWithValue("@id", id);
+                rdr = cmd.ExecuteReader();
+                while(rdr.Read())
+                {
+                    result.ID = rdr.GetInt32(0);
+                    result.GivenName = rdr.GetString(1);
+                    result.FamilyName = rdr.GetString(2);
+
+                    if (Convert.IsDBNull(rdr[3]) || rdr.GetString(3) == "")
+                    {
+                        result.Title = "Unknown";
+                    }
+                    else { result.Title = rdr.GetString(3); }
+
+                    if (Convert.IsDBNull(rdr[4]) || rdr.GetString(4) == "")
+                    {
+                        result.campus = Campus.Unknown;
+                    }
+                    else { result.campus = ParseEnum<Campus>(rdr.GetString(4)); }
+
+                    if (Convert.IsDBNull(rdr[5]) || rdr.GetString(5) == "")
+                    {
+                        result.Phone = "No contact added";
+                    }
+                    else { result.Phone = rdr.GetString(5); }
+
+                    if (Convert.IsDBNull(rdr[6]) || rdr.GetString(6) == "")
+                    {
+                        result.Room = "Unknown";
+                    }
+                    else { result.Room = rdr.GetString(6); }
+
+                    if (Convert.IsDBNull(rdr[7]) || rdr.GetString(7) == "")
+                    {
+                        result.Email = "No email added";
+                    }
+                    else { result.Email = rdr.GetString(7); }
+
+                    if (!Convert.IsDBNull(rdr[8]))
+                    {
+                        result.Photo = (byte[])rdr[8];
+                    }
+
+                    if (Convert.IsDBNull(rdr[9]) || rdr.GetString(9) == "")
+                    {
+                        result.category = Category.uncategorised;
+                    }
+                    else { result.category = ParseEnum<Category>(rdr.GetString(9)); }
+                }
+            }
+            catch (MySqlException e)
+            {
+                ReportError("loading staff", e);
+            }
+            finally
+            {
+                if (rdr != null)
+                {
+                    rdr.Close();
+                }
+                if (conn != null)
+                {
+                    conn.Close();
+                }
+            }
+
+            return result;
+        }
+        #endregion
+
+        #region Load All Staff With Name And ID
+        public static List<Staff> LoadAllStaffWithIDNAME()
+        {
+            List<Staff> staffList = new List<Staff>();
+
+
+            MySqlDataReader rdr = null;
+            MySqlConnection conn = GetConnection();
+            try
+            {
+                conn.Open();
+
+                MySqlCommand cmd = new MySqlCommand("SELECT id, title, given_name, family_name FROM staff order by id ASC", conn);
+
+                rdr = cmd.ExecuteReader();
+
+                while (rdr.Read())
+                {
+                    staffList.Add(new Staff { ID = rdr.GetInt32(0), Title = rdr.GetString(1), GivenName = rdr.GetString(2), FamilyName = rdr.GetString(3) });
+                }
+            }
+            catch (MySqlException e)
+            {
+                ReportError("loading id", e);
+            }
+            finally
+            {
+                if (rdr != null)
+                {
+                    rdr.Close();
+                }
+                if (conn != null)
+                {
+                    conn.Close();
+                }
+            }
+            return staffList;
+        }
+        #endregion
+
         //UNIT OPERATIONS
+        #region Load All Units
+        //Retrieve all units from database
+        public static List<Unit> LoadAllUnits()
+        {
+            List<Unit> unitList = new List<Unit>();
+
+            MySqlDataReader rdr = null;
+            conn = GetConnection();
+
+            try
+            {
+                conn.Open();
+                MySqlCommand cmd = new MySqlCommand("select code, title, coordinator from unit", conn);
+                rdr = cmd.ExecuteReader();
+                while (rdr.Read())
+                {
+                    unitList.Add(new Unit
+                    {
+                        UnitCode = rdr.GetString(0),
+                        UnitName = rdr.GetString(1),
+                        Coordinator = new Staff { ID = rdr.GetInt32(2) },
+                    });
+                }
+            }
+            catch (MySqlException e)
+            {
+                ReportError("loading units", e);
+            }
+            finally
+            {
+                if (rdr != null)
+                {
+                    rdr.Close();
+                }
+                if (conn != null)
+                {
+                    conn.Close();
+                }
+            }
+
+            return unitList;
+        }
+        #endregion
+
+        #region Get A Unit By Unit Code
+        public static Unit GetUnitByUnitCode(string code)
+        {
+            MySqlConnection conn = GetConnection();
+
+            MySqlDataReader rdr = null;
+
+            Unit unit = new Unit();
+            try
+            {
+                conn.Open();
+                MySqlCommand cmd = new MySqlCommand("select code, title, coordinator from unit where code=@code", conn);
+                cmd.Parameters.AddWithValue("@code", code);
+                rdr = cmd.ExecuteReader();
+
+                while (rdr.Read())
+                {
+                    unit.UnitCode = code;
+                    unit.UnitName = rdr.GetString(1);
+                    unit.Coordinator = new Staff { ID = rdr.GetInt32(2) };
+                }
+            }
+            catch (MySqlException e)
+            {
+                ReportError("loading unit", e);
+            }
+            finally
+            {
+                if (rdr != null)
+                {
+                    rdr.Close();
+                }
+                if (conn != null)
+                {
+                    conn.Close();
+                }
+            }
+            return unit;
+        }
+        #endregion
+
         #region Update Unit Coordinator
         public static void UpdateUnitCoordinator(string UnitCode, int StaffID)
         {
@@ -440,7 +497,7 @@ namespace KIT206.A2.Group18.HRIS
             }
             catch (MySqlException e)
             {
-                ReportError("deleting consultation selected", e);
+                ReportError("Updating unit coordinator", e);
             }
             finally
             {
@@ -462,7 +519,7 @@ namespace KIT206.A2.Group18.HRIS
             {
                 conn.Open();
                 MySqlCommand cmd = new MySqlCommand("insert into unit(code, title, coordinator) values(@code, @title, @coordinator)", conn);
-                cmd.Parameters.AddWithValue("@code", UnitCode);
+                cmd.Parameters.AddWithValue("@code", UnitCode.ToUpper());
                 cmd.Parameters.AddWithValue("@title", UnitName);
                 cmd.Parameters.AddWithValue("@coordinator", StaffID);
 
@@ -470,7 +527,7 @@ namespace KIT206.A2.Group18.HRIS
             }
             catch (MySqlException e)
             {
-                ReportError("deleting consultation selected", e);
+                ReportError("Adding unit", e);
             }
             finally
             {
@@ -484,8 +541,57 @@ namespace KIT206.A2.Group18.HRIS
         #endregion
 
         //CLASS OPERATION
+        #region Load All Classes
+        public static List<Class> LoadAllClasses()
+        {
+            List<Class> classList = new List<Class>();
+
+            MySqlDataReader rdr = null;
+            conn = GetConnection();
+
+            try
+            {
+                conn.Open();
+                MySqlCommand cmd = new MySqlCommand("select unit_code, campus, day, type, start, end, room, staff from class", conn);
+                rdr = cmd.ExecuteReader();
+                while (rdr.Read())
+                {
+                    Class result = new Class();
+
+                    result.unit = new Unit { UnitCode = rdr.GetString(0) };
+                    result.campus = ParseEnum<Campus>(rdr.GetString(1));
+                    result.day = ParseEnum<Day>(rdr.GetString(2));
+                    result.type = ParseEnum<Type>(rdr.GetString(3));
+                    result.StartTime = TimeOnly.ParseExact(rdr.GetString(4), "HH:mm:ss");
+                    result.EndTime = TimeOnly.ParseExact(rdr.GetString(5), "HH:mm:ss");
+                    result.Room = rdr.GetString(6);
+                    result.staff = new Staff { ID = rdr.GetInt32(7) };
+
+                    classList.Add(result);
+                }
+            }
+            catch (MySqlException e)
+            {
+                ReportError("loading classes", e);
+            }
+            finally
+            {
+                if (rdr != null)
+                {
+                    rdr.Close();
+                }
+                if (conn != null)
+                {
+                    conn.Close();
+                }
+            }
+
+            return classList;
+        }
+        #endregion
+
         #region Edit Details Of A Class
-        public static void EditClassDetail(string code, string day,string campus, string start, string new_day, string new_start, string end, string type, string room, int staff)
+        public static void EditClassDetail(string code, string day, string campus, string start, string new_day, string new_start, string end, string type, string room, int staff)
         {
 
             MySqlConnection conn = GetConnection();
@@ -495,42 +601,20 @@ namespace KIT206.A2.Group18.HRIS
                 conn.Open();
 
                 MySqlCommand cmd = new MySqlCommand("UPDATE class" +
-                                                    " SET day=@new_day, room=@new_room, end=@new_end, start=@new_start WHERE unit_code=@code AND day=@day AND campus=@campus AND start=@start", conn);
+                                                    " SET day=@new_day, room=@new_room, end=@new_end, start=@new_start, type=@new_type, staff=@id " +
+                                                    " WHERE unit_code=@code AND day=@day AND campus=@campus AND start=@start", conn);
                 cmd.Parameters.AddWithValue("@new_day", new_day);
                 cmd.Parameters.AddWithValue("@new_start", new_start);
                 cmd.Parameters.AddWithValue("@new_end", end);
                 cmd.Parameters.AddWithValue("@new_room", room);
+                cmd.Parameters.AddWithValue("@new_type", type);
+                cmd.Parameters.AddWithValue("@id", staff);
 
                 cmd.Parameters.AddWithValue("@code", code);
                 cmd.Parameters.AddWithValue("@day", day);
                 cmd.Parameters.AddWithValue("@campus", campus);
                 cmd.Parameters.AddWithValue("@start", start);
                 cmd.ExecuteNonQuery();
-
-                if (staff != -1)
-                {
-                    MySqlCommand staffCmd = new MySqlCommand("update class set staff=@id where unit_code=@code and day=@day and campus=@campus and start=@start", conn);
-                    staffCmd.Parameters.AddWithValue("@id", staff);
-                    
-                    staffCmd.Parameters.AddWithValue("@code", code);
-                    staffCmd.Parameters.AddWithValue("@day", day);
-                    staffCmd.Parameters.AddWithValue("@campus", campus);
-                    staffCmd.Parameters.AddWithValue("@start", start);
-                    staffCmd.ExecuteNonQuery();
-                }
-
-                if(type != "Select..")
-                {
-                    MySqlCommand typeCmd = new MySqlCommand("update class set type=@type where unit_code=@code and day=@day and campus=@campus and start=@start", conn);
-                    typeCmd.Parameters.AddWithValue("@type", type);
-
-                    typeCmd.Parameters.AddWithValue("@code", code);
-                    typeCmd.Parameters.AddWithValue("@day", day);
-                    typeCmd.Parameters.AddWithValue("@campus", campus);
-                    typeCmd.Parameters.AddWithValue("@start", start);
-                    typeCmd.ExecuteNonQuery();
-                }
-                
             }
             catch (MySqlException e)
             {
@@ -543,10 +627,190 @@ namespace KIT206.A2.Group18.HRIS
                     conn.Close();
                 }
             }
+            MessageBox.Show("Update Class Details successfully");
         }
         #endregion Edit details of a class
 
+        #region Add A New Class
+        public static void AddClass(string code, string campus, string day, string start, string end, string type, string room, int staff)
+        {
+            MySqlConnection conn = GetConnection();
+
+            try
+            {
+                conn.Open();
+
+                MySqlCommand cmd = new MySqlCommand("INSERT INTO class (unit_code, campus, day, start, end, type, room, staff) " +
+                    " VALUES (@code, @campus, @day, @start, @end, @type, @room, @staff)", conn);
+
+                cmd.Parameters.AddWithValue("@code", code);
+                cmd.Parameters.AddWithValue("@campus", campus);
+                cmd.Parameters.AddWithValue("@day", day);
+                cmd.Parameters.AddWithValue("@start", start);
+                cmd.Parameters.AddWithValue("@end", end);
+                cmd.Parameters.AddWithValue("@type", type);
+                cmd.Parameters.AddWithValue("@room", room);
+                cmd.Parameters.AddWithValue("@staff", staff);
+
+                cmd.ExecuteNonQuery();
+            }
+            catch (MySqlException e)
+            {
+                ReportError("Adding Class selected", e);
+            }
+            finally
+            {
+                if (conn != null)
+                {
+                    conn.Close();
+                }
+            }
+            MessageBox.Show("A class added successfully");
+        }
+        #endregion
+
+        #region Check If Room Is Available At A Specific Time Or Not
+        //Check if a room is available or not
+        public static Boolean checkValidateClass(string campus, string day, string start, string room)
+        {
+            List<string> campusList = new List<string>();
+            List<string> dayList = new List<string>();
+            List<string> startList = new List<string>();
+            Boolean check = true;
+
+            MySqlDataReader rdr = null;
+            MySqlConnection conn = GetConnection();
+
+            try
+            {
+                conn.Open();
+                MySqlCommand cmd = new MySqlCommand("SELECT campus, day, start " +
+                                                    "FROM class " +
+                                                    "WHERE room=@room ", conn);
+
+                cmd.Parameters.AddWithValue("@room", room);
+
+                rdr = cmd.ExecuteReader();
+
+
+
+                while (rdr.Read())
+                {
+                    campusList.Add(rdr.GetString(0));
+                    dayList.Add(rdr.GetString(1));
+                    startList.Add(rdr.GetString(2));
+                }
+            }
+            catch (MySqlException e)
+            {
+                ReportError("validating...", e);
+            }
+            finally
+            {
+                if (rdr != null)
+                {
+                    rdr.Close();
+                }
+                if (conn != null)
+                {
+                    conn.Close();
+                }
+            }
+
+            int count = 0;
+
+            foreach (string s in campusList)
+            {
+                if ((s == campus) && (dayList[count] == day) && (startList[count] == start))
+                {
+                    check = false;
+                }
+                count++;
+            }
+            return check;
+        }
+        #endregion
+
         //CONSULTATION OPERATIONS
+        #region Load All Consultations
+        //Retrieve all consultations from database
+        public static List<Consultation> LoadAllConsultations()
+        {
+            List<Consultation> consultationList = new List<Consultation>();
+
+            MySqlDataReader rdr = null;
+            conn = GetConnection();
+
+            try
+            {
+                conn.Open();
+                MySqlCommand cmd = new MySqlCommand("select staff_id, day, start, end from consultation", conn);
+                rdr = cmd.ExecuteReader();
+                while (rdr.Read())
+                {
+                    consultationList.Add(new Consultation
+                    {
+                        staff = new Staff { ID = rdr.GetInt32(0) },
+                        day = ParseEnum<Day>(rdr.GetString(1)),
+                        StartTime = TimeOnly.ParseExact(rdr.GetString(2), "HH:mm:ss"),
+                        EndTime = TimeOnly.ParseExact(rdr.GetString(3), "HH:mm:ss"),
+                    });
+                }
+            }
+            catch (MySqlException e)
+            {
+                ReportError("loading consultations", e);
+            }
+            finally
+            {
+                if (rdr != null)
+                {
+                    rdr.Close();
+                }
+                if (conn != null)
+                {
+                    conn.Close();
+                }
+            }
+
+            return consultationList;
+        }
+        #endregion
+
+        #region Add A New Consultation
+        public static void AddConsultation(string day, string start, string end, int staff)
+        {
+            MySqlConnection conn = GetConnection();
+
+            try
+            {
+                conn.Open();
+
+                MySqlCommand cmd = new MySqlCommand("INSERT INTO consultation (staff_id, day, start, end) " +
+                    " VALUES (@staff, @day, @start, @end)", conn);
+
+                cmd.Parameters.AddWithValue("@day", day);
+                cmd.Parameters.AddWithValue("@start", start);
+                cmd.Parameters.AddWithValue("@end", end);
+                cmd.Parameters.AddWithValue("@staff", staff);
+
+                cmd.ExecuteNonQuery();
+            }
+            catch (MySqlException e)
+            {
+                ReportError("Adding a consultation", e);
+            }
+            finally
+            {
+                if (conn != null)
+                {
+                    conn.Close();
+                }
+            }
+            MessageBox.Show("A new consultation added");
+        }
+        #endregion
+
         #region Delete Consultation
         public static void DeleteConsultation(int id, string day, string Start, string End)
         {
@@ -581,7 +845,66 @@ namespace KIT206.A2.Group18.HRIS
             }
             MessageBox.Show("Consultation cancelled");
         }
-        #endregion 
+        #endregion
+
+        #region Check If A Consultation Time Is Valid Or Not
+        public static Boolean checkValidateConsul(string day, string start, int staff)
+        {
+            List<string> dayList = new List<string>();
+            List<string> startList = new List<string>();
+            Boolean check = true;
+
+            MySqlDataReader rdr = null;
+            MySqlConnection conn = GetConnection();
+
+            try
+            {
+                conn.Open();
+                MySqlCommand cmd = new MySqlCommand("SELECT day, start " +
+                                                    "FROM consultation " +
+                                                    "WHERE staff_id=@staff ", conn);
+
+                cmd.Parameters.AddWithValue("@staff", staff);
+
+                rdr = cmd.ExecuteReader();
+
+
+                while (rdr.Read())
+                {
+                    dayList.Add(rdr.GetString(0));
+                    startList.Add(rdr.GetString(1));
+                }
+            }
+            catch (MySqlException e)
+            {
+                ReportError("validating...", e);
+            }
+            finally
+            {
+                if (rdr != null)
+                {
+                    rdr.Close();
+                }
+                if (conn != null)
+                {
+                    conn.Close();
+                }
+            }
+
+            int count = 0;
+
+            foreach (string s in dayList)
+            {
+                if ((s == day) && (startList[count] == start))
+                {
+                    check = false;
+                }
+                count++;
+            }
+
+            return check;
+        }
+        #endregion
 
         private static void ReportError(string msg, Exception e)
         {
