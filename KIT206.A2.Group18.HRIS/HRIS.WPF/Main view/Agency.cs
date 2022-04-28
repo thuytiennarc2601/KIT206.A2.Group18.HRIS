@@ -39,7 +39,6 @@ namespace KIT206.A2.Group18.HRIS
             return (T)Enum.Parse(typeof(T), value);
         }
 
-        //SHOULD USE LINQ TO GET SPECIFIC DATA
         #region
         public static List<Consultation> LoadConsultations(int id)
         {
@@ -88,7 +87,7 @@ namespace KIT206.A2.Group18.HRIS
 
             return consultations;
         }
-        #endregion
+        #endregion 
         #region
         public static List<Class> LoadClasses(int id)
         {
@@ -149,7 +148,6 @@ namespace KIT206.A2.Group18.HRIS
         public static List<Staff> LoadAllStaffs()
         {
             List<Staff> staffList = new List<Staff>();
-
             MySqlDataReader rdr = null;
             conn = GetConnection();
             try
@@ -210,7 +208,7 @@ namespace KIT206.A2.Group18.HRIS
             }
             catch (MySqlException e)
             {
-                ReportError("loading staffs", e);
+                ReportError("loading all staff", e);
             }
             finally
             {
@@ -253,7 +251,7 @@ namespace KIT206.A2.Group18.HRIS
             }
             catch (MySqlException e)
             {
-                ReportError("deleting consultation selected", e);
+                ReportError("update staff information", e);
             }
             finally
             {
@@ -274,6 +272,87 @@ namespace KIT206.A2.Group18.HRIS
                 cmd.Parameters.AddWithValue("@id", StaffID);
                 cmd.ExecuteNonQuery();
             }
+        }
+        #endregion
+
+        #region Get A Staff Member By ID
+        public static Staff GetStaffByID(int id)
+        {
+            MySqlConnection conn = GetConnection();
+            MySqlDataReader rdr = null;
+            Staff result = new Staff();
+
+            try
+            {
+                conn.Open();
+                MySqlCommand cmd = new MySqlCommand("select id, given_name, family_name, title, campus, phone, room, email, photo, category from staff where id=@id", conn);
+                cmd.Parameters.AddWithValue("@id", id);
+                rdr = cmd.ExecuteReader();
+                while(rdr.Read())
+                {
+                    result.ID = rdr.GetInt32(0);
+                    result.GivenName = rdr.GetString(1);
+                    result.FamilyName = rdr.GetString(2);
+
+                    if (Convert.IsDBNull(rdr[3]) || rdr.GetString(3) == "")
+                    {
+                        result.Title = "Unknown";
+                    }
+                    else { result.Title = rdr.GetString(3); }
+
+                    if (Convert.IsDBNull(rdr[4]) || rdr.GetString(4) == "")
+                    {
+                        result.campus = Campus.Unknown;
+                    }
+                    else { result.campus = ParseEnum<Campus>(rdr.GetString(4)); }
+
+                    if (Convert.IsDBNull(rdr[5]) || rdr.GetString(5) == "")
+                    {
+                        result.Phone = "No contact added";
+                    }
+                    else { result.Phone = rdr.GetString(5); }
+
+                    if (Convert.IsDBNull(rdr[6]) || rdr.GetString(6) == "")
+                    {
+                        result.Room = "Unknown";
+                    }
+                    else { result.Room = rdr.GetString(6); }
+
+                    if (Convert.IsDBNull(rdr[7]) || rdr.GetString(7) == "")
+                    {
+                        result.Email = "No email added";
+                    }
+                    else { result.Email = rdr.GetString(7); }
+
+                    if (!Convert.IsDBNull(rdr[8]))
+                    {
+                        result.Photo = (byte[])rdr[8];
+                    }
+
+                    if (Convert.IsDBNull(rdr[9]) || rdr.GetString(9) == "")
+                    {
+                        result.category = Category.uncategorised;
+                    }
+                    else { result.category = ParseEnum<Category>(rdr.GetString(9)); }
+                }
+            }
+            catch (MySqlException e)
+            {
+                ReportError("loading staff", e);
+            }
+            finally
+            {
+                if (rdr != null)
+                {
+                    rdr.Close();
+                }
+                if (conn != null)
+                {
+                    conn.Close();
+                }
+            }
+
+            return result;
         }
         #endregion
 
@@ -322,15 +401,44 @@ namespace KIT206.A2.Group18.HRIS
         }
         #endregion
 
-        #region Load A Unit By Staff ID
-        public static Unit GetUnitByStaffID(int StaffID)
+        #region Get A Unit By Unit Code
+        public static Unit GetUnitByUnitCode(string code)
         {
             MySqlConnection conn = GetConnection();
 
+            MySqlDataReader rdr = null;
+
+            Unit unit = new Unit();
             try
             {
-                MySqlCommand cmd = new MySqlCommand("select code, title, coordinator from unit where coordinator=@id", conn);
+                conn.Open();
+                MySqlCommand cmd = new MySqlCommand("select code, title, coordinator from unit where code=@code", conn);
+                cmd.Parameters.AddWithValue("@code", code);
+                rdr = cmd.ExecuteReader();
+
+                while (rdr.Read())
+                {
+                    unit.UnitCode = code;
+                    unit.UnitName = rdr.GetString(1);
+                    unit.Coordinator = new Staff { ID = rdr.GetInt32(2) };
+                }
             }
+            catch (MySqlException e)
+            {
+                ReportError("loading unit", e);
+            }
+            finally
+            {
+                if (rdr != null)
+                {
+                    rdr.Close();
+                }
+                if (conn != null)
+                {
+                    conn.Close();
+                }
+            }
+            return unit;
         }
         #endregion
 
@@ -349,7 +457,7 @@ namespace KIT206.A2.Group18.HRIS
             }
             catch (MySqlException e)
             {
-                ReportError("deleting consultation selected", e);
+                ReportError("Updating unit coordinator", e);
             }
             finally
             {
@@ -371,7 +479,7 @@ namespace KIT206.A2.Group18.HRIS
             {
                 conn.Open();
                 MySqlCommand cmd = new MySqlCommand("insert into unit(code, title, coordinator) values(@code, @title, @coordinator)", conn);
-                cmd.Parameters.AddWithValue("@code", UnitCode);
+                cmd.Parameters.AddWithValue("@code", UnitCode.ToUpper());
                 cmd.Parameters.AddWithValue("@title", UnitName);
                 cmd.Parameters.AddWithValue("@coordinator", StaffID);
 
@@ -379,7 +487,7 @@ namespace KIT206.A2.Group18.HRIS
             }
             catch (MySqlException e)
             {
-                ReportError("deleting consultation selected", e);
+                ReportError("Adding unit", e);
             }
             finally
             {
@@ -413,22 +521,11 @@ namespace KIT206.A2.Group18.HRIS
                     result.unit = new Unit { UnitCode = rdr.GetString(0) };
                     result.campus = ParseEnum<Campus>(rdr.GetString(1));
                     result.day = ParseEnum<Day>(rdr.GetString(2));
-
-                    if (Convert.IsDBNull(rdr[3]) || rdr.GetString(3) == "")
-                    {
-                        result.type = Type.Undefined;
-                    }
-                    else { result.type = ParseEnum<Type>(rdr.GetString(3)); }
-
+                    result.type = ParseEnum<Type>(rdr.GetString(3));
                     result.StartTime = TimeOnly.ParseExact(rdr.GetString(4), "HH:mm:ss");
                     result.EndTime = TimeOnly.ParseExact(rdr.GetString(5), "HH:mm:ss");
                     result.Room = rdr.GetString(6);
-
-                    if (Convert.IsDBNull(rdr[7]))
-                    {
-                        result.staff = new Staff { ID = -1 };
-                    }
-                    else { result.staff = new Staff { ID = rdr.GetInt32(7) }; }
+                    result.staff = new Staff { ID = rdr.GetInt32(7) };
 
                     classList.Add(result);
                 }
@@ -490,6 +587,7 @@ namespace KIT206.A2.Group18.HRIS
                     conn.Close();
                 }
             }
+            MessageBox.Show("Update Class Details successfully");
         }
         #endregion Edit details of a class
 

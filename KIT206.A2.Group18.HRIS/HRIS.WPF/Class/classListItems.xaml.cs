@@ -26,16 +26,32 @@ namespace HRIS.WPF
         }
 
         #region Class Properties
+        //Class 'class' properties
         private string _unitCode;
-        private string _unitDetails;
         private int _staffID;
+        private string _day;
+        private string _campus;
+        private TimeOnly _start;
+        private TimeOnly _end;
+        private string _room;
+        private string _type;
+        
+        //Properties for classlistitem
+        private string _unitDetails;
         private string _classType;
         private string _classTime;
         private string _classLocation;
 
-        private string _day;
-        private string _campus;
-        private TimeOnly _start;
+        public string UnitCode
+        {
+            get { return _unitCode; }
+            set { _unitCode = value; }
+        }
+        public int StaffID
+        {
+            get { return _staffID; }
+            set { _staffID = value; }
+        }
 
         public string Day
         {
@@ -55,22 +71,29 @@ namespace HRIS.WPF
             set { _start = value; }
         }
 
-        public string UnitCode
+        public TimeOnly EndTime
         {
-            get { return _unitCode; }
-            set { _unitCode = value; }
+            get { return _end; }
+            set { _end = value; }
         }
 
+        public string Room
+        {
+            get { return _room; }
+            set { _room = value; }
+        }
+
+        public string thisClassType
+        {
+            get { return _type; }
+            set { _type = value; }
+        }
+
+        //Classlistitem properties
         public string UnitDetails
         {
             get { return _unitDetails; }
             set { _unitDetails = value; this.unitInfo.Content = value; }
-        }
-
-        public int StaffID
-        {
-            get { return _staffID; }
-            set { _staffID = value; }
         }
         
         public string ClassType
@@ -94,7 +117,7 @@ namespace HRIS.WPF
 
         private void editClassBtn_Click(object sender, RoutedEventArgs e)
         {
-            EditClassDetails view = Controller.LoadClassDetails(StaffID, UnitCode, Day, Campus, StartTime);
+            EditClassDetails view = Controller.LoadClassDetails(StaffID, UnitCode, Day, Campus, StartTime, EndTime, Room, thisClassType);
             view.UnitCode = UnitCode;
             view.Day = Day;
             view.Campus = Campus;

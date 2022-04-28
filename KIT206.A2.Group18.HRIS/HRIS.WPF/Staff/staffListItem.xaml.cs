@@ -21,13 +21,11 @@ namespace HRIS.WPF
     /// </summary>
     public partial class staffListItem : UserControl
     {
-        private const string STAFF_LIST_KEY = "staffList";
         private Controller controller;
 
         public staffListItem()
         {
             InitializeComponent();
-            //controller = (Controller)(Application.Current.FindResource(STAFF_LIST_KEY) as ObjectDataProvider).ObjectInstance;
         }
 
         #region Staff Item Properties

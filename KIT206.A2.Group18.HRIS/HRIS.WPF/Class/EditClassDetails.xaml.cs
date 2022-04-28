@@ -114,6 +114,7 @@ namespace HRIS.WPF
             string campus = this.Campus;
             string day = this.Day;
             string start = this.ClassStart.ToString("HH:mm:ss");
+
             string startHour = this.StartHourTB.Text;
             string startMinute = this.StartMinute.Text;
             string endHour = this.EndHourTB.Text;

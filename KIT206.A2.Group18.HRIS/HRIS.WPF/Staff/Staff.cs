@@ -78,27 +78,5 @@ namespace KIT206.A2.Group18.HRIS
             return result;
         }
         #endregion
-
-        //Return a staff by its ID
-        #region Return A Staff By Its ID
-        public static Staff GetStaffByID(int StaffID)
-        {
-            List<Staff> staffList = Agency.LoadAllStaffs();
-            Staff staff = new Staff();
-            var getStaff = from Staff s in staffList
-                           where s.ID == StaffID
-                           select s;
-            List<Staff> resultStaff = new List<Staff>(getStaff);
-            if(resultStaff.Count > 0)
-            {
-                staff = resultStaff[0];
-            } else { staff.ID = -1; staff.GivenName = "Unknown" ; }
-
-            return staff;
-        }
-        #endregion
-
-        
-
     }
 }

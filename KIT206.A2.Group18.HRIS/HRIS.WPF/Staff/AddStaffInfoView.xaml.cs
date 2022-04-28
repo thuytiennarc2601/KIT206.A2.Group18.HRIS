@@ -36,7 +36,10 @@ namespace HRIS.WPF
         private void UploadButton_Click(object sender, RoutedEventArgs e)
         {
             fileImageName = ImageDealer.GetImageFileName();
-            this.StaffPhoto.Source = new BitmapImage(new Uri(fileImageName, UriKind.Absolute));
+            if (fileImageName != "")
+            {
+                this.StaffPhoto.Source = new BitmapImage(new Uri(fileImageName, UriKind.Absolute));
+            }
         }
 
         private void SaveButton_Click(object sender, RoutedEventArgs e)
