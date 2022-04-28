@@ -637,7 +637,7 @@ namespace KIT206.A2.Group18.HRIS
         }
         #endregion
 
-        #region Add/Update Consultation
+        #region Update Consultation
         public static void UpdateConsultation(int id, string day, string Start, string End)
         {
 
@@ -647,7 +647,8 @@ namespace KIT206.A2.Group18.HRIS
             {
                 conn.Open();
 
-                MySqlCommand cmd = new MySqlCommand("UPDATE consultation set staff_id =@id AND day=@day AND start=@start AND end=@end", conn);
+                MySqlCommand cmd = new MySqlCommand("INSERT INTO consultation (staff_id, day, start, end) " +
+                    " VALUES (@staff, @day, @start, @end)", conn);
 
                 cmd.Parameters.AddWithValue("@id", id);
                 cmd.Parameters.AddWithValue("@day", day);

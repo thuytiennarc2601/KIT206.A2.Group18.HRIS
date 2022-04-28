@@ -47,16 +47,16 @@ namespace HRIS.WPF
 
 
         //Properties for functionality
-        public TimeOnly Start1
+        public string Start
         {
-            get { return _start1; }
-            set { _start1 = value; }
+            get { return _start; }
+            set { _start = value; }
 
         }
-        public TimeOnly End1
+        public string End
         {
-            get { return _end1; }
-            set { _end1 = value; }
+            get { return _end; }
+            set { _end = value; }
         }
 
         public string ConsultationDay
@@ -67,10 +67,11 @@ namespace HRIS.WPF
         #endregion
         private void saveBtn_Click(object sender, RoutedEventArgs e)
         {
-            //Agency.UpdateConsultation(StaffID, ConsultationDay, Start, End);
-            EditConsultationView view = Controller.ShowStaffDetails(StaffID, ConsultationDay, Start1, End1);
+            Agency.UpdateConsultation(StaffID, ConsultationDay, Start, End);
+            //EditConsultationView view = Controller.ShowStaffDetails(StaffID, ConsultationDay, Start1, End1);
             //view.Code = StaffName;
-            view.ShowDialog();
+            //view.ShowDialog();
+            this.Close();
         }
 
         private void cancelBtn_Click(object sender, RoutedEventArgs e)

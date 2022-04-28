@@ -12,13 +12,15 @@
 
         <TextBox x:Name="StaffDetailsTB" HorizontalAlignment="Left" Height="26" Margin="33,75,0,0" TextWrapping="Wrap" Text="StaffDetailsTB" VerticalAlignment="Top" Width="243"/>
         <Label x:Name="DayLB" Content="Day:" HorizontalAlignment="Left" Margin="345,31,0,0" VerticalAlignment="Top" FontFamily="Century Gothic" FontSize="18" FontWeight="Bold"/>
-        <TextBox x:Name="StartHourTB" HorizontalAlignment="Left" Height="60" Margin="336,283,0,0" TextWrapping="Wrap" Text="End Minute" VerticalAlignment="Top" Width="230"/>
-        <TextBox x:Name="StartMinuteTB" HorizontalAlignment="Left" Height="60" TextWrapping="Wrap" Text="Start Minut" VerticalAlignment="Top" Width="230" Margin="336,179,0,0"/>
-        <TextBox x:Name="EndHourTB" HorizontalAlignment="Left" Height="60" Margin="33,283,0,0" TextWrapping="Wrap" Text="End Hour" VerticalAlignment="Top" Width="243"/>
-        <TextBox x:Name="EndMinuteTB" HorizontalAlignment="Left" Height="60" Margin="33,179,0,0" TextWrapping="Wrap" Text="Start Hour" VerticalAlignment="Top" Width="243"/>
+        <TextBox x:Name="StartHourTB" HorizontalAlignment="Left" Height="60" Margin="186,253,0,0" TextWrapping="Wrap" Text="End Minute" VerticalAlignment="Top" Width="90"/>
+        <TextBox x:Name="StartMinuteTB" HorizontalAlignment="Left" Height="60" TextWrapping="Wrap" Text="Start Minut" VerticalAlignment="Center" Width="90" Margin="186,0,0,0"/>
+        <TextBox x:Name="EndHourTB" HorizontalAlignment="Left" Height="60" Margin="33,253,0,0" TextWrapping="Wrap" Text="End Hour" VerticalAlignment="Top" Width="86"/>
+        <TextBox x:Name="EndMinuteTB" HorizontalAlignment="Left" Height="60" Margin="33,160,0,0" TextWrapping="Wrap" Text="Start Hour" VerticalAlignment="Top" Width="86"/>
         <ComboBox x:Name="DayList" Foreground="DarkGray" HorizontalAlignment="Left" Margin="336,75,0,0" VerticalAlignment="Top" Width="230" Height="26" FontFamily="Calibri"/>
         <Label x:Name="Staffdetail" Content="Staff:" HorizontalAlignment="Left" Margin="33,31,0,0" VerticalAlignment="Top" FontFamily="Century Gothic" FontSize="18" FontWeight="Bold" RenderTransformOrigin="0.105,-0.663"/>
-        <Label x:Name="Time" Content="Time:" HorizontalAlignment="Left" Margin="33,142,0,0" VerticalAlignment="Top" FontFamily="Century Gothic" FontSize="18" FontWeight="Bold" RenderTransformOrigin="0.105,-0.663"/>
-        
+        <Label x:Name="Time" Content="Time:" HorizontalAlignment="Left" Margin="33,128,0,0" VerticalAlignment="Top" FontFamily="Century Gothic" FontSize="18" FontWeight="Bold" RenderTransformOrigin="0.105,-0.663"/>
+        <Button x:Name="UpdateBT" Content="Update" HorizontalAlignment="Left" Height="26" Margin="389,0,0,0" VerticalAlignment="Center" Width="85" Click="saveBtn_Click"/>
+        <Button x:Name="CloseBT" Content="Close" HorizontalAlignment="Left" Height="30" Margin="389,253,0,0" VerticalAlignment="Top" Width="85" Click="cancelBtn_Click"/>
+
     </Grid>
 </Window>
