@@ -81,7 +81,13 @@ namespace HRIS.WPF
 
         private void editConsultation_Click(object sender, RoutedEventArgs e)
         {
-
+            EditConsultationView view = new EditConsultationView();
+            view.StaffID = StaffID;
+            view.StaffIDDisplay.Content = StaffID;
+            view.Day = ConsultationDay;
+            view.ConsultationStart = Start;
+            view.ConsultationEnd = End;
+            view.ShowDialog();
         }
     }
 }

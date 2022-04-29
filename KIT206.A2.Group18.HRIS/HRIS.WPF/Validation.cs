@@ -165,6 +165,27 @@ namespace HRIS.WPF
         }
         #endregion
 
+        #region Validate Edit Consultation
+        public static bool EditConsultationValidation(int staffId, string day, string start, string end)
+        {
+            bool valid = true;
+
+            if (day == "Select..")
+            {
+                valid = false;
+                MessageBox.Show("Day required");
+            }
+            else if (!Consultation.CheckConsulation(day, start, end, staffId))
+            {
+                valid = false;
+            }
+            else if (!Class.CheckClassClash(day, start, end, staffId))
+            {
+                valid = false;
+            }
+            return valid;
+        }
+        #endregion
         #region Update Photo Validation
         public static bool PhotoValidation(byte[] photo)
         {
