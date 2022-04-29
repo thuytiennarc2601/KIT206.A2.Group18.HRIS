@@ -19,8 +19,7 @@ namespace HRIS.WPF
     /// Interaction logic for AddStaffInfoView.xaml
     /// </summary>
     public partial class AddStaffInfoView : Window
-    {
-        private byte[] Photo;
+    { 
 
         public AddStaffInfoView()
         {
@@ -40,7 +39,7 @@ namespace HRIS.WPF
             if (fileImageName != "")
             {
                 this.StaffPhoto.Source = new BitmapImage(new Uri(fileImageName, UriKind.Absolute));
-                Photo = ImageDealer.BytesFromImage(fileImageName);
+                
             }
         }
 
@@ -52,6 +51,7 @@ namespace HRIS.WPF
             string Room = this.RoomTB.Text;
             string Email = this.EmailTB.Text;
             string Campus = this.CampusCB.SelectedItem.ToString();
+            byte[] Photo = ImageDealer.BytesFromImage(fileImageName);
 
             if (Validation.PhotoValidation(Photo))
             {

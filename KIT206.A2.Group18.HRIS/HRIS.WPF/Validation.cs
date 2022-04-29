@@ -169,7 +169,7 @@ namespace HRIS.WPF
         public static bool PhotoValidation(byte[] photo)
         {
             bool valid = true;
-            if(photo.Length < ImageDealer.MINIMUM_IMAGE_SIZE)
+            if(photo.Length > 0 == photo.Length < ImageDealer.MINIMUM_IMAGE_SIZE)
             {
                 valid = false;
                 MessageBox.Show("The image size is too small");

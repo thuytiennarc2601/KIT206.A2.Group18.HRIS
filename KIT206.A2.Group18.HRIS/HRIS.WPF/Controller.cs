@@ -32,6 +32,16 @@ namespace HRIS.WPF
                 {
                     staffListItem item = new staffListItem();
                     item.ID = staff[i].ID;
+                    item.GivenName = staff[i].GivenName;
+                    item.FamilyName = staff[i].FamilyName;
+                    item.Email = staff[i].Email;
+                    item.Phone = staff[i].Phone;
+                    item.sCampus = staff[i].campus.ToString();
+                    item.sCategory = staff[i].category.ToString();
+                    item.Photo = staff[i].Photo;
+                    item.Room = staff[i].Room;
+                    item.Title = staff[i].Title;
+
                     item.StaffInfo = staff[i].ToString();
                     item.StaffCategory = staff[i].category.ToString().ToUpper();
                     item.StaffEmail = "Email: " + staff[i].Email;
@@ -172,28 +182,27 @@ namespace HRIS.WPF
         //STAFF MANAGEMENT: Show Staff Details, Add Staff Info
             //Show staff member's details (their information, their units and their consultations)
         #region Show A Staff Member Details
-        public static StaffDetailView ShowStaffDetails(int StaffID)
+        public static StaffDetailView ShowStaffDetails(int StaffID, string title, string gname, string fname, string email, string phone, string campus, string category, string room, byte[] photo)
         {
-            Staff shownStaff = Agency.GetStaffByID(StaffID);
             List<Unit> thisStaffUnits = Unit.GetUnitsByStaffID(StaffID);
             List<Consultation> thisStaffConsultations = Consultation.GetConsultationByStaffID(StaffID);
             StaffDetailView detailView = new StaffDetailView();
 
-            detailView.Title = shownStaff.ToString() + " Information";
+            detailView.Title = StaffID.ToString() + " | " + title + ". " + gname + " " + fname + "Information";
 
             //set staff data
-            if (shownStaff.Photo == null || shownStaff.Photo.Length < ImageDealer.MINIMUM_IMAGE_SIZE)
+            if (photo == null || photo.Length < ImageDealer.MINIMUM_IMAGE_SIZE)
             {
                 detailView.StaffPhoto.Source = new BitmapImage(new System.Uri("https://www.shareicon.net/data/128x128/2016/07/10/793851_people_512x512.png"));
             }
-            else if(shownStaff.Photo.Length >= ImageDealer.MINIMUM_IMAGE_SIZE)
+            else if(photo.Length >= ImageDealer.MINIMUM_IMAGE_SIZE)
             {
-                detailView.StaffPhoto.Source = ImageDealer.ByteToImage(shownStaff.Photo);
+                detailView.StaffPhoto.Source = ImageDealer.ByteToImage(photo);
             }
-            detailView.StaffName.Text = shownStaff.ToString();
-            detailView.StaffCategory.Content = shownStaff.category.ToString().ToUpper();
-            detailView.StaffPhone.Content = "Phone: " + shownStaff.Phone;
-            detailView.StaffEmail.Content = "Email: " + shownStaff.Email;
+            detailView.StaffName.Text = StaffID.ToString() + " | " + title + ". " + gname + " " + fname;
+            detailView.StaffCategory.Content = category.ToString().ToUpper();
+            detailView.StaffPhone.Content = "Phone: " + phone;
+            detailView.StaffEmail.Content = "Email: " + email;
 
             if (thisStaffUnits.Count > 0)
             {
@@ -211,71 +220,70 @@ namespace HRIS.WPF
 
             //Load staff details into AddStaffInfoView
         #region Load Staff Details Into AddStaffInfoView
-        public static AddStaffInfoView LoadStaffDetails(int StaffID)
+        public static AddStaffInfoView LoadStaffDetails(int StaffID, string title, string gname, string fname, string email, string phone, string campus, string category, string room, byte[] photo)
         {
             AddStaffInfoView addInfoView = new AddStaffInfoView();
-            Staff shownStaff = Agency.GetStaffByID(StaffID);
 
-            addInfoView.Title = shownStaff.ToString();
+            addInfoView.Title = StaffID.ToString() + title + ". " + gname + " " + fname;
             //set staff data
-            if (shownStaff.Photo == null || shownStaff.Photo.Length < ImageDealer.MINIMUM_IMAGE_SIZE)
+            if (photo == null || photo.Length < ImageDealer.MINIMUM_IMAGE_SIZE)
             {
                 addInfoView.StaffPhoto.Source = new BitmapImage(new System.Uri("https://www.shareicon.net/data/128x128/2016/07/10/793851_people_512x512.png"));
             }
-            else if(shownStaff.Photo.Length >= ImageDealer.MINIMUM_IMAGE_SIZE)
+            else if(photo.Length >= ImageDealer.MINIMUM_IMAGE_SIZE)
             {
-                addInfoView.StaffPhoto.Source = ImageDealer.ByteToImage(shownStaff.Photo);
+                addInfoView.StaffPhoto.Source = ImageDealer.ByteToImage(photo);
             }
-            addInfoView.TitleTB.Text = shownStaff.Title;
-            addInfoView.GNameTB.Text = shownStaff.GivenName;
+            addInfoView.TitleTB.Text = title;
+            addInfoView.GNameTB.Text = gname;
             addInfoView.GNameTB.IsEnabled = false;
-            addInfoView.FNameTB.Text = shownStaff.FamilyName;
+            addInfoView.FNameTB.Text = fname;
             addInfoView.FNameTB.IsEnabled = false;
 
-            if(shownStaff.category == Category.uncategorised)
+            if(category == Category.uncategorised.ToString())
             {
                 addInfoView.CategoryCB.Items.Add("Select..");
-                foreach(string category in Enum.GetNames(typeof(Category)))
+                foreach(string name in Enum.GetNames(typeof(Category)))
                 {
-                    if(category != "uncategorised")
+                    if(name != "uncategorised")
                     {
-                        addInfoView.CategoryCB.Items.Add(category.ToUpper());
+                        addInfoView.CategoryCB.Items.Add(name.ToUpper());
                     }
                 }
                 addInfoView.CategoryCB.SelectedIndex = 0;
-            } else{ addInfoView.CategoryCB.Items.Add(shownStaff.category.ToString().ToUpper()); addInfoView.CategoryCB.SelectedIndex = 0;}
+            } else{ addInfoView.CategoryCB.Items.Add(category.ToUpper()); addInfoView.CategoryCB.SelectedIndex = 0;}
 
-            addInfoView.ContactTB.Text = shownStaff.Phone;
-            if(shownStaff.Phone != "No contact added")
+            addInfoView.ContactTB.Text = phone;
+            if(phone != "No contact added")
             {
                 addInfoView.ContactTB.IsEnabled = false;
             }
 
-            addInfoView.EmailTB.Text = shownStaff.Email;
-            if(shownStaff.Email != "No email added")
+            addInfoView.EmailTB.Text = email;
+            if(email != "No email added")
             {
                 addInfoView.EmailTB.IsEnabled = false;
             }
 
-            addInfoView.RoomTB.Text = shownStaff.Room;
-            if(shownStaff.Room != "Unknown")
+            addInfoView.RoomTB.Text = room;
+            if(room != "Unknown")
             {
                 addInfoView.RoomTB.IsEnabled = false;
             }
 
-            if(shownStaff.campus == Campus.Unknown)
+            if(campus == Campus.Unknown.ToString())
             {
                 addInfoView.CampusCB.Items.Add("Select..");
-                foreach(string campus in Enum.GetNames(typeof(Campus)))
+                foreach(string name in Enum.GetNames(typeof(Campus)))
                 {
-                    if(campus != "Unknown")
+                    if(name != "Unknown")
                     {
-                        addInfoView.CampusCB.Items.Add(campus);
+                        addInfoView.CampusCB.Items.Add(name);
                     }
                 }
                 addInfoView.CampusCB.SelectedIndex = 0;
             }
-            else { addInfoView.CampusCB.Items.Add(shownStaff.campus); addInfoView.CampusCB.SelectedIndex = 0;}
+            else { addInfoView.CampusCB.Items.Add(campus); addInfoView.CampusCB.SelectedIndex = 0;}
 
             return addInfoView;
         }

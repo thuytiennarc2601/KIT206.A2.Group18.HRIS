@@ -53,41 +53,6 @@ namespace HRIS.WPF
             differSize = ChangeListItemSize();
         }
 
-        #region Display a functioning dialog when a GeneralListBox's item is chosen
-        private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (choseStaff)
-            {
-                
-            }
-
-            if(choseUnit)
-            {
-                unitListItems selectedUnit = (unitListItems)GeneralListBox.SelectedItem;
-                if(selectedUnit != null)
-                {
-                    EditUnitView view = Controller.ShowUnitDetails(selectedUnit.UnitCode, selectedUnit.UnitName, selectedUnit.StaffID);
-                    view.Code = selectedUnit.UnitCode;
-                    view.ShowDialog();
-                }
-            }
-
-            if(choseClass)
-            {
-                classListItems tClass = (classListItems)GeneralListBox.SelectedItem;
-                if( tClass != null)
-                {
-                    EditClassDetails view = Controller.LoadClassDetails(tClass.StaffID, tClass.UnitCode, tClass.Day, tClass.Campus, tClass.StartTime, tClass.EndTime, tClass.Room, tClass.thisClassType);
-                    view.UnitCode = tClass.UnitCode;
-                    view.Day = tClass.Day;
-                    view.Campus = tClass.Campus;
-                    view.ClassStart = tClass.StartTime;
-                    view.ShowDialog();
-                }
-            }
-        }
-        #endregion
-
         #region Functions for clicking Staff button, Unit button, Class button, Consultation button
         private void staffButton_Click(object sender, RoutedEventArgs e)
         {
