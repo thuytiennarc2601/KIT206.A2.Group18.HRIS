@@ -411,20 +411,18 @@ namespace HRIS.WPF
         #endregion
 
         #region Display UpdateConsultationView
-        public static UpdateConsultationView ShowAddConsultation()
+        public static UpdateConsultationView ShowStaffDetails(int StaffID, string day, TimeOnly start, TimeOnly end)
         {
             UpdateConsultationView view = new UpdateConsultationView();
 
-            view.StaffList.ItemsSource = Agency.LoadAllStaffWithIDNAME();
+            Staff staff = Agency.GetStaffByID(StaffID);
+            view.StaffList.Text = StaffID + " | " + staff;
 
-            view.DayList.Items.Add("Select..");
-
-            foreach (string name in Enum.GetNames(typeof(Day)))
+            foreach (string dayName in Enum.GetNames(typeof(Day)))
             {
-                view.DayList.Items.Add(name);
+                view.DayList.Items.Add(dayName);
             }
-
-            view.DayList.SelectedIndex = 0;
+            view.DayList.SelectedItem = day;
 
             return view;
         }
