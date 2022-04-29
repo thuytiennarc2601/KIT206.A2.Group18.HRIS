@@ -190,7 +190,7 @@ namespace HRIS.WPF
             {
                 detailView.StaffPhoto.Source = ImageDealer.ByteToImage(shownStaff.Photo);
             }
-            detailView.StaffName.Content = shownStaff.ToString();
+            detailView.StaffName.Text = shownStaff.ToString();
             detailView.StaffCategory.Content = shownStaff.category.ToString().ToUpper();
             detailView.StaffPhone.Content = "Phone: " + shownStaff.Phone;
             detailView.StaffEmail.Content = "Email: " + shownStaff.Email;

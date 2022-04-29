@@ -80,5 +80,11 @@ namespace HRIS.WPF
             view.StaffID = ID;
             view.ShowDialog();
         }
+
+        private void ViewButton_Click(object sender, RoutedEventArgs e)
+        {
+            StaffDetailView detailView = Controller.ShowStaffDetails(ID);
+            detailView.ShowDialog();
+        }
     }
 }

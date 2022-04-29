@@ -9,7 +9,7 @@
     <Grid x:Name="container" Background="LightGray">
         <Grid x:Name="DetailsHolder" Background="White" Margin="20,20,20,20">
             <Label x:Name="UnitCodeLB" Foreground="Black" Content="Unit details:" HorizontalAlignment="Left" Margin="10,15,0,0" VerticalAlignment="Top" FontFamily="Century Gothic" FontSize="16" FontWeight="Bold"/>
-            <TextBox x:Name="UnitDetailsTB" VerticalContentAlignment="Center" BorderBrush="LightGray" Foreground="DarkGray" HorizontalAlignment="Left" Margin="10,45,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="216" Text="text" FontFamily="Calibri" FontSize="16" Height="29" IsEnabled="False" Background="Gray"/>
+            <TextBox x:Name="UnitDetailsTB" VerticalContentAlignment="Center" BorderBrush="LightGray" Foreground="White" HorizontalAlignment="Left" Margin="10,45,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="216" Text="text" FontFamily="Calibri" FontSize="16" Height="29" IsEnabled="False" Background="Gray"/>
             <Label x:Name="StaffDetailsLB" Foreground="Black" Content="Staff details:" HorizontalAlignment="Left" Margin="287,15,0,0" VerticalAlignment="Top" FontFamily="Century Gothic" FontSize="16" FontWeight="Bold"/>
             <TextBox x:Name="StaffDetailsTB" VerticalContentAlignment="Center" BorderBrush="LightGray" Foreground="DarkGray" HorizontalAlignment="Left" Margin="286,45,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="216" Text="text" FontFamily="Calibri" FontSize="16" Height="29" KeyDown="StaffDetailsTB_KeyDown"/>
             <Button x:Name="SearchStaffButton" BorderBrush="LightGray" Content="" HorizontalAlignment="Left" Margin="502,45,0,0" VerticalAlignment="Top" Width="29" RenderTransformOrigin="1.543,-1.32" Height="29" Click="SearchStaffButton_Click">

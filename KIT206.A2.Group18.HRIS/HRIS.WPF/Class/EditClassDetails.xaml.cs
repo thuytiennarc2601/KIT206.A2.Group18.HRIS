@@ -102,9 +102,8 @@ namespace HRIS.WPF
             {
                 Staff selectedStaff = (Staff)StaffList.SelectedItem;
                 this.StaffID = selectedStaff.ID;
-                this.StaffDetailsTB.Text = selectedStaff.ID.ToString() + " | " + selectedStaff.ToString();
+                this.StaffDetailsTB.Text = selectedStaff.ToString();
                 this.StaffList.Visibility = Visibility.Hidden;
-                MessageBox.Show(StaffID.ToString());
             }
         }
 

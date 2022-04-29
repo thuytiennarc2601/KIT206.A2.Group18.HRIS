@@ -11,7 +11,7 @@
         <Label x:Name="classInfo" Content="Lecture | Staff: Linsday Wells" Margin="10,38,0,80" FontFamily="Century Gothic" Foreground="#FF6F6F6F" FontSize="16" FontWeight="Bold"/>
         <Label x:Name="classLocation" Content="Room C0 | Hobart campus" Margin="10,70,224,37" FontFamily="Century Gothic" Foreground="#FF868686" FontSize="18"/>
         <Label x:Name="classTime" Content="Thursday | 11:00 - 12:00" Margin="10,97,224,10" FontFamily="Century Gothic" Foreground="#FF868686" FontSize="18"/>
-        <Button x:Name="editClassBtn" HorizontalAlignment="Right" Content="EDIT DETAILS" Margin="0,91,42,24" FontSize="14" FontFamily="Calibri" BorderBrush="White" Background="#FFD7C282" Foreground="White" Width="88" Click="editClassBtn_Click"/>
+        <Button x:Name="editClassBtn" HorizontalAlignment="Right" Content="EDIT DETAILS" Margin="0,92,23,24" FontSize="14" FontFamily="Calibri" BorderBrush="White" Background="#FFD7C282" Foreground="White" Width="88" Click="editClassBtn_Click"/>
 
     </Grid>
 </UserControl>

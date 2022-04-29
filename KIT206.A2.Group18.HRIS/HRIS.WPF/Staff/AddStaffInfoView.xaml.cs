@@ -20,7 +20,8 @@ namespace HRIS.WPF
     /// </summary>
     public partial class AddStaffInfoView : Window
     {
-        
+        private byte[] Photo;
+
         public AddStaffInfoView()
         {
             InitializeComponent();
@@ -39,6 +40,7 @@ namespace HRIS.WPF
             if (fileImageName != "")
             {
                 this.StaffPhoto.Source = new BitmapImage(new Uri(fileImageName, UriKind.Absolute));
+                Photo = ImageDealer.BytesFromImage(fileImageName);
             }
         }
 
@@ -50,10 +52,12 @@ namespace HRIS.WPF
             string Room = this.RoomTB.Text;
             string Email = this.EmailTB.Text;
             string Campus = this.CampusCB.SelectedItem.ToString();
-            byte[] Photo = ImageDealer.BytesFromImage(fileImageName);
 
-            Agency.UpdateStaffInfo(StaffID, Title, Category, Phone, Room, Email, Campus, Photo);
-            this.Close();
+            if (Validation.PhotoValidation(Photo))
+            {
+                Agency.UpdateStaffInfo(StaffID, Title, Category, Phone, Room, Email, Campus, Photo);
+                this.Close();
+            }
         }
     }
 }

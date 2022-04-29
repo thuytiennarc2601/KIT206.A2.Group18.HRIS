@@ -5,20 +5,28 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HRIS.WPF"
         mc:Ignorable="d"
-        Title="StaffDetailView" Height="400" Width="600" MinHeight="400" MinWidth="600" MaxHeight="400" MaxWidth="600">
+        Title="StaffDetailView" Height="400" Width="600" MinHeight="400" MinWidth="600" MaxHeight="600" MaxWidth="800">
     <Grid x:Name="container" Background="LightGray">
-        <Grid x:Name="DetailContainer" Background="White" Margin="20,20,20,20" Width="560" Height="345">
-            <Image x:Name="StaffPhoto" Margin="22,13,392,181" Source="/resources/CAT-HAIR-TIE_1000.jpg" Stretch="Fill"/>
-            <Label x:Name="StaffName" Content="Dr. Linday Wells" FontFamily="Century Gothic" FontSize="24" FontWeight="Bold" Foreground="#FF729F54" Margin="173,13,22,292"/>
-            <Label x:Name="StaffCategory" Content="ACADEMIC" Foreground="#FF5C5C5C" Margin="173,66,22,0" VerticalAlignment="Top" FontFamily="Century Gothic" FontSize="16" FontWeight="Bold"/>
-            <Label x:Name="StaffPhone" Content="Phone: (03)62000000" Foreground="DarkGray" Margin="173,88,22,0" VerticalAlignment="Top" FontFamily="Century Gothic" FontSize="16"/>
-            <Label x:Name="StaffEmail" Content="Email: abd@utad.edu.au" Foreground="DarkGray" Margin="173,112,22,0" VerticalAlignment="Top" FontFamily="Century Gothic" FontSize="16"/>
-            <Label x:Name="UnitLabel" Content="UNITS" Foreground="Black" Margin="22,172,22,147" FontFamily="Georgia" FontSize="14" FontWeight="Bold"/>
-            <ListBox x:Name="UnitList" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="22,199,22,101" FontFamily="Century Gothic"/>
-            <Label x:Name="ConsultationLabel" Content="CONSULTATION" Foreground="Black" Margin="22,249,22,70" FontFamily="Georgia" FontSize="14" FontWeight="Bold"/>
-            <Label x:Name="StaffLocation" Content="Room: C0 | Launceston" Foreground="DarkGray" Margin="173,133,22,0" VerticalAlignment="Top" FontFamily="Century Gothic" FontSize="16"/>
-            <ListBox x:Name="ConsultationList" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="22,275,22,25" FontFamily="Century Gothic"
- />
+        <Grid x:Name="DetailContainer" Background="White" Margin="20,20,20,20" Width="Auto" Height="Auto">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="166*"/>
+                <RowDefinition Height="85*"/>
+                <RowDefinition Height="93*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="179*"/>
+                <ColumnDefinition Width="381*"/>
+            </Grid.ColumnDefinitions>
+            <Image x:Name="StaffPhoto" Margin="15,9,15,10" Source="/resources/CAT-HAIR-TIE_1000.jpg" Stretch="Fill"/>
+            <Label x:Name="StaffCategory" Content="ACADEMIC" Foreground="#FF5C5C5C" Margin="1,0,21,76" VerticalAlignment="Bottom" FontFamily="Century Gothic" FontSize="16" FontWeight="Bold" Height="30" Grid.Column="1"/>
+            <Label x:Name="StaffPhone" Content="Phone: (03)62000000" Foreground="DarkGray" Margin="1,0,21,55" VerticalAlignment="Bottom" FontFamily="Century Gothic" FontSize="16" Grid.Column="1" Height="30"/>
+            <Label x:Name="StaffEmail" Content="Email: abd@utad.edu.au" Foreground="DarkGray" Margin="1,0,21,27" VerticalAlignment="Bottom" FontFamily="Century Gothic" FontSize="16" Grid.Column="1" Height="30"/>
+            <Label x:Name="UnitLabel" Content="UNITS" Foreground="Black" Margin="23,5,21,52" FontFamily="Georgia" FontSize="14" FontWeight="Bold" Grid.ColumnSpan="2" Grid.Row="1"/>
+            <ListBox x:Name="UnitList" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="22,33,22,10" FontFamily="Century Gothic" Grid.ColumnSpan="2" Grid.Row="1" Height="Auto"/>
+            <Label x:Name="ConsultationLabel" Content="CONSULTATION" Foreground="Black" Margin="23,4,21,60" FontFamily="Georgia" FontSize="14" FontWeight="Bold" Grid.ColumnSpan="2" Grid.Row="2"/>
+            <Label x:Name="StaffLocation" Content="Room: C0 | Launceston" Foreground="DarkGray" Margin="0,0,22,0" VerticalAlignment="Bottom" FontFamily="Century Gothic" FontSize="16" Grid.Column="1" Height="30"/>
+            <ListBox x:Name="ConsultationList" Height="Auto" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="22,38,22,10" FontFamily="Century Gothic" Grid.ColumnSpan="2" Grid.Row="2"/>
+            <TextBlock x:Name="StaffName" HorizontalAlignment="Left" Margin="0,10,0,0" TextWrapping="Wrap" Text="Dr. Ivy Tran" VerticalAlignment="Top" Width="359" FontFamily="Century Gothic" FontSize="22" FontWeight="Bold" Foreground="#FF799A4D" Grid.Column="1" Height="27"/>
 
         </Grid>
 

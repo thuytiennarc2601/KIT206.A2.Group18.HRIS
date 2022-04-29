@@ -164,5 +164,18 @@ namespace HRIS.WPF
             return valid;
         }
         #endregion
+
+        #region Update Photo Validation
+        public static bool PhotoValidation(byte[] photo)
+        {
+            bool valid = true;
+            if(photo.Length < ImageDealer.MINIMUM_IMAGE_SIZE)
+            {
+                valid = false;
+                MessageBox.Show("The image size is too small");
+            }
+            return valid;
+        }
+        #endregion
     }
 }

@@ -58,12 +58,7 @@ namespace HRIS.WPF
         {
             if (choseStaff)
             {
-                staffListItem selectedStaff = (staffListItem)GeneralListBox.SelectedItem;
-                if (selectedStaff != null)
-                {
-                    StaffDetailView detailView = Controller.ShowStaffDetails(selectedStaff.ID);
-                    detailView.ShowDialog();
-                }
+                
             }
 
             if(choseUnit)
