@@ -33,6 +33,8 @@ namespace HRIS.WPF
 
         private string _day;
         private string _start;
+        private TimeOnly _start1;
+        private TimeOnly _end1;
         private string _end;
 
         //Properties for Displaying data
@@ -67,6 +69,19 @@ namespace HRIS.WPF
             set { _end = value; }
         }
 
+
+        public TimeOnly Start1
+        {
+            get { return _start1; }
+            set { _start1 = value; }
+
+        }
+        public TimeOnly End1
+        {
+            get { return _end1; }
+            set { _end1 = value; }
+        }
+
         public string ConsultationDay
         {
             get { return _day; }   
@@ -77,7 +92,7 @@ namespace HRIS.WPF
         private void conUpdateBtn_Click(object sender, RoutedEventArgs e)
         {
             //Agency.UpdateConsultation(StaffID, ConsultationDay, Start, End)
-            UpdateConsultationView view = Controller.ShowStaffDetails(StaffID, ConsultationDay, Start, End);
+            UpdateConsultationView view = Controller.ShowStaffDetails(StaffID, ConsultationDay, Start1, End1);
             view.ShowDialog();
         }
 
