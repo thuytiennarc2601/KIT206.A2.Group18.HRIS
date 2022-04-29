@@ -78,5 +78,10 @@ namespace HRIS.WPF
         {
             Consultation.DeleteConsultation(StaffID, ConsultationDay, Start, End);
         }
+
+        private void editConsultation_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

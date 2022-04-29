@@ -9,7 +9,7 @@ namespace KIT206.A2.Group18.HRIS
 {
     enum Type { Lecture, Tutorial, Practical, Workshop}
 
-    enum Day { Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday}
+    enum Day { Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday, NA}
 
     class Class
     {

@@ -60,10 +60,13 @@ namespace KIT206.A2.Group18.HRIS
 
                 while (rdr.Read())
                 {
+                    Day dayRead;
+                    if (Convert.IsDBNull(rdr[1]) || rdr.GetString(1) == "") { dayRead = Day.NA; }
+                    else { dayRead = ParseEnum<Day>(rdr.GetString(1)); }
                     consultations.Add(new Consultation
                     {
                         staff = new Staff { ID = rdr.GetInt32(0) },
-                        day = ParseEnum<Day>(rdr.GetString(1)),
+                        day = dayRead,
                         StartTime = TimeOnly.ParseExact(rdr.GetString(2), "HH:mm:ss"),
                         EndTime = TimeOnly.ParseExact(rdr.GetString(3), "HH:mm:ss"),
                     });
@@ -109,11 +112,14 @@ namespace KIT206.A2.Group18.HRIS
 
                 while (rdr.Read())
                 {
+                    Day dayRead;
+                    if (Convert.IsDBNull(rdr[2]) || rdr.GetString(1) == "") { dayRead = Day.NA; }
+                    else { dayRead = ParseEnum<Day>(rdr.GetString(2)); }
                     classes.Add(new Class
                     {
                         unit = new Unit { UnitCode = rdr.GetString(0) },
                         campus = ParseEnum<Campus>(rdr.GetString(1)),
-                        day = ParseEnum<Day>(rdr.GetString(2)),
+                        day = dayRead,
                         type = ParseEnum<Type>(rdr.GetString(3)),
                         StartTime = TimeOnly.ParseExact(rdr.GetString(4), "HH:mm:ss"),
                         EndTime = TimeOnly.ParseExact(rdr.GetString(5), "HH:mm:ss"),
@@ -581,10 +587,14 @@ namespace KIT206.A2.Group18.HRIS
                 while (rdr.Read())
                 {
                     Class result = new Class();
+                    Day dayRead;
+
+                    if (Convert.IsDBNull(rdr[2]) || rdr.GetString(1) == "") { dayRead = Day.NA; }
+                    else { dayRead = ParseEnum<Day>(rdr.GetString(2)); }
 
                     result.unit = new Unit { UnitCode = rdr.GetString(0) };
                     result.campus = ParseEnum<Campus>(rdr.GetString(1));
-                    result.day = ParseEnum<Day>(rdr.GetString(2));
+                    result.day = dayRead;
                     result.type = ParseEnum<Type>(rdr.GetString(3));
                     result.StartTime = TimeOnly.ParseExact(rdr.GetString(4), "HH:mm:ss");
                     result.EndTime = TimeOnly.ParseExact(rdr.GetString(5), "HH:mm:ss");
@@ -798,10 +808,14 @@ namespace KIT206.A2.Group18.HRIS
                 rdr = cmd.ExecuteReader();
                 while (rdr.Read())
                 {
+                    Day dayRead;
+                    if (Convert.IsDBNull(rdr[1]) || rdr.GetString(1) == "") { dayRead = Day.NA; }
+                    else { dayRead = ParseEnum<Day>(rdr.GetString(1)); }
+
                     consultationList.Add(new Consultation
                     {
                         staff = new Staff { ID = rdr.GetInt32(0) },
-                        day = ParseEnum<Day>(rdr.GetString(1)),
+                        day = dayRead,
                         StartTime = TimeOnly.ParseExact(rdr.GetString(2), "HH:mm:ss"),
                         EndTime = TimeOnly.ParseExact(rdr.GetString(3), "HH:mm:ss"),
                     });

@@ -9,7 +9,7 @@
     <Grid x:Name="consultationItem" Background="White">
         <Label x:Name="staffDetails" Content="Dr. Lindsay Wells" Margin="10,10,153,49" Foreground="#FF7BA8D7" FontFamily="Century Gothic" FontSize="22" FontWeight="Bold"/>
         <Label x:Name="consultationTime" Content="Monday | 11:00 - 12:00" Margin="10,47,226,18" FontFamily="Century Gothic" Foreground="#FF787878" FontSize="18" FontWeight="Bold"/>
-        <Button x:Name="editConsultation" HorizontalAlignment='Right' Content="EDIT DETAILS" Margin="0,51,118,18" FontFamily="Calibri" Foreground="White" Background="#FF7BA8D7" BorderBrush="White" FontSize="14" Width="103"/>
+        <Button x:Name="editConsultation" HorizontalAlignment='Right' Content="EDIT DETAILS" Margin="0,51,118,18" FontFamily="Calibri" Foreground="White" Background="#FF7BA8D7" BorderBrush="White" FontSize="14" Width="103" Click="editConsultation_Click"/>
         <Button x:Name="conCancelBtn" HorizontalAlignment="Right" Content="CANCEL" Margin="0,51,10,18" FontFamily="Calibri" Foreground="White" Background="#FF7BA8D7" BorderBrush="White" FontSize="14" Width="103" Click="conCancelBtn_Click"/>
 
     </Grid>
