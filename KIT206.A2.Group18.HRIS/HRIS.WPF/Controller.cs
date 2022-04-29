@@ -37,11 +37,11 @@ namespace HRIS.WPF
                     item.StaffEmail = "Email: " + staff[i].Email;
                     item.StaffLocation = "Room: " + staff[i].Room + " | " + staff[i].campus.ToString() + " campus";
 
-                    if (staff[i].Photo == null || staff[i].Photo.Length == 0)
+                    if (staff[i].Photo == null || staff[i].Photo.Length < ImageDealer.MINIMUM_IMAGE_SIZE)
                     {
                         item.StaffPhoto = new BitmapImage(new System.Uri("https://www.shareicon.net/data/128x128/2016/07/10/793851_people_512x512.png"));
                     }
-                    else
+                    else if(staff[i].Photo.Length >= ImageDealer.MINIMUM_IMAGE_SIZE)
                     {
                         item.StaffPhoto = ImageDealer.ByteToImage(staff[i].Photo);
                     }
@@ -182,11 +182,11 @@ namespace HRIS.WPF
             detailView.Title = shownStaff.ToString() + " Information";
 
             //set staff data
-            if (shownStaff.Photo == null || shownStaff.Photo.Length == 0)
+            if (shownStaff.Photo == null || shownStaff.Photo.Length < ImageDealer.MINIMUM_IMAGE_SIZE)
             {
                 detailView.StaffPhoto.Source = new BitmapImage(new System.Uri("https://www.shareicon.net/data/128x128/2016/07/10/793851_people_512x512.png"));
             }
-            else
+            else if(shownStaff.Photo.Length >= ImageDealer.MINIMUM_IMAGE_SIZE)
             {
                 detailView.StaffPhoto.Source = ImageDealer.ByteToImage(shownStaff.Photo);
             }
@@ -218,11 +218,11 @@ namespace HRIS.WPF
 
             addInfoView.Title = shownStaff.ToString();
             //set staff data
-            if (shownStaff.Photo == null || shownStaff.Photo.Length == 0)
+            if (shownStaff.Photo == null || shownStaff.Photo.Length < ImageDealer.MINIMUM_IMAGE_SIZE)
             {
                 addInfoView.StaffPhoto.Source = new BitmapImage(new System.Uri("https://www.shareicon.net/data/128x128/2016/07/10/793851_people_512x512.png"));
             }
-            else
+            else if(shownStaff.Photo.Length >= ImageDealer.MINIMUM_IMAGE_SIZE)
             {
                 addInfoView.StaffPhoto.Source = ImageDealer.ByteToImage(shownStaff.Photo);
             }
@@ -361,7 +361,7 @@ namespace HRIS.WPF
 
             view.StaffID = staffID;
             view.UnitDetailsTB.Text = unit.ToString();
-            view.StaffDetailsTB.Text = staffID.ToString() + " | " + staff.ToString();
+            view.StaffDetailsTB.Text = staff.ToString();
 
             foreach (string dayName in Enum.GetNames(typeof(Day)))
             {

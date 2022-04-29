@@ -291,7 +291,5 @@ namespace HRIS.WPF
         }
 
         #endregion
-
-       
     }
 }

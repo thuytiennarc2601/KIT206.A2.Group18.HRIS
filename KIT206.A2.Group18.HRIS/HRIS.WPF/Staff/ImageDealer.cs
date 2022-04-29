@@ -14,7 +14,10 @@ namespace HRIS.WPF
     //Working with Image and Byte Array: Uploading an Image, Converting an ImageSource to ByteArray and vice versa
     class ImageDealer
     {
+        public const int MINIMUM_IMAGE_SIZE = 20000;
+
         //Convert from byte array to imagesource
+        #region Convert An Byte Array To Image
         public static ImageSource ByteToImage(byte[] imageData)
         {
             BitmapImage biImg = new BitmapImage();
@@ -27,8 +30,10 @@ namespace HRIS.WPF
 
             return imgSrc;
         }
+        #endregion
 
         //Convert an Image file path to a byte array
+        #region Convert An ImageSource to A Byte Array
         public static byte[] BytesFromImage(String imageFile)
         {
             MemoryStream ms = new MemoryStream();
@@ -39,8 +44,7 @@ namespace HRIS.WPF
             }
             return ms.ToArray();
         }
-
-
+        #endregion
 
         //Upload a photo
         #region Get An Image File Name For Upload Staff Photo
