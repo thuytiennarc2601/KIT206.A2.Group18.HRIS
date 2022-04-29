@@ -370,8 +370,6 @@ namespace HRIS.WPF
             EditConsultationView view = new EditConsultationView();
         
             Staff staff = Agency.GetStaffByID(StaffID);
-
-            //view.StaffID = staffID;
             view.StaffDetailsTB.Text = StaffID.ToString() + " | " + staff.ToString();
 
             foreach (string dayName in Enum.GetNames(typeof(Day)))
