@@ -24,7 +24,7 @@ namespace HRIS.WPF
         //Load all staff info into the main listbox
         private List<staffListItem> AddStaffInfoToItem()
         {
-            List<Staff> staff = Agency.LoadAllStaffs();
+            List<Staff> staff = Staff.LoadAllStaff();
             List<staffListItem> items = new List<staffListItem>();
             if (staff.Count > 0)
             {
@@ -67,7 +67,7 @@ namespace HRIS.WPF
         //Load units info to the main listbox
         private List<unitListItems> AddUnitInfoToItem()
         {
-            List<Unit> unitList = Agency.LoadAllUnits();
+            List<Unit> unitList = Unit.LoadAllUnits();
             List<unitListItems> items = new List<unitListItems>();
 
             if(unitList.Count > 0)
@@ -79,7 +79,7 @@ namespace HRIS.WPF
                     item.UnitCode = unitList[i].UnitCode.ToUpper();
                     item.StaffID = unitList[i].Coordinator.ID;
 
-                    Staff staff = Agency.GetStaffByID(item.StaffID);
+                    Staff staff = Staff.GetStaffByID(item.StaffID);
                     item.StaffName = "Coordinator: " + staff.ToString();  
                     items.Add(item);
                 }
@@ -109,10 +109,10 @@ namespace HRIS.WPF
                     item.Room = classList[i].Room;
                     item.thisClassType = classList[i].type.ToString();
 
-                    Unit unit = Agency.GetUnitByUnitCode(item.UnitCode);
+                    Unit unit = Unit.GetUnitByCode(item.UnitCode);
                     item.UnitDetails = unit.ToString();
 
-                    Staff staff = Agency.GetStaffByID(item.StaffID);
+                    Staff staff = Staff.GetStaffByID(item.StaffID);
 
                     item.ClassType = item.thisClassType + " | Staff: " + staff.ToString();
                     item.ClassTime = item.Day + " | " + item.StartTime + " - " + item.EndTime;
@@ -138,7 +138,7 @@ namespace HRIS.WPF
                     consultationListItem item = new consultationListItem();
                     item.StaffID = conList[i].staff.ID;
 
-                    Staff staff = Agency.GetStaffByID(item.StaffID);
+                    Staff staff = Staff.GetStaffByID(item.StaffID);
 
                     item.StaffName = staff.ToString();
                     item.ConTime = conList[i].day.ToString() + " | " + conList[i].StartTime.ToString() + " - " + conList[i].EndTime.ToString();
@@ -296,7 +296,7 @@ namespace HRIS.WPF
         {
             EditUnitView view = new EditUnitView();
             List<Class> classes = Class.GetClassesByUnitCode(UnitCode);
-            Staff staff = Agency.GetStaffByID(StaffID);
+            Staff staff = Staff.GetStaffByID(StaffID);
 
             view.UnitName.Content = UnitName;
             view.UnitCode.Content = UnitCode.ToUpper();
@@ -327,8 +327,8 @@ namespace HRIS.WPF
         {
             AddClassView view = new AddClassView();
 
-            view.UnitList.ItemsSource = Agency.LoadAllUnits();
-            view.StaffList.ItemsSource = Agency.LoadAllStaffWithIDNAME();
+            view.UnitList.ItemsSource = Unit.LoadAllUnits();
+            view.StaffList.ItemsSource = Staff.GetStaffsWithIDName();
 
             view.DayList.Items.Add("Select..");
             foreach (string name in Enum.GetNames(typeof(Day)))
@@ -364,8 +364,8 @@ namespace HRIS.WPF
         public static EditClassDetails LoadClassDetails(int staffID, string code, string day, string campus, TimeOnly start, TimeOnly end, string room, string type)
         {
             EditClassDetails view = new EditClassDetails();
-            Unit unit = Agency.GetUnitByUnitCode(code);
-            Staff staff = Agency.GetStaffByID(staffID);
+            Unit unit = Unit.GetUnitByCode(code);
+            Staff staff = Staff.GetStaffByID(staffID);
 
             view.StaffID = staffID;
             view.UnitDetailsTB.Text = unit.ToString();
@@ -403,7 +403,7 @@ namespace HRIS.WPF
         {
             AddConsultationView view = new AddConsultationView();
 
-            view.StaffList.ItemsSource = Agency.LoadAllStaffWithIDNAME();
+            view.StaffList.ItemsSource = Staff.GetStaffsWithIDName();
 
             view.DayList.Items.Add("Select..");
             foreach(string name in Enum.GetNames (typeof(Day)))

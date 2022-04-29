@@ -55,7 +55,7 @@ namespace HRIS.WPF
 
             if (Validation.PhotoValidation(Photo))
             {
-                Agency.UpdateStaffInfo(StaffID, Title, Category, Phone, Room, Email, Campus, Photo);
+                Staff.UpdateStaffDetails(StaffID, Title, Category, Phone, Room, Email, Campus, Photo);
                 this.Close();
             }
         }

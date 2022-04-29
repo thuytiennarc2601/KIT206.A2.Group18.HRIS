@@ -46,7 +46,7 @@ namespace KIT206.A2.Group18.HRIS
         public static List<Staff> GetStaffListBySearchText(string SearchText)
         {
             SearchText = SearchText.ToLower();
-            List<Staff> staffList = Agency.LoadAllStaffs();
+            List<Staff> staffList = Staff.LoadAllStaff();
             var getStaff = from Staff s in staffList
                            where (s.ID).ToString().Contains(SearchText) || s.GivenName.ToLower().Contains(SearchText) || s.FamilyName.ToLower().Contains(SearchText)
                            select s;
@@ -54,6 +54,40 @@ namespace KIT206.A2.Group18.HRIS
             List<Staff> result = new List<Staff>(getStaff);
 
             return result;
+        }
+        #endregion
+
+        //Load All Staff
+        #region Load All Staff Members From Database
+        public static List<Staff> LoadAllStaff()
+        {
+            List<Staff> staffList = Agency.LoadAllStaffs();
+            return staffList;
+        }
+        #endregion
+
+        //Add/Update A Specific Staff Member Information
+        #region Add/Update Staff Details
+        public static void UpdateStaffDetails(int StaffID, string Title, string Category, string Phone, string Room, string Email, string Campus, byte[] Photo)
+        {
+            Agency.UpdateStaffInfo(StaffID, Title, Category, Phone, Room, Email, Campus, Photo);
+        }
+        #endregion
+
+        //Get Staff By ID
+        #region Get Staff By ID
+        public static Staff GetStaffByID(int id)
+        {
+            Staff staff = Agency.GetStaffByID(id);
+            return staff;
+        }
+        #endregion
+
+        #region Get A Staff List With ID, Title, Name
+        public static List<Staff> GetStaffsWithIDName()
+        {
+            List<Staff> staffList = Agency.LoadAllStaffWithIDNAME();
+            return staffList;
         }
         #endregion
     }

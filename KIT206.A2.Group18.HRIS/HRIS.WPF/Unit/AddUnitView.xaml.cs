@@ -64,7 +64,7 @@ namespace HRIS.WPF
             if(this.StaffList.SelectedItem != null)
             {
                 Staff selectedStaff = (Staff)this.StaffList.SelectedItem;
-                this.CoordinatorTB.Text = selectedStaff.ID.ToString() + " | " + selectedStaff.ToString();
+                this.CoordinatorTB.Text = selectedStaff.ToString();
                 StaffID = selectedStaff.ID;
 
                 this.StaffList.Visibility = Visibility.Hidden;
@@ -76,7 +76,7 @@ namespace HRIS.WPF
             bool valid = Validation.AddUnitValidation(this.UnitCodeTB.Text, this.UnitNameTB.Text, StaffID);
             if(valid)
             {
-                Agency.AddNewUnit(this.UnitCodeTB.Text, this.UnitNameTB.Text, StaffID);
+                Unit.AddUnit(this.UnitCodeTB.Text, this.UnitNameTB.Text, StaffID);
                 this.Close();
             }
         }

@@ -75,7 +75,7 @@ namespace HRIS.WPF
         {
             if (StaffID != -1)
             {
-                Agency.UpdateUnitCoordinator(Code, StaffID);
+                Unit.UpdateUnitCoordinator(Code, StaffID);
                 this.Close();
             }
             else { MessageBox.Show("No staff member is chosen"); }
