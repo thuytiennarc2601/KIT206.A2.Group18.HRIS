@@ -61,7 +61,7 @@ namespace KIT206.A2.Group18.HRIS
                 while (rdr.Read())
                 {
                     Day dayRead;
-                    if (Convert.IsDBNull(rdr[1]) || rdr.GetString(1) == "") { dayRead = Day.NA; }
+                    if (rdr.GetString(1) == "") { dayRead = Day.NA; }
                     else { dayRead = ParseEnum<Day>(rdr.GetString(1)); }
                     consultations.Add(new Consultation
                     {
@@ -113,7 +113,7 @@ namespace KIT206.A2.Group18.HRIS
                 while (rdr.Read())
                 {
                     Day dayRead;
-                    if (Convert.IsDBNull(rdr[2]) || rdr.GetString(1) == "") { dayRead = Day.NA; }
+                    if (rdr.GetString(1) == "") { dayRead = Day.NA; }
                     else { dayRead = ParseEnum<Day>(rdr.GetString(2)); }
                     classes.Add(new Class
                     {
@@ -589,7 +589,7 @@ namespace KIT206.A2.Group18.HRIS
                     Class result = new Class();
                     Day dayRead;
 
-                    if (Convert.IsDBNull(rdr[2]) || rdr.GetString(1) == "") { dayRead = Day.NA; }
+                    if (rdr.GetString(2) == "") { dayRead = Day.NA; }
                     else { dayRead = ParseEnum<Day>(rdr.GetString(2)); }
 
                     result.unit = new Unit { UnitCode = rdr.GetString(0) };
@@ -809,7 +809,7 @@ namespace KIT206.A2.Group18.HRIS
                 while (rdr.Read())
                 {
                     Day dayRead;
-                    if (Convert.IsDBNull(rdr[1]) || rdr.GetString(1) == "") { dayRead = Day.NA; }
+                    if (rdr.GetString(1) == "") { dayRead = Day.NA; }
                     else { dayRead = ParseEnum<Day>(rdr.GetString(1)); }
 
                     consultationList.Add(new Consultation
@@ -910,7 +910,41 @@ namespace KIT206.A2.Group18.HRIS
             MessageBox.Show("Consultation cancelled");
         }
         #endregion
+        #region Edit Consultation
+        public static void EditConsultation(int id, string day, string start, string new_day, string new_start, string new_end)
+        {
 
+            MySqlConnection conn = GetConnection();
+
+            try
+            {
+                conn.Open();
+
+                MySqlCommand cmd = new MySqlCommand("UPDATE consultation" +
+                                                    " SET day=@new_day, end=@new_end, start=@new_start" +
+                                                    " WHERE staff_id=@id AND day=@day AND start=@start", conn);
+                cmd.Parameters.AddWithValue("@new_day", new_day);
+                cmd.Parameters.AddWithValue("@new_start", new_start);
+                cmd.Parameters.AddWithValue("@new_end", new_end);
+                cmd.Parameters.AddWithValue("@id", id);
+                cmd.Parameters.AddWithValue("@day", day);
+                cmd.Parameters.AddWithValue("@start", start);
+                cmd.ExecuteNonQuery();
+            }
+            catch (MySqlException e)
+            {
+                ReportError("Editing consultation details", e);
+            }
+            finally
+            {
+                if (conn != null)
+                {
+                    conn.Close();
+                }
+            }
+            MessageBox.Show("Update Consultation Details successfully");
+        }
+        #endregion Edit details of a consultation
         #region Check If A Consultation Time Of Specific Staff Is Not Clashing With Other Consultation
         public static Boolean checkValidateConsul(string day, string start, string end, int staff)
         {

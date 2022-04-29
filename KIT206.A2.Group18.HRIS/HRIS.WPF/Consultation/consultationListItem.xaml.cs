@@ -87,6 +87,13 @@ namespace HRIS.WPF
             view.Day = ConsultationDay;
             view.ConsultationStart = Start;
             view.ConsultationEnd = End;
+            foreach (string dayName in Enum.GetNames(typeof(Day)))
+            {
+                if (dayName != "NA")
+                {
+                    view.DayList.Items.Add(dayName);
+                }
+            }
             view.ShowDialog();
         }
     }

@@ -364,7 +364,10 @@ namespace HRIS.WPF
 
             foreach (string dayName in Enum.GetNames(typeof(Day)))
             {
-                view.DayList.Items.Add(dayName);
+                if (dayName != "NA")
+                {
+                    view.DayList.Items.Add(dayName);
+                }
             }
             view.DayList.SelectedItem = day;
 

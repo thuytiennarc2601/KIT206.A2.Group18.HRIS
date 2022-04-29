@@ -66,5 +66,11 @@ namespace KIT206.A2.Group18.HRIS
             return valid;
         }
         #endregion
+        #region Edit Consultation
+        public static void EditConsultation(int id, string day, string start, string new_day, string new_start, string new_end)
+        {
+            Agency.EditConsultation(id, day, start, new_day, new_start, new_end);
+        }
+        #endregion
     }
 }

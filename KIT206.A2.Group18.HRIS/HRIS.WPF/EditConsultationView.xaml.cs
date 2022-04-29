@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using KIT206.A2.Group18.HRIS;
 
 namespace HRIS.WPF
 {
@@ -74,7 +75,7 @@ namespace HRIS.WPF
 
                 if (Validation.EditConsultationValidation(StaffID, day, start, end))
                 {
-                    //Consultation.EditConsultation(this._id, _day, _start, day, start, end);
+                    Consultation.EditConsultation(StaffID, Day, ConsultationStart, day, start, end);
                     this.Close();
                 }
             }
