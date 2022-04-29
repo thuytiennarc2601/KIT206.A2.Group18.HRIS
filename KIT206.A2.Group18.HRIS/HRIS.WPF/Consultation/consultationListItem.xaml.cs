@@ -76,7 +76,9 @@ namespace HRIS.WPF
 
         private void conUpdateBtn_Click(object sender, RoutedEventArgs e)
         {
-            Agency.UpdateConsultation(StaffID, ConsultationDay, Start, End);
+            //Agency.UpdateConsultation(StaffID, ConsultationDay, Start, End)
+            UpdateConsultationView view = Controller.ShowStaffDetails(StaffID, ConsultationDay, Start, End);
+            view.ShowDialog();
         }
 
         private void conCancelBtn_Click(object sender, RoutedEventArgs e)
