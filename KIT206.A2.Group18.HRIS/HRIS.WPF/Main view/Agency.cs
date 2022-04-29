@@ -837,6 +837,40 @@ namespace KIT206.A2.Group18.HRIS
         }
         #endregion
 
+        #region Update an consultation
+        public static void UpdateConsultation(int staff, string day, string start, string end)
+        {
+        MySqlConnection conn = GetConnection();
+
+            try
+            {
+                conn.Open();
+
+                MySqlCommand cmd = new MySqlCommand("UPDATE consultation" +
+                                                    " SET day=@new_day, end=@new_end, start=@new_start " +
+                                                    " WHERE staff=@id", conn);
+                cmd.Parameters.AddWithValue("@new_day", day);
+                cmd.Parameters.AddWithValue("@new_start", start);
+                cmd.Parameters.AddWithValue("@new_end", end);
+                cmd.Parameters.AddWithValue("@id", staff);
+                cmd.ExecuteNonQuery();
+            }
+            catch (MySqlException e)
+            {
+                ReportError("Updating Consultation details", e);
+            }
+            finally
+            {
+                if (conn != null)
+                {
+                    conn.Close();
+                }
+            }
+            MessageBox.Show("Update Consultaion Details successfully");
+        }
+
+        #endregion
+
         #region Delete Consultation
         public static void DeleteConsultation(int id, string day, string Start, string End)
         {

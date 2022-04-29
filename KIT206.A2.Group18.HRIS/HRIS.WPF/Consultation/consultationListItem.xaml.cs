@@ -74,6 +74,11 @@ namespace HRIS.WPF
         }
         #endregion
 
+        private void conUpdateBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Agency.UpdateConsultation(StaffID, ConsultationDay, Start, End);
+        }
+
         private void conCancelBtn_Click(object sender, RoutedEventArgs e)
         {
             Agency.DeleteConsultation(StaffID, ConsultationDay, Start, End);

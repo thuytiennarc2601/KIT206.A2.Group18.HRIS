@@ -396,16 +396,41 @@ namespace HRIS.WPF
             AddConsultationView view = new AddConsultationView();
 
             view.StaffList.ItemsSource = Agency.LoadAllStaffWithIDNAME();
-
+            
             view.DayList.Items.Add("Select..");
+
             foreach(string name in Enum.GetNames (typeof(Day)))
             {
                 view.DayList.Items.Add(name);
             }
+            
             view.DayList.SelectedIndex = 0;
+            
             return view;
         }
         #endregion
+
+        #region Display UpdateConsultationView
+        public static UpdateConsultationView ShowAddConsultation()
+        {
+            UpdateConsultationView view = new UpdateConsultationView();
+
+            view.StaffList.ItemsSource = Agency.LoadAllStaffWithIDNAME();
+
+            view.DayList.Items.Add("Select..");
+
+            foreach (string name in Enum.GetNames(typeof(Day)))
+            {
+                view.DayList.Items.Add(name);
+            }
+
+            view.DayList.SelectedIndex = 0;
+
+            return view;
+        }
+        #endregion
+
+
 
     }
 }
