@@ -83,6 +83,7 @@ namespace KIT206.A2.Group18.HRIS
         }
         #endregion
 
+        //Get A Staff With Just ID, Title, Name
         #region Get A Staff List With ID, Title, Name
         public static List<Staff> GetStaffsWithIDName()
         {
@@ -90,5 +91,12 @@ namespace KIT206.A2.Group18.HRIS
             return staffList;
         }
         #endregion
+
+        //Get A Staff With All Details
+        public static Staff GetStaffWithAllDetails(int id)
+        {
+            Staff staff = Agency.GetStaffWithAllDetails(id);
+            return staff;
+        }
     }
 }

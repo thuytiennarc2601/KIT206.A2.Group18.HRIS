@@ -9,12 +9,10 @@
     <Grid x:Name="staffItem1" Background="White">
         <Image x:Name="staffPhoto" HorizontalAlignment="Left" Margin="23,4,0,10" Stretch="Fill" OpacityMask="Black" Width="136"/>
 
-        <Label x:Name="staffInfo" Content="Dr. Lindsay Wells" Margin="171,10,68,89" FontFamily="Century Gothic" Foreground="#FF729F54" FontSize="22" FontWeight="Bold"/>
-        <Label x:Name="staffEmail" Content="Email: abd@utas.edu.au" Margin="171,79,58,31" FontFamily="Century Gothic" Foreground="#FF9D9D9D" FontSize="16" Height="30"/>
-        <Label x:Name="staffCampus" Content="Room C0 | Hobart campus" Margin="171,100,58,10" FontFamily="Century Gothic" Foreground="#FF9D9D9D" FontSize="16" Height="30"/>
-        <Label x:Name="staffCate" Content="TECHNICAL" Margin="171,37,58,73" FontFamily="Century Gothic" Foreground="#FF9D9D9D" FontSize="16" Height="30"/>
-        <Button x:Name="editInfoBtn" Content="EDIT DETAILS" Margin="0,100,10,10" Background="#FF799A4D" Width="91" Height="30" FontFamily="Calibri" Foreground="White" BorderBrush="White" FontSize="14" Cursor="Hand" HorizontalAlignment="Right" Click="editInfoBtn_Click"/>
-        <Button x:Name="ViewButton" Content="VIEW" Margin="0,100,106,10" Background="#FF799A4D" Width="91" Height="30" FontFamily="Calibri" Foreground="White" BorderBrush="White" FontSize="14" Cursor="Hand" HorizontalAlignment="Right" Click="ViewButton_Click"/>
+        <Label x:Name="staffInfo" Content="Dr. Lindsay Wells" Margin="171,14,68,85" FontFamily="Century Gothic" Foreground="#FF729F54" FontSize="22" FontWeight="Bold"/>
+        <Label x:Name="staffCate" Content="TECHNICAL" Margin="171,55,58,55" FontFamily="Century Gothic" Foreground="#FF9D9D9D" FontSize="16" Height="30"/>
+        <Button x:Name="editInfoBtn" Content="EDIT DETAILS" Margin="0,95,10,15" Background="#FF799A4D" Width="91" Height="30" FontFamily="Calibri" Foreground="White" BorderBrush="White" FontSize="14" Cursor="Hand" HorizontalAlignment="Right" Click="editInfoBtn_Click"/>
+        <Button x:Name="ViewButton" Content="VIEW" Margin="0,95,106,15" Background="#FF799A4D" Width="91" Height="30" FontFamily="Calibri" Foreground="White" BorderBrush="White" FontSize="14" Cursor="Hand" HorizontalAlignment="Right" Click="ViewButton_Click"/>
 
 
     </Grid>

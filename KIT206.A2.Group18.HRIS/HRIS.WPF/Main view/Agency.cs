@@ -153,7 +153,7 @@ namespace KIT206.A2.Group18.HRIS
             try
             {
                 conn.Open();
-                MySqlCommand cmd = new MySqlCommand("select id, given_name, family_name, title, campus, phone, room, email, photo, category from staff", conn);
+                MySqlCommand cmd = new MySqlCommand("select id, given_name, family_name, title, category, photo from staff", conn);
                 rdr = cmd.ExecuteReader();
                 while (rdr.Read())
                 {
@@ -170,38 +170,14 @@ namespace KIT206.A2.Group18.HRIS
 
                     if (Convert.IsDBNull(rdr[4]) || rdr.GetString(4) == "")
                     {
-                        result.campus = Campus.Unknown;
-                    }
-                    else { result.campus = ParseEnum<Campus>(rdr.GetString(4)); }
-
-                    if (Convert.IsDBNull(rdr[5]) || rdr.GetString(5) == "")
-                    {
-                        result.Phone = "No contact added";
-                    }
-                    else { result.Phone = rdr.GetString(5); }
-
-                    if (Convert.IsDBNull(rdr[6]) || rdr.GetString(6) == "")
-                    {
-                        result.Room = "Unknown";
-                    }
-                    else { result.Room = rdr.GetString(6); }
-
-                    if (Convert.IsDBNull(rdr[7]) || rdr.GetString(7) == "")
-                    {
-                        result.Email = "No email added";
-                    }
-                    else { result.Email = rdr.GetString(7); }
-
-                    if (!Convert.IsDBNull(rdr[8]))
-                    {
-                        result.Photo = (byte[])rdr[8];
-                    }
-
-                    if (Convert.IsDBNull(rdr[9]) || rdr.GetString(9) == "")
-                    {
                         result.category = Category.uncategorised;
                     }
-                    else { result.category = ParseEnum<Category>(rdr.GetString(9)); }
+                    else { result.category = ParseEnum<Category>(rdr.GetString(4)); }
+                    
+                    if (!Convert.IsDBNull(rdr[5]))
+                    {
+                        result.Photo = (byte[])rdr[5];
+                    }
 
                     staffList.Add(result);
                 }
@@ -275,8 +251,55 @@ namespace KIT206.A2.Group18.HRIS
         }
         #endregion
 
-        #region Get A Staff Member By ID
+        #region Get A Staff Member By ID (ID, Title, Name)
         public static Staff GetStaffByID(int id)
+        {
+            MySqlConnection conn = GetConnection();
+            MySqlDataReader rdr = null;
+            Staff result = new Staff();
+
+            try
+            {
+                conn.Open();
+                MySqlCommand cmd = new MySqlCommand("select id, given_name, family_name, title from staff where id=@id", conn);
+                cmd.Parameters.AddWithValue("@id", id);
+                rdr = cmd.ExecuteReader();
+                while (rdr.Read())
+                {
+                    result.ID = rdr.GetInt32(0);
+                    result.GivenName = rdr.GetString(1);
+                    result.FamilyName = rdr.GetString(2);
+
+                    if (Convert.IsDBNull(rdr[3]) || rdr.GetString(3) == "")
+                    {
+                        result.Title = "Unknown";
+                    }
+                    else { result.Title = rdr.GetString(3); }
+
+                }
+            }
+            catch (MySqlException e)
+            {
+                ReportError("loading staff", e);
+            }
+            finally
+            {
+                if (rdr != null)
+                {
+                    rdr.Close();
+                }
+                if (conn != null)
+                {
+                    conn.Close();
+                }
+            }
+
+            return result;
+        }
+        #endregion
+
+        #region Get Staff Member In Depth (All details)
+        public static Staff GetStaffWithAllDetails(int id)
         {
             MySqlConnection conn = GetConnection();
             MySqlDataReader rdr = null;
@@ -288,7 +311,7 @@ namespace KIT206.A2.Group18.HRIS
                 MySqlCommand cmd = new MySqlCommand("select id, given_name, family_name, title, campus, phone, room, email, photo, category from staff where id=@id", conn);
                 cmd.Parameters.AddWithValue("@id", id);
                 rdr = cmd.ExecuteReader();
-                while(rdr.Read())
+                while (rdr.Read())
                 {
                     result.ID = rdr.GetInt32(0);
                     result.GivenName = rdr.GetString(1);
@@ -334,6 +357,7 @@ namespace KIT206.A2.Group18.HRIS
                         result.category = Category.uncategorised;
                     }
                     else { result.category = ParseEnum<Category>(rdr.GetString(9)); }
+
                 }
             }
             catch (MySqlException e)
