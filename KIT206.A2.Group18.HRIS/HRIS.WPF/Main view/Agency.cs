@@ -838,7 +838,7 @@ namespace KIT206.A2.Group18.HRIS
         #endregion
 
         #region Update an consultation
-        public static void UpdateConsultation(int staff, string day, string start, string end)
+        public static void UpdateConsultation(int staff_id, string day, string start, string end)
         {
         MySqlConnection conn = GetConnection();
 
@@ -848,11 +848,11 @@ namespace KIT206.A2.Group18.HRIS
 
                 MySqlCommand cmd = new MySqlCommand("UPDATE consultation" +
                                                     " SET day=@new_day, end=@new_end, start=@new_start " +
-                                                    " WHERE staff=@id", conn);
+                                                    " WHERE staff_id=@id", conn);
                 cmd.Parameters.AddWithValue("@new_day", day);
                 cmd.Parameters.AddWithValue("@new_start", start);
                 cmd.Parameters.AddWithValue("@new_end", end);
-                cmd.Parameters.AddWithValue("@id", staff);
+                cmd.Parameters.AddWithValue("@id", staff_id);
                 cmd.ExecuteNonQuery();
             }
             catch (MySqlException e)
