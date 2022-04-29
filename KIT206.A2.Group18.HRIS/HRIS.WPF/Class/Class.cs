@@ -39,7 +39,7 @@ namespace KIT206.A2.Group18.HRIS
         #region Get A List Of Classes Of A Unit
         public static List<Class> GetClassesByUnitCode(string UnitCode)
         {
-            List<Class> classList = Agency.LoadAllClasses();
+            List<Class> classList = Class.LoadAllClasses();
             var getClass = from Class c in classList
                            where c.unit.UnitCode == UnitCode
                            select c;
@@ -47,6 +47,44 @@ namespace KIT206.A2.Group18.HRIS
             List<Class> result = new List<Class>(getClass);
 
             return result;
+        }
+        #endregion
+
+        #region Load All Classes
+        public static List<Class> LoadAllClasses()
+        {
+            List<Class> classList = Agency.LoadAllClasses();
+            return classList;
+        }
+        #endregion
+
+        #region Edit Class Details
+        public static void EditClassDetails(string code, string day, string campus, string start, string new_day, string new_start, string end, string type, string room, int staff)
+        {
+            Class.EditClassDetails(code, day, campus, start, new_day, new_start, end, type, room, staff);
+        }
+        #endregion
+
+        #region Add A New Class
+        public static void AddClass(string code, string campus, string day, string start, string end, string type, string room, int staff)
+        {
+            Agency.AddClass(code, campus, day, start, end, type, room, staff);
+        }
+        #endregion
+
+        #region Check If A Class Room Is Available Or Not
+        public static bool CheckClass(string campus, string day, string start, string end, string room, int staff)
+        {
+            bool valid = Agency.checkValidateClass(campus, day, start, end, room, staff);
+            return valid;
+        }
+        #endregion
+
+        #region Check If A Staff Is Available Or Not
+        public static bool CheckClassClash(string day, string start, string end, int staff)
+        {
+            bool valid = Agency.checkClassClash(day, start, end, staff);
+            return valid;
         }
         #endregion
     }

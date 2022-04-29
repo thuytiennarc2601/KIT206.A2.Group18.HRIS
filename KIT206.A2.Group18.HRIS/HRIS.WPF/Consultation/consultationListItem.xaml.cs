@@ -76,7 +76,7 @@ namespace HRIS.WPF
 
         private void conCancelBtn_Click(object sender, RoutedEventArgs e)
         {
-            Agency.DeleteConsultation(StaffID, ConsultationDay, Start, End);
+            Consultation.DeleteConsultation(StaffID, ConsultationDay, Start, End);
         }
     }
 }

@@ -50,7 +50,7 @@ namespace HRIS.WPF
 
                 if(Validation.AddingConsultationValidation(staff, day, start, end))
                 {
-                    Agency.AddConsultation(day, start, end, staff);
+                    Consultation.AddConsultation(day, start, end, staff);
                     this.Close();
                 }
             }

@@ -63,7 +63,7 @@ namespace HRIS.WPF
                 if(Validation.AddingClassValidation(unitCode, campus, day, start, end, room, staffID) 
                     && Validation.AddingEditClassValidation(staffID, start, end, room, campus, day, type))
                 {
-                    Agency.AddClass(unitCode, campus, day, start, end, type, room, staffID);
+                    Class.AddClass(unitCode, campus, day, start, end, type, room, staffID);
                     this.Close();
                 }
             }

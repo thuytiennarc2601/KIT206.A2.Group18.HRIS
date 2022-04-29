@@ -128,7 +128,7 @@ namespace HRIS.WPF
         //Load all consultations' details into the main listbox
         private List<consultationListItem> AddConsultationInfoToItem()
         {
-            List<Consultation> conList = Agency.LoadAllConsultations();
+            List<Consultation> conList = Consultation.LoadAllConsultations();
             List<consultationListItem> items = new List<consultationListItem>();
 
             if(conList.Count > 0)

@@ -97,7 +97,7 @@ namespace HRIS.WPF
                 MessageBox.Show("A unit required");
             }
             
-            else if(!Agency.checkValidateClass(campus, day, start, end, room, staff))
+            else if(!Class.CheckClass(campus, day, start, end, room, staff))
             {
                 valid = false;
             }
@@ -153,11 +153,11 @@ namespace HRIS.WPF
                 valid = false;
                 MessageBox.Show("Day required");
             }
-            else if(!Agency.checkValidateConsul(day, start, end, staffId))
+            else if(!Consultation.CheckConsulation(day, start, end, staffId))
             {
                 valid = false;
             }
-            else if (!Agency.checkClassClash(day, start, end, staffId))
+            else if (!Class.CheckClassClash(day, start, end, staffId))
             {
                 valid = false;
             }
