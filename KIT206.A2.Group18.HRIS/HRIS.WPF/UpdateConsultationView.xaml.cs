@@ -39,7 +39,7 @@ namespace HRIS.WPF
 
             if (selectedStaff != null)
             {
-                staff = selectedStaff.ID;
+              staff = selectedStaff.ID;
             }
             else { staff = -1; }
 
@@ -51,11 +51,11 @@ namespace HRIS.WPF
                 string start = startHour + ":" + startMinute + ":00";
                 string end = endHour + ":" + endMinute + ":00";
 
-                if (Validation.AddingConsultationValidation(staff, day, start, end))
-                {
+                //if (Validation.AddingConsultationValidation(staff, day, start, end))
+                //{
                     Agency.UpdateConsultation(staff, day, start, end);
                     this.Close();
-                }
+                //}
             }
 
         }
