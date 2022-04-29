@@ -5,37 +5,48 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HRIS.WPF"
         mc:Ignorable="d"
-        Title="AddClassView" Height="400" Width="600" MinHeight="400" MinWidth="600" MaxHeight="400" MaxWidth="600">
+        Title="AddClassView" Height="400" Width="600" MinHeight="400" MinWidth="600" MaxHeight="500" MaxWidth="700">
     <Grid x:Name="container" Background="LightGray">
         <Grid Background="white" Margin="20,20,20,20">
-            <Label x:Name="UnitLB" Content="Unit:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontFamily="Century Gothic" FontSize="18" FontWeight="Bold"/>
-            <ComboBox x:Name="UnitList" Foreground="DarkGray" HorizontalAlignment="Left" Margin="10,42,0,0" VerticalAlignment="Top" Width="208" FontFamily="Calibri" Height="25" FontSize="14"/>
-            <Label x:Name="StaffLB" Content="Staff:" HorizontalAlignment="Left" Margin="319,10,0,0" VerticalAlignment="Top" FontFamily="Century Gothic" FontSize="18" FontWeight="Bold"/>
-            <ComboBox x:Name="StaffList" Foreground="DarkGray" HorizontalAlignment="Left" Margin="319,42,0,0" VerticalAlignment="Top" Width="204" Height="25" FontFamily="Calibri" FontSize="14"/>
-            <Label x:Name="CampusLB" Content="Campus:" HorizontalAlignment="Left" Margin="10,81,0,0" VerticalAlignment="Top" FontFamily="Century Gothic" FontSize="18" FontWeight="Bold"/>
-            <ComboBox x:Name="CampusList" Foreground="DarkGray" HorizontalAlignment="Left" Margin="10,113,0,0" VerticalAlignment="Top" Width="208" Height="25" FontFamily="Calibri" FontSize="14"/>
-            <Label x:Name="DayLB" Content="Day:" HorizontalAlignment="Left" Margin="319,81,0,0" VerticalAlignment="Top" FontFamily="Century Gothic" FontSize="18" FontWeight="Bold"/>
-            <ComboBox x:Name="DayList" Foreground="DarkGray" HorizontalAlignment="Left" Margin="319,113,0,0" VerticalAlignment="Top" Width="204" Height="25" FontFamily="Calibri" FontSize="14"/>
-            <Label x:Name="StartLB" Content="Start At:" HorizontalAlignment="Left" Margin="10,164,0,0" VerticalAlignment="Top" FontFamily="Century Gothic" FontSize="18" FontWeight="Bold"/>
-            <TextBox x:Name="StartHour" MaxLength="2" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" BorderBrush="LightGray"  HorizontalAlignment="Left" Margin="87,167,0,0" TextWrapping="Wrap" Text="00" VerticalAlignment="Top" Width="35" FontFamily="Century Gothic" Foreground="DarkGray" FontSize="14" Height="26"/>
-            <Label x:Name="this" Content=":" HorizontalAlignment="Left" Margin="122,164,0,0" VerticalAlignment="Top" FontFamily="Century Gothic" FontSize="18" FontWeight="Bold" Height="29"/>
-            <TextBox x:Name="StartMinute" MaxLength="2" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" BorderBrush="LightGray"  HorizontalAlignment="Left" Margin="142,167,0,0" TextWrapping="Wrap" Text="00" VerticalAlignment="Top" Width="35" FontFamily="Century Gothic" Foreground="DarkGray" FontSize="14" Height="26"/>
-            <Label x:Name="EndLB" Content="End At:" HorizontalAlignment="Left" Margin="319,164,0,0" VerticalAlignment="Top" FontFamily="Century Gothic" FontSize="18" FontWeight="Bold"/>
-            <TextBox x:Name="EndHour" MaxLength="2" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" BorderBrush="LightGray"  HorizontalAlignment="Left" Margin="390,167,0,0" TextWrapping="Wrap" Text="00" VerticalAlignment="Top" Width="35" FontFamily="Century Gothic" Foreground="DarkGray" FontSize="14" Height="26"/>
-            <Label x:Name="this1" Content=":" HorizontalAlignment="Left" Margin="425,164,0,0" VerticalAlignment="Top" FontFamily="Century Gothic" FontSize="18" FontWeight="Bold" Height="29"/>
-            <TextBox x:Name="EndMinute" MaxLength="2" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" BorderBrush="LightGray"  HorizontalAlignment="Left" Margin="445,167,0,0" TextWrapping="Wrap" Text="00" VerticalAlignment="Top" Width="35" FontFamily="Century Gothic" Foreground="DarkGray" FontSize="14" Height="26"/>
-            <Label x:Name="Type" Content="Type:" HorizontalAlignment="Left" Margin="10,220,0,0" VerticalAlignment="Top" FontFamily="Century Gothic" FontSize="18" FontWeight="Bold"/>
-            <ComboBox x:Name="TypeList" Foreground="DarkGray" HorizontalAlignment="Left" Margin="10,252,0,0" VerticalAlignment="Top" Width="208" Height="25" FontFamily="Calibri" FontSize="14"/>
-            <Label x:Name="Room" Content="Room:" HorizontalAlignment="Left" Margin="319,220,0,0" VerticalAlignment="Top" FontFamily="Century Gothic" FontSize="18" FontWeight="Bold"/>
-            <TextBox x:Name="RoomTB"  VerticalContentAlignment="Center" BorderBrush="LightGray"  HorizontalAlignment="Left" Margin="319,251,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="204" FontFamily="Century Gothic" Foreground="DarkGray" FontSize="14" Height="26"/>
-            <Button x:Name="SaveButton" Content="" BorderBrush="LightGray" HorizontalAlignment="Left" Margin="493,291,0,0" VerticalAlignment="Top" Width="30" Height="30" Click="SaveButton_Click">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="250*"></ColumnDefinition>
+                <ColumnDefinition Width="61*"></ColumnDefinition>
+                <ColumnDefinition Width="250*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions >
+                <RowDefinition Height="43*"></RowDefinition>
+                <RowDefinition Height="261*"></RowDefinition>
+                <RowDefinition Height="40*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Label Grid.Column="0" x:Name="TitleLB" Content="Add A Class" HorizontalAlignment="Left" Margin="14,0,0,0" VerticalAlignment="Center" FontFamily="Century Gothic" FontSize="22" FontWeight="Bold" Foreground="#FFD7C282" Height="36" Width="217"/>
+            <Label Grid.Row="1" Grid.Column="0" x:Name="UnitLB" Content="Unit:" HorizontalAlignment="Left" Margin="14,4,0,0" VerticalAlignment="Top" FontFamily="Century Gothic" FontSize="18" FontWeight="Bold" Height="32" Width="48"/>
+            <ComboBox Grid.Row="1" x:Name="UnitList" Foreground="DarkGray" HorizontalAlignment="Center" Margin="0,36,0,0" VerticalAlignment="Top" Width="208" FontFamily="Calibri" Height="25" FontSize="14" />
+            <Label Grid.Row="1" x:Name="StaffLB" Content="Staff:" HorizontalAlignment="Left" Margin="60,4,0,0" VerticalAlignment="Top" FontFamily="Century Gothic" FontSize="18" FontWeight="Bold" Grid.Column="1" Width="55" Height="32" Grid.ColumnSpan="2"/>
+            <ComboBox Grid.Row="1" x:Name="StaffList" Foreground="DarkGray" HorizontalAlignment="Left" Margin="4,36,0,0" VerticalAlignment="Top" Width="204" Height="25" FontFamily="Calibri" FontSize="14" Grid.Column="2"/>
+            <Label Grid.Row="1" Grid.Column="0" x:Name="CampusLB" Content="Campus:" HorizontalAlignment="Left" Margin="14,66,0,0" VerticalAlignment="Top" FontFamily="Century Gothic" FontSize="18" FontWeight="Bold" Height="32" Width="88"/>
+            <ComboBox Grid.Row="1" x:Name="CampusList" Foreground="DarkGray" HorizontalAlignment="Center" Margin="0,98,0,0" VerticalAlignment="Top" Width="208" Height="25" FontFamily="Calibri" FontSize="14" />
+            <Label Grid.Row="1" x:Name="DayLB" Content="Day:" HorizontalAlignment="Left" Margin="60,66,0,0" VerticalAlignment="Top" FontFamily="Century Gothic" FontSize="18" FontWeight="Bold" Grid.Column="1" Width="55" Height="32" Grid.ColumnSpan="2"/>
+            <ComboBox Grid.Row="1" x:Name="DayList" Foreground="DarkGray" HorizontalAlignment="Left" Margin="4,98,0,0" VerticalAlignment="Top" Width="204" Height="24" FontFamily="Calibri" FontSize="14" Grid.Column="2"/>
+            <Label Grid.Row="1" Grid.Column="0" x:Name="StartLB" Content="Start At:" HorizontalAlignment="Left" Margin="14,132,0,0" VerticalAlignment="Top" FontFamily="Century Gothic" FontSize="18" FontWeight="Bold" Height="32" Width="77" />
+            <TextBox Grid.Row="1" x:Name="StartHour" MaxLength="2" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" BorderBrush="LightGray"  HorizontalAlignment="Left" Margin="119,148,0,0" TextWrapping="Wrap" Text="00" VerticalAlignment="Top" Width="35" FontFamily="Century Gothic" Foreground="DarkGray" FontSize="14" Height="26"/>
+            <Label Grid.Row="1" Grid.Column="0" x:Name="this" Content=":" HorizontalAlignment="Left" Margin="159,145,0,0" VerticalAlignment="Top" FontFamily="Century Gothic" FontSize="18" FontWeight="Bold" Height="29" Width="15"/>
+            <TextBox Grid.Row="1" Grid.Column="0" x:Name="StartMinute" MaxLength="2" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" BorderBrush="LightGray"  HorizontalAlignment="Left" Margin="179,148,0,0" TextWrapping="Wrap" Text="00" VerticalAlignment="Top" Width="35" FontFamily="Century Gothic" Foreground="DarkGray" FontSize="14" Height="26" />
+            <Label Grid.Row="1" x:Name="EndLB" Content="End At:" HorizontalAlignment="Left" Margin="60,132,0,0" VerticalAlignment="Top" FontFamily="Century Gothic" FontSize="18" FontWeight="Bold" Grid.Column="1" Width="71" Height="32" Grid.ColumnSpan="2" />
+            <TextBox Grid.Row="1" x:Name="EndHour" MaxLength="2" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" BorderBrush="LightGray"  HorizontalAlignment="Left" Margin="95,148,0,0" TextWrapping="Wrap" Text="00" VerticalAlignment="Top" Width="35" FontFamily="Century Gothic" Foreground="DarkGray" FontSize="14" Height="26" Grid.Column="2" />
+            <Label Grid.Row="1" x:Name="this1" Content=":" HorizontalAlignment="Left" Margin="135,142,0,0" VerticalAlignment="Top" FontFamily="Century Gothic" FontSize="18" FontWeight="Bold" Height="29" Grid.Column="2" Width="24" />
+            <TextBox Grid.Row="1" x:Name="EndMinute" MaxLength="2" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" BorderBrush="LightGray"  HorizontalAlignment="Left" Margin="159,148,0,0" TextWrapping="Wrap" Text="00" VerticalAlignment="Top" Width="35" FontFamily="Century Gothic" Foreground="DarkGray" FontSize="14" Height="26" Grid.Column="2"/>
+            <Label Grid.Row="1" Grid.Column="0" x:Name="Type" Content="Type:" HorizontalAlignment="Left" Margin="14,182,0,0" VerticalAlignment="Top" FontFamily="Century Gothic" FontSize="18" FontWeight="Bold" Height="32" Width="56"/>
+            <ComboBox Grid.Row="1" x:Name="TypeList" Foreground="DarkGray" HorizontalAlignment="Center" Margin="0,214,0,0" VerticalAlignment="Top" Width="208" Height="25" FontFamily="Calibri" FontSize="14"/>
+            <Label Grid.Row="1" x:Name="Room" Content="Room:" HorizontalAlignment="Left" Margin="60,182,0,0" VerticalAlignment="Top" FontFamily="Century Gothic" FontSize="18" FontWeight="Bold" Grid.Column="1" Width="71" Height="32" Grid.ColumnSpan="2" />
+            <TextBox Grid.Row="1" x:Name="RoomTB"  VerticalContentAlignment="Center" BorderBrush="LightGray"  HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="204" FontFamily="Century Gothic" Foreground="DarkGray" FontSize="14" Height="26" Grid.Column="2" Margin="4,213,0,0"/>
+            <Button Grid.Row="2" x:Name="SaveButton" Content="" BorderBrush="LightGray" HorizontalAlignment="Left" VerticalAlignment="Center" Width="35" Height="37" Click="SaveButton_Click" Grid.Column="2" Margin="215,0,0,0" >
                 <Button.Background>
                     <ImageBrush ImageSource="/icons8-save-30.png"/>
                 </Button.Background>
             </Button>
-            <Rectangle x:Name="seperator" HorizontalAlignment="Left" Height="280" Margin="271,26,0,0" Stroke="#FFD7C282" VerticalAlignment="Top" Width="3" Fill="#FFD7C282"/>
-
-
+            <Rectangle x:Name="seperator" HorizontalAlignment="Center" Height="358" Stroke="#FFD7C282" VerticalAlignment="Center" Width="2" Fill="#FFD7C282" Grid.Column="1" Grid.Row="1"/>
+            <Label Grid.Row="1" Grid.Column="0" x:Name="note" Foreground="DarkGray" Content="(24-hour format)" HorizontalAlignment="Left" Margin="117,176,0,0" VerticalAlignment="Top" FontStyle="Italic" Height="26" Width="97"/>
+            <Label Grid.Row="1" Grid.Column="2" x:Name="note_copy" Foreground="DarkGray" Content="(24-hour format)" HorizontalAlignment="Left" Margin="95,176,0,0" VerticalAlignment="Top" FontStyle="Italic" Height="26" Width="97"/>
         </Grid>
 
     </Grid>
