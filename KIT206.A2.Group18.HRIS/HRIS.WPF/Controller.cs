@@ -415,8 +415,10 @@ namespace HRIS.WPF
         {
             UpdateConsultationView view = new UpdateConsultationView();
 
-            Staff staff = Agency.GetStaffByID(StaffID);
-            view.StaffList.Text = StaffID + " | " + staff;
+            //Staff staff = Agency.GetStaffByID(StaffID);
+            //view.StaffList.Text = StaffID.ToString() + " | " + staff;
+            //view.StaffList.ItemsSource = Agency.GetStaffByID(StaffID);
+            view.StaffList.ItemsSource = Agency.LoadAllStaffWithIDNAME();
 
             foreach (string dayName in Enum.GetNames(typeof(Day)))
             {

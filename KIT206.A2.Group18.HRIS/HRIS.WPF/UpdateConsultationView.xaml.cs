@@ -25,18 +25,27 @@ namespace HRIS.WPF
             InitializeComponent();
         }
 
+        private int _id = -1;
+
+        public int StaffID
+        {
+            get { return _id; }
+            set { _id = value; }
+        }
+
         #region save button
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
 
-            int staff;
-            Staff selectedStaff = (Staff)this.StaffList.SelectedItem;
+            int staff;//=this.StaffID;
+            
             string day = (string)this.DayList.SelectedItem;
             string startHour = this.StartHour.Text;
             string endHour = this.EndHour.Text;
             string startMinute = this.StartMinute.Text;
             string endMinute = this.EndMinute.Text;
 
+            Staff selectedStaff = (Staff)this.StaffList.SelectedItem;
             if (selectedStaff != null)
             {
               staff = selectedStaff.ID;
@@ -51,11 +60,11 @@ namespace HRIS.WPF
                 string start = startHour + ":" + startMinute + ":00";
                 string end = endHour + ":" + endMinute + ":00";
 
-                //if (Validation.AddingConsultationValidation(staff, day, start, end))
-                //{
+                if (Validation.AddingConsultationValidation(staff, day, start, end))
+                {
                     Agency.UpdateConsultation(staff, day, start, end);
                     this.Close();
-                //}
+                }
             }
 
         }
